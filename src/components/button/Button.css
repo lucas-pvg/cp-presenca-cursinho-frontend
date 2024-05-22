@@ -1,0 +1,48 @@
+a {
+  text-decoration: none;
+}
+
+.base-button {
+  padding: 12px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px;
+  border-radius: 5px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+
+  transition: 
+    transform .1s ease-in-out
+}
+
+.base-button:hover {
+  transform: scale(1.05);
+}
+
+.light.solid {
+  background: var(--blue-base);
+  border-color: var(--blue-base);
+  color: var(--base-white);
+}
+
+.light.outline {
+  background: transparent;
+  border-color: var(--blue-base);
+  color: var(--blue-base);
+}
+
+.dark.solid {
+  background: var(--blue-inverse);
+  border-color: var(--blue-inverse);
+  color: var(--base-white);
+}
+
+.dark.outline {
+  background: transparent;
+  border-color: var(--blue-inverse);
+  color: var(--blue-inverse);
+}
+  
