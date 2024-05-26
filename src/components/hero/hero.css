@@ -1,0 +1,27 @@
+.light.solid {
+    display: flex;
+    justify-content: space-between;
+    background-image: var(--blue-grad);
+    color: var(--base-white);
+    padding: 0.5rem;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.light.solid .hero-text {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.light.solid .hero-text .hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.light.solid .hero-icon {
+    margin-right: 3rem;
+}
