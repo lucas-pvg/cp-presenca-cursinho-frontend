@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 import { Link, To } from 'react-router-dom';
 import './header.css';
 import { ComponentProps } from 'react';
-import Switch from '../switch/switch';
+import { Switch } from '../switch/switch';
 
 const HeaderVariants = cva(
     'base-button',
