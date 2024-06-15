@@ -1,9 +1,10 @@
 .base-navbar {
   width: 300px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .base-navbar.light {
@@ -12,4 +13,24 @@
 
 .base-navbar.dark {
   background-color: var(--base-gray);
+}
+
+.nav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.base-navbar .logo {
+  height: 40px;
+  width: 250px;
+  background-color: var(--outline-base);
+}
+
+.base-navbar .nav-image {
+  height: 220px;
+  width: 220px;
+  background-color: var(--outline-base);
 }
