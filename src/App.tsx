@@ -8,16 +8,12 @@ function App() {
       <Navbar mode='light' />
 
       <div className='pages'>
-        <h1>Hello World</h1>
-
-        {/* <LinkGroup
-          mode='light'
-          labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
-          paths={['/', '/', '/', '/', '/']}
-        /> */}
-
         <Routes>
-          <Route path="/" element={<></>} />
+          <Route path="/" element={<h1>Hello World</h1>} />
+          <Route path="/attendence" element={<h1>Presença</h1>} />
+          <Route path="/teachers" element={<h1>Professores</h1>} />
+          <Route path="/classes" element={<h1>Turmas</h1>} />
+          <Route path="/metrics" element={<h1>Métricas</h1>} />
         </Routes>
       </div>
     </div>
