@@ -30,11 +30,17 @@ interface NavbarProps extends VariantProps<typeof NavbarVariants> {
 export function Navbar({ minimized, mode }: NavbarProps) {
   return (
     <nav className={NavbarVariants({ minimized, mode })}>
-      <LinkGroup
-        mode={mode}
-        labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
-        paths={['/', '/', '/', '/', '/']}
-      />
+      <div className='nav-content'>
+        <div className='logo' />
+
+        <LinkGroup
+          mode={mode}
+          labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
+          paths={['/', '/attendence', '/teachers', '/classes', '/metrics']}
+        />
+      </div>
+
+      <div className='nav-image'/>
     </nav>
   )
 }
