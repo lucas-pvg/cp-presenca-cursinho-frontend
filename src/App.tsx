@@ -1,25 +1,28 @@
-// import { Router, Routes, Route } from 'react-router-dom'
-import { LinkGroup } from './components/links/LinkGroup'
+import { Routes, Route } from 'react-router-dom'
+import { Navbar } from './components/navbar/Navbar'
 import './App.css'
 
 function App() {
   return (
     <div className='app-container'>
-      <h1>Hello World</h1>
+      <Navbar mode='light' />
 
-      <LinkGroup
-        mode='light'
-        labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
-        paths={['/', '/', '/']}
-      />
+      <div className='pages'>
+        <h1>Hello World</h1>
 
+        {/* <LinkGroup
+          mode='light'
+          labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
+          paths={['/', '/', '/', '/', '/']}
+        /> */}
+
+        <Routes>
+          <Route path="/" element={<></>} />
+        </Routes>
+      </div>
     </div>
 
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //   </Routes>
-    // </Router>
+
   )
 }
 
