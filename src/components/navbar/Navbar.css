@@ -1,0 +1,15 @@
+.base-navbar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.base-navbar.light {
+  background-color: var(--base-white);
+}
+
+.base-navbar.dark {
+  background-color: var(--base-gray);
+}
