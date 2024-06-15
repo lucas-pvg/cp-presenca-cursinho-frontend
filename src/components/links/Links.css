@@ -4,19 +4,20 @@
 
 .base-link-group.vertical {
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .base-link-group.horizontal {
   flex-direction: row;
-  gap: 50px;
+  gap: 40px;
 }
 
 .base-link {
   width: fit-content;
-  padding: 8px 4px;
+  padding: 5px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 10px;
@@ -25,25 +26,43 @@
   font-weight: 400;
 
   transition: 
-    transform .1s ease-in-out,
-    background-color .1s ease-in-out
+    transform .2s ease-in-out
+}
+
+.link-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.base-link hr {
+  width: 0%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    width .2s ease-in-out,
+    border-color .2s ease-in-out
 }
 
 .base-link svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
 }
 
-.base-link.active {
-  border-bottom: 2px solid;
+.base-link.active.light hr {
+  width: 100%;
+  border-color: var(--blue-base);
 }
 
-.base-link.inactive {
-  border-bottom: none;
+.base-link.active.dark hr {
+  width: 100%;
+  border-color: var(--blue-inverse);
 }
 
 .base-link.inactive:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .base-link.icon svg {
@@ -56,10 +75,9 @@
 
 .base-link.light {
   color: var(--base-black);
-  border-color: var(--blue-base);
+  
 }
 
 .base-link.dark {
   color: var(--base-white);
-  border-color: var(--blue-inverse);
 }

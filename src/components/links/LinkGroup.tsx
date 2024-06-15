@@ -1,4 +1,5 @@
 import { cva, VariantProps } from 'class-variance-authority'
+import { useLocation } from 'react-router-dom'
 import { Links } from './Links'
 import './Links.css'
 
@@ -26,12 +27,19 @@ interface LinkGroupProps
 }
 
 export function LinkGroup({ variant, mode, labels, paths }: LinkGroupProps) {
+  const location = useLocation()
+
   return (
     <div className={LinkGroupVariants({ variant })}>
       {
         labels.map((label, i) => {
           return (
-            <Links mode={mode} to={paths[i]} key={i} state={i==1 ? 'active' : 'inactive'}>
+            <Links 
+              mode={mode}
+              to={paths[i]} 
+              state={location.pathname === paths[i] ? 'active' : 'inactive'} 
+              key={i}
+            >
               {label}
             </Links>
           )

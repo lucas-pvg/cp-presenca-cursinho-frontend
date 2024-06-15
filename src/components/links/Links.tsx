@@ -39,8 +39,12 @@ interface LinksProps
 export function Links({state, mode, icon, ...props }: LinksProps) {
   return (
     <Link className={LinksVariants({ state, mode, icon })} {...props}>
-      <Icon />
-      {props.children}
+      <div className='link-content'>
+        <Icon />
+        {props.children}
+      </div>
+
+      <hr />
     </Link>
   )
 }
