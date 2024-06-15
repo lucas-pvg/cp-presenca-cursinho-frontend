@@ -36,6 +36,11 @@
   gap: 10px;
 }
 
+.base-link svg {
+  width: 15px;
+  height: 15px;
+}
+
 .base-link hr {
   width: 0%;
   border: 1px solid transparent;
@@ -44,11 +49,6 @@
   transition:
     width .2s ease-in-out,
     border-color .2s ease-in-out
-}
-
-.base-link svg {
-  width: 15px;
-  height: 15px;
 }
 
 .base-link.active.light hr {
@@ -75,7 +75,6 @@
 
 .base-link.light {
   color: var(--base-black);
-  
 }
 
 .base-link.dark {
