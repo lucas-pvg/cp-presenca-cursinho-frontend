@@ -1,0 +1,65 @@
+.base-link-group {
+  display: flex;
+}
+
+.base-link-group.vertical {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.base-link-group.horizontal {
+  flex-direction: row;
+  gap: 50px;
+}
+
+.base-link {
+  width: fit-content;
+  padding: 8px 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  transition: 
+    transform .1s ease-in-out,
+    background-color .1s ease-in-out
+}
+
+.base-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.base-link.active {
+  border-bottom: 2px solid;
+}
+
+.base-link.inactive {
+  border-bottom: none;
+}
+
+.base-link.inactive:hover {
+  transform: scale(1.05);
+}
+
+.base-link.icon svg {
+  display: inline-flex;
+}
+
+.base-link.no-icon svg {
+  display: none;
+}
+
+.base-link.light {
+  color: var(--base-black);
+  border-color: var(--blue-base);
+}
+
+.base-link.dark {
+  color: var(--base-white);
+  border-color: var(--blue-inverse);
+}

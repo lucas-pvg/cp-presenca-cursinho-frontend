@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority'
-import { Link } from './Link'
-import './Link.css'
+import { Links } from './Links'
+import './Links.css'
 
 const LinkGroupVariants = cva(
   'base-link-group',
@@ -20,7 +20,7 @@ const LinkGroupVariants = cva(
 interface LinkGroupProps
   extends VariantProps<typeof LinkGroupVariants> {
     variant?: 'vertical' | 'horizontal'
-    mode: 'light' | 'dark'
+    mode?: 'light' | 'dark'
     labels: Array<string>
     paths: Array<string>
 }
@@ -31,9 +31,9 @@ export function LinkGroup({ variant, mode, labels, paths }: LinkGroupProps) {
       {
         labels.map((label, i) => {
           return (
-            <Link mode={mode} key={i}>
+            <Links mode={mode} to={paths[i]} key={i} state={i==1 ? 'active' : 'inactive'}>
               {label}
-            </Link>
+            </Links>
           )
         })
       }
