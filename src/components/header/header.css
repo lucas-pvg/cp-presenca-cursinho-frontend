@@ -1,0 +1,22 @@
+.light.solid {
+    display: flex;
+    justify-content: space-between;
+    background-image: var(--blue-grad);
+    color: var(--base-white);
+    padding: 0.5rem;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.light.solid .toggle {
+    margin-left: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.light.solid .profile {
+    margin-right: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
