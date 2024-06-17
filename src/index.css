@@ -13,8 +13,8 @@
   --background-inverse: #262A32;
   --outline-base: #BBBBBB;
   --outline-inverse: #4D5461;
-  --shadow-base: #222222;
-  --shadow-inverse: #1F2228;
+  --shadow-base: #22222240;
+  --shadow-inverse: #1F222840;
 }
 
 * {
@@ -65,6 +65,7 @@ body {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-base);
 }
 
 a {
