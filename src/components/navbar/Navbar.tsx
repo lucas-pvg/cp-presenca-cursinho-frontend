@@ -1,5 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority'
+import { IconCP } from '../cp-art/IconCP'
 import { LinkGroup } from '../links/LinkGroup'
+import { Reading } from '../cp-art/reading/Reading'
 import './Navbar.css'
 
 const NavbarVariants = cva(
@@ -31,7 +33,9 @@ export function Navbar({ minimized, mode }: NavbarProps) {
   return (
     <nav className={NavbarVariants({ minimized, mode })}>
       <div className='nav-content'>
-        <div className='logo' />
+        <div className='logo'>
+          <IconCP type='icon' />
+        </div>
 
         <LinkGroup
           mode={mode}
@@ -40,7 +44,7 @@ export function Navbar({ minimized, mode }: NavbarProps) {
         />
       </div>
 
-      <div className='nav-image'/>
+      <Reading />
     </nav>
   )
 }

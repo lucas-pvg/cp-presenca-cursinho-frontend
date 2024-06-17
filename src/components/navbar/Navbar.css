@@ -16,6 +16,7 @@
 }
 
 .nav-content {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,14 +24,8 @@
   gap: 50px;
 }
 
-.base-navbar .logo {
-  height: 40px;
-  width: 250px;
-  background-color: var(--outline-base);
-}
-
-.base-navbar .nav-image {
-  height: 220px;
-  width: 220px;
-  background-color: var(--outline-base);
+.nav-content .logo {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 }
