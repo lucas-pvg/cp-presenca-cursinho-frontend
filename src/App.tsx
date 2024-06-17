@@ -18,6 +18,7 @@ function App() {
         header={['Aula', 'Horário', 'Turma', 'Column']}
         data={classData}
       />
+
     </div>
 
     // <Router>
