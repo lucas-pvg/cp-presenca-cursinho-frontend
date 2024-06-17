@@ -16,14 +16,16 @@ function App() {
       <div className='pages'>
         <Routes>
           <Route path="/" element={
-            <h1>Hello World</h1>
+            <>
+              <h1>Hello World</h1>
 
-            <Table
-              mode='light'
-              clickable={true}
-              header={['Aula', 'Horário', 'Turma', 'Column']}
-              data={classData}
-            />
+              <Table
+                mode='light'
+                clickable={true}
+                header={['Aula', 'Horário', 'Turma', 'Column']}
+                data={classData}
+              />
+            </>
            } />
           <Route path="/attendence" element={<h1>Presença</h1>} />
           <Route path="/teachers" element={<h1>Professores</h1>} />
