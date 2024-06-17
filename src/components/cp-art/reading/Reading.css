@@ -1,0 +1,68 @@
+.reading {
+  position: relative;
+  height: 210px;
+  width: 270px;
+}
+
+.reading-img {
+  height: 200px;
+  opacity: 70%;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.reading .doodle {
+  position: absolute;
+}
+
+.reading .d1 {
+  height: 40px;
+  top: 0px;
+  left: 190px;
+  animation-delay: 0 !important;
+}
+
+.reading .d2 {
+  height: 12px;
+  top: 10px;
+  left: 250px;
+  animation-delay: .8s !important;
+}
+
+.reading .d3 {
+  height: 12px;
+  top: 40px;
+  left: 170px;
+  animation-delay: 1.6s !important;
+}
+
+.reading .d4 {
+  height: 30px;
+  top: 50px;
+  left: 250px;
+  animation-delay: 3.2s !important;
+}
+
+.reading .d5 {
+  height: 10px;
+  top: 60px;
+  left: 220px;
+  animation-delay: 4s !important;
+}
+
+.reading .d6 {
+  height: 10px;
+  top: 100px;
+  left: 265px;
+  animation-delay: 4.8s !important;
+}
+
+.reading .float {
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0%, 100%   {translate: 0 0;}
+  50%  {translate: 0 -7px;}
+}
