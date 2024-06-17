@@ -1,0 +1,93 @@
+.base-table {
+  min-width: 40vw;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.base-table.light {
+  box-shadow: 4px 4px 30px 0px var(--shadow-base);
+}
+
+.base-table.dark {
+  box-shadow: 4px 4px 30px 0px var(--shadow-inverse);
+}
+
+.table-header {
+  border-bottom: 1px solid ;
+  background: var(--blue-grad);
+  color: var(--base-white);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  
+  th {
+    font-weight: 600;
+    text-align: start;
+    padding: 10px 20px;
+  }
+}
+
+.table-header.light {
+  border-color: var(--outline-base);
+}
+
+.table-header.dark {
+  border-color: var(--outline-inverse);
+}
+
+.table-row {
+  font-family: "Karla", sans-serif;
+  font-size: 12px;
+  border-bottom: 1px solid;
+
+  transition:
+    background-color .2s ease-in-out;
+
+  td {
+    font-weight: 400;
+    text-align: start;
+    padding: 12px 20px;
+  }
+}
+
+.table-row:last-of-type {
+  border: none;
+}
+
+.table-row.light {
+  background: var(--base-white);
+  color: var(--base-black);
+  border-color: var(--outline-base);
+}
+
+.table-row.dark {
+  background: var(--base-gray);
+  color: var(--base-white);
+  border-color: var(--outline-inverse);
+}
+
+.table-row.click {
+  cursor: pointer;
+}
+
+.table-row.click.light:hover {
+  background-color: var(--background-base);
+}
+
+.table-row.click.dark:hover {
+  background-color: var(--background-inverse);
+}
+
+.base-table .click .icon {
+  width: 50px;
+  display: table-cell;
+  text-align: center;
+}
+
+.base-table .not-click .icon {
+  display: none;
+}
+
+.table-footer td {
+  border: none;
+}
