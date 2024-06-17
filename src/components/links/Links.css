@@ -1,0 +1,82 @@
+.base-link-group {
+  display: flex;
+}
+
+.base-link-group.vertical {
+  flex-direction: column;
+  gap: 15px;
+}
+
+.base-link-group.horizontal {
+  flex-direction: row;
+  gap: 40px;
+}
+
+.base-link {
+  width: fit-content;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  transition: 
+    transform .2s ease-in-out
+}
+
+.link-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.base-link svg {
+  width: 15px;
+  height: 15px;
+}
+
+.base-link hr {
+  width: 0%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    width .2s ease-in-out,
+    border-color .2s ease-in-out
+}
+
+.base-link.active.light hr {
+  width: 100%;
+  border-color: var(--blue-base);
+}
+
+.base-link.active.dark hr {
+  width: 100%;
+  border-color: var(--blue-inverse);
+}
+
+.base-link.inactive:hover {
+  transform: scale(1.1);
+}
+
+.base-link.icon svg {
+  display: inline-flex;
+}
+
+.base-link.no-icon svg {
+  display: none;
+}
+
+.base-link.light {
+  color: var(--base-black);
+}
+
+.base-link.dark {
+  color: var(--base-white);
+}

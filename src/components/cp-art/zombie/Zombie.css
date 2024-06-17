@@ -1,0 +1,111 @@
+.zombie {
+  position: relative;
+  height: 200px;
+  width: 300px;
+}
+
+.zombie-img {
+  height: 200px;
+  opacity: 70%;
+  position: absolute;
+  top: 0;
+  left: 30px;
+}
+
+.zombie .doodle {
+  position: absolute;
+}
+
+.zombie .d1 {
+  height: 40px;
+  top: 110px;
+  left: 65px;
+  animation-delay: 0 !important;
+}
+
+.zombie .d2 {
+  height: 40px;
+  top: 10px;
+  left: 20px;
+  animation-delay: .4s !important;
+}
+
+.zombie .d3 {
+  height: 12px;
+  top: 100px;
+  left: 50px;
+  animation-delay: .8s !important;
+}
+
+.zombie .d4 {
+  height: 12px;
+  top: 0px;
+  left: 5px;
+  animation-delay: 1.2s !important;
+}
+
+.zombie .d5 {
+  height: 10px;
+  top: 150px;
+  left: 110px;
+  animation-delay: 1.6s !important;
+}
+
+.zombie .d6 {
+  height: 10px;
+  top: 50px;
+  left: 65px;
+  animation-delay: 2s !important;
+}
+
+.zombie .d7 {
+  height: 40px;
+  top: 60px;
+  left: 215px;
+  animation-delay: 2.4s !important;
+}
+
+.zombie .d8 {
+  height: 35px;
+  transform: rotate(-150deg);
+  top: 65px;
+  left: 0px;
+  animation-delay: 2.8s !important;
+}
+
+.zombie .d9 {
+  height: 15px;
+  top: 40px;
+  left: 245px;
+  animation-delay: 3.2s !important;
+}
+
+.zombie .d10 {
+  height: 12px;
+  top: 120px;
+  left: 0px;
+  animation-delay: 3.6s !important;
+}
+
+.zombie .d11 {
+  height: 15px;
+  top: 100px;
+  left: 260px;
+  animation-delay: 4s !important;
+}
+
+.zombie .d12 {
+  height: 18px;
+  top: 150px;
+  left: 30px;
+  animation-delay: 4.4s !important;
+}
+
+.zombie .float {
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0%, 100%   {translate: 0 0;}
+  50%  {translate: 0 -7px;}
+}
