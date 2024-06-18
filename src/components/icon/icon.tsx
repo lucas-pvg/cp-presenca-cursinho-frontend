@@ -17,7 +17,10 @@ import ArrowRightCircle from "../../assets/icons/style_guide/icon-arrow-right-ci
 import ArrowRight from "../../assets/icons/style_guide/icon-arrow-right.svg";
 import ChevronLeft from "../../assets/icons/style_guide/icon-chevron-left.svg";
 import ChevronRight from "../../assets/icons/style_guide/icon-chevron-right.svg";
+import ChevronDown from "../../assets/icons/style_guide/icon-chevron-down.svg";
 import File from "../../assets/icons/style_guide/icon-file.svg";
+import IconBook from "../../assets/icons/style_guide/icon-book.svg";
+import IconUsers from "../../assets/icons/style_guide/icon-users.svg";
 import Logout from "../../assets/icons/style_guide/icon-log-out.svg";
 import Trash from "../../assets/icons/style_guide/icon-trash.svg";
 import Search from "../../assets/icons/style_guide/icon-search.svg";
@@ -26,7 +29,7 @@ import X from "../../assets/icons/style_guide/icon-x.svg";
 import XCircle from "../../assets/icons/style_guide/icon-x-circle.svg";
 
 interface IconProps {
-    className: string;
+    className?: string;
     iconType: string;
     to: To;
 }
@@ -52,7 +55,10 @@ export const Icon = (props: IconProps) => {
         case "arrow-right" : return <Link className={classes} to={props.to}><img src={ArrowRight} /></Link>;
         case "chevron-left" : return <Link className={classes} to={props.to}><img src={ChevronLeft} /></Link>
         case "chevron-right" : return <Link className={classes} to={props.to}><img src={ChevronRight} /></Link>
+        case "chevron-down" : return <Link className={classes} to={props.to}><img src={ChevronDown} /></Link>
         case "file" : return <Link className={classes} to={props.to}><img src={File} /></Link>
+        case "icon-book" : return <Link className={classes} to={props.to}><img src={IconBook}/></Link>
+        case "icon-users" : return <Link className={classes} to={props.to}><img src={IconUsers}/></Link>
         case "logout" : return <Link className={classes} to={props.to}><img src={Logout} /></Link>
         case "trash" : return <Link className={classes} to={props.to}><img src={Trash} /></Link>
         case "search" : return <Link className={classes} to={props.to}><img src={Search} /></Link>

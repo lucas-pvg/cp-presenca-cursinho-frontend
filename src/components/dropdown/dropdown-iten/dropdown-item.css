@@ -1,0 +1,14 @@
+.item-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.item-container:hover {
+    color: var(--blue-inverse);
+}
+
+.item-container .body {
+    margin-left: 1rem;
+}

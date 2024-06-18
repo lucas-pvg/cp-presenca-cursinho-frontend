@@ -15,6 +15,8 @@
   --outline-inverse: #4D5461;
   --shadow-base: #22222240;
   --shadow-inverse: #1F222840;
+  --speed: 500ms;
+
 }
 
 * {

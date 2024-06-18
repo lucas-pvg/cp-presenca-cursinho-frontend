@@ -1,0 +1,36 @@
+.base-dropdown {
+    position: absolute;
+    padding: 1rem;
+    width: 250px;
+    border-radius: 1rem;
+}
+
+.base-dropdown::before {
+    content: '';
+    position: absolute;
+    transform: rotate(45deg);
+}
+
+.light.solid {
+    background: var(--base-white);
+    border-color: var(--blue-base);
+    color: var(--base-black);
+  }
+  
+  .light.outline {
+    background: transparent;
+    border-color: var(--blue-base);
+    color: var(--blue-base);
+  }
+  
+  .dark.solid {
+    background: var(--base-black);
+    border-color: var(--blue-inverse);
+    color: var(--base-white);
+  }
+  
+  .dark.outline {
+    background: transparent;
+    border-color: var(--blue-inverse);
+    color: var(--blue-inverse);
+}
