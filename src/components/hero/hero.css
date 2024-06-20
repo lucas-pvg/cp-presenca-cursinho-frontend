@@ -1,27 +1,31 @@
-.light.solid {
-    display: flex;
-    justify-content: space-between;
-    background-image: var(--blue-grad);
-    color: var(--base-white);
-    padding: 0.5rem;
-    width: 100%;
-    position: fixed;
-    top: 0;
+.base-hero {
+  width: 100%;
+  padding: 0px 50px;
+  /* position: sticky;
+  top: 0;
+  translate: 0 -1px; */
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  background-image: var(--blue-grad);
+  color: var(--base-white);
 }
 
-.light.solid .hero-text {
-    margin-left: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.base-hero .hero-text {
+  width: 35%;
+  padding: 15px 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  gap: 12px;
 }
 
-.light.solid .hero-text .hero-title {
-    margin-bottom: 1.5rem;
-}
-
-.light.solid .hero-icon {
-    margin-right: 3rem;
+.base-hero .hero-description {
+  font-size: 16px;
+  line-height: 150%;
 }
