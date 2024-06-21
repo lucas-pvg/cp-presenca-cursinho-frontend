@@ -2,14 +2,14 @@ import { Card } from './card'
 import './card.css'
 
 interface cardMenuProps {
-	className: string
+	className?: string
 	mode?: 'light' | 'dark'
 	labels: Array<string>
 	to: Array<string>
 }
 
 export function CardMenu({ className, mode, labels, to }: cardMenuProps) {
-	const classes = `${className} card-menu`
+	const classes = className ? `${className} card-menu` : 'card-menu'
 
 	return (
 		<div className={classes}>
