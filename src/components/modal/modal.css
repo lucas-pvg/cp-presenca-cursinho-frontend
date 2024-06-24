@@ -1,0 +1,154 @@
+.base-modal {
+  width: 600px;
+  padding-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.base-modal.light {
+  background-color: var(--base-white);
+}
+
+.base-modal.dark {
+  background-color: var(--base-gray);
+}
+
+.modal-header {
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.modal-header.solid {
+  background: var(--blue-grad);
+  color: var(--base-white);
+}
+
+.modal-header.outline {
+  border-bottom: 2px solid;
+}
+
+.modal-header.outline.light {
+  background-color: var(--base-white);
+  border-color: var(--blue-base);
+  color: var(--base-black);
+}
+
+.modal-header.outline.dark {
+  background-color: var(--base-gray);
+  border-color: var(--blue-inverse);
+  color: var(--base-white);
+}
+
+.modal-header .description {
+  line-height: 150%;
+  font-size: 14px;
+}
+
+.modal-row {
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal-row.light {
+  color: var(--base-black);
+}
+
+.modal-row.dark {
+  color: var(--base-white);
+}
+
+.modal-row .col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.modal-row .title {
+  font-size: 14px;
+}
+
+.modal-content {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.base-modal .body {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.base-modal .divider {
+  border: 1px solid var(--outline-base);
+  border-radius: 5px;
+}
+
+.base-modal.dark .divider {
+  border-color: var(--outline-inverse) !important;
+}
+
+.modal-warning {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-warning.light {
+  color: var(--base-black);
+}
+
+.modal-warning.dark {
+  color: var(--base-white);
+}
+
+.modal-warning .modal-icon,
+.modal-warning .modal-icon img {
+  height: 12px;
+  width: 12px;
+}
+
+.modal-footer {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal-footer.light {
+  background-color: var(--base-white);
+}
+
+.modal-footer.dark {
+  background-color: var(--base-gray);
+}
+
+.input-modal .body {
+  padding: 10px 20px;
+}
+
+.input-modal .modal-row {
+  padding: 15px 0;
+  gap: 30px;
+}
+
+.input-modal .modal-row .col {
+  width: 100%;
+  align-items: stretch;
+  gap: 10px;
+}
