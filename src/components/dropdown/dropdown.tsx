@@ -7,30 +7,24 @@ const DropDownVariants = cva(
     'base-dropdown', 
     {
         variants: {
-            variant: {
-                solid: 'solid',
-                outline: 'outline'
-            }, 
             mode: {
                 dark: 'dark', 
                 light: 'light'
             }
         }, 
         defaultVariants: {
-            variant: 'solid',
             mode: 'light'
         }
     }
 )
 
 interface DropDownProps extends ComponentProps<'div'>, VariantProps<typeof DropDownVariants> {
-    variant?: 'solid' | 'outline'
     mode?: 'light' | 'dark'
 }
 
-export const DropDown = ({variant, mode, ...props}: DropDownProps) => {
+export const DropDown = ({mode, ...props}: DropDownProps) => {
     return (
-        <div className={DropDownVariants({variant, mode})} {...props}>
+        <div className={DropDownVariants({mode})} {...props}>
             <ul className="dropdown-list">
                 <DropDownItem icon={"icon-book"} body={"Meu perfil"} />
                 <DropDownItem icon={"icon-users"} body={"Trocar de conta"} />

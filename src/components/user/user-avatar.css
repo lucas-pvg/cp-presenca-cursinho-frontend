@@ -2,15 +2,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    width: 200px;
   }
   
   .avatar-image {
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     overflow: hidden;
     border-radius: 50%;
-    margin-bottom: 8px;
+    background: var(--base-white);
   }
   
   .avatar-image img {
@@ -26,7 +28,7 @@
   }
 
   .drop-arrow {
-    margin: 1rem;
+    margin-left: 0.5rem;
   }
 
   .dropdown-menu.active {
@@ -43,26 +45,16 @@
     transition: var(--speed) ease;
   }
 
-  .light.solid {
+  .light {
     background: var(--base-white);
     border-color: var(--blue-base);
     color: var(--base-black);
   }
   
-  .light.outline {
-    background: transparent;
-    border-color: var(--blue-base);
-    color: var(--blue-base);
-  }
   
-  .dark.solid {
+  .dark {
     background: var(--base-black);
     border-color: var(--blue-inverse);
     color: var(--base-white);
   }
   
-  .dark.outline {
-    background: transparent;
-    border-color: var(--blue-inverse);
-    color: var(--blue-inverse);
-}

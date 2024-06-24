@@ -9,35 +9,29 @@ const UserAvatarVariants = cva(
     'base-use-avatar', 
     {
         variants: {
-            variant: {
-                solid: 'solid',
-                outline: 'outline'
-            }, 
             mode: {
                 dark: 'dark', 
                 light: 'light'
             }
         }, 
         defaultVariants: {
-            variant: 'solid',
             mode: 'light'
         }
     }
 )
 
 interface UserAvatarProps extends ComponentProps<'div'>, VariantProps<typeof UserAvatarVariants>{
-    variant?: 'solid' | 'outline'
     mode?: 'light' | 'dark'
     photoUrl: string, 
     userName: string,
     onClick: () => void;
 }
 
-export const UserAvatar = ({variant, mode, ...props}: UserAvatarProps) => {
+export const UserAvatar = ({mode, ...props}: UserAvatarProps) => {
     const [active, setActive] = React.useState(false);
 
     return (
-        <div className={UserAvatarVariants({variant, mode})} {...props}>
+        <div className={UserAvatarVariants({mode})} {...props}>
              <div className="user-avatar" onClick={props.onClick}>
                 <div className="user-name">{props.userName}</div>
                 <div className="avatar-image">
@@ -48,7 +42,7 @@ export const UserAvatar = ({variant, mode, ...props}: UserAvatarProps) => {
                 </div>
             </div>
             <div className={`dropdown-menu ${active ? 'active' : 'inactive'}`}>
-                <DropDown />
+                <DropDown mode={mode}/>
             </div>
         </div>
        
