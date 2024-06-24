@@ -32,38 +32,39 @@ interface IconProps {
     className?: string;
     iconType: string;
     to: To;
+    size?: number;
 }
 
 export const Icon = (props: IconProps) => {
     const classes = props.to ? `icon ${props.className}` : `icon disabled-link ${props.className}`;
 
     switch (props.iconType) {
-        case "activity" : return <Link className={classes} to={props.to}><img src={Activity}/></Link>;
-        case "airplay" : return <Link className={classes} to={props.to}><img src={Airplay}/></Link>;
-        case "alert-circle" : return <Link className={classes} to={props.to}><img src={AlertCircle} /></Link>;
-        case "alert-octagon" : return <Link className={classes} to={props.to}><img src={AlertOctagon} /></Link>;
-        case "alert-triangle" : return <Link className={classes} to={props.to}><img src={AlertTriangle} /></Link>;
-        case "align-center" : return <Link className={classes} to={props.to}><img src={AlignCenter} /></Link>;
-        case "align-justify" : return <Link className={classes} to={props.to}><img src={AlignJustify} /></Link>;
-        case "arrow-down-circle" : return <Link className={classes} to={props.to}><img src={ArrowDownCircle} /></Link>;
-        case "arrow-down-left" : return <Link className={classes} to={props.to}><img src={ArrowDownLeft} /></Link>;
-        case "arrow-down-right" : return <Link className={classes} to={props.to}><img src={ArrowDownRight} /></Link>;
-        case "arrow-down" : return <Link className={classes} to={props.to}><img src={ArrowDown} /></Link>;
-        case "arrow-left-circle" : return <Link className={classes} to={props.to}><img src={ArrowLeftCircle} /></Link>;
-        case "arrow-left" : return <Link className={classes} to={props.to}><img src={ArrowLeft} /></Link>;
-        case "arrow-right-circle" : return <Link className={classes} to={props.to}><img src={ArrowRightCircle} /></Link>;
-        case "arrow-right" : return <Link className={classes} to={props.to}><img src={ArrowRight} /></Link>;
-        case "chevron-left" : return <Link className={classes} to={props.to}><img src={ChevronLeft} /></Link>
-        case "chevron-right" : return <Link className={classes} to={props.to}><img src={ChevronRight} /></Link>
-        case "chevron-down" : return <Link className={classes} to={props.to}><img src={ChevronDown} /></Link>
-        case "file" : return <Link className={classes} to={props.to}><img src={File} /></Link>
-        case "icon-book" : return <Link className={classes} to={props.to}><img src={IconBook}/></Link>
-        case "icon-users" : return <Link className={classes} to={props.to}><img src={IconUsers}/></Link>
-        case "logout" : return <Link className={classes} to={props.to}><img src={Logout} /></Link>
-        case "trash" : return <Link className={classes} to={props.to}><img src={Trash} /></Link>
-        case "search" : return <Link className={classes} to={props.to}><img src={Search} /></Link>
-        case "user" : return <Link className={classes} to={props.to}><img src={User} /></Link>
-        case "x" : return <Link className={classes} to={props.to}><img src={X}/></Link>
-        case "x-circle" : return <Link className={classes} to={props.to}><img src={XCircle} /></Link>
+        case "activity" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={Activity}/></Link>;
+        case "airplay" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={Airplay}/></Link>;
+        case "alert-circle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={AlertCircle} /></Link>;
+        case "alert-octagon" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={AlertOctagon} /></Link>;
+        case "alert-triangle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={AlertTriangle} /></Link>;
+        case "align-center" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={AlignCenter} /></Link>;
+        case "align-justify" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={AlignJustify} /></Link>;
+        case "arrow-down-circle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowDownCircle} /></Link>;
+        case "arrow-down-left" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowDownLeft} /></Link>;
+        case "arrow-down-right" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowDownRight} /></Link>;
+        case "arrow-down" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowDown} /></Link>;
+        case "arrow-left-circle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowLeftCircle} /></Link>;
+        case "arrow-left" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowLeft} /></Link>;
+        case "arrow-right-circle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowRightCircle} /></Link>;
+        case "arrow-right" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ArrowRight} /></Link>;
+        case "chevron-left" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ChevronLeft} /></Link>
+        case "chevron-right" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ChevronRight} /></Link>
+        case "chevron-down" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={ChevronDown} /></Link>
+        case "file" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={File} /></Link>
+        case "icon-book" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={IconBook}/></Link>
+        case "icon-users" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={IconUsers}/></Link>
+        case "logout" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={Logout} /></Link>
+        case "trash" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={Trash} /></Link>
+        case "search" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={Search} /></Link>
+        case "user" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={User} /></Link>
+        case "x" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={X}/></Link>
+        case "x-circle" : return <Link className={classes} to={props.to}><img style={{ width: props.size || '24px', height: props.size || '24px' }} src={XCircle} /></Link>
     }
 }

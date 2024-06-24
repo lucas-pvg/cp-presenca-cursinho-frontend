@@ -12,7 +12,7 @@ interface DropDownItemProps {
 export const DropDownItem = (props: DropDownItemProps) => {
     return (
         <div className="item-container">
-            <Icon iconType={props.icon} to={props.to ? props.to : ''} />
+            <Icon className="dropdown-icon" iconType={props.icon} to={props.to ? props.to : ''} size={14} />
             <p className="body">{props.body}</p>
         </div>
     );
