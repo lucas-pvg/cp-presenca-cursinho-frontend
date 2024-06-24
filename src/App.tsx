@@ -3,6 +3,7 @@ import { Navbar } from './components/navbar/Navbar'
 import { Table } from './components/table/Table'
 import { Class, classes } from './data/classes'
 import './App.css'
+import { PresencePage } from './pages/presence/PresencePage'
 
 function App() {
   const classData = classes.map((obj) => {
@@ -27,7 +28,7 @@ function App() {
               />
             </>
            } />
-          <Route path="/attendence" element={<h1>Presença</h1>} />
+          <Route path="/attendence" element={<PresencePage />} />
           <Route path="/teachers" element={<h1>Professores</h1>} />
           <Route path="/classes" element={<h1>Turmas</h1>} />
           <Route path="/metrics" element={<h1>Métricas</h1>} />
