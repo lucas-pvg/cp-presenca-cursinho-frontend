@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/navbar/Navbar'
 import { Table } from './components/table/Table'
+import { CreateClass } from './components/modal/create-class'
 import { Class, classes } from './data/classes'
 import './App.css'
 
@@ -30,7 +31,11 @@ function App() {
           <Route path="/attendence" element={<h1>Presença</h1>} />
           <Route path="/teachers" element={<h1>Professores</h1>} />
           <Route path="/classes" element={<h1>Turmas</h1>} />
-          <Route path="/metrics" element={<h1>Métricas</h1>} />
+          <Route path="/metrics" element={
+            <>
+              <CreateClass mode='light' />
+            </>
+          } />
         </Routes>
       </div>
     </div>
