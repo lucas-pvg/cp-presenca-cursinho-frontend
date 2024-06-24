@@ -42,7 +42,7 @@ export const UserAvatar = ({mode, ...props}: UserAvatarProps) => {
                 </div>
             </div>
             <div className={`dropdown-menu ${active ? 'active' : 'inactive'}`}>
-                <DropDown />
+                <DropDown mode={mode}/>
             </div>
         </div>
        
