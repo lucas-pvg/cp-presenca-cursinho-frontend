@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/navbar/Navbar'
 import { Table } from './components/table/Table'
-import { Class, classes } from './data/classes'
+import { Class, classes } from './data/mock/classes.mock'
 import './App.css'
 
 function App() {
