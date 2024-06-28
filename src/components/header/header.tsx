@@ -33,7 +33,7 @@ interface HeaderProps extends ComponentProps<'header'>, VariantProps<typeof Head
 }
 
 
-export const Header = ({ title, to, subtitle, variant, mode, ...props }: HeaderProps) => {
+export const Header = ({ to, variant, mode, ...props }: HeaderProps) => {
     return (
         <header className={HeaderVariants({variant, mode})} {...props}>
             <div className='first-row'>
@@ -45,10 +45,6 @@ export const Header = ({ title, to, subtitle, variant, mode, ...props }: HeaderP
                         <h1>{'Topo da página'}</h1>
                     </Link>
                 </div>
-            </div>
-            <div className='second-row'>
-                <h1 className='header-title'>{title}</h1>
-                <h4 className='header-subtitle'>{subtitle}</h4>
             </div>
            
         </header>
