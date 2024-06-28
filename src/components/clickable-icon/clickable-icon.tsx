@@ -13,6 +13,7 @@ import ArrowLeftCircle from "../../assets/icons/style_guide/icon-arrow-left-circ
 import ArrowLeft from "../../assets/icons/style_guide/icon-arrow-left.svg?react";
 import ArrowRightCircle from "../../assets/icons/style_guide/icon-arrow-right-circle.svg?react";
 import ArrowRight from "../../assets/icons/style_guide/icon-arrow-right.svg?react";
+import Book from "../../assets/icons/style_guide/icon-book.svg?react";
 import Calendar from "../../assets/icons/style_guide/icon-calendar.svg?react";
 import ChevronDown from "../../assets/icons/style_guide/icon-chevron-down.svg?react";
 import ChevronsDown from "../../assets/icons/style_guide/icon-chevrons-down.svg?react";
@@ -62,6 +63,7 @@ export const ClickableIcon = (props: ClickableIconProps) => {
     case "arrow-left" : return <Link className='clickable-icon-container' to={props.to}><ArrowLeft className={classes} /></Link>;
     case "arrow-right-circle" : return <Link className='clickable-icon-container' to={props.to}><ArrowRightCircle className={classes} /></Link>;
     case "arrow-right" : return <Link className='clickable-icon-container' to={props.to}><ArrowRight className={classes} /></Link>;
+    case "book" : return <Link className='clickable-icon-container' to={props.to}><Book className={classes} /></Link>;
     case "calendar" : return <Link className='clickable-icon-container' to={props.to}><Calendar className={classes} /></Link>;
     case "chevron-down" : return <Link className='clickable-icon-container' to={props.to}><ChevronDown className={classes} /></Link>;
     case "chevrons-down" : return <Link className='clickable-icon-container' to={props.to}><ChevronsDown className={classes} /></Link>;

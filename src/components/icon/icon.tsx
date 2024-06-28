@@ -13,6 +13,7 @@ import ArrowLeftCircle from "../../assets/icons/style_guide/icon-arrow-left-circ
 import ArrowLeft from "../../assets/icons/style_guide/icon-arrow-left.svg?react";
 import ArrowRightCircle from "../../assets/icons/style_guide/icon-arrow-right-circle.svg?react";
 import ArrowRight from "../../assets/icons/style_guide/icon-arrow-right.svg?react";
+import Book from "../../assets/icons/style_guide/icon-book.svg?react";
 import Calendar from "../../assets/icons/style_guide/icon-calendar.svg?react";
 import ChevronDown from "../../assets/icons/style_guide/icon-chevron-down.svg?react";
 import ChevronsDown from "../../assets/icons/style_guide/icon-chevrons-down.svg?react";
@@ -60,6 +61,7 @@ export const Icon = (props: IconProps) => {
     case "arrow-left" : return <ArrowLeft className={classes} />;
     case "arrow-right-circle" : return <ArrowRightCircle className={classes} />;
     case "arrow-right" : return <ArrowRight className={classes} />;
+    case "book" : return <Book className={classes} />;
     case "calendar" : return <Calendar className={classes} />;
     case "chevron-down" : return <ChevronDown className={classes} />;
     case "chevrons-down" : return <ChevronsDown className={classes} />;
