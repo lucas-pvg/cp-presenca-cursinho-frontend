@@ -50,13 +50,6 @@ export function HomePage({ mode, ...props }: HomePageProps) {
           header={['Aula', 'Horário', 'Turma', 'Column']}
           data={classData}
         />
-
-        <Table
-          mode='light'
-          clickable={true}
-          header={['Aula', 'Horário', 'Turma', 'Column']}
-          data={classData}
-        />
       </div>
     </div>
   )
