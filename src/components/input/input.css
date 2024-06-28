@@ -7,6 +7,9 @@
 
   border-radius: 8px;
   border: 1px solid;
+
+  transition: 
+    border-color .2s ease-in-out;
 }
 
 .input.light {
@@ -27,8 +30,7 @@
   border-color: var(--blue-inverse) !important;
 }
 
-.input .input-icon,
-.input .input-icon img {
+.input .input-icon {
   height: 16px;
   width: 16px;
 }

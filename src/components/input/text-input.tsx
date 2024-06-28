@@ -26,7 +26,7 @@ interface textInputProps
 export function TextInput({ mode, ...props }: textInputProps) {
   return (
     <div className={textInputVariants({ mode })}>
-      <Icon className='input-icon' iconType='search' />
+      <Icon className='input-icon' iconType='align-justify' />
       <input {...props} />
     </div>
   )
