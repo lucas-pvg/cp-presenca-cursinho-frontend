@@ -21,42 +21,50 @@ const modalVariants = cva(
 )
 
 interface modalProps extends VariantProps<typeof modalVariants> {
+  className?: string
   mode?: 'light' | 'dark'
   variant?: 'solid' | 'outline'
+  close: Function
 }
 
-export function Modal({ mode, variant }: modalProps) {
+export function Modal({ mode, variant, close, className }: modalProps) {
   return (
-    <div className={modalVariants({ mode })}>
-      <ModalHeader
-        title='Title'
-        description='Description'
-        variant={variant}
-        mode={mode}
-      />
+    <div className={className ? `modal ${className}` : 'modal'}>
+      <div className='modal-background' onClick={() => close()} />
 
-      <div className='modal-content'>
-        <div className='body'>
-          <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
-            <span>Description</span>
-            <span>Description</span>
-            <span>Description</span>
-          </ModalRow>
-          <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
-            <span>Description</span>
-            <span>Description</span>
-            <span>Description</span>
-          </ModalRow>
-          <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
-            <span>Description</span>
-            <span>Description</span>
-            <span>Description</span>
-          </ModalRow>
+      <div className={modalVariants({ mode })}>
+        <ModalHeader
+          title='Title'
+          description='Description'
+          variant={variant}
+          mode={mode}
+        />
+
+        <div className='modal-content'>
+          <div className='content-body'>
+            <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
+              <span>Description</span>
+              <span>Description</span>
+              <span>Description</span>
+            </ModalRow>
+
+            <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
+              <span>Description</span>
+              <span>Description</span>
+              <span>Description</span>
+            </ModalRow>
+            
+            <ModalRow labels={['Title', 'Title', 'Title']} mode={mode}>
+              <span>Description</span>
+              <span>Description</span>
+              <span>Description</span>
+            </ModalRow>
+          </div>
+
+          <hr className='divider'/>
+          <ModalWarning mode={mode} />
+          <ModalFooter type='button' mode={mode} close={() => close()} />
         </div>
-
-        <hr className='divider'/>
-        <ModalWarning mode={mode} />
-        <ModalFooter mode={mode} />
       </div>
     </div>
   )
