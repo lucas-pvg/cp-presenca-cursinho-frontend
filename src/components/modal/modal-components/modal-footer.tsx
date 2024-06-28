@@ -19,13 +19,21 @@ const modalFooterVariants = cva(
 
 interface modalFooterProps extends VariantProps<typeof modalFooterVariants> {
   mode?: 'light' | 'dark'
+  type?: 'submit' | 'button'
+  form?: string
+  close: Function
 }
 
-export function ModalFooter({ mode }: modalFooterProps) {
+export function ModalFooter({ mode, type, form, close }: modalFooterProps) {
   return (
     <div className={modalFooterVariants({ mode })} >
-      <Button variant='solid' mode={mode}>Confirm</Button>
-      <Button variant='outline' mode={mode}>Cancel</Button>
+      {
+        type == 'submit'
+        ? <Button type='submit' form={form} variant='solid' mode={mode}>Confirmar</Button>
+        : <Button type='button' variant='solid' mode={mode}>Confirmar</Button>
+      }
+      
+      <Button type='button' variant='outline' mode={mode} onClick={() => close()}>Cancelar</Button>
     </div>
   )
 }
