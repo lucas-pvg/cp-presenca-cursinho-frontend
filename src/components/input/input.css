@@ -1,0 +1,75 @@
+.input {
+  width: 100%;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 8px;
+  border: 1px solid;
+
+  transition: 
+    border-color .2s ease-in-out;
+}
+
+.input.light {
+  border-color: var(--outline-base);
+  color: var(--base-black);
+}
+
+.input.light:focus-within {
+  border-color: var(--blue-base) !important;
+}
+
+.input.dark {
+  border-color: var(--outline-inverse);
+  color: var(--base-white);
+}
+
+.input.dark:focus-within {
+  border-color: var(--blue-inverse) !important;
+}
+
+.input .input-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.input input {
+  all: unset;
+  width: 100%;
+  font-family: "Karla", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.input input::placeholder {
+  color: var(--outline-base);
+}
+
+.input input::-ms-input-placeholder {
+  color: var(--outline-base);
+}
+
+.date-input input::-webkit-calendar-picker-indicator,
+.time-input input::-webkit-calendar-picker-indicator  { 
+  display: none;
+}
+
+.time-input .time {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+
+  span {
+    color: var(--outline-base);
+  }
+}
+
+.time-input.light .time {
+  color: var(--base-black);
+}
+
+.time-input.dark .time {
+  color: var(--base-white);
+}

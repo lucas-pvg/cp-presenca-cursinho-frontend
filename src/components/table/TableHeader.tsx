@@ -33,7 +33,7 @@ export function TableHeader({ mode, clickable, headers, ...props }: TableHeaderP
   return (
     <thead className={TableHeaderVariants({ mode, clickable })} {...props}>
       <tr>
-        {headers.map((h) => <th>{h}</th>)}
+        {headers.map((h, i) => <th key={i}>{h}</th>)}
         <td className='icon'></td>
       </tr>
     </thead>
