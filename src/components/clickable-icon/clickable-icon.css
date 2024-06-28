@@ -1,0 +1,14 @@
+.clickable-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  color: inherit;
+}
+
+.clickable-icon {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}

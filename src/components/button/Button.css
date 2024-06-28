@@ -1,7 +1,3 @@
-a {
-  text-decoration: none;
-}
-
 .base-button {
   padding: 12px 15px;
   display: flex;
@@ -13,7 +9,7 @@ a {
 
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
 
   transition: 
     transform .1s ease-in-out
@@ -23,25 +19,25 @@ a {
   transform: scale(1.1);
 }
 
-.light.solid {
+.base-button.light.solid {
   background: var(--blue-base);
   border-color: var(--blue-base);
   color: var(--base-white);
 }
 
-.light.outline {
+.base-button.light.outline {
   background: transparent;
   border-color: var(--blue-base);
   color: var(--blue-base);
 }
 
-.dark.solid {
+.base-button.dark.solid {
   background: var(--blue-inverse);
   border-color: var(--blue-inverse);
   color: var(--base-white);
 }
 
-.dark.outline {
+.base-button.dark.outline {
   background: transparent;
   border-color: var(--blue-inverse);
   color: var(--blue-inverse);

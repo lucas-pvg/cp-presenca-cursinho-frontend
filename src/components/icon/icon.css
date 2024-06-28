@@ -1,18 +1,8 @@
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    width: fit-content;
-    text-decoration: none;
-    color: inherit;
-}
-
-.icon svg {
-    width: 25px;
-    height: 25px;
-}
-
-.disabled-link {
-    pointer-events: none;
+.base-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: inherit;
 }

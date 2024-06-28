@@ -36,14 +36,16 @@ export function Table({ mode, clickable, header, data, ...props }: TableProps) {
     <table className={TableVariants({ mode })} {...props}>
       <TableHeader mode={mode} clickable={clickable} headers={header} />
 
-      {
-        data.slice((page-1)*10, page*10).map((row, i) => {
-          return (
-            <TableRow mode={mode} clickable={clickable} data={row} key={i} />
-          )
-        })
-      }
-
+      <tbody>
+        {
+          data.slice((page-1)*10, page*10).map((row, i) => {
+            return (
+              <TableRow mode={mode} clickable={clickable} data={row} key={i} />
+            )
+          })
+        }
+      </tbody>
+      
       <TableFooter mode={mode} page={page} setPage={setPage} maxPage={maxPage} />
     </table>
   )

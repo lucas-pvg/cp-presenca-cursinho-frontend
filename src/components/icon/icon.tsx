@@ -1,63 +1,86 @@
-import { Link, To } from "react-router-dom";
+import Activity from "../../assets/icons/style_guide/icon-activity.svg?react";
+import Airplay from "../../assets/icons/style_guide/icon-airplay.svg?react";
+import AlertCircle from "../../assets/icons/style_guide/icon-alert-circle.svg?react";
+import AlertOctagon from "../../assets/icons/style_guide/icon-alert-octagon.svg?react";
+import AlertTriangle from "../../assets/icons/style_guide/icon-alert-triangle.svg?react";
+import AlignCenter from "../../assets/icons/style_guide/icon-align-center.svg?react";
+import AlignJustify from "../../assets/icons/style_guide/icon-align-justify.svg?react";
+import ArrowDownCircle from "../../assets/icons/style_guide/icon-arrow-down-circle.svg?react";
+import ArrowDownLeft from "../../assets/icons/style_guide/icon-arrow-down-left.svg?react";
+import ArrowDownRight from "../../assets/icons/style_guide/icon-arrow-down-right.svg?react";
+import ArrowDown from "../../assets/icons/style_guide/icon-arrow-down.svg?react";
+import ArrowLeftCircle from "../../assets/icons/style_guide/icon-arrow-left-circle.svg?react";
+import ArrowLeft from "../../assets/icons/style_guide/icon-arrow-left.svg?react";
+import ArrowRightCircle from "../../assets/icons/style_guide/icon-arrow-right-circle.svg?react";
+import ArrowRight from "../../assets/icons/style_guide/icon-arrow-right.svg?react";
+import Book from "../../assets/icons/style_guide/icon-book.svg?react";
+import Calendar from "../../assets/icons/style_guide/icon-calendar.svg?react";
+import ChevronDown from "../../assets/icons/style_guide/icon-chevron-down.svg?react";
+import ChevronsDown from "../../assets/icons/style_guide/icon-chevrons-down.svg?react";
+import ChevronLeft from "../../assets/icons/style_guide/icon-chevron-left.svg?react";
+import ChevronsLeft from "../../assets/icons/style_guide/icon-chevrons-left.svg?react";
+import ChevronRight from "../../assets/icons/style_guide/icon-chevron-right.svg?react";
+import ChevronsRight from "../../assets/icons/style_guide/icon-chevrons-right.svg?react";
+import ChevronUp from "../../assets/icons/style_guide/icon-chevron-up.svg?react";
+import ChevronsUp from "../../assets/icons/style_guide/icon-chevrons-up.svg?react";
+import Clock from "../../assets/icons/style_guide/icon-clock.svg?react";
+import File from "../../assets/icons/style_guide/icon-file.svg?react";
+import Logout from "../../assets/icons/style_guide/icon-log-out.svg?react";
+import Trash from "../../assets/icons/style_guide/icon-trash.svg?react";
+import Search from "../../assets/icons/style_guide/icon-search.svg?react";
+import Settings from "../../assets/icons/style_guide/icon-settings.svg?react";
+import TrendingUp from "../../assets/icons/style_guide/icon-trending-up.svg?react";
+import User from "../../assets/icons/style_guide/icon-user.svg?react";
+import Users from "../../assets/icons/style_guide/icon-users.svg?react";
+import X from "../../assets/icons/style_guide/icon-x.svg?react";
+import XCircle from "../../assets/icons/style_guide/icon-x-circle.svg?react";
 
-import Activity from "../../assets/icons/style_guide/icon-activity.svg";
-import Airplay from "../../assets/icons/style_guide/icon-airplay.svg";
-import AlertCircle from "../../assets/icons/style_guide/icon-alert-circle.svg";
-import AlertOctagon from "../../assets/icons/style_guide/icon-alert-octagon.svg";
-import AlertTriangle from "../../assets/icons/style_guide/icon-alert-triangle.svg";
-import AlignCenter from "../../assets/icons/style_guide/icon-align-center.svg";
-import AlignJustify from "../../assets/icons/style_guide/icon-align-justify.svg";
-import ArrowDownCircle from "../../assets/icons/style_guide/icon-arrow-down-circle.svg";
-import ArrowDownLeft from "../../assets/icons/style_guide/icon-arrow-down-left.svg";
-import ArrowDownRight from "../../assets/icons/style_guide/icon-arrow-down-right.svg";
-import ArrowDown from "../../assets/icons/style_guide/icon-arrow-down.svg";
-import ArrowLeftCircle from "../../assets/icons/style_guide/icon-arrow-left-circle.svg";
-import ArrowLeft from "../../assets/icons/style_guide/icon-arrow-left.svg";
-import ArrowRightCircle from "../../assets/icons/style_guide/icon-arrow-right-circle.svg";
-import ArrowRight from "../../assets/icons/style_guide/icon-arrow-right.svg";
-import ChevronLeft from "../../assets/icons/style_guide/icon-chevron-left.svg";
-import ChevronRight from "../../assets/icons/style_guide/icon-chevron-right.svg";
-import File from "../../assets/icons/style_guide/icon-file.svg";
-import Logout from "../../assets/icons/style_guide/icon-log-out.svg";
-import Trash from "../../assets/icons/style_guide/icon-trash.svg";
-import Search from "../../assets/icons/style_guide/icon-search.svg";
-import User from "../../assets/icons/style_guide/icon-user.svg";
-import X from "../../assets/icons/style_guide/icon-x.svg";
-import XCircle from "../../assets/icons/style_guide/icon-x-circle.svg";
+import './icon.css'
 
 interface IconProps {
-    className: string;
-    iconType: string;
-    to: To;
+  className?: string;
+  iconType: string;
 }
 
 export const Icon = (props: IconProps) => {
-    const classes = props.to ? `icon ${props.className}` : `icon disabled-link ${props.className}`;
+  const classes = props.className ? `base-icon ${props.className}` : 'base-icon';
 
-    switch (props.iconType) {
-        case "activity" : return <Link className={classes} to={props.to}><img src={Activity}/></Link>;
-        case "airplay" : return <Link className={classes} to={props.to}><img src={Airplay}/></Link>;
-        case "alert-circle" : return <Link className={classes} to={props.to}><img src={AlertCircle} /></Link>;
-        case "alert-octagon" : return <Link className={classes} to={props.to}><img src={AlertOctagon} /></Link>;
-        case "alert-triangle" : return <Link className={classes} to={props.to}><img src={AlertTriangle} /></Link>;
-        case "align-center" : return <Link className={classes} to={props.to}><img src={AlignCenter} /></Link>;
-        case "align-justify" : return <Link className={classes} to={props.to}><img src={AlignJustify} /></Link>;
-        case "arrow-down-circle" : return <Link className={classes} to={props.to}><img src={ArrowDownCircle} /></Link>;
-        case "arrow-down-left" : return <Link className={classes} to={props.to}><img src={ArrowDownLeft} /></Link>;
-        case "arrow-down-right" : return <Link className={classes} to={props.to}><img src={ArrowDownRight} /></Link>;
-        case "arrow-down" : return <Link className={classes} to={props.to}><img src={ArrowDown} /></Link>;
-        case "arrow-left-circle" : return <Link className={classes} to={props.to}><img src={ArrowLeftCircle} /></Link>;
-        case "arrow-left" : return <Link className={classes} to={props.to}><img src={ArrowLeft} /></Link>;
-        case "arrow-right-circle" : return <Link className={classes} to={props.to}><img src={ArrowRightCircle} /></Link>;
-        case "arrow-right" : return <Link className={classes} to={props.to}><img src={ArrowRight} /></Link>;
-        case "chevron-left" : return <Link className={classes} to={props.to}><img src={ChevronLeft} /></Link>
-        case "chevron-right" : return <Link className={classes} to={props.to}><img src={ChevronRight} /></Link>
-        case "file" : return <Link className={classes} to={props.to}><img src={File} /></Link>
-        case "logout" : return <Link className={classes} to={props.to}><img src={Logout} /></Link>
-        case "trash" : return <Link className={classes} to={props.to}><img src={Trash} /></Link>
-        case "search" : return <Link className={classes} to={props.to}><img src={Search} /></Link>
-        case "user" : return <Link className={classes} to={props.to}><img src={User} /></Link>
-        case "x" : return <Link className={classes} to={props.to}><img src={X}/></Link>
-        case "x-circle" : return <Link className={classes} to={props.to}><img src={XCircle} /></Link>
-    }
+  switch (props.iconType) {
+    case "activity" : return <Activity className={classes} />;
+    case "airplay" : return <Airplay className={classes} />;
+    case "alert-circle" : return <AlertCircle className={classes} />;
+    case "alert-octagon" : return <AlertOctagon className={classes} />;
+    case "alert-triangle" : return <AlertTriangle className={classes} />;
+    case "align-center" : return <AlignCenter className={classes} />;
+    case "align-justify" : return <AlignJustify className={classes} />;
+    case "arrow-down-circle" : return <ArrowDownCircle className={classes} />;
+    case "arrow-down-left" : return <ArrowDownLeft className={classes} />;
+    case "arrow-down-right" : return <ArrowDownRight className={classes} />;
+    case "arrow-down" : return <ArrowDown className={classes} />;
+    case "arrow-left-circle" : return <ArrowLeftCircle className={classes} />;
+    case "arrow-left" : return <ArrowLeft className={classes} />;
+    case "arrow-right-circle" : return <ArrowRightCircle className={classes} />;
+    case "arrow-right" : return <ArrowRight className={classes} />;
+    case "book" : return <Book className={classes} />;
+    case "calendar" : return <Calendar className={classes} />;
+    case "chevron-down" : return <ChevronDown className={classes} />;
+    case "chevrons-down" : return <ChevronsDown className={classes} />;
+    case "chevron-left" : return <ChevronLeft className={classes} />
+    case "chevrons-left" : return <ChevronsLeft className={classes} />;
+    case "chevron-right" : return <ChevronRight className={classes} />
+    case "chevrons-right" : return <ChevronsRight className={classes} />;
+    case "chevron-up" : return <ChevronUp className={classes} />;
+    case "chevrons-up" : return <ChevronsUp className={classes} />;
+    case "clock" : return <Clock className={classes} />;
+    case "file" : return <File className={classes} />;
+    case "logout" : return <Logout className={classes} />;
+    case "trash" : return <Trash className={classes} />;
+    case "search" : return <Search className={classes} />;
+    case "settings" : return <Settings className={classes} />;
+    case "trending-up" : return <TrendingUp className={classes} />;
+    case "user" : return <User className={classes} />;
+    case "users" : return <Users className={classes} />;
+    case "x" : return <X className={classes} />;
+    case "x-circle" : return <XCircle className={classes} />;
+  }
 }

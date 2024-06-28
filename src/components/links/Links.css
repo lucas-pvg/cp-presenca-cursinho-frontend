@@ -65,14 +65,6 @@
   transform: scale(1.1);
 }
 
-.base-link.icon svg {
-  display: inline-flex;
-}
-
-.base-link.no-icon svg {
-  display: none;
-}
-
 .base-link.light {
   color: var(--base-black);
 }

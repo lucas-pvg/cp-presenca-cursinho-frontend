@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react'
 import { Link } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
-import Icon from '../../assets/icon-book.svg?react'
+import { Icon } from '../icon/icon'
 import './Links.css'
 
 const LinksVariants = cva(
@@ -12,10 +12,6 @@ const LinksVariants = cva(
         active: 'active',
         inactive: 'inactive'
       },
-      icon: {
-        true: 'icon',
-        false: 'no-icon'
-      },
       mode: {
         light: 'light',
         dark: 'dark'
@@ -23,7 +19,6 @@ const LinksVariants = cva(
     },
     defaultVariants: {
       state: 'inactive',
-      icon: true,
       mode: 'light'
     }
   }
@@ -33,14 +28,17 @@ interface LinksProps
   extends ComponentProps<typeof Link>, VariantProps<typeof LinksVariants> {
     state?: 'active' | 'inactive'
     mode?: 'light' | 'dark'
-    icon?: boolean
+    iconType?: string
 }
 
-export function Links({state, mode, icon, ...props }: LinksProps) {
+export function Links({state, mode, iconType, ...props }: LinksProps) {
+  
   return (
-    <Link className={LinksVariants({ state, mode, icon })} {...props}>
+    <Link className={LinksVariants({ state, mode })} {...props}>
       <div className='link-content'>
-        <Icon />
+        {
+          iconType && <Icon iconType={iconType} />
+        }
         {props.children}
       </div>
 

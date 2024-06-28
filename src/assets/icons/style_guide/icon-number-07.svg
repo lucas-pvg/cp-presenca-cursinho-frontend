@@ -1,6 +1,6 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_11_1417)">
-<circle cx="12" cy="12" r="12" fill="#333333"/>
+<circle cx="12" cy="12" r="12" fill="currentColor"/>
 <path d="M9.0649 17.0001L13.2858 8.64778V8.57818H8.36888V6.81824H15.5131V8.60304L11.2872 17.0001H9.0649Z" fill="white"/>
 </g>
 <defs>
