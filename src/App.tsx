@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar } from './components/navbar/Navbar'
 import { Table } from './components/table/Table'
 import { CreateClass } from './components/modal/create-class'
+import { Button } from './components/button/Button'
 import { Class, classes } from './data/classes'
 import './App.css'
 
 function App() {
+  const [ open, setOpen ] = useState(false)
   const classData = classes.map((obj) => {
     return (Object.keys(obj).map((key) => obj[key as keyof Class]))
   })
@@ -33,7 +36,8 @@ function App() {
           <Route path="/classes" element={<h1>Turmas</h1>} />
           <Route path="/metrics" element={
             <>
-              <CreateClass mode='light' />
+              <Button onClick={() => setOpen(true)}>Open Modal</Button>
+              <CreateClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
             </>
           } />
         </Routes>
