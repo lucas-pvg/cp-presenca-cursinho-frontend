@@ -8,11 +8,6 @@
     color: inherit;
 }
 
-.icon svg {
-    width: 25px;
-    height: 25px;
-}
-
 .disabled-link {
     pointer-events: none;
 }
