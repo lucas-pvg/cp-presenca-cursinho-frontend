@@ -1,11 +1,11 @@
 .zombie {
   position: relative;
-  height: 200px;
-  width: 300px;
+  height: 150px;
+  width: 220px;
 }
 
 .zombie-img {
-  height: 200px;
+  height: 150px;
   opacity: 70%;
   position: absolute;
   top: 0;
@@ -17,87 +17,87 @@
 }
 
 .zombie .d1 {
-  height: 40px;
-  top: 110px;
+  height: 30px;
+  top: 90px;
   left: 65px;
   animation-delay: 0 !important;
 }
 
 .zombie .d2 {
-  height: 40px;
-  top: 10px;
+  height: 30px;
+  top: 15px;
   left: 20px;
   animation-delay: .4s !important;
 }
 
 .zombie .d3 {
-  height: 12px;
-  top: 100px;
-  left: 50px;
+  height: 10px;
+  top: 80px;
+  left: 55px;
   animation-delay: .8s !important;
 }
 
 .zombie .d4 {
-  height: 12px;
-  top: 0px;
+  height: 10px;
+  top: 10px;
   left: 5px;
   animation-delay: 1.2s !important;
 }
 
 .zombie .d5 {
-  height: 10px;
-  top: 150px;
-  left: 110px;
+  height: 8px;
+  top: 120px;
+  left: 100px;
   animation-delay: 1.6s !important;
 }
 
 .zombie .d6 {
-  height: 10px;
-  top: 50px;
-  left: 65px;
+  height: 8px;
+  top: 45px;
+  left: 55px;
   animation-delay: 2s !important;
 }
 
 .zombie .d7 {
-  height: 40px;
-  top: 60px;
-  left: 215px;
+  height: 30px;
+  top: 45px;
+  left: 170px;
   animation-delay: 2.4s !important;
 }
 
 .zombie .d8 {
-  height: 35px;
+  height: 25px;
   transform: rotate(-150deg);
   top: 65px;
-  left: 0px;
+  left: 10px;
   animation-delay: 2.8s !important;
 }
 
 .zombie .d9 {
-  height: 15px;
-  top: 40px;
-  left: 245px;
+  height: 12px;
+  top: 25px;
+  left: 195px;
   animation-delay: 3.2s !important;
 }
 
 .zombie .d10 {
-  height: 12px;
-  top: 120px;
+  height: 10px;
+  top: 110px;
   left: 0px;
   animation-delay: 3.6s !important;
 }
 
 .zombie .d11 {
-  height: 15px;
-  top: 100px;
-  left: 260px;
+  height: 12px;
+  top: 80px;
+  left: 205px;
   animation-delay: 4s !important;
 }
 
 .zombie .d12 {
-  height: 18px;
-  top: 150px;
-  left: 30px;
+  height: 13px;
+  top: 120px;
+  left: 35px;
   animation-delay: 4.4s !important;
 }
 

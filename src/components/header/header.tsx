@@ -1,48 +1,20 @@
-import { cva, VariantProps } from 'class-variance-authority'
-import { Link, To } from 'react-router-dom';
-import './header.css';
 import { ComponentProps } from 'react';
+import { To, Link } from 'react-router-dom';
 import { Switch } from '../switch/switch';
+import './header.css';
 
-const HeaderVariants = cva(
-    'base-button',
-    {
-        variants: {
-        variant: {
-            solid: 'solid',
-            outline: 'outline'
-        },
-        mode: {
-            dark: 'dark',
-            light: 'light'
-        }
-        },
-        defaultVariants: {
-        variant: 'solid',
-        mode: 'light'
-        }
-    }
-)
-
-interface HeaderProps extends ComponentProps<'header'>, VariantProps<typeof HeaderVariants> {
-    to: To 
-    variant?: 'solid' | 'outline'
-    mode?: 'light' | 'dark'
+interface HeaderProps extends ComponentProps<'header'> {
+  to: To
 }
 
+export const Header = ({ to, ...props }: HeaderProps) => {
+  return (
+    <header className='base-header' {...props}>
+      <Switch />
 
-export const Header = ({ to, variant, mode, ...props }: HeaderProps) => {
-    return (
-        <header className={HeaderVariants({variant, mode})} {...props}>
-            <div className='toggle'>
-                <Switch />
-            </div>
-            <div className='profile'>
-                <Link to={to}>
-                    <h1>{'Topo da página'}</h1>
-                </Link>
-            </div>
-            
-        </header>
-    )
+      <Link to={to}>
+          <h1>{'Topo da página'}</h1>
+      </Link>
+    </header>
+  )
 }
