@@ -1,0 +1,21 @@
+.item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+}
+
+.item-container:hover {
+    color: var(--blue-inverse);
+}
+
+.item-container .body {
+    margin-left: 1rem;
+}
+
+.item-container p {
+    font-size: 16px;
+}
+
+

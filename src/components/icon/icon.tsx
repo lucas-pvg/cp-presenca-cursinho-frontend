@@ -40,47 +40,48 @@ import './icon.css'
 interface IconProps {
   className?: string;
   iconType: string;
+  size?: number;
 }
 
 export const Icon = (props: IconProps) => {
   const classes = props.className ? `base-icon ${props.className}` : 'base-icon';
 
   switch (props.iconType) {
-    case "activity" : return <Activity className={classes} />;
-    case "airplay" : return <Airplay className={classes} />;
-    case "alert-circle" : return <AlertCircle className={classes} />;
-    case "alert-octagon" : return <AlertOctagon className={classes} />;
-    case "alert-triangle" : return <AlertTriangle className={classes} />;
-    case "align-center" : return <AlignCenter className={classes} />;
-    case "align-justify" : return <AlignJustify className={classes} />;
-    case "arrow-down-circle" : return <ArrowDownCircle className={classes} />;
-    case "arrow-down-left" : return <ArrowDownLeft className={classes} />;
-    case "arrow-down-right" : return <ArrowDownRight className={classes} />;
-    case "arrow-down" : return <ArrowDown className={classes} />;
-    case "arrow-left-circle" : return <ArrowLeftCircle className={classes} />;
-    case "arrow-left" : return <ArrowLeft className={classes} />;
-    case "arrow-right-circle" : return <ArrowRightCircle className={classes} />;
-    case "arrow-right" : return <ArrowRight className={classes} />;
-    case "book" : return <Book className={classes} />;
-    case "calendar" : return <Calendar className={classes} />;
-    case "chevron-down" : return <ChevronDown className={classes} />;
-    case "chevrons-down" : return <ChevronsDown className={classes} />;
-    case "chevron-left" : return <ChevronLeft className={classes} />
-    case "chevrons-left" : return <ChevronsLeft className={classes} />;
-    case "chevron-right" : return <ChevronRight className={classes} />
-    case "chevrons-right" : return <ChevronsRight className={classes} />;
-    case "chevron-up" : return <ChevronUp className={classes} />;
-    case "chevrons-up" : return <ChevronsUp className={classes} />;
-    case "clock" : return <Clock className={classes} />;
-    case "file" : return <File className={classes} />;
-    case "logout" : return <Logout className={classes} />;
-    case "trash" : return <Trash className={classes} />;
-    case "search" : return <Search className={classes} />;
-    case "settings" : return <Settings className={classes} />;
-    case "trending-up" : return <TrendingUp className={classes} />;
-    case "user" : return <User className={classes} />;
-    case "users" : return <Users className={classes} />;
-    case "x" : return <X className={classes} />;
-    case "x-circle" : return <XCircle className={classes} />;
+    case "activity" : return <Activity style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "airplay" : return <Airplay style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "alert-circle" : return <AlertCircle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "alert-octagon" : return <AlertOctagon style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "alert-triangle" : return <AlertTriangle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "align-center" : return <AlignCenter style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "align-justify" : return <AlignJustify style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-down-circle" : return <ArrowDownCircle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-down-left" : return <ArrowDownLeft style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-down-right" : return <ArrowDownRight style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-down" : return <ArrowDown style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-left-circle" : return <ArrowLeftCircle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-left" : return <ArrowLeft style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-right-circle" : return <ArrowRightCircle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "arrow-right" : return <ArrowRight style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "book" : return <Book style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "calendar" : return <Calendar style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevron-down" : return <ChevronDown style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevrons-down" : return <ChevronsDown style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevron-left" : return <ChevronLeft style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />
+    case "chevrons-left" : return <ChevronsLeft style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevron-right" : return <ChevronRight style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />
+    case "chevrons-right" : return <ChevronsRight style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevron-up" : return <ChevronUp style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "chevrons-up" : return <ChevronsUp style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "clock" : return <Clock style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "file" : return <File style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "logout" : return <Logout style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "trash" : return <Trash style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "search" : return <Search style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "settings" : return <Settings style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "trending-up" : return <TrendingUp style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "user" : return <User style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "users" : return <Users style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "x" : return <X style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "x-circle" : return <XCircle style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
   }
 }

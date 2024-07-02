@@ -1,0 +1,84 @@
+.base-option {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  z-index: 1;
+}
+
+.base-option.light {
+  color: var(--base-black);
+}
+
+.base-option.dark {
+  color: var(--base-white);
+}
+
+.base-option span {
+  font-family: "Karla", sans-serif;
+  font-weight: 300;
+  padding: 0 10px;
+
+  transition: 
+    transform .2s ease-in-out
+}
+
+.base-option:not(.active):hover span {
+  transform: scale(1.1);
+}
+
+.base-option hr {
+  width: 0%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  transition:
+    width .2s ease-in-out,
+    border-color .2s ease-in-out
+}
+
+.base-option.light.active hr {
+  width: 100%;
+  border-color: var(--blue-base);
+}
+
+.base-option.dark.active hr {
+  width: 100%;
+  border-color: var(--blue-inverse);
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+.labels {
+  display: flex;
+  gap: 10px;
+}
+
+.option-list .divider {
+  width: 100%;
+  border: 1px solid;
+  border-radius: 10px;
+  z-index: 0;
+
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+}
+
+.option-list.light .divider {
+  border-color: var(--outline-base);
+}
+
+.option-list.dark .divider {
+  border-color: var(--outline-inverse);
+}
