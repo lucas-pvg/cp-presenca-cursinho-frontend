@@ -4,13 +4,37 @@
   display: flex;
   justify-content: flex-start;
   background-color: var(--background-base);
+
+  overflow: hidden;
 }
 
-.pages {
+.page-container {
+  min-height: 100vh;
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-bottom: 50px;
+  gap: 90px;
+
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+.center {
+  margin: auto;
 }
