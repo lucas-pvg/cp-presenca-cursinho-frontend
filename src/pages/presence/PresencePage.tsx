@@ -1,22 +1,35 @@
-import { Header } from '../../components/header/header';
+import { cva, VariantProps } from 'class-variance-authority';
 import { Hero } from '../../components/hero/hero';
 import { Table } from '../../components/table/Table';
 import { Student, students } from '../../data/students';
 
-
 import './PresencePage.css';
 
-export const PresencePage = () => {
+const PresencePageVariants = cva(
+    'presence page',
+    {
+      variants: {
+        mode: {
+          light: 'light',
+          dark: 'dark'
+        }
+      },
+      defaultVariants: {
+        mode: 'light'
+      }
+    }
+  )
+
+  interface PresencePageProps extends VariantProps<typeof PresencePageVariants> {
+    mode?: 'light' | 'dark'
+  }
+
+export const PresencePage = ({ mode, ...props}: PresencePageProps) => {
     return (
-        <div className='presence-container'>
-            <div className='presence-header'>
-                <Header to={''} />
-                <Hero heroTitle={'Consultar Presença'} heroDescription='Tenha acesso às informações de uma aula e à lista de presença gerada.'/>
-            </div>
-            <div className='presence-body'>
-                <div className='presence-table'>
-                    <Table header={['Nome do aluno', 'Presença']} data={studentsData} />
-                </div>
+        <div className={PresencePageVariants({ mode })} {...props}>
+            <Hero title={'Consultar Presença'} description='Tenha acesso às informações de uma aula e à lista de presença gerada.'/>
+            <div className='page-content'>
+                <Table header={['Nome do aluno', 'Presença']} data={studentsData} />
             </div>
         </div>
     )
