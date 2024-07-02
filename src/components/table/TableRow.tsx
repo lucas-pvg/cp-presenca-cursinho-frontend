@@ -32,7 +32,7 @@ interface TableRowProps
 export function TableRow({ data, mode, clickable, ...props }: TableRowProps) {
   return (
     <tr className={TableRowVariants({ mode, clickable })} {...props}>
-      {data.map((d) => <td>{d}</td>)}
+      {data.map((d, i) => <td key={i}>{d}</td>)}
       <td className='icon'>{'>'}</td>
     </tr>
   )

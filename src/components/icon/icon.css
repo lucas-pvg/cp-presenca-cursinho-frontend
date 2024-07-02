@@ -1,13 +1,6 @@
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    width: fit-content;
-    text-decoration: none;
-    color: inherit;
-}
-
-.disabled-link {
-    pointer-events: none;
+.base-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
 }
