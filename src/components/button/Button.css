@@ -42,4 +42,47 @@
   border-color: var(--blue-inverse);
   color: var(--blue-inverse);
 }
+
+.presence-check-button {
+  padding: 8px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+
+ 
+  background: green;
+  color: var(--base-white);
   
+
+  transition: 
+    transform .1s ease-in-out
+}
+  
+.abscense-button {
+  padding: 8px 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+
+ 
+  background: red;
+  color: var(--base-white);
+  
+
+  transition: 
+    transform .1s ease-in-out
+}

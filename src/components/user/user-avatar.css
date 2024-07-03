@@ -1,4 +1,4 @@
-.user-avatar {
+  .user-avatar {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -50,11 +50,10 @@
     border-color: var(--blue-base);
     color: var(--base-black);
   }
-  
+
   
   .dark {
     background: var(--base-black);
     border-color: var(--blue-inverse);
     color: var(--base-white);
   }
-  

@@ -4,7 +4,6 @@
     width: 200px;
     border-radius: 8px;
     margin-top: 1rem;
-
 }
 
 .base-dropdown::before {
@@ -24,4 +23,3 @@
   border-color: var(--blue-inverse);
   color: var(--base-white);
 }
-  
