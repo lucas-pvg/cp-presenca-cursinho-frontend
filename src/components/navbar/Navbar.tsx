@@ -42,6 +42,7 @@ export function Navbar({ minimized, mode }: NavbarProps) {
           labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
           paths={['/', '/attendence', '/teachers', '/classes', '/metrics']}
           iconTypes={['book', 'calendar', 'user', 'users', 'trending-up']}
+          iconSize={16}
         />
       </div>
 

@@ -30,11 +30,6 @@
   border-color: var(--blue-inverse) !important;
 }
 
-.input .input-icon {
-  height: 16px;
-  width: 16px;
-}
-
 .input input {
   all: unset;
   width: 100%;

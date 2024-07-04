@@ -21,7 +21,7 @@ const timeInputVariants = cva(
 interface timeInputProps
   extends ComponentProps<'input'>, VariantProps<typeof timeInputVariants> {
     mode?: 'light' | 'dark'
-    names: Array<string>
+    names?: Array<string>
     values?: Array<string>
 }
 
@@ -30,12 +30,12 @@ export function TimeInput({ mode, names, values, ...props }: timeInputProps) {
     <div className={timeInputVariants({ mode })}>
       <div className='time'>
         <span>Das</span>
-        <input name={names[0]} value={values && values[0]} type='time' {...props} />
+        <input name={names && names[0]} value={values && values[0]} type='time' {...props} />
         <span>às</span>
-        <input name={names[1]} value={values && values[1]} type='time' {...props} />
+        <input name={names && names[1]} value={values && values[1]} type='time' {...props} />
       </div>
       
-      <Icon className='input-icon' iconType='clock' />
+      <Icon className='input-icon' iconType='clock' size={16} />
     </div>
   )
 }

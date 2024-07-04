@@ -27,7 +27,7 @@ export function SelectInput({ mode, ...props }: selectInputProps) {
   return (
     <div className={selectInputVariants({ mode })}>
       <input type='text' {...props} />
-      <Icon className='input-icon' iconType='chevron-down' />
+      <Icon className='input-icon' iconType='chevron-down' size={16} />
     </div>
   )
 }

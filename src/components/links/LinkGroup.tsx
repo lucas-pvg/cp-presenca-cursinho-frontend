@@ -25,9 +25,10 @@ interface LinkGroupProps
     labels: Array<string>
     paths: Array<string>
     iconTypes?: Array<string>
+    iconSize?: number
 }
 
-export function LinkGroup({ variant, mode, labels, paths, iconTypes }: LinkGroupProps) {
+export function LinkGroup({ variant, mode, labels, paths, iconTypes, iconSize }: LinkGroupProps) {
   const location = useLocation()
 
   return (
@@ -39,6 +40,7 @@ export function LinkGroup({ variant, mode, labels, paths, iconTypes }: LinkGroup
               mode={mode}
               to={paths[i]}
               iconType={iconTypes && iconTypes[i]}
+              iconSize={iconSize}
               state={location.pathname === paths[i] ? 'active' : 'inactive'} 
               key={i}
             >

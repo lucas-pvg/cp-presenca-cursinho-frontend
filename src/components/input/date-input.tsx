@@ -27,7 +27,7 @@ export function DateInput({ mode, ...props }: dateInputProps) {
   return (
     <div className={dateInputVariants({ mode })}>
       <input type='date' {...props} />
-      <Icon className='input-icon' iconType='calendar' />
+      <Icon className='input-icon' iconType='calendar' size={16} />
     </div>
   )
 }

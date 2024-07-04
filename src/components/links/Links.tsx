@@ -29,15 +29,16 @@ interface LinksProps
     state?: 'active' | 'inactive'
     mode?: 'light' | 'dark'
     iconType?: string
+    iconSize?: number
 }
 
-export function Links({state, mode, iconType, ...props }: LinksProps) {
+export function Links({state, mode, iconType, iconSize, ...props }: LinksProps) {
   
   return (
     <Link className={LinksVariants({ state, mode })} {...props}>
       <div className='link-content'>
         {
-          iconType && <Icon iconType={iconType} />
+          iconType && <Icon iconType={iconType} size={iconSize} />
         }
         {props.children}
       </div>
