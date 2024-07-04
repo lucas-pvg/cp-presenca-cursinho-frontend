@@ -4,13 +4,9 @@ import { ModalHeader } from './modal-components/modal-header'
 import { ModalRow } from './modal-components/modal-row'
 import { ModalWarning } from './modal-components/modal-warning'
 import { ModalFooter } from './modal-components/modal-footer'
+import { Input } from '../input/input'
 import axios from 'axios';
 import './modal.css'
-
-import { TextInput } from '../input/text-input'
-import { SelectInput } from '../input/select-input'
-import { DateInput } from '../input/date-input'
-import { TimeInput } from '../input/time-input'
 
 const createClassVariants = cva(
   'base-modal input-modal',
@@ -92,17 +88,17 @@ export function CreateClass({ mode, variant, close, className }: createClassProp
           <div className='content-body'>
             <form id='class-form' onSubmit={handleSubmit}>
               <ModalRow labels={['Nome do evento']} mode={mode} >
-                <TextInput name='name' value={classData.name} placeholder='Aula de Matemática' mode={mode} onChange={handleChange} />
+                <Input type='text' name='name' value={classData.name} placeholder='Aula de Matemática' mode={mode} onChange={handleChange} />
               </ModalRow>
 
               <ModalRow labels={['Disciplina', 'Turma']} mode={mode}>
-                <SelectInput name='subject' value={classData.subject} placeholder='Selecione a disciplina' mode={mode} onChange={handleChange} />
-                <SelectInput name='course_class' value={classData.course_class} placeholder='Selecione a turma' mode={mode} onChange={handleChange} />
+                <Input type='select' name='subject' value={classData.subject} placeholder='Selecione a disciplina' mode={mode} onChange={handleChange} />
+                <Input type='select' name='course_class' value={classData.course_class} placeholder='Selecione a turma' mode={mode} onChange={handleChange} />
               </ModalRow>
 
               <ModalRow labels={['Data', 'Horário']} mode={mode}>
-                <DateInput name='date' value={classData.date} mode={mode} onChange={handleChange} />
-                <TimeInput names={['startTime', 'endTime']} values={[classData.startTime, classData.endTime]} mode={mode} onChange={handleChange} />
+                <Input type='date' name='date' value={classData.date} mode={mode} onChange={handleChange} />
+                <Input type='time' names={['startTime', 'endTime']} values={[classData.startTime, classData.endTime]} mode={mode} onChange={handleChange} />
               </ModalRow>
             </form>
           </div>
