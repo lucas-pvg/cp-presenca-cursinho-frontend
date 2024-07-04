@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
 import { Table } from '../../components/table/Table'
-import { Class, classes } from '../../data/classes'
+import { Class, classes } from '../../data/mock/classes.mock'
 import './HomePage.css'
 
 const HomePageVariants = cva(
