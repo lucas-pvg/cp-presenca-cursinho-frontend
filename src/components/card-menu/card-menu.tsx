@@ -1,25 +1,14 @@
-import { Card } from './card'
+import { ComponentProps } from 'react'
 import './card.css'
 
-interface cardMenuProps {
+interface cardMenuProps extends ComponentProps<'div'> {
 	className?: string
-	mode?: 'light' | 'dark'
-	labels: Array<string>
-	to: Array<string>
 }
 
-export function CardMenu({ className, mode, labels, to }: cardMenuProps) {
+export function CardMenu({ className, ...props }: cardMenuProps) {
 	const classes = className ? `${className} card-menu` : 'card-menu'
 
 	return (
-		<div className={classes}>
-			{
-				labels.map((label, i) => {
-					return (
-						<Card to={to[i]} mode={mode} label={label} key={i} />
-					)
-				})
-			}
-		</div>
+		<div className={classes} {...props} />
 	)
 }
