@@ -9,9 +9,9 @@ export const BaseSwitch = () => {
   };
 
   return (
-    <label className={`switch ${isActive ? 'active' : ''}`} onClick={toggleSwitch}>
+    <label className={`base-switch ${isActive ? 'active' : ''}`} onClick={toggleSwitch}>
       <input type="checkbox" onClick={(e) => e.stopPropagation()}/>
-      <span className="slider">
+      <span className="base-slider">
       </span>
     </label>
   );

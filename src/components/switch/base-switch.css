@@ -1,28 +1,28 @@
-.switch {
+.base-switch {
   position: relative;
   display: inline-block;
   width: 48px;
   height: 24px;
 }
 
-.switch input {
+.base-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.switch .icon-container {
+.base-switch .icon-container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   transition: transform 0.2s;
 }
 
-.switch input:checked + .slider .icon-container {
-  transform: translateY(-50%) translateX(28px); /* Mova o ícone para a posição correta quando o switch está ativado */
+.base-switch input:checked + .slider .icon-container {
+  transform: translateY(-50%) translateX(28px); /* Mova o ícone para a posição correta quando o base-switch está ativado */
 }
 
-.slider {
+.base-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -34,7 +34,7 @@
   border-radius: 30px;
 }
 
-.slider:before {
+.base-slider:before {
   position: absolute;
   content: "";
   height: 18px;
@@ -46,15 +46,15 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked + .base-slider {
   background-color: var(--blue-base);
 }
 
-input:focus + .slider {
+input:focus + .base-slider {
   box-shadow: 0 0 1px var(--blue-base);
 }
 
-input:checked + .slider:before {
+input:checked + .base-slider:before {
   transform: translateX(28px);
   background-color: var(--base-white);
 }
