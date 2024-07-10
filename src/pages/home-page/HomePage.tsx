@@ -1,6 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
+import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
 import { Class, classes } from '../../data/mock/classes.mock'
 import './HomePage.css'
@@ -36,12 +37,11 @@ export function HomePage({ mode, ...props }: HomePageProps) {
         description='Acompanhe suas turmas e aulas e gerencie a presença de seus alunos.'
       />
 
-      <CardMenu
-        className='menu'
-        mode='light'
-        labels={['Agendar', 'Consultar', 'Eventos']}
-        to={['/', '/', '/']}
-      />
+      <CardMenu className='menu'>
+        <Card to='' label='Agendar' mode='light' />
+        <Card to='' label='Consultar' mode='light' />
+        <Card to='' label='Disciplinas' mode='light' />
+      </CardMenu>
 
       <div className='page-content'>
         <Table
