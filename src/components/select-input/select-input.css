@@ -1,0 +1,41 @@
+.select-input {
+  width: 100%;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: 8px;
+  border: 1px solid;
+
+  transition: 
+    border-color .2s ease-in-out;
+}
+
+.select-input.light {
+  border-color: var(--outline-base);
+  color: var(--base-black);
+}
+
+.select-input.light:focus-within {
+  border-color: var(--blue-base) !important;
+}
+
+.select-input.dark {
+  border-color: var(--outline-inverse);
+  color: var(--base-white);
+}
+
+.select-input.dark:focus-within {
+  border-color: var(--blue-inverse) !important;
+}
+
+.select-input select {
+  all: unset;
+  width: 100%;
+  padding: 0 5px;
+  font-family: "Karla", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  cursor: pointer;
+}
