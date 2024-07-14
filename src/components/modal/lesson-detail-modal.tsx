@@ -5,6 +5,7 @@ import { Input } from "../input/input"
 import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
+import { setPassKey } from "../../data/requests/attendance.requests"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -51,7 +52,7 @@ export const LessonDetailModal = ({ mode, variant, close, className }: classDeta
   };
 
   const handleSubmit = () => {
-
+    setPassKey(lessonData.passkey)
   }
 
   const handleClose = () => {
