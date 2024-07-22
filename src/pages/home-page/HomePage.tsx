@@ -3,8 +3,11 @@ import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
-import { Class, classes } from '../../data/mock/classes.mock'
 import './HomePage.css'
+import { useState } from 'react'
+import { Switch } from '../../components/switch/switch'
+import { lessonsMock } from '../../data/mock/lesson.mock'
+import { Lesson } from '../../data/models/lesson.model'
 
 const HomePageVariants = cva(
   'home page',
@@ -26,9 +29,30 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 }
 
 export function HomePage({ mode, ...props }: HomePageProps) {
-  const classData = classes.map((obj) => {
-    return (Object.keys(obj).map((key) => obj[key as keyof Class]))
-  })
+  const [lessonsData, setLessonsData] = useState<Lesson[]>(lessonsMock);
+
+  const createTableData = () => {
+    return lessonsData.map((lesson, index) => [
+      lesson.name,
+      lesson.startDatetime.toDateString(),
+      lesson.studentClass,
+      <Switch 
+        type='base'
+        mode={mode}
+        isActive={lesson.isAttendanceRegistrable}
+        handleChange={() => {
+          setLessonsData((currentStateLessons) => {
+            const updatedLessons = [...currentStateLessons];
+            updatedLessons[index] = {
+              ...updatedLessons[index],
+              isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+            }
+            return updatedLessons;
+          })
+        }}
+      />
+    ])
+  }
 
   return (
     <div className={HomePageVariants({ mode })} {...props}>
@@ -47,8 +71,8 @@ export function HomePage({ mode, ...props }: HomePageProps) {
         <Table
           mode='light'
           clickable={true}
-          header={['Aula', 'Horário', 'Turma', 'Column']}
-          data={classData}
+          header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
+          data={createTableData()}
         />
       </div>
     </div>

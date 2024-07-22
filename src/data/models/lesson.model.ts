@@ -1,12 +1,17 @@
-import { Class } from "./class.model";
-import { Subject } from "./subject.model";
-
 export interface Lesson {
-    courseClass: Class;
-    subject: Subject; 
+    id: number;
+    name: string;
+    lessonRecurrency: number;
+    startDatetime: Date;
+    endDatetime: Date;
+    attendanceStartDatetime: Date;
+    attendanceEndDatetime: Date;
+    isAttendanceRegistrable: boolean;
+    /* TODO: remover studentClass e atribuir pela relação de classes */
+    studentClass: string;
 }
 
-export interface LessonDateTime {
+export interface LessonRecurrency {
     lesson: Lesson;
     dateTime: Date;
 }
