@@ -9,6 +9,7 @@ import { Switch } from '../../components/switch/switch'
 import { lessonsMock } from '../../data/mock/lesson.mock'
 import { Lesson } from '../../data/models/lesson.model'
 import { LessonDetailModal } from '../../components/modal/lesson-detail-modal'
+import { formatTime } from '../../utils/datetime'
 
 const HomePageVariants = cva(
   'home page',
@@ -37,8 +38,8 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
   const createTableData = () => {
     return lessonsData.map((lesson, index) => [
-      lesson.name,
-      lesson.startDatetime.toDateString(),
+      lesson.subject,
+      formatTime(lesson.startDatetime),
       lesson.studentClass,
       <Switch 
         type='base'

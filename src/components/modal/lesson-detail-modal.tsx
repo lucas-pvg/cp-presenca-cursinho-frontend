@@ -6,6 +6,7 @@ import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
+import { formatTime } from "../../utils/datetime"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -65,16 +66,16 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
           <div className='content-body'>
             <form id='class-form' onSubmit={handleSubmit}>
               <ModalRow labels={['Disciplina', 'Horário de aula', 'Curso']} mode={mode} >
-                <p>{lessonData.name}</p>
-                <p>{lessonData.startDatetime.toDateString()}</p>
-                <p>{"Extensivo"}</p>
+                <p>{lessonData.subject}</p>
+                <p>{formatTime(lessonData.startDatetime)}</p>
+                <p>{lessonData.course}</p>
               </ModalRow>
 
               <ModalRow labels={['Turma', 'Horário de abertura e fechamento', 'Presença aberta']} mode={mode}>
                 <p>{lessonData.studentClass}</p>
                 <div>
-                  <p>{lessonData.attendanceStartDatetime.toDateString()}</p>
-                  <p>{lessonData.attendanceEndDatetime.toDateString()}</p>
+                  <p>{formatTime(lessonData.attendanceStartDatetime)}</p>
+                  <p>{formatTime(lessonData.attendanceEndDatetime)}</p>
                 </div>
                 
                 <Switch
