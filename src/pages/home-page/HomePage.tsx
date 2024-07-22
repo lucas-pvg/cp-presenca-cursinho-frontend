@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { Switch } from '../../components/switch/switch'
 import { lessonsMock } from '../../data/mock/lesson.mock'
 import { Lesson } from '../../data/models/lesson.model'
+import { LessonDetailModal } from '../../components/modal/lesson-detail-modal'
 
 const HomePageVariants = cva(
   'home page',
@@ -30,6 +31,9 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 
 export function HomePage({ mode, ...props }: HomePageProps) {
   const [lessonsData, setLessonsData] = useState<Lesson[]>(lessonsMock);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalLessonData, setModalLessonData] = useState<Lesson>(lessonsMock[0]);
 
   const createTableData = () => {
     return lessonsData.map((lesson, index) => [
@@ -54,27 +58,45 @@ export function HomePage({ mode, ...props }: HomePageProps) {
     ])
   }
 
+  const onTableClick = (index: number) => {
+    setModalLessonData(lessonsData[index]);
+    setIsModalOpen(true);
+  }
+
   return (
-    <div className={HomePageVariants({ mode })} {...props}>
-      <Hero 
-        title='Bem-vindo, Lucas!'
-        description='Acompanhe suas turmas e aulas e gerencie a presença de seus alunos.'
-      />
-
-      <CardMenu className='menu'>
-        <Card to='' label='Agendar' mode='light' />
-        <Card to='' label='Consultar' mode='light' />
-        <Card to='' label='Disciplinas' mode='light' />
-      </CardMenu>
-
-      <div className='page-content'>
-        <Table
-          mode='light'
-          clickable={true}
-          header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
-          data={createTableData()}
+    <>
+      <div className={HomePageVariants({ mode })} {...props}>
+        <Hero 
+          title='Bem-vindo, Lucas!'
+          description='Acompanhe suas turmas e aulas e gerencie a presença de seus alunos.'
         />
+
+        <CardMenu className='menu'>
+          <Card to='' label='Agendar' mode='light' />
+          <Card to='' label='Consultar' mode='light' />
+          <Card to='' label='Disciplinas' mode='light' />
+        </CardMenu>
+
+        <div className='page-content'>
+          <Table
+            mode='light'
+            clickable={true}
+            header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
+            data={createTableData()}
+            onRowClick={onTableClick}
+          />
+        </div>
       </div>
-    </div>
+
+      {isModalOpen && (
+          <LessonDetailModal 
+            className={isModalOpen ? "modal-open" : "modal-close"}
+            data={modalLessonData}
+            close={() => {
+              setIsModalOpen(false);
+            }}
+          />
+        )}
+    </>
   )
 }

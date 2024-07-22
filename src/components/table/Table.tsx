@@ -24,7 +24,7 @@ interface TableProps
 	clickable?: boolean;
 	header: Array<string>;
 	data: Array<Array<ReactNode>>;
-	onClick?: () => void;
+	onRowClick?: (index: number) => void;
 }
 
 export function Table({
@@ -32,7 +32,7 @@ export function Table({
 	clickable,
 	header,
 	data,
-	onClick,
+	onRowClick,
 	...props
 }: TableProps) {
 	const [page, setPage] = useState(1);
@@ -49,7 +49,7 @@ export function Table({
 							mode={mode}
 							clickable={clickable}
 							key={i}
-							onClick={onClick}
+							onClick={() => onRowClick?.(i)}
 						>
 							{row}
 						</TableRow>
