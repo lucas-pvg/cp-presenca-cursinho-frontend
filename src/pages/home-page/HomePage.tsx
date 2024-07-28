@@ -32,15 +32,29 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 }
 
 export function HomePage({ mode, ...props }: HomePageProps) {
-  const [lessonsData, setLessonsData] = useState<Lesson[]>(lessonsMock);
+  const [lessonsData, setLessonsData] = useState<Lesson[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalLessonData, setModalLessonData] = useState<Lesson>(lessonsMock[0]);
 
   useEffect(() => {
-    Services.listLessons()
+    Services.listLessonsWithDetails()
       .then((response) => {
-        setLessonsData(response);
+        const formattedLessons = response.map((lesson: any) => {
+          return {
+            id: lesson.id,
+            subject: lesson.subject,
+            startDatetime: new Date(lesson.start_datetime),
+            endDatetime: new Date(lesson.end_datetime),
+            attendanceStartDatetime: new Date(lesson.attendance_start_datetime),
+            attendanceEndDatetime: new Date(lesson.attendance_end_datetime),
+            isAttendanceRegistrable: lesson.is_attendance_registrable,
+            studentClass: lesson.student_class,
+            course: lesson.course,
+          }
+        })
+        
+        setLessonsData(formattedLessons);
       })
       .catch((error) => {
         console.log(error);

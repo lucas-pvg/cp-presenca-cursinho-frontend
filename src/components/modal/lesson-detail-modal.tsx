@@ -7,6 +7,7 @@ import { useState } from "react"
 import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
 import { formatTime } from "../../utils/datetime"
+import Services from "../../services"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -82,10 +83,14 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
                   type='base'
                   isActive={lessonData.isAttendanceRegistrable}
                   handleChange={() => {
-                    setLessonData({
-                      ...lessonData, 
-                      isAttendanceRegistrable: !lessonData.isAttendanceRegistrable
-                    })
+                    Services.updateAttendanceRegistrability(data.id)
+                      .then(() => {
+                        setLessonData({
+                          ...lessonData, 
+                          isAttendanceRegistrable: !lessonData.isAttendanceRegistrable
+                        })
+                      })
+                      .catch((error) => console.log(error));
                   }}
                 />
               </ModalRow>
