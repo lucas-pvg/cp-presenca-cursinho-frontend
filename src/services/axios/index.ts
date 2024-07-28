@@ -1,7 +1,7 @@
 import Axios, { type AxiosResponse } from 'axios';
 
 const axios = Axios.create({
-  baseURL: 'http://localhost:8000/',
+  baseURL: import.meta.env.VITE_API_URL,
   responseType: 'json'
 });
 
