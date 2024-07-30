@@ -1,10 +1,10 @@
-import { FormEvent, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 import { ModalHeader } from './modal-components/modal-header'
 import { ModalRow } from './modal-components/modal-row'
-import { ModalWarning } from './modal-components/modal-warning'
 import { ModalFooter } from './modal-components/modal-footer'
 import { Input } from '../input/input'
+import { SelectInput } from '../select-input/select-input'
 import axios from 'axios';
 import './modal.css'
 
@@ -31,7 +31,9 @@ interface createClassProps extends VariantProps<typeof createClassVariants> {
 }
 
 export function CreateClass({ mode, variant, close, className }: createClassProps) {
-  const [ classData, setClassData ] = useState({
+  // const [ studentClasses, setStudentClasses ] = useState([])
+  // const [ subjects, setSubjects ] = useState([])
+  const [ lessonData, setLessonData ] = useState({
     name: '',
     subject: '',
     course_class: '',
@@ -40,20 +42,29 @@ export function CreateClass({ mode, variant, close, className }: createClassProp
     endTime: ''
   })
 
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/users")
+  //     .then((res) => setUsers(res.data))
+  //     .catch(err => {
+  //       setError(err.message);
+  //     })
+  // }, []);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target
-    setClassData((prevData) => ({...prevData, [name]: value}))
+    setLessonData((prevData) => ({...prevData, [name]: value}))
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault()
-    let start_datetime: Date = new Date(`${classData.date}T${classData.startTime}`)
-    let end_datetime: Date = new Date(`${classData.date}T${classData.endTime}`)
+    let start_datetime: Date = new Date(`${lessonData.date}T${lessonData.startTime}`)
+    let end_datetime: Date = new Date(`${lessonData.date}T${lessonData.endTime}`)
 
     axios.post('http://localhost:8000/lesson/', {
-      name: classData.name,
-      subject: classData.subject,
-      course_class: classData.course_class,
+      name: lessonData.name,
+      subject: lessonData.subject,
+      course_class: lessonData.course_class,
       start_datetime: start_datetime,
       end_datetime: end_datetime
     })
@@ -62,12 +73,11 @@ export function CreateClass({ mode, variant, close, className }: createClassProp
       handleClose()
     })
     .catch(err => { console.log(err) })
-
   }
 
   const handleClose = () => {
     close()
-    setClassData(
+    setLessonData(
       { name: '', subject: '', course_class: '', date: '', startTime: '', endTime: '' }
     )
   }
@@ -88,23 +98,22 @@ export function CreateClass({ mode, variant, close, className }: createClassProp
           <div className='content-body'>
             <form id='class-form' onSubmit={handleSubmit}>
               <ModalRow labels={['Nome do evento']} mode={mode} >
-                <Input type='text' name='name' value={classData.name} placeholder='Aula de Matemática' mode={mode} onChange={handleChange} />
+                <Input required type='text' name='name' value={lessonData.name} placeholder='Aula de Matemática' mode={mode} onChange={handleChange} />
               </ModalRow>
 
               <ModalRow labels={['Disciplina', 'Turma']} mode={mode}>
-                <Input type='select' name='subject' value={classData.subject} placeholder='Selecione a disciplina' mode={mode} onChange={handleChange} />
-                <Input type='select' name='course_class' value={classData.course_class} placeholder='Selecione a turma' mode={mode} onChange={handleChange} />
+                <Input type='select' name='subject' value={lessonData.subject} placeholder='Selecione a disciplina' mode={mode} onChange={handleChange} />
+                <Input type='select' name='course_class' value={lessonData.course_class} placeholder='Selecione a turma' mode={mode} onChange={handleChange} />
               </ModalRow>
 
               <ModalRow labels={['Data', 'Horário']} mode={mode}>
-                <Input type='date' name='date' value={classData.date} mode={mode} onChange={handleChange} />
-                <Input type='time' names={['startTime', 'endTime']} values={[classData.startTime, classData.endTime]} mode={mode} onChange={handleChange} />
+                <Input required type='date' name='date' value={lessonData.date} mode={mode} onChange={handleChange} />
+                <Input required type='time' names={['startTime', 'endTime']} values={[lessonData.startTime, lessonData.endTime]} mode={mode} onChange={handleChange} />
               </ModalRow>
             </form>
           </div>
 
           <hr className='divider'/>
-          {/* <ModalWarning mode={mode} /> */}
           <ModalFooter type='submit' form='class-form' mode={mode} close={() => handleClose()} />
         </div>
       </div>

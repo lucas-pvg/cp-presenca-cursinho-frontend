@@ -1,16 +1,12 @@
-import { useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Navbar } from './components/navbar/Navbar'
 import { Header } from './components/header/header'
-import { CreateClass } from './components/modal/create-class'
-import { Button } from './components/button/Button'
 import './App.css'
 
 import { HomePage } from './pages/home-page/HomePage'
 
 function App() {
   const location = useLocation()
-  const [ open, setOpen ] = useState(false)
 
   return (
     <div className='app-container'>
@@ -24,12 +20,7 @@ function App() {
           <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
           <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
           <Route path="/classes" element={<h1 className='center'>Turmas</h1>} />
-          <Route path="/metrics" element={
-            <div className='center'>
-              <Button onClick={() => setOpen(true)}>Open Modal</Button>
-              <CreateClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
-            </div>
-          } />
+          <Route path="/metrics" element={<div className='center'><h1>Métricas</h1></div>} />
         </Routes>
       </div>
     </div>

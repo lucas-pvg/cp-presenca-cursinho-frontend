@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
 import { Class, classes } from '../../data/mock/classes.mock'
+import { CreateClass } from '../../components/modal/create-class'
 import './HomePage.css'
 
 const HomePageVariants = cva(
@@ -26,6 +28,7 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 }
 
 export function HomePage({ mode, ...props }: HomePageProps) {
+  const [ open, setOpen ] = useState(false)
   const classData = classes.map((obj) => {
     return (Object.keys(obj).map((key) => obj[key as keyof Class]))
   })
@@ -38,7 +41,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
       />
 
       <CardMenu className='menu'>
-        <Card to='' label='Agendar' mode='light' />
+        <Card to='' label='Agendar' mode='light' onClick={() => setOpen(true)} />
         <Card to='' label='Consultar' mode='light' />
         <Card to='' label='Disciplinas' mode='light' />
       </CardMenu>
@@ -51,6 +54,8 @@ export function HomePage({ mode, ...props }: HomePageProps) {
           data={classData}
         />
       </div>
+
+      <CreateClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
     </div>
   )
 }
