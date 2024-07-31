@@ -1,75 +1,119 @@
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 24px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .switch .icon-container {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.2s;
-  }
-  
-  .switch input:checked + .slider .icon-container {
-    transform: translateY(-50%) translateX(28px); /* Mova o ícone para a posição correta quando o switch está ativado */
-  }
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
 
-  .switch .icon {
-    position: absolute;
-    height: 10px;
-    width: 10px;
-    left: 6.2px;
-    top: -5.2px;
-    color: var(--base-black);
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: -6.2px;
-    bottom: 0;
-    background-color: var(--base-white);
-    transition: .2s;
-    border-radius: 30px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: var(--yellow-inverse);;
-    transition: .2s;
-    border-radius: 50%;
-  }
-  
-  /* Adicione estilos específicos para cada ícone, se necessário */
-  .switch .icon svg {
-    width: 80%; /* Ajuste o tamanho do ícone conforme necessário */
-    height: 80%;
-  }
-  
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .icon-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s;
+}
+
+.switch.active .slider .icon-container {
+  transform: translateY(-50%) translateX(28px); /* Mova o ícone para a posição correta quando o switch está ativado */
+}
+
+.switch .icon {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  left: 6.2px;
+  top: -5.2px;
+  color: var(--base-black);
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: -6.2px;
+  bottom: 0;
+  transition: .2s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+/* Adicione estilos específicos para cada ícone, se necessário */
+.switch .icon svg {
+  width: 80%; /* Ajuste o tamanho do ícone conforme necessário */
+  height: 80%;
+}
+
+/* type = 'nightMode' */
+.night-mode.light {
   input:checked + .slider {
-    background-color: var(--base-black);
+    background-color: var(--base-black); /* MUDOU */
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #2196F3; /* MUDOU */
   }
   
   input:checked + .slider:before {
-    transform: translateX(28px);
+    transform: translateX(28px); /* MUDOU */
   }
 
+  .slider {
+    background-color: var(--base-white);
+  }
+
+  .slider:before {
+    background-color: var(--yellow-inverse);
+  }
+}
+
+.night-mode.light.active {
+  .slider {
+    background-color: var(--base-black); /* MUDOU */
+  }
+  
+  .slider:before {
+    transform: translateX(28px); /* MUDOU */
+  }
+}
+
+/* type = 'base' */
+.base.light {
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--blue-base); /* MUDOU */
+  }
+
+  .slider {
+    background-color: var(--base-white);
+  }
+
+  .slider:before {
+    background-color: var(--blue-base);
+  }
+}
+
+.base.light.active {
+  .slider {
+    background-color: var(--blue-base);
+  }
+
+  .slider:before {
+    transform: translateX(28px); /* MUDOU */
+    background-color: var(--base-white);
+  }
+}
