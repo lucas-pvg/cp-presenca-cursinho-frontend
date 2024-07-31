@@ -4,10 +4,10 @@ import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
 import { Class, classes } from '../../data/mock/classes.mock'
-import './HomePage.css'
+import './lessons-page.css'
 
-const HomePageVariants = cva(
-  'home page',
+const LessonsPageVariants = cva(
+  'lessons page',
   {
     variants: {
       mode: {
@@ -21,25 +21,24 @@ const HomePageVariants = cva(
   }
 )
 
-interface HomePageProps extends VariantProps<typeof HomePageVariants> {
+interface LessonsPageProps extends VariantProps<typeof LessonsPageVariants> {
   mode?: 'light' | 'dark'
 }
 
-export function HomePage({ mode, ...props }: HomePageProps) {
+export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   const classData = classes.map((obj) => {
     return (Object.keys(obj).map((key) => obj[key as keyof Class]))
   })
 
   return (
-    <div className={HomePageVariants({ mode })} {...props}>
+    <div className={LessonsPageVariants({ mode })} {...props}>
       <Hero 
-        title='Bem-vindo, Lucas!'
-        description='Acompanhe suas turmas e aulas e gerencie a presença de seus alunos.'
+        title='Consultar aulas'
+        description='Veja as suas aulas que foram agendadas dentro do período de 1 mês.'
       />
 
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' />
-        <Card to='/lessons' label='Consultar' mode='light' />
         <Card to='' label='Disciplinas' mode='light' />
       </CardMenu>
 
