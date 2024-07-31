@@ -7,6 +7,7 @@ import { Button } from './components/button/Button'
 import './App.css'
 
 import { HomePage } from './pages/home-page/HomePage'
+import { LessonsPage } from './pages/lessons-page/lessons-page'
 
 function App() {
   const location = useLocation()
@@ -21,6 +22,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/lessons" element={<LessonsPage />} />
+          
           <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
           <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
           <Route path="/classes" element={<h1 className='center'>Turmas</h1>} />
