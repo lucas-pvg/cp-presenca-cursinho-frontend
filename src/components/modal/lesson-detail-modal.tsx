@@ -4,7 +4,7 @@ import { ModalRow } from "./modal-components/modal-row"
 import { Input } from "../input/input"
 import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
-import { Switch } from "../switch/switch"
+import { BaseSwitch } from "../switch/base-switch"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -38,8 +38,7 @@ export const LessonDetailModal = ({ mode, variant, close, className }: classDeta
     course_class: '', 
     startTime: new Date(), 
     endTime: new Date(),
-    passkey: '',
-    isAttendanceRegistrable: false
+    passkey: ''
   });
 
   const handlePasskeyChange = (e: any) => {
@@ -85,16 +84,7 @@ export const LessonDetailModal = ({ mode, variant, close, className }: classDeta
                   <p>{lessonData.endTime.toDateString()}</p>
                 </div>
                 
-                <Switch
-                  type='base'
-                  isActive={lessonData.isAttendanceRegistrable}
-                  handleChange={() => {
-                    setLessonData({
-                      ...lessonData, 
-                      isAttendanceRegistrable: !lessonData.isAttendanceRegistrable
-                    })
-                  }}
-                />
+                <BaseSwitch />
               </ModalRow>
 
               <ModalRow labels={['Palavra chave']} mode={mode}>
