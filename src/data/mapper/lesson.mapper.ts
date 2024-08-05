@@ -1,5 +1,5 @@
 import { Lesson } from "../models/lesson.model";
-import { LessonServiceResponse } from "../service-responses";
+import { LessonServiceResponse } from "../models/lesson.model";
 
 export const lessonMapper = (lesson: LessonServiceResponse): Lesson => ({
 	id: lesson.id,
@@ -11,4 +11,5 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson => ({
 	isAttendanceRegistrable: lesson.is_attendance_registrable,
 	studentClass: lesson.student_class,
 	course: lesson.course,
+	passkey: lesson.passkey
 });

@@ -1,6 +1,6 @@
 import { get, patch } from "../axios"
 import { lessonMapper } from "../../data/mapper";
-import { LessonServiceResponse } from "../../data/service-responses";
+import { LessonServiceResponse } from "../../data/models/lesson.model";
 
 const LessonService = {
   async listLessons(params?: unknown) {
