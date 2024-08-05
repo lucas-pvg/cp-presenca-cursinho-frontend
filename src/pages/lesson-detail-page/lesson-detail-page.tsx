@@ -1,24 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
+import { TextCard } from '../../components/text-card/text-card'
 import { Search } from '../../components/search/search'
 import { Table } from '../../components/table/Table'
+import { TableRow } from '../../components/table/TableRow'
 
-import axios from 'axios';
+import { classes } from '../../data/mock/classes.mock'
 import './lesson-detail-page.css'
-
-interface Classes {
-  id: number
-  name: string
-  start_datetime: string
-  end_datetime: string
-  attendance_start_datetime: string
-  attendance_end_datetime: string
-  is_attendance_registrable: boolean
-  lesson_recurrency: number
-}
 
 const LessonDetailPageVariants = cva(
   'lesson-detail page',
@@ -40,39 +31,11 @@ interface LessonDetailPageProps extends VariantProps<typeof LessonDetailPageVari
 }
 
 export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
-  // const [ classData, setClassData ] = useState([])
-  // const [ search, setSearch ] = useState<string>('')
-  // const [ lessons, setLessons ] = useState<string[][]>([])
+  const [ search, setSearch ] = useState<string>('')
 
-  // useEffect(() => {
-  //   axios.get('http://127.0.0.1:8000/lesson/')
-  //     .then(response => {
-  //       setClassData(response.data.map((obj:any) => {
-  //         // return (Object.keys(obj).map((key) => obj[key as keyof Classes]))
-  //         return ([obj.name, obj.id, obj.start_datetime])
-  //       }))
-
-  //       setLessons(response.data.map((obj:any) => {
-  //         // return (Object.keys(obj).map((key) => obj[key as keyof Classes]))
-  //         return ([obj.name, obj.id, obj.start_datetime])
-  //       }))
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-
-
-  // const filterLesson = (e:any) => {
-  //   setSearch(e.target.value)
-
-  //   if (e.target.value == '') {
-  //     setLessons(classData)
-  //   } else {
-  //     setLessons(classData.filter((lesson) => lesson[0].includes(e.target.value)))
-  //   }
-  // }
+  const filterLesson = (e:any) => {
+    setSearch(e.target.value)
+  }
 
   return (
     <div className={LessonDetailPageVariants({ mode })} {...props}>
@@ -87,14 +50,30 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       </CardMenu>
 
       <div className='page-content'>
+        <div className='info'>
+          <h5>Informações</h5>
+          <div className='cards'>
+            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
+            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
+            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
+            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
+          </div>
+        </div>
+        
         <div className='lesson-table'>
-          {/* <Search value={search} onChange={filterLesson} /> */}
-          {/* <Table
-            mode='light'
-            clickable={true}
-            header={['Aula', 'ID', 'Datetime']}
-            data={lessons}
-          /> */}
+          <Search value={search} onChange={filterLesson} />
+          <Table mode='light' clickable={true} header={['Aula', 'Horário', 'Turma', 'Column']}>
+            {
+              classes.map((lesson, i) => { return (
+                <TableRow key={i}>
+                  <td>{lesson.aula}</td>
+                  <td>{lesson.horario}</td>
+                  <td>{lesson.turma}</td>
+                  <td>{lesson.column}</td>
+                </TableRow>
+              )})
+            }
+          </Table>
         </div>
       </div>
     </div>

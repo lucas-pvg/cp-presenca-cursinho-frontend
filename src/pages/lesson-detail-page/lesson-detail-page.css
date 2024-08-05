@@ -1,10 +1,14 @@
+.page.lesson-detail {
+  gap: 50px;
+}
+
 .lesson-detail .page-content {
   padding: 0 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 40px;
 }
 
 .lesson-detail {
@@ -22,5 +26,16 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
+  gap: 20px;
+}
+
+.lesson-detail .info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lesson-detail .cards {
+  display: flex;
   gap: 20px;
 }
