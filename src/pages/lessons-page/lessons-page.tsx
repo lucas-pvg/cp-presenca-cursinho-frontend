@@ -5,20 +5,11 @@ import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Search } from '../../components/search/search'
 import { Table } from '../../components/table/Table'
+import { TableRow } from '../../components/table/TableRow'
 
-import axios from 'axios';
+import { Lesson } from '../../data/models/lesson.model'
+import { getLessons } from '../../data/requests/lesson.requests'
 import './lessons-page.css'
-
-interface Classes {
-  id: number
-  name: string
-  start_datetime: string
-  end_datetime: string
-  attendance_start_datetime: string
-  attendance_end_datetime: string
-  is_attendance_registrable: boolean
-  lesson_recurrency: number
-}
 
 const LessonsPageVariants = cva(
   'lessons page',
@@ -40,41 +31,30 @@ interface LessonsPageProps extends VariantProps<typeof LessonsPageVariants> {
 }
 
 export function LessonsPage({ mode, ...props }: LessonsPageProps) {
-  const [ classData, setClassData ] = useState([])
+  const [ lessons, setLessons ] = useState(Array<Lesson>)
+  const [ filtered, setFiltered ] = useState(Array<Lesson>)
   const [ search, setSearch ] = useState<string>('')
-  const [ lessons, setLessons ] = useState<string[][]>([])
-
+  
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/lesson/')
-      .then(response => {
-        setClassData(response.data.map((obj:any) => {
-          // return (Object.keys(obj).map((key) => obj[key as keyof Classes]))
-          return ([obj.name, obj.id, obj.start_datetime])
-        }))
-
-        setLessons(response.data.map((obj:any) => {
-          // return (Object.keys(obj).map((key) => obj[key as keyof Classes]))
-          return ([obj.name, obj.id, obj.start_datetime])
-        }))
+    getLessons()
+      .then(data => {
+        setLessons(data)
+        setFiltered(data)
       })
       .catch(error => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   }, []);
 
 
-
-  const filterLesson = (e:any) => {
+  const filterLesson = (e: any) => {
     setSearch(e.target.value)
-
     if (e.target.value == '') {
-      setLessons(classData)
+      setFiltered(lessons)
     } else {
-      setLessons(classData.filter((lesson) => lesson[0].includes(e.target.value)))
+      setFiltered(lessons.filter((lesson) => lesson.name.includes(e.target.value)))
     }
   }
-
-  console.log(lessons)
 
   return (
     <div className={LessonsPageVariants({ mode })} {...props}>
@@ -89,15 +69,23 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       </CardMenu>
 
       <div className='page-content'>
-        <div className='lesson-table'>
-          <Search value={search} onChange={filterLesson} />
-          <Table
-            mode='light'
-            clickable={true}
-            header={['Aula', 'ID', 'Datetime']}
-            data={lessons}
-          />
-        </div>
+        {
+          filtered && <div className='lesson-table'>
+            <Search value={search} onChange={filterLesson} />
+            <Table clickable={true} header={['Aula', 'Data', 'Hora', 'Turma']}>
+              {
+                filtered.map((lesson) => { return (
+                  <TableRow key={lesson.id}>
+                    <td>{lesson.name}</td>
+                    <td>{lesson.dateFormat('medium')}</td>
+                    <td>{lesson.startTimeFormat()}</td>
+                    <td>{lesson.studentClass.name}</td>
+                  </TableRow>
+                )})
+              }
+            </Table>
+          </div>
+        }
       </div>
     </div>
   )
