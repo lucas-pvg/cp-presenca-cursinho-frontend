@@ -1,8 +1,8 @@
 import { Subject } from "./subject.model";
 
-export interface Class {
-    name: string;
-    classroom: string;
-    course?: string;
-    subjects: Subject[];
+export interface StudentClass {
+  name: string;
+  // classroom: string;
+  // course?: string;
+  // subjects: Subject[];
 }

@@ -1,3 +1,3 @@
 export interface Subject {
-    name: string;
+	name: string;
 }
