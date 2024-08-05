@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Lesson } from "../models/lesson.model"
 import { mapLesson } from "../mapper/lesson.mapper"
 
 const BASE_URL = 'http://localhost:8000/lesson/'
