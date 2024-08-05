@@ -1,4 +1,4 @@
-import { Children, ComponentProps, ReactNode } from "react";
+import { ComponentProps } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import "./Table.css";
 
@@ -20,11 +20,9 @@ const TableRowVariants = cva("table-row", {
 });
 
 interface TableRowProps
-	extends ComponentProps<"tr">,
-		VariantProps<typeof TableRowVariants> {
-	mode?: "light" | "dark";
-	clickable?: boolean;
-	children: ReactNode;
+	extends ComponentProps<"tr">, VariantProps<typeof TableRowVariants> {
+		mode?: "light" | "dark";
+		clickable?: boolean;
 }
 
 export function TableRow({ mode, clickable, ...props }: TableRowProps) {
@@ -35,10 +33,7 @@ export function TableRow({ mode, clickable, ...props }: TableRowProps) {
 
 	return (
 		<tr className={TableRowVariants({ mode, clickable })} {...props}>
-			{props.children &&
-				Children.map(props.children, (child, i) => {
-					return <td key={i}>{child}</td>;
-				})}
+			{ props.children }
 			<td className="icon">{">"}</td>
 		</tr>
 	);
