@@ -8,6 +8,7 @@ export interface Lesson {
     isAttendanceRegistrable: boolean;
     studentClass: string;
     course: string;
+    passkey: string;
 }
 
 export interface LessonRecurrency {

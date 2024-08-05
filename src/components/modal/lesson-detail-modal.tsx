@@ -8,6 +8,7 @@ import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
 import { formatTime } from "../../utils/datetime"
 import Services from "../../services"
+import { setPassKey } from "../../data/requests/attendance.requests"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -45,7 +46,7 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
   };
 
   const handleSubmit = () => {
-
+    setPassKey(lessonData.passkey)
   }
 
   const handleClose = () => {
