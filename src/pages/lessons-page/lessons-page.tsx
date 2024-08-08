@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
@@ -34,6 +35,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   const [ lessons, setLessons ] = useState(Array<Lesson>)
   const [ filtered, setFiltered ] = useState(Array<Lesson>)
   const [ search, setSearch ] = useState<string>('')
+  const nav = useNavigate()
   
   useEffect(() => {
     getLessons()
@@ -75,7 +77,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
             <Table clickable={true} header={['Aula', 'Data', 'Hora', 'Turma']}>
               {
                 filtered.map((lesson) => { return (
-                  <TableRow key={lesson.id}>
+                  <TableRow key={lesson.id} onClick={() => nav(`/lessons/${lesson.id}`)}>
                     <td>{lesson.name}</td>
                     <td>{lesson.dateFormat('medium')}</td>
                     <td>{lesson.startTimeFormat()}</td>
