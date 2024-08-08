@@ -10,7 +10,6 @@ export const getLessons = () => {
       return data
     })
     .catch(error => {
-      console.log(error)
       return error
     })
   
@@ -18,12 +17,13 @@ export const getLessons = () => {
 }
 
 export const getLesson = (id: number) => {
-  const lesson = axios.get(`${BASE_URL}${id}`)
-    .then(res => {
-      return res;
+  const lesson = axios.get(`${BASE_URL}${id}/`)
+    .then(response => {
+      return mapLesson(response.data)
     })
-    .catch(err => {
-      return err;
+    .catch(error => {
+      return error;
     })
-    return lesson;
+
+  return lesson;
 }
