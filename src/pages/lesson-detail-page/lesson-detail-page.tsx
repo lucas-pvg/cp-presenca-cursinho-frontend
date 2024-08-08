@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
@@ -9,6 +10,8 @@ import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
 
 import { classes } from '../../data/mock/classes.mock'
+import { getLesson } from '../../data/requests/lesson.requests'
+import { Lesson } from '../../data/models/lesson.model'
 import './lesson-detail-page.css'
 
 const LessonDetailPageVariants = cva(
@@ -32,6 +35,18 @@ interface LessonDetailPageProps extends VariantProps<typeof LessonDetailPageVari
 
 export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   const [ search, setSearch ] = useState<string>('')
+  const [ lesson, setLesson ] = useState<Lesson>()
+  const { lessonID } = useParams()
+
+  useEffect(() => {
+    lessonID && getLesson(parseInt(lessonID))
+      .then(data => {
+        setLesson(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, []);
 
   const filterLesson = (e:any) => {
     setSearch(e.target.value)
@@ -40,8 +55,8 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   return (
     <div className={LessonDetailPageVariants({ mode })} {...props}>
       <Hero 
-        title='Aula de Matemática'
-        description='Matemática • Turma 1'
+        title={`${lesson?.name}`}
+        description={`${lesson?.subject.name} • ${lesson?.studentClass.name}`}
       />
 
       <CardMenu className='menu'>
@@ -53,10 +68,10 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
         <div className='info'>
           <h5>Informações</h5>
           <div className='cards'>
-            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
-            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
-            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
-            <TextCard iconType='align-justify' label='Modalidade'>MODALIDADE</TextCard>
+            <TextCard iconType='calendar' label='Data'>{lesson?.dateFormat('short')}</TextCard>
+            <TextCard iconType='clock' label='Horário'>{`${lesson?.startTimeFormat()} - ${lesson?.endTimeFormat()}`}</TextCard>
+            <TextCard iconType='clipboard' label='Presença'>{`${lesson?.startAttendanceFormat()} - ${lesson?.endAttendanceFormat()}`}</TextCard>
+            <TextCard iconType='lock' label='Palavra-chave'>{lesson?.passkey}</TextCard>
           </div>
         </div>
         
