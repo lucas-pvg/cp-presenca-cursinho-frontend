@@ -44,10 +44,18 @@ export class Lesson implements LessonInterface {
   }
 
   startTimeFormat(): string {
-    return this.startTime.toLocaleTimeString('pt-br', {timeStyle: 'short'})
+    return this.startTime.toLocaleTimeString('pt-br', {timeStyle: 'short', hour12: false})
   }
 
   endTimeFormat(): string {
-    return this.endTime.toLocaleTimeString('pt-br', {timeStyle: 'short'})
+    return this.endTime.toLocaleTimeString('pt-br', {timeStyle: 'short', hour12: false})
+  }
+
+  startAttendanceFormat(): string {
+    return this.startAttendance.toLocaleTimeString('pt-br', {timeStyle: 'short', hour12: false})
+  }
+
+  endAttendanceFormat(): string {
+    return this.endAttendance.toLocaleTimeString('pt-br', {timeStyle: 'short', hour12: false})
   }
 }
