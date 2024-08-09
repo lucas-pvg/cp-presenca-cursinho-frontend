@@ -6,7 +6,6 @@ import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
-import { formatTime } from "../../utils/datetime"
 import Services from "../../services"
 
 const classDetailVariants = cva(
@@ -40,7 +39,12 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
     const { name, value } = e.target;
     const input = e.target.value;
     if (input.length <= max_lenght) {
-      setLessonData((prevData) => ({...prevData, [name]: value}));
+      setLessonData((prevData) => 
+        new Lesson ({
+          ...prevData,
+          [name]: value
+        })
+      );
     }
   };
 
@@ -70,16 +74,16 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
           <div className='content-body'>
             <form id='class-form' onSubmit={handleSubmit}>
               <ModalRow labels={['Disciplina', 'Horário de aula', 'Curso']} mode={mode} >
-                <p>{lessonData.subject}</p>
-                <p>{formatTime(lessonData.startDatetime)}</p>
+                <p>{lessonData.subject.name}</p>
+                <p>{lessonData.startTimeFormat()}</p>
                 <p>{lessonData.course}</p>
               </ModalRow>
 
               <ModalRow labels={['Turma', 'Horário de abertura e fechamento', 'Presença aberta']} mode={mode}>
-                <p>{lessonData.studentClass}</p>
+                <p>{lessonData.studentClass.name}</p>
                 <div>
-                  <p>{formatTime(lessonData.attendanceStartDatetime)}</p>
-                  <p>{formatTime(lessonData.attendanceEndDatetime)}</p>
+                  <p>{lessonData.startAttendanceFormat()}</p>
+                  <p>{lessonData.endAttendanceFormat()}</p>
                 </div>
                 
                 <Switch
@@ -88,10 +92,12 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
                   handleChange={() => {
                     Services.updateAttendanceRegistrability(lessonData.id)
                       .then(() => {
-                        setLessonData({
-                          ...lessonData, 
-                          isAttendanceRegistrable: !lessonData.isAttendanceRegistrable
-                        })
+                        setLessonData((currentStateLesson) => 
+                          new Lesson ({
+                            ...currentStateLesson,
+                            isAttendanceRegistrable: !currentStateLesson.isAttendanceRegistrable
+                          })
+                        )
                       })
                       .catch((error) => console.log(error));
                   }}
