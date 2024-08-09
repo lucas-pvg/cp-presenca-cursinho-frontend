@@ -9,8 +9,8 @@ import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
 
 import { Lesson } from '../../data/models/lesson.model'
-import { getLessons } from '../../data/requests/lesson.requests'
 import './lessons-page.css'
+import Services from '../../services'
 
 const LessonsPageVariants = cva(
   'lessons page',
@@ -38,7 +38,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   const nav = useNavigate()
   
   useEffect(() => {
-    getLessons()
+    Services.listLessonsWithDetails()
       .then(data => {
         setLessons(data)
         setFiltered(data)
