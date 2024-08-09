@@ -45,7 +45,10 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
   };
 
   const handleSubmit = () => {
-
+    // TODO: remover console.log's
+    Services.setPassKey(lessonData.passkey, lessonData.id)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   const handleClose = () => {
@@ -96,7 +99,7 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
               </ModalRow>
 
               <ModalRow labels={['Palavra chave']} mode={mode}>
-                <Input type='text' name='passkey' value={"abracadabra"} mode={mode} onChange={handlePasskeyChange} />
+                <Input type='text' name='passkey' value={lessonData.passkey} mode={mode} onChange={handlePasskeyChange} />
               </ModalRow>
             </form>
           </div>

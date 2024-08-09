@@ -6,6 +6,7 @@ import { Student, studentsMock } from "../../data/students";
 import "./PresencePage.css";
 import React from "react";
 import { Button } from "../../components/button/Button";
+import { TableRow } from "../../components/table/TableRow";
 
 const PresencePageVariants = cva("presence page", {
 	variants: {
@@ -31,36 +32,6 @@ export const PresencePage = ({ mode, ...props }: PresencePageProps) => {
 	// 	setStudentsData(students);
 	// });
 
-	const createTableDataFromStudentsData = () => {
-		return studentsData.map((student, index) => [
-			student.name,
-			<Button
-				onClick={(e) => {
-					e.preventDefault();
-
-					const newPresence =
-						student.presence === "ausente" ? "presente" : "ausente";
-
-					setStudentsData((prevStudents) => {
-						const newStudents = [...prevStudents];
-						newStudents[index] = {
-							...newStudents[index],
-							presence: newPresence,
-						};
-						return newStudents;
-					});
-				}}
-				className={
-					student.presence === "presente"
-						? "presence-check-button"
-						: "abscense-button"
-				}
-			>
-				{student.presence}
-			</Button>,
-		]);
-	};
-
 	return (
 		<div className={PresencePageVariants({ mode })} {...props}>
 			<Hero
@@ -69,9 +40,41 @@ export const PresencePage = ({ mode, ...props }: PresencePageProps) => {
 			/>
 			<div className="page-content">
 				<Table
+					mode={mode}
 					header={["Nome do aluno", "Presença"]}
-					data={createTableDataFromStudentsData()}
-				/>
+				>
+					{studentsData.map((student, index) => (
+						<TableRow key={index}>
+							<td>{student.name}</td>
+							<td>
+								<Button
+									onClick={(e) => {
+										e.preventDefault();
+
+										const newPresence =
+											student.presence === "ausente" ? "presente" : "ausente";
+
+										setStudentsData((prevStudents) => {
+											const newStudents = [...prevStudents];
+											newStudents[index] = {
+												...newStudents[index],
+												presence: newPresence,
+											};
+											return newStudents;
+										});
+									}}
+									className={
+										student.presence === "presente"
+											? "presence-check-button"
+											: "abscense-button"
+									}
+								>
+									{student.presence}
+								</Button>
+							</td>
+						</TableRow>
+					))}
+				</Table>
 			</div>
 		</div>
 	);
