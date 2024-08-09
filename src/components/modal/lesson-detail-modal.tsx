@@ -92,7 +92,7 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
               </ModalRow>
 
               <ModalRow labels={['Palavra chave']} mode={mode}>
-                <Input type='text' name='passkey' value={"abracadabra"} mode={mode} onChange={handlePasskeyChange} />
+                <Input type='text' name='passkey' value={lessonData.passkey} mode={mode} onChange={handlePasskeyChange} />
               </ModalRow>
             </form>
           </div>
