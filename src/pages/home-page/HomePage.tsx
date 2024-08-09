@@ -10,6 +10,7 @@ import { lessonsMock } from '../../data/mock/lesson.mock'
 import { Lesson } from '../../data/models/lesson.model'
 import { LessonDetailModal } from '../../components/modal/lesson-detail-modal'
 import { formatTime } from '../../utils/datetime'
+import { TableRow } from '../../components/table/TableRow'
 
 const HomePageVariants = cva(
   'home page',
@@ -59,11 +60,6 @@ export function HomePage({ mode, ...props }: HomePageProps) {
     ])
   }
 
-  const onTableClick = (index: number) => {
-    setModalLessonData(lessonsData[index]);
-    setIsModalOpen(true);
-  }
-
   return (
     <>
       <div className={HomePageVariants({ mode })} {...props}>
@@ -83,9 +79,41 @@ export function HomePage({ mode, ...props }: HomePageProps) {
             mode='light'
             clickable={true}
             header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
-            data={createTableData()}
-            onRowClick={onTableClick}
-          />
+          >
+            {lessonsData.map((lesson, index) => (
+              <TableRow 
+                key={index} 
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  setModalLessonData(lessonsData[index]);
+                  setIsModalOpen(true);
+                }}
+              >
+                <td>{lesson.subject}</td>
+                <td>{formatTime(lesson.startDatetime)}</td>
+                <td>{lesson.studentClass}</td>
+                <td>
+                  <Switch 
+                    type='base'
+                    mode={mode}
+                    isActive={lesson.isAttendanceRegistrable}
+                    handleChange={() => {
+                      setLessonsData((currentStateLessons) => {
+                        const updatedLessons = [...currentStateLessons];
+                        updatedLessons[index] = {
+                          ...updatedLessons[index],
+                          isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+                        }
+                        return updatedLessons;
+                      })
+                    }}
+                  />
+                </td>
+              </TableRow>
+              ))
+            }
+          </Table>
         </div>
       </div>
 
