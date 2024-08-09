@@ -86,7 +86,7 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
                   type='base'
                   isActive={lessonData.isAttendanceRegistrable}
                   handleChange={() => {
-                    Services.updateAttendanceRegistrability(data.id)
+                    Services.updateAttendanceRegistrability(lessonData.id)
                       .then(() => {
                         setLessonData({
                           ...lessonData, 
