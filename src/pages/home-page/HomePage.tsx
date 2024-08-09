@@ -39,14 +39,15 @@ export function HomePage({ mode, ...props }: HomePageProps) {
   const [modalLessonData, setModalLessonData] = useState<Lesson>(lessonsMock[0]);
 
   useEffect(() => {
+    !isModalOpen &&
     Services.listLessonsWithDetails()
-      .then((response) => {       
+      .then((response) => {  
         setLessonsData(response);
       })
       .catch((error) => {
         console.log(error);
       })
-  }, [])
+  }, [isModalOpen])
 
   return (
     <>
@@ -87,14 +88,19 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                     mode={mode}
                     isActive={lesson.isAttendanceRegistrable}
                     handleChange={() => {
-                      setLessonsData((currentStateLessons) => {
-                        const updatedLessons = [...currentStateLessons];
-                        updatedLessons[index] = {
-                          ...updatedLessons[index],
-                          isAttendanceRegistrable: !lesson.isAttendanceRegistrable
-                        }
-                        return updatedLessons;
-                      })
+                      Services.updateAttendanceRegistrability(lesson.id)
+                        .then(() => {
+                          setLessonsData((currentStateLessons) => {
+                            const updatedLessons = [...currentStateLessons];
+                            updatedLessons[index] = {
+                              ...updatedLessons[index],
+                              isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+                            }
+                            console.log(updatedLessons[index])
+                            return updatedLessons;
+                          })
+                        })
+                        .catch((error) => console.log(error));                      
                     }}
                   />
                 </td>
