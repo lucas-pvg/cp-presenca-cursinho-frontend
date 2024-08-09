@@ -1,5 +1,4 @@
 import axios from "axios"
-import { Lesson } from "../models/lesson.model"
 import { mapLesson } from "../mapper/lesson.mapper"
 
 const BASE_URL = 'http://localhost:8000/lesson/'
@@ -27,4 +26,17 @@ export const getLesson = (id: number) => {
     })
 
   return lesson;
+}
+
+export const deleteLesson = (id: number) => {
+  const lesson = axios.delete(`${BASE_URL}${id}/`)
+    .then(response => {
+      console.log(response)
+      return response
+    })
+    .catch(error => {
+      return error
+    })
+
+  return lesson
 }
