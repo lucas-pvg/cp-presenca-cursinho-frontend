@@ -23,8 +23,10 @@ import ChevronRight from "../../assets/icons/style_guide/icon-chevron-right.svg?
 import ChevronsRight from "../../assets/icons/style_guide/icon-chevrons-right.svg?react";
 import ChevronUp from "../../assets/icons/style_guide/icon-chevron-up.svg?react";
 import ChevronsUp from "../../assets/icons/style_guide/icon-chevrons-up.svg?react";
+import Clipboard from "../../assets/icons/style_guide/icon-clipboard.svg?react";
 import Clock from "../../assets/icons/style_guide/icon-clock.svg?react";
 import File from "../../assets/icons/style_guide/icon-file.svg?react";
+import Lock from "../../assets/icons/style_guide/icon-lock.svg?react";
 import Logout from "../../assets/icons/style_guide/icon-log-out.svg?react";
 import Trash from "../../assets/icons/style_guide/icon-trash.svg?react";
 import Search from "../../assets/icons/style_guide/icon-search.svg?react";
@@ -72,8 +74,10 @@ export const Icon = (props: IconProps) => {
     case "chevrons-right" : return <ChevronsRight style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "chevron-up" : return <ChevronUp style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "chevrons-up" : return <ChevronsUp style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "clipboard" : return <Clipboard style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "clock" : return <Clock style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "file" : return <File style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
+    case "lock" : return <Lock style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "logout" : return <Logout style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "trash" : return <Trash style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;
     case "search" : return <Search style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} />;

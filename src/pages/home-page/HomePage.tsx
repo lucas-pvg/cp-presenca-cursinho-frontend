@@ -39,7 +39,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' />
-        <Card to='' label='Consultar' mode='light' />
+        <Card to='/lessons' label='Consultar' mode='light' />
         <Card to='' label='Disciplinas' mode='light' />
       </CardMenu>
 
