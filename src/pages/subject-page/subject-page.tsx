@@ -32,15 +32,15 @@ export function SubjectPage({ mode, ...props }: SubjectPageProps) {
 
       <div className='page-content'>
         <div className='subject-grid'>
-          <Card to='/subject/matematica' label='Atualidades' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Biologia' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Filosofia' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Física' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Geografia' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='História' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Matemática' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Português' variant='primary' mode='light' />
-          <Card to='/subject/matematica' label='Química' variant='primary' mode='light' />
+          <Card to='/subject/CA' label='Atualidades' variant='primary' mode='light' />
+          <Card to='/subject/BI' label='Biologia' variant='primary' mode='light' />
+          <Card to='/subject/PL' label='Filosofia' variant='primary' mode='light' />
+          <Card to='/subject/PH' label='Física' variant='primary' mode='light' />
+          <Card to='/subject/GE' label='Geografia' variant='primary' mode='light' />
+          <Card to='/subject/HI' label='História' variant='primary' mode='light' />
+          <Card to='/subject/MT' label='Matemática' variant='primary' mode='light' />
+          <Card to='/subject/PT' label='Português' variant='primary' mode='light' />
+          <Card to='/subject/CH' label='Química' variant='primary' mode='light' />
         </div>
       </div>
     </div>

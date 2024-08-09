@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { Card } from '../../components/card-menu/card'
 import { Button } from '../../components/button/Button'
 import { OptionList } from '../../components/option-list/option-list'
 import { Input } from '../../components/input/input'
+import { SelectInput } from '../../components/select-input/select-input'
+
+import { Subject } from '../../data/models/subject.model'
+import { getSubjectsFromMainSubject } from '../../data/requests/subject.requests'
 import './subject-detail-page.css'
 
 const SubjectDetailPageVariants = cva(
@@ -26,6 +32,19 @@ interface SubjectDetailPageProps extends VariantProps<typeof SubjectDetailPageVa
 }
 
 export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
+  const { subjectCode } = useParams()
+  const [ subjects, setSubjects ] = useState(Array<Subject>)
+
+  useEffect(() => {
+    subjectCode && getSubjectsFromMainSubject(subjectCode)
+      .then(data => {
+        setSubjects(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [subjectCode]);
+
   return (
     <div className={SubjectDetailPageVariants({ mode })} {...props}>
       <Hero 
@@ -35,10 +54,7 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
 
       <div className='page-content'>
         <div className='subject-menu'>
-          <Card to='' label='Frente 1' />
-          <Card to='' label='Frente 2' />
-          <Card to='' label='Frente 3' />
-          <Card to='' label='Frente 4' />
+          { subjects.map((sub) => <Card to='' label={sub.name} key={sub.id} />) }
           <Button>Adicionar</Button>
         </div>
 
@@ -53,15 +69,39 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
 
           <div className='schedule'>
             <div className='schedule-row'>
-              <Input type='select' />
+              <SelectInput>
+                <option>Segunda</option>
+                <option>Terça</option>
+                <option>Quarta</option>
+                <option>Quinta</option>
+                <option>Sexta</option>
+                <option>Sábado</option>
+                <option>Domingo</option>
+              </SelectInput>
               <Input type='time' />
             </div>
             <div className='schedule-row'>
-              <Input type='select' />
+              <SelectInput>
+                <option>Segunda</option>
+                <option>Terça</option>
+                <option>Quarta</option>
+                <option>Quinta</option>
+                <option>Sexta</option>
+                <option>Sábado</option>
+                <option>Domingo</option>
+              </SelectInput>
               <Input type='time' />
             </div>
             <div className='schedule-row'>
-              <Input type='select' />
+              <SelectInput>
+                <option>Segunda</option>
+                <option>Terça</option>
+                <option>Quarta</option>
+                <option>Quinta</option>
+                <option>Sexta</option>
+                <option>Sábado</option>
+                <option>Domingo</option>
+              </SelectInput>
               <Input type='time' />
             </div>
           </div>

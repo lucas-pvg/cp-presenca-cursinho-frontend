@@ -16,8 +16,11 @@
 }
 
 .subject-detail .subject-menu {
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-self: stretch;
   gap: 30px;
 }
 
