@@ -16,15 +16,27 @@
   transform: scale(1.1);
 }
 
-.base-card.light {
+.base-card.secondary.light {
   color: var(--base-black);
   background: var(--base-white);
   box-shadow: 4px 4px 30px 0 var(--shadow-base);
 }
 
-.base-card.dark {
+.base-card.secondary.dark {
   color: var(--base-white);
   background: var(--base-gray);
+  box-shadow: 4px 4px 30px 0 var(--shadow-inverse);
+}
+
+.base-card.primary.light {
+  color: var(--base-white);
+  background: var(--blue-base);
+  box-shadow: 4px 4px 30px 0 var(--shadow-base);
+}
+
+.base-card.primary.dark {
+  color: var(--base-white);
+  background: var(--blue-inverse);
   box-shadow: 4px 4px 30px 0 var(--shadow-inverse);
 }
 
