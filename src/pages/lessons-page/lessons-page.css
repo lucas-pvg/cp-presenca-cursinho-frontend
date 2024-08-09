@@ -1,0 +1,26 @@
+.lessons .page-content {
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.lessons {
+  position: relative;
+}
+
+.lessons .menu {
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.lessons .lesson-table {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;
+}

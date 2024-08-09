@@ -9,7 +9,6 @@ import { Switch } from '../../components/switch/switch'
 import { lessonsMock } from '../../data/mock/lesson.mock'
 import { Lesson } from '../../data/models/lesson.model'
 import { LessonDetailModal } from '../../components/modal/lesson-detail-modal'
-import { formatTime } from '../../utils/datetime'
 import { TableRow } from '../../components/table/TableRow'
 
 const HomePageVariants = cva(
@@ -47,7 +46,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
         <CardMenu className='menu'>
           <Card to='' label='Agendar' mode='light' />
-          <Card to='' label='Consultar' mode='light' />
+          <Card to='/lessons' label='Consultar' mode='light' />
           <Card to='' label='Disciplinas' mode='light' />
         </CardMenu>
 
@@ -67,9 +66,9 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                   setIsModalOpen(true);
                 }}
               >
-                <td>{lesson.subject}</td>
-                <td>{formatTime(lesson.startDatetime)}</td>
-                <td>{lesson.studentClass}</td>
+                <td>{lesson.subject.name}</td>
+                <td>{lesson.startTimeFormat()}</td>
+                <td>{lesson.studentClass.name}</td>
                 <td>
                   <Switch 
                     type='base'
@@ -78,10 +77,10 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                     handleChange={() => {
                       setLessonsData((currentStateLessons) => {
                         const updatedLessons = [...currentStateLessons];
-                        updatedLessons[index] = {
+                        updatedLessons[index] = new Lesson({
                           ...updatedLessons[index],
                           isAttendanceRegistrable: !lesson.isAttendanceRegistrable
-                        }
+                        })
                         return updatedLessons;
                       })
                     }}

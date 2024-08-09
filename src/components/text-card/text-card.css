@@ -1,0 +1,53 @@
+.text-card {
+  width: 150px;
+  height: 80px;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.text-card .header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  h6 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.text-card p {
+  font-size: 16px;
+}
+
+.text-card.light {
+  border: 1px solid var(--outline-base);
+  background: var(--base-white);
+
+  .header {
+    color: var(--outline-base);
+  }
+
+  p {
+    color: var(--base-black);
+  }
+}
+
+.text-card.dark {
+  border: 1px solid var(--outline-inverse);
+  background: var(--base-gray);
+
+  .header {
+    color: var(--outline-inverse);
+  }
+
+  p {
+    color: var(--base-white);
+  }
+}

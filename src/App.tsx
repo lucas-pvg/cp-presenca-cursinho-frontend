@@ -6,8 +6,9 @@ import { CreateClass } from "./components/modal/create-class";
 import { Button } from "./components/button/Button";
 import "./App.css";
 
-import { HomePage } from "./pages/home-page/HomePage";
-import { PresencePage } from "./pages/presence/PresencePage";
+import { HomePage } from './pages/home-page/HomePage'
+import { LessonsPage } from './pages/lessons-page/lessons-page'
+import { LessonDetailPage } from './pages/lesson-detail-page/lesson-detail-page'
 
 function App() {
 	const location = useLocation();
@@ -20,31 +21,27 @@ function App() {
 			<div className="page-container">
 				<Header to={location} />
 
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					<Route path="/attendence" element={<PresencePage />} />
-					<Route
-						path="/teachers"
-						element={<h1 className="center">Professores</h1>}
-					/>
-					<Route path="/classes" element={<h1 className="center">Turmas</h1>} />
-					<Route
-						path="/metrics"
-						element={
-							<div className="center">
-								<Button onClick={() => setOpen(true)}>Open Modal</Button>
-								<CreateClass
-									className={open ? "modal-open" : "modal-close"}
-									mode="light"
-									close={() => setOpen(false)}
-								/>
-							</div>
-						}
-					/>
-				</Routes>
-			</div>
-		</div>
-	);
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/lessons" element={<LessonsPage />} />
+          <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
+          
+          <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
+          <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
+          <Route path="/classes" element={
+            <LessonDetailPage />
+            // <h1 className='center'>Turmas</h1>
+          } />
+          <Route path="/metrics" element={
+            <div className='center'>
+              <Button onClick={() => setOpen(true)}>Open Modal</Button>
+              <CreateClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
+            </div>
+          } />
+        </Routes>
+      </div>
+    </div>
+  )
 }
 
 export default App;
