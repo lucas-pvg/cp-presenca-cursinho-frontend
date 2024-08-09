@@ -1,7 +1,6 @@
 import { Lesson, LessonCreateData } from "../models/lesson.model";
 import { LessonServiceResponse, LessonServiceRequest } from "../models/lesson.model";
 
-
 export const lessonMapper = (lesson: LessonServiceResponse): Lesson => 
   new Lesson ({
     id: lesson.id,
