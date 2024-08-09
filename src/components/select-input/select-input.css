@@ -13,6 +13,7 @@
 }
 
 .select-input.light {
+  background-color: var(--base-white);
   border-color: var(--outline-base);
   color: var(--base-black);
 }
@@ -22,6 +23,7 @@
 }
 
 .select-input.dark {
+  background-color: var(--base-gray);
   border-color: var(--outline-inverse);
   color: var(--base-white);
 }
