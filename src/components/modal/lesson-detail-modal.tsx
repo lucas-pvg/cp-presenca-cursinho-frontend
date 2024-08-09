@@ -5,6 +5,7 @@ import { Input } from "../input/input"
 import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
+import { Lesson } from "../../data/models/lesson.model"
 import { setPassKey } from "../../data/requests/attendance.requests"
 
 const classDetailVariants = cva(
@@ -27,27 +28,23 @@ interface classDetailProps extends VariantProps<typeof classDetailVariants> {
   mode?: 'light' | 'dark'
   variant?: 'solid' | 'outline'
   close: () => void;
+  data: Lesson
 }
 
-export const LessonDetailModal = ({ mode, variant, close, className }: classDetailProps) => {
+export const LessonDetailModal = ({ mode, variant, close, className, data }: classDetailProps) => {
   const max_lenght = 10;
-  const [ lessonData, setLessonData ] = useState({
-    name: '', 
-    subject: '', 
-    date: new Date(), 
-    class: '', 
-    course_class: '', 
-    startTime: new Date(), 
-    endTime: new Date(),
-    passkey: '',
-    isAttendanceRegistrable: false
-  });
+  const [ lessonData, setLessonData ] = useState(data);
 
   const handlePasskeyChange = (e: any) => {
     const { name, value } = e.target;
     const input = e.target.value;
     if (input.length <= max_lenght) {
-      setLessonData((prevData) => ({...prevData, [name]: value}));
+      setLessonData((prevData) => 
+        new Lesson ({
+          ...prevData,
+          [name]: value
+        })
+      );
     }
   };
 
@@ -74,26 +71,28 @@ export const LessonDetailModal = ({ mode, variant, close, className }: classDeta
           <div className='content-body'>
             <form id='class-form' onSubmit={handleSubmit}>
               <ModalRow labels={['Disciplina', 'Horário de aula', 'Curso']} mode={mode} >
-                <p>{lessonData.subject}</p>
-                <p>{lessonData.date.toDateString()}</p>
-                <p>{lessonData.course_class}</p>
+                <p>{lessonData.subject.name}</p>
+                <p>{lessonData.startTimeFormat()}</p>
+                <p>{lessonData.course}</p>
               </ModalRow>
 
               <ModalRow labels={['Turma', 'Horário de abertura e fechamento', 'Presença aberta']} mode={mode}>
-                <p>{lessonData.subject}</p>
+                <p>{lessonData.studentClass.name}</p>
                 <div>
-                  <p>{lessonData.startTime.toDateString()}</p>
-                  <p>{lessonData.endTime.toDateString()}</p>
+                  <p>{lessonData.startAttendanceFormat()}</p>
+                  <p>{lessonData.endAttendanceFormat()}</p>
                 </div>
                 
                 <Switch
                   type='base'
                   isActive={lessonData.isAttendanceRegistrable}
                   handleChange={() => {
-                    setLessonData({
-                      ...lessonData, 
-                      isAttendanceRegistrable: !lessonData.isAttendanceRegistrable
-                    })
+                    setLessonData((currentStateLesson) => 
+                      new Lesson ({
+                        ...currentStateLesson,
+                        isAttendanceRegistrable: !currentStateLesson.isAttendanceRegistrable
+                      })
+                    )
                   }}
                 />
               </ModalRow>

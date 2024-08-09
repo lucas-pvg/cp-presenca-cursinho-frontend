@@ -26,10 +26,6 @@ interface TableRowProps
 }
 
 export function TableRow({ mode, clickable, ...props }: TableRowProps) {
-	// const [presenceText, setPresenceText] = React.useState(data[1] === 'presente');
-	// const presenceButtonTap = () => {
-	//   setPresenceText(!presenceText);
-	// }
 
 	return (
 		<tr className={TableRowVariants({ mode, clickable })} {...props}>
@@ -37,13 +33,4 @@ export function TableRow({ mode, clickable, ...props }: TableRowProps) {
 			<td className="icon">{">"}</td>
 		</tr>
 	);
-	// return (
-	//   <tr className={TableRowVariants({ mode, clickable })} {...props}>
-	//     {data.map((d, i) => d === 'presente' || d === 'ausente' ?
-	//       <td key={i}><Button onClick={presenceButtonTap} className={presenceText ? 'presence-check-button' : 'abscense-button'}>{presenceText ? 'presente' : 'ausente'}</Button></td> :
-	//       <td key={i}>{d}</td>
-	//     )}
-	//     <td className='icon'>{'>'}</td>
-	//   </tr>
-	// )
 }

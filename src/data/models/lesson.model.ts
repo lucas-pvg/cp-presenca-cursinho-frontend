@@ -12,6 +12,7 @@ export interface LessonInterface {
   endAttendance: Date
   isAttendanceRegistrable: boolean
   passkey: string
+  course: string
 }
 
 export class Lesson implements LessonInterface {
@@ -25,6 +26,7 @@ export class Lesson implements LessonInterface {
   endAttendance: Date
   isAttendanceRegistrable: boolean
   passkey: string
+  course: string
 
   constructor(params: LessonInterface) {
     this.id = params.id
@@ -37,6 +39,7 @@ export class Lesson implements LessonInterface {
     this.endAttendance = params.endAttendance
     this.isAttendanceRegistrable = params.isAttendanceRegistrable
     this.passkey = params.passkey
+    this.course = params.course
   }
 
   dateFormat(style: 'medium' | 'short'): string {
