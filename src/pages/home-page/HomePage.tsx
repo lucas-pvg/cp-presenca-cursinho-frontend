@@ -37,29 +37,6 @@ export function HomePage({ mode, ...props }: HomePageProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalLessonData, setModalLessonData] = useState<Lesson>(lessonsMock[0]);
 
-  const createTableData = () => {
-    return lessonsData.map((lesson, index) => [
-      lesson.subject,
-      formatTime(lesson.startDatetime),
-      lesson.studentClass,
-      <Switch 
-        type='base'
-        mode={mode}
-        isActive={lesson.isAttendanceRegistrable}
-        handleChange={() => {
-          setLessonsData((currentStateLessons) => {
-            const updatedLessons = [...currentStateLessons];
-            updatedLessons[index] = {
-              ...updatedLessons[index],
-              isAttendanceRegistrable: !lesson.isAttendanceRegistrable
-            }
-            return updatedLessons;
-          })
-        }}
-      />
-    ])
-  }
-
   return (
     <>
       <div className={HomePageVariants({ mode })} {...props}>
