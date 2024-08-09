@@ -3,7 +3,8 @@ import { Hero } from '../../components/hero/hero'
 import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
-import { Class, classes } from '../../data/mock/classes.mock'
+import { TableRow } from '../../components/table/TableRow'
+import { classes } from '../../data/mock/classes.mock'
 import './HomePage.css'
 
 const HomePageVariants = cva(
@@ -26,10 +27,6 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 }
 
 export function HomePage({ mode, ...props }: HomePageProps) {
-  const classData = classes.map((obj) => {
-    return (Object.keys(obj).map((key) => obj[key as keyof Class]))
-  })
-
   return (
     <div className={HomePageVariants({ mode })} {...props}>
       <Hero 
@@ -40,16 +37,22 @@ export function HomePage({ mode, ...props }: HomePageProps) {
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' />
         <Card to='/lessons' label='Consultar' mode='light' />
-        <Card to='' label='Disciplinas' mode='light' />
+        <Card to='/subject' label='Disciplinas' mode='light' />
       </CardMenu>
 
       <div className='page-content'>
-        <Table
-          mode='light'
-          clickable={true}
-          header={['Aula', 'Horário', 'Turma', 'Column']}
-          data={classData}
-        />
+        <Table mode='light' clickable={true} header={['Aula', 'Horário', 'Turma', 'Column']}>
+          {
+            classes.map((lesson, i) => { return (
+              <TableRow key={i}>
+                <td>{lesson.aula}</td>
+                <td>{lesson.horario}</td>
+                <td>{lesson.turma}</td>
+                <td>{lesson.column}</td>
+              </TableRow>
+            )})
+          }
+        </Table>
       </div>
     </div>
   )

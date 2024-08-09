@@ -67,7 +67,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
 
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' />
-        <Card to='' label='Disciplinas' mode='light' />
+        <Card to='/subject' label='Disciplinas' mode='light' />
       </CardMenu>
 
       <div className='page-content'>
