@@ -6,7 +6,7 @@ import "./App.css";
 import { HomePage } from './pages/home-page/HomePage'
 import { LessonsPage } from './pages/lessons-page/lessons-page'
 import { LessonDetailPage } from './pages/lesson-detail-page/lesson-detail-page'
-  import { SubjectPage } from "./pages/subject-page/subject-page";
+import { SubjectPage } from "./pages/subject-page/subject-page";
 import { SubjectDetailPage } from "./pages/subject-detail-page/subject-detail-page";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path="/lessons" element={<LessonsPage />} />
           <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
           <Route path="/subject" element={<SubjectPage />} />
-          <Route path="/subject/:subjectName" element={<SubjectDetailPage />} />
+          <Route path="/subject/:subjectCode" element={<SubjectDetailPage />} />
 
           <Route path="/attendence" element={<SubjectPage />} />
           <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
