@@ -4,11 +4,12 @@ import { CardMenu } from '../../components/card-menu/card-menu'
 import { Card } from '../../components/card-menu/card'
 import { Table } from '../../components/table/Table'
 import './HomePage.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Switch } from '../../components/switch/switch'
 import { lessonsMock } from '../../data/mock/lesson.mock'
 import { Lesson } from '../../data/models/lesson.model'
 import { LessonDetailModal } from '../../components/modal/lesson-detail-modal'
+import Services from '../../services'
 import { TableRow } from '../../components/table/TableRow'
 
 const HomePageVariants = cva(
@@ -31,10 +32,21 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 }
 
 export function HomePage({ mode, ...props }: HomePageProps) {
-  const [lessonsData, setLessonsData] = useState<Lesson[]>(lessonsMock);
+  const [lessonsData, setLessonsData] = useState<Lesson[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalLessonData, setModalLessonData] = useState<Lesson>(lessonsMock[0]);
+
+  useEffect(() => {
+    !isModalOpen &&
+    Services.listLessonsWithDetails()
+      .then((response) => {  
+        setLessonsData(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [isModalOpen])
 
   return (
     <>
@@ -75,14 +87,18 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                     mode={mode}
                     isActive={lesson.isAttendanceRegistrable}
                     handleChange={() => {
-                      setLessonsData((currentStateLessons) => {
-                        const updatedLessons = [...currentStateLessons];
-                        updatedLessons[index] = new Lesson({
-                          ...updatedLessons[index],
-                          isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+                      Services.updateAttendanceRegistrability(lesson.id)
+                        .then(() => {
+                          setLessonsData((currentStateLessons) => {
+                            const updatedLessons = [...currentStateLessons];
+                            updatedLessons[index] = new Lesson({
+                              ...updatedLessons[index],
+                              isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+                            })
+                            return updatedLessons;
+                          })
                         })
-                        return updatedLessons;
-                      })
+                        .catch((error) => console.log(error));                      
                     }}
                   />
                 </td>

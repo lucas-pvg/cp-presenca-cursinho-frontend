@@ -6,7 +6,7 @@ import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
-import { setPassKey } from "../../data/requests/attendance.requests"
+import Services from "../../services"
 
 const classDetailVariants = cva(
   'base-modal input-modal',
@@ -49,7 +49,10 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
   };
 
   const handleSubmit = () => {
-    setPassKey(lessonData.passkey)
+    // TODO: remover console.log's
+    Services.updateLessonPasskey(lessonData.passkey, lessonData.id)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
   const handleClose = () => {
@@ -87,12 +90,16 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
                   type='base'
                   isActive={lessonData.isAttendanceRegistrable}
                   handleChange={() => {
-                    setLessonData((currentStateLesson) => 
-                      new Lesson ({
-                        ...currentStateLesson,
-                        isAttendanceRegistrable: !currentStateLesson.isAttendanceRegistrable
+                    Services.updateAttendanceRegistrability(lessonData.id)
+                      .then(() => {
+                        setLessonData((currentStateLesson) => 
+                          new Lesson ({
+                            ...currentStateLesson,
+                            isAttendanceRegistrable: !currentStateLesson.isAttendanceRegistrable
+                          })
+                        )
                       })
-                    )
+                      .catch((error) => console.log(error));
                   }}
                 />
               </ModalRow>

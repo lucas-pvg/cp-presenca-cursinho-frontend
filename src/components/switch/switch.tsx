@@ -43,8 +43,8 @@ export const Switch = ({mode, type, isActive, handleChange, ...props}: SwitchPro
   const SwitchIcon = getSwitchIcon(isActive, type); 
 
   return (
-    <label className={`${switchVariants({ mode, type })} ${isActive ? 'active' : ''}`} onClick={handleChange}>
-      <input type="checkbox" onClick={(e) => e.stopPropagation()}/>
+    <label className={`${switchVariants({ mode, type })} ${isActive ? 'active' : ''}`} onClick={(e) => e.stopPropagation()}>
+      <input type="checkbox" onClick={handleChange}/>
       <span className="slider" {...props}>
         {type !== 'base' && (
           <span className='icon-container'>

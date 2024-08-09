@@ -10,9 +10,9 @@ import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
 
 import { classes } from '../../data/mock/classes.mock'
-import { getLesson } from '../../data/requests/lesson.requests'
 import { Lesson } from '../../data/models/lesson.model'
 import './lesson-detail-page.css'
+import Services from '../../services'
 
 const LessonDetailPageVariants = cva(
   'lesson-detail page',
@@ -39,7 +39,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   const { lessonID } = useParams()
 
   useEffect(() => {
-    lessonID && getLesson(parseInt(lessonID))
+    lessonID && Services.retrieveLesson(parseInt(lessonID))
       .then(data => {
         setLesson(data)
       })

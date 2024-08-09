@@ -1,19 +1,17 @@
-import { Lesson, LessonInterface } from "../models/lesson.model";
+import { Lesson } from "../models/lesson.model";
+import { LessonServiceResponse } from "../models/lesson.model";
 
-export const mapLesson = (data: any) => {
-  let lessonData: LessonInterface = {
-    id: data.id,
-    name: data.name,
-    startTime: new Date(data.start_datetime),
-    endTime: new Date(data.end_datetime),
-    studentClass: {name: 'Turma 1'},
-    subject: {name: 'Matemática'},
-    startAttendance: new Date (data.attendance_start_datetime),
-    endAttendance: new Date (data.attendance_end_datetime),
-    isAttendanceRegistrable: false,
-    passkey: 'PASSWORD',
-    course: data.course
-  }
-
-  return new Lesson(lessonData)
-}
+export const lessonMapper = (lesson: LessonServiceResponse): Lesson => 
+  new Lesson ({
+    id: lesson.id,
+    name: lesson.name || "",
+    subject: {name: lesson.subject},
+    startTime: new Date(lesson.start_datetime),
+    endTime: new Date(lesson.end_datetime),
+    startAttendance: new Date(lesson.attendance_start_datetime),
+    endAttendance: new Date(lesson.attendance_end_datetime),
+    isAttendanceRegistrable: lesson.is_attendance_registrable,
+    studentClass: {name: lesson.student_class},
+    course: lesson.course,
+    passkey: lesson.passkey
+});
