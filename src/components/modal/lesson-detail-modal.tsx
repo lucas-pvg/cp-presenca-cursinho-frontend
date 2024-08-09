@@ -6,7 +6,6 @@ import { ModalFooter } from "./modal-components/modal-footer"
 import { useState } from "react"
 import { Switch } from "../switch/switch"
 import { Lesson } from "../../data/models/lesson.model"
-import { formatTime } from "../../utils/datetime"
 import { setPassKey } from "../../data/requests/attendance.requests"
 
 const classDetailVariants = cva(

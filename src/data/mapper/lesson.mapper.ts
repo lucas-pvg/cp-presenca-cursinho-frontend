@@ -12,6 +12,7 @@ export const mapLesson = (data: any) => {
     endAttendance: new Date (data.attendance_end_datetime),
     isAttendanceRegistrable: false,
     passkey: 'PASSWORD',
+    course: data.course
   }
 
   return new Lesson(lessonData)
