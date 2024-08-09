@@ -120,6 +120,10 @@
   font-size: 14px;
 }
 
+.modal-row .description {
+  line-height: 28px;
+}
+
 .modal-content {
   padding: 10px 40px 20px;
   display: flex;
