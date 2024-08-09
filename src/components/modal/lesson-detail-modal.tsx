@@ -46,7 +46,7 @@ export const LessonDetailModal = ({ mode, variant, close, className, data }: cla
 
   const handleSubmit = () => {
     // TODO: remover console.log's
-    Services.setPassKey(lessonData.passkey, lessonData.id)
+    Services.updateLessonPasskey(lessonData.passkey, lessonData.id)
       .then(response => console.log(response))
       .catch(error => console.log(error));
   }

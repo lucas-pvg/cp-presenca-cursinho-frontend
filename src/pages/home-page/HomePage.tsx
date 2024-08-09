@@ -40,22 +40,8 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
   useEffect(() => {
     Services.listLessonsWithDetails()
-      .then((response) => {
-        const formattedLessons = response.map((lesson: any) => {
-          return {
-            id: lesson.id,
-            subject: lesson.subject,
-            startDatetime: new Date(lesson.start_datetime),
-            endDatetime: new Date(lesson.end_datetime),
-            attendanceStartDatetime: new Date(lesson.attendance_start_datetime),
-            attendanceEndDatetime: new Date(lesson.attendance_end_datetime),
-            isAttendanceRegistrable: lesson.is_attendance_registrable,
-            studentClass: lesson.student_class,
-            course: lesson.course,
-          }
-        })
-        
-        setLessonsData(formattedLessons);
+      .then((response) => {       
+        setLessonsData(response);
       })
       .catch((error) => {
         console.log(error);

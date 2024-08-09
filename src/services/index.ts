@@ -1,4 +1,4 @@
-import LessonService from "./modules/lessonService";
+import LessonService from "./modules/lesson.service";
 
 const Services = {
   ...LessonService
