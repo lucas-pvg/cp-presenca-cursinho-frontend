@@ -6,8 +6,7 @@ import './StudentClassPage.css';
 import { Table } from "../../components/table/Table";
 import { OptionList } from "../../components/option-list/option-list";
 import { Input } from "../../components/input/input";
-import { TextMenu } from "../../components/text-menu/TextMenu";
-import { rows } from "../../data/mock/student-class.mock";
+import { TextCard } from "../../components/text-card/text-card";
 
 const StudentClassPageVariants = cva(
   'student-class page', 
@@ -44,7 +43,12 @@ export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
       <div className='student-class-page-content'>
         <div className='column'>
           <OptionList labels={['Turma 1', 'Turma 2', 'Turma 3', 'Turma 4']} />
-          <TextMenu rows={rows} />
+          <div className='cards'>
+            <TextCard iconType='book' label='Curso'>{}</TextCard>
+            <TextCard iconType='clock' label='Horário'>{}</TextCard>
+            <TextCard iconType='clipboard' label='Sala'>{}</TextCard>
+            <TextCard iconType='users' label='Modalidade'>{}</TextCard>
+          </div>
         </div>
         <div className='column'>
           <Input type={'text'} />
@@ -52,7 +56,6 @@ export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
             mode='light'
             clickable={true}
             header={['Aluno']}
-            data={[]}
           />
         </div>
       </div>

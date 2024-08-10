@@ -26,3 +26,9 @@
   gap: 20px;
   padding: 0 50px;
 }
+
+.student-class .cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
