@@ -1,0 +1,34 @@
+.student-class-page-content {
+  padding: 0 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  gap: 50px;
+}
+
+.student-class {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 130px;
+  left: 60px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 50px;
+}
+
+.student-class .cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
