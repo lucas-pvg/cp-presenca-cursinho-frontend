@@ -6,6 +6,7 @@ import "./App.css";
 import { HomePage } from './pages/home-page/HomePage'
 import { LessonsPage } from './pages/lessons-page/lessons-page'
 import { LessonDetailPage } from './pages/lesson-detail-page/lesson-detail-page'
+import { StudentClassPage } from "./pages/student-class-page/StudentClassPage";
 
 function App() {
 	const location = useLocation();
@@ -24,8 +25,8 @@ function App() {
           
           <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
           <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
-          <Route path="/classes" element={<h1 className='center'>Turmas</h1>} />
           <Route path="/metrics" element={<h1 className='center'>Métricas</h1>} />
+          <Route path="/classes" element={<StudentClassPage />} />
         </Routes>
       </div>
     </div>

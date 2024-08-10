@@ -1,12 +1,12 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { Hero } from "../../components/hero/hero";
 import { Table } from "../../components/table/Table";
-import { Student, studentsMock } from "../../data/students";
 
 import "./PresencePage.css";
 import React from "react";
 import { Button } from "../../components/button/Button";
 import { TableRow } from "../../components/table/TableRow";
+import { Student, students } from "../../data/mock/students.mock";
 
 const PresencePageVariants = cva("presence page", {
 	variants: {
@@ -26,7 +26,7 @@ interface PresencePageProps extends VariantProps<typeof PresencePageVariants> {
 
 export const PresencePage = ({ mode, ...props }: PresencePageProps) => {
 	const [studentsData, setStudentsData] =
-		React.useState<Array<Student>>(studentsMock);
+		React.useState<Array<Student>>(students);
 
 	// useEffect(() => {
 	// 	setStudentsData(students);

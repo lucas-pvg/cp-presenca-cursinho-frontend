@@ -12,6 +12,7 @@ import { students } from "../../data/mock/students-select";
 import { StudentSelect } from "../../data/models/student.model";
 import { CreateStudentClass } from "../../components/modal/create-student-class";
 import { TextCard } from "../../components/text-card/text-card";
+import { TableRow } from "../../components/table/TableRow";
 
 const StudentClassPageVariants = cva(
   'student-class page', 
@@ -91,19 +92,25 @@ export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
             mode='light'
             clickable={true}
             header={['Aluno', 'id']}
-          />
+          >
+            {selectedStudents.map((student, index) => (
+              <TableRow key={index}>
+                <td>{student.name}</td>
+                <td>{student.id}</td>
+              </TableRow>
+            ))}
+          </Table>
           <div className="center">
-             <Button onClick={() => setOpenAdd(true)}>{'Adicionar aluno'}</Button>
-             <SelectList 
-              className={openAdd ? 'modal-open' : 'modal-close'} 
-              close={() => setOpenAdd(false)} items={students} 
-              verifyIncluded={verifyIncluded} 
-              handleListChange={handleCheckboxChange}
-              confirm={confirm}
-             />
-             <CreateStudentClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
+            <Button onClick={() => setOpenAdd(true)}>{'Adicionar aluno'}</Button>
+            <SelectList 
+            className={openAdd ? 'modal-open' : 'modal-close'} 
+            close={() => setOpenAdd(false)} items={students} 
+            verifyIncluded={verifyIncluded} 
+            handleListChange={handleCheckboxChange}
+            confirm={confirm}
+            />
+            <CreateStudentClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
           </div>
-         
         </div>
       </div>
     </div>
