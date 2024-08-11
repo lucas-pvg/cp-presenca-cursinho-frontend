@@ -21,13 +21,15 @@ const optionListVariants = cva(
 interface OptionListProps extends VariantProps<typeof optionListVariants> {
   mode?: 'light' | 'dark'
   labels: Array<string>
+  setIndex?: (index: number) => void;
 }
 
-export function OptionList({ mode, labels }: OptionListProps) {
+export function OptionList({ mode, labels, setIndex }: OptionListProps) {
   const [ option, setOption ] = useState(0)
 
   const setActive = (e: any) => {
     setOption(e.currentTarget.value)
+    setIndex && setIndex(e.currentTarget.value)
   }
 
   return (
