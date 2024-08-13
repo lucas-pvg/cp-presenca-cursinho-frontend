@@ -1,14 +1,12 @@
-import { ComponentProps } from 'react'
-import './card.css'
+import { ComponentProps } from 'react';
+import './card.css';
 
 interface cardMenuProps extends ComponentProps<'div'> {
-	className?: string
+  className?: string;
 }
 
 export function CardMenu({ className, ...props }: cardMenuProps) {
-	const classes = className ? `${className} card-menu` : 'card-menu'
+  const classes = className ? `${className} card-menu` : 'card-menu';
 
-	return (
-		<div className={classes} {...props} />
-	)
+  return <div className={classes} {...props} />;
 }

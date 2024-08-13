@@ -1,5 +1,3 @@
-import { lessonMapper } from "./lesson.mapper";
+import { lessonMapper } from './lesson.mapper';
 
-export {
-  lessonMapper
-}
+export { lessonMapper };

@@ -1,7 +1,7 @@
-import LessonService from "./modules/lesson.service";
+import LessonService from './modules/lesson.service';
 
 const Services = {
-  ...LessonService
+  ...LessonService,
 };
 
 export default Services;

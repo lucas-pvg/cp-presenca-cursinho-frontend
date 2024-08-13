@@ -1,27 +1,26 @@
 :root {
-  --blue-grad: linear-gradient(90deg, #3A4089, #4E55A1, #6A73D3);
-  --blue-base: #4E55A1;
-  --blue-inverse: #6A73D3;
-  --red-base: #E42C3A;
-  --red-inverse: #E56973;
-  --yellow-base: #F0B700;
-  --yellow-inverse: #E9CD75;
+  --blue-grad: linear-gradient(90deg, #3a4089, #4e55a1, #6a73d3);
+  --blue-base: #4e55a1;
+  --blue-inverse: #6a73d3;
+  --red-base: #e42c3a;
+  --red-inverse: #e56973;
+  --yellow-base: #f0b700;
+  --yellow-inverse: #e9cd75;
   --base-black: #333333;
   --base-gray: #323741;
-  --base-white: #FFFFFF;
-  --background-base: #F5F5F6;
-  --background-inverse: #262A32;
-  --outline-base: #BBBBBB;
-  --outline-inverse: #4D5461;
+  --base-white: #ffffff;
+  --background-base: #f5f5f6;
+  --background-inverse: #262a32;
+  --outline-base: #bbbbbb;
+  --outline-inverse: #4d5461;
   --shadow-base: #22222240;
-  --shadow-inverse: #1F222840;
+  --shadow-inverse: #1f222840;
   --speed: 500ms;
-
 }
 
 * {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -30,7 +29,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-style: normal;
 }
@@ -66,7 +65,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
   font-weight: 300;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

@@ -20,12 +20,11 @@
 }
 
 .base-option span {
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
   font-weight: 300;
   padding: 0 10px;
 
-  transition: 
-    transform .2s ease-in-out
+  transition: transform 0.2s ease-in-out;
 }
 
 .base-option:not(.active):hover span {
@@ -38,8 +37,8 @@
   border-radius: 10px;
 
   transition:
-    width .2s ease-in-out,
-    border-color .2s ease-in-out
+    width 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
 }
 
 .base-option.light.active hr {

@@ -18,23 +18,33 @@
 }
 
 .modal-open {
-  animation: open .2s ease-in-out;
+  animation: open 0.2s ease-in-out;
   display: flex;
 }
 
 .modal-close {
-  animation: close .2s ease-in-out;
+  animation: close 0.2s ease-in-out;
   display: none;
 }
 
 @keyframes open {
-  from {opacity: 0%;}
-  to {opacity: 100%;}
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }
 
 @keyframes close {
-  from {opacity: 100%; display: flex;}
-  to {opacity: 0%; display: none;}
+  from {
+    opacity: 100%;
+    display: flex;
+  }
+  to {
+    opacity: 0%;
+    display: none;
+  }
 }
 
 .base-modal {
