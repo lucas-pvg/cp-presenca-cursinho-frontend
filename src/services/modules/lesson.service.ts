@@ -1,8 +1,13 @@
 import { get, patch, post } from "../axios"
-import { lessonMapper } from "../../data/mapper";
-import { Lesson, LessonServiceResponse } from "../../data/models/lesson.model";
+import { lessonMapper, lessonRequestMapper } from "../../data/mapper";
+import { Lesson, LessonCreateData, LessonServiceResponse } from "../../data/models/lesson.model";
 
 const LessonService = {
+  async createLesson(lesson: LessonCreateData, params?: unknown) {
+    console.log('entrou no serviço')
+    return await post('lesson/', lessonRequestMapper(lesson), params);
+  },
+
   async listLessons(params?: unknown) {
     const response = await get('lesson/', { params });
     const lessonsMapped = response.map((lesson: LessonServiceResponse) => 
