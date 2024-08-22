@@ -16,7 +16,6 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson =>
     passkey: lesson.passkey
 });
 
-
 export const lessonRequestMapper = (lesson: LessonCreateData): LessonServiceRequest => {
   let startDatetime: Date = new Date(`${lesson.date}T${lesson.startTime}`)
   let endDatetime: Date = new Date(`${lesson.date}T${lesson.endTime}`)
