@@ -1,18 +1,6 @@
-.page-content {
-  padding: 0 60px;
+.home .content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: 50px;
-}
-
-.home {
-  position: relative;
-}
-
-.home .menu {
-  position: absolute;
-  top: 130px;
-  left: 60px;
+  gap: 25px;
 }

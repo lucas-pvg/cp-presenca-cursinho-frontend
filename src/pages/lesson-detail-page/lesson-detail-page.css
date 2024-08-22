@@ -2,22 +2,13 @@
   gap: 50px;
 }
 
-.lesson-detail .page-content {
-  padding: 0 60px;
-  display: flex;
-  flex-direction: column;
+.page.lesson-detail .page-content {
   align-items: flex-start;
-  justify-content: flex-start;
-  gap: 40px;
+  gap: 50px;
 }
 
-.lesson-detail {
-  position: relative;
-}
-
-.lesson-detail .menu {
-  position: absolute;
-  top: 130px;
+.page.lesson-detail .menu {
+  left: auto;
   right: 60px;
 }
 
@@ -27,6 +18,24 @@
   align-items: stretch;
   justify-content: center;
   gap: 20px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+
+  .switch-content {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
 }
 
 .lesson-detail .info {

@@ -11,12 +11,12 @@
   --base-white: #FFFFFF;
   --background-base: #F5F5F6;
   --background-inverse: #262A32;
+  --background-modal: color-mix(in srgb, var(--base-black) 85%, transparent);
   --outline-base: #BBBBBB;
   --outline-inverse: #4D5461;
   --shadow-base: #22222240;
   --shadow-inverse: #1F222840;
   --speed: 500ms;
-
 }
 
 * {
