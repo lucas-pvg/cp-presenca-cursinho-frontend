@@ -9,8 +9,10 @@ import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
 
 import { Lesson } from '../../data/models/lesson.model'
-import './lessons-page.css'
+import { CreateLesson } from '../../components/modal/create-lesson'
 import Services from '../../services'
+
+import './lessons-page.css'
 
 const LessonsPageVariants = cva(
   'lessons page',
@@ -35,9 +37,11 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   const [ lessons, setLessons ] = useState(Array<Lesson>)
   const [ filtered, setFiltered ] = useState(Array<Lesson>)
   const [ search, setSearch ] = useState<string>('')
+  const [ isModalOpen, setIsModalOpen ] = useState(false)
   const nav = useNavigate()
   
   useEffect(() => {
+    !isModalOpen &&
     Services.listLessonsWithDetails()
       .then(data => {
         setLessons(data)
@@ -46,8 +50,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       .catch(error => {
         console.log(error)
       })
-  }, []);
-
+  }, [isModalOpen]);
 
   const filterLesson = (e: any) => {
     setSearch(e.target.value)
@@ -59,6 +62,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   }
 
   return (
+    <>
     <div className={LessonsPageVariants({ mode })} {...props}>
       <Hero 
         title='Consultar aulas'
@@ -66,7 +70,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       />
 
       <CardMenu className='menu'>
-        <Card to='' label='Agendar' mode='light' />
+        <Card to='' label='Agendar' mode='light' onClick={() => setIsModalOpen(true)} />
         <Card to='' label='Disciplinas' mode='light' />
       </CardMenu>
 
@@ -81,7 +85,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
                     <td>{lesson.name}</td>
                     <td>{lesson.dateFormat('medium')}</td>
                     <td>{lesson.startTimeFormat()}</td>
-                    <td>{lesson.studentClass.name}</td>
+                    <td>{lesson.studentClass}</td>
                   </TableRow>
                 )})
               }
@@ -90,5 +94,8 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
         }
       </div>
     </div>
+
+    <CreateLesson className={isModalOpen ? 'modal-open' : 'modal-close'} mode='light' close={() => setIsModalOpen(false)} />
+    </>
   )
 }

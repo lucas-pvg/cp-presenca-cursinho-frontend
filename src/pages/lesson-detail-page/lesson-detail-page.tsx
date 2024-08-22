@@ -8,11 +8,13 @@ import { TextCard } from '../../components/text-card/text-card'
 import { Search } from '../../components/search/search'
 import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
+import { Switch } from '../../components/switch/switch'
 
 import { classes } from '../../data/mock/classes.mock'
 import { Lesson } from '../../data/models/lesson.model'
-import './lesson-detail-page.css'
 import Services from '../../services'
+import './lesson-detail-page.css'
+
 
 const LessonDetailPageVariants = cva(
   'lesson-detail page',
@@ -39,24 +41,41 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   const { lessonID } = useParams()
 
   useEffect(() => {
-    lessonID && Services.retrieveLesson(parseInt(lessonID))
+    lessonID &&
+    Services.retrieveLesson(parseInt(lessonID))
       .then(data => {
         setLesson(data)
       })
       .catch(error => {
         console.log(error)
       })
-  }, []);
+  }, [lessonID]);
 
   const filterLesson = (e:any) => {
     setSearch(e.target.value)
+  }
+
+  const handleSwitchChange = () => {
+    lesson &&
+    Services.updateAttendanceRegistrability(lesson.id)
+      .then(() => {
+        setLesson(() => {
+          const updatedLesson = new Lesson({
+            ...lesson,
+            isAttendanceRegistrable: !lesson.isAttendanceRegistrable
+          })
+
+          return updatedLesson
+        })
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
     <div className={LessonDetailPageVariants({ mode })} {...props}>
       <Hero 
         title={`${lesson?.name}`}
-        description={`${lesson?.subject.name} • ${lesson?.studentClass.name}`}
+        description={`${lesson?.subject} • ${lesson?.studentClass}`}
       />
 
       <CardMenu className='menu'>
@@ -67,16 +86,32 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       <div className='page-content'>
         <div className='info'>
           <h5>Informações</h5>
+
           <div className='cards'>
             <TextCard iconType='calendar' label='Data'>{lesson?.dateFormat('short')}</TextCard>
-            <TextCard iconType='clock' label='Horário'>{`${lesson?.startTimeFormat()} - ${lesson?.endTimeFormat()}`}</TextCard>
-            <TextCard iconType='clipboard' label='Presença'>{`${lesson?.startAttendanceFormat()} - ${lesson?.endAttendanceFormat()}`}</TextCard>
+            <TextCard iconType='clock' label='Horário'>{`${lesson?.startTimeFormat(false)} - ${lesson?.endTimeFormat()}`}</TextCard>
+            <TextCard iconType='clipboard' label='Presença'>{`${lesson?.startAttendanceFormat(false)} - ${lesson?.endAttendanceFormat()}`}</TextCard>
             <TextCard iconType='lock' label='Palavra-chave'>{lesson?.passkey}</TextCard>
           </div>
         </div>
         
         <div className='lesson-table'>
-          <Search value={search} onChange={filterLesson} />
+          <div className='header'>
+            <Search value={search} onChange={filterLesson} />
+
+            <div className='switch-content'>
+              <p>Presença aberta?</p>
+
+              <Switch
+                type='base'
+                mode={mode}
+                isActive={lesson?.isAttendanceRegistrable}
+                handleChange={() => handleSwitchChange()}
+              />
+            </div>
+          </div>
+          
+
           <Table mode='light' clickable={true} header={['Aula', 'Horário', 'Turma', 'Column']}>
             {
               classes.map((lesson, i) => { return (

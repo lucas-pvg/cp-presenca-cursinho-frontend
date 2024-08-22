@@ -26,11 +26,11 @@ const switchVariants = cva(
 interface SwitchProps {
   mode?: 'light' | 'dark';
   type?: 'base' | 'darkMode'
-  isActive: boolean;
+  isActive?: boolean;
   handleChange: () => void;
 }
 
-const getSwitchIcon = (isActive: boolean, type?: string): IconType => {
+const getSwitchIcon = (isActive?: boolean, type?: string): IconType => {
   switch(type) {
     case 'darkMode': 
       return isActive ? FaMoon : FaSun;
@@ -39,7 +39,7 @@ const getSwitchIcon = (isActive: boolean, type?: string): IconType => {
   }
 }
 
-export const Switch = ({mode, type, isActive, handleChange, ...props}: SwitchProps) => {
+export const Switch = ({ mode, type, isActive, handleChange, ...props }: SwitchProps) => {
   const SwitchIcon = getSwitchIcon(isActive, type); 
 
   return (

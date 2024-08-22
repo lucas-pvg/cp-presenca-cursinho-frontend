@@ -27,9 +27,9 @@ interface selectInputProps
 export function SelectInput({ mode, placeholder, ...props }: selectInputProps) {
   return (
     <div className={selectInputVariants({ mode })}>
-      <select defaultValue='default' {...props}>
+      <select {...props}>
         { placeholder && <option disabled value='default'>{placeholder}</option> }
-        {props.children}
+        { props.children }
       </select>
       <Icon className='input-icon' iconType='chevron-down' size={16} />
     </div>
