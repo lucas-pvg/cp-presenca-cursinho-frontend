@@ -2,17 +2,11 @@
   gap: 50px;
 }
 
-.subject-detail .page-content {
+.page.subject-detail .page-content {
   width: 100%;
-  padding: 0 60px;
-  display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: stretch;
   gap: 50px;
-}
-
-.subject-detail {
-  position: relative;
 }
 
 .subject-detail .subject-menu {
@@ -25,7 +19,7 @@
 }
 
 .subject-detail .vl {
-  height: 500px;
+  height: 450px;
   border-radius: 5px;
   border: 1px solid var(--outline-base);
 }
