@@ -26,7 +26,7 @@ function App() {
           <Route path="/subject" element={<SubjectPage />} />
           <Route path="/subject/:subjectCode" element={<SubjectDetailPage />} />
 
-          <Route path="/attendence" element={<SubjectPage />} />
+          <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
           <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
           <Route path="/classes" element={<h1 className='center'>Turmas</h1>} />
           <Route path="/metrics" element={<h1 className='center'>Métricas</h1>} />

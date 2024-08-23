@@ -71,7 +71,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
 
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' onClick={() => setIsModalOpen(true)} />
-        <Card to='' label='Disciplinas' mode='light' />
+        <Card to='/subject' label='Disciplinas' mode='light' />
       </CardMenu>
 
       <div className='page-content'>

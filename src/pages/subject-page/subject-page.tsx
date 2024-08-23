@@ -1,6 +1,8 @@
 import { cva, VariantProps } from 'class-variance-authority'
 import { Hero } from '../../components/hero/hero'
 import { Card } from '../../components/card-menu/card'
+
+import { MainSubject } from '../../data/models/subject.model'
 import './subject-page.css'
 
 const SubjectPageVariants = cva(
@@ -32,15 +34,9 @@ export function SubjectPage({ mode, ...props }: SubjectPageProps) {
 
       <div className='page-content'>
         <div className='subject-grid'>
-          <Card to='/subject/CA' label='Atualidades' variant='primary' mode='light' />
-          <Card to='/subject/BI' label='Biologia' variant='primary' mode='light' />
-          <Card to='/subject/PL' label='Filosofia' variant='primary' mode='light' />
-          <Card to='/subject/PH' label='Física' variant='primary' mode='light' />
-          <Card to='/subject/GE' label='Geografia' variant='primary' mode='light' />
-          <Card to='/subject/HI' label='História' variant='primary' mode='light' />
-          <Card to='/subject/MT' label='Matemática' variant='primary' mode='light' />
-          <Card to='/subject/PT' label='Português' variant='primary' mode='light' />
-          <Card to='/subject/CH' label='Química' variant='primary' mode='light' />
+          {
+            MainSubject.map((mainSubject, i) => <Card key={i} to={`/subject/${mainSubject.id}`} label={mainSubject.name} variant='primary' mode='light' />)
+          }
         </div>
       </div>
     </div>

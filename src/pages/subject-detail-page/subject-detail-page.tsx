@@ -8,8 +8,8 @@ import { OptionList } from '../../components/option-list/option-list'
 import { Input } from '../../components/input/input'
 import { SelectInput } from '../../components/select-input/select-input'
 
-import { Subject } from '../../data/models/subject.model'
-import { getSubjectsFromMainSubject } from '../../data/requests/subject.requests'
+import { Subject, MainSubject } from '../../data/models/subject.model'
+import Services from '../../services'
 import './subject-detail-page.css'
 
 const SubjectDetailPageVariants = cva(
@@ -33,10 +33,14 @@ interface SubjectDetailPageProps extends VariantProps<typeof SubjectDetailPageVa
 
 export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
   const { subjectCode } = useParams()
+  const [ mainSubject, setMainSubject ] = useState<string>('Disciplina')
   const [ subjects, setSubjects ] = useState(Array<Subject>)
 
   useEffect(() => {
-    subjectCode && getSubjectsFromMainSubject(subjectCode)
+    subjectCode && setMainSubject(MainSubject.find(ms => ms.id == subjectCode)!.name)
+
+    subjectCode &&
+    Services.listSubjectsFromMain(subjectCode)
       .then(data => {
         setSubjects(data)
       })
@@ -48,7 +52,7 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
   return (
     <div className={SubjectDetailPageVariants({ mode })} {...props}>
       <Hero 
-        title='Matemática'
+        title={mainSubject}
         description='Crie, edite e gerencie suas diferentes frentes e a frequência das suas aulas.'
       />
 
