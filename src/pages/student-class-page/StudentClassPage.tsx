@@ -5,8 +5,14 @@ import { Card } from "../../components/card-menu/card";
 import './StudentClassPage.css';
 import { Table } from "../../components/table/Table";
 import { OptionList } from "../../components/option-list/option-list";
-import { Input } from "../../components/input/input";
+import { Button } from "../../components/button/Button";
+import { useState } from "react";
+import { SelectList } from "../../components/select-list/SelectList";
+import { students } from "../../data/mock/students-select";
+import { StudentSelect } from "../../data/models/student.model";
+import { CreateStudentClass } from "../../components/modal/create-student-class";
 import { TextCard } from "../../components/text-card/text-card";
+import { TableRow } from "../../components/table/TableRow";
 
 const StudentClassPageVariants = cva(
   'student-class page', 
@@ -28,6 +34,37 @@ interface StudentClassPageProps extends VariantProps<typeof StudentClassPageVari
 }
 
 export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
+  const [ open, setOpen ] = useState(false)
+  const [ openAdd, setOpenAdd ] = useState(false)
+  const [ selectedIds, setSelectedIds ] = useState([0]);
+  const [ selectedStudents, setSelectedStudents ] = useState<StudentSelect[]>([]);
+
+  const handleCheckboxChange = (id: number) => {
+    setSelectedIds(prevSelectedIds => {
+      if (prevSelectedIds.includes(id)) {
+        return prevSelectedIds.filter(selectedId => selectedId !== id);
+      } else {
+        return [...prevSelectedIds, id];
+      }
+    });
+  };
+
+  const verifyIncluded = (id: number) => {
+    return selectedIds.includes(id);
+  }
+
+  const confirm = () => {
+    setSelectedStudents([]);
+    selectedIds.sort((a,b) => a - b);
+    selectedIds.forEach((id) => {
+      const student = students.find(student => student.id === id) ?? null;
+      setSelectedStudents(prevSelectedStudents => {
+        return student ? [...prevSelectedStudents, student] : [...prevSelectedStudents];
+      })
+    })
+    setOpenAdd(false)
+  }
+
   return (
     <div className={StudentClassPageVariants({ mode })} {...props}>
       <Hero 
@@ -36,7 +73,7 @@ export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
       />
 
       <CardMenu className='menu'>
-        <Card to='' label='Adicionar' mode='light' />
+        <Card to='' label='Adicionar' mode='light' onClick={() => setOpen(true)}/>
         <Card to='' label='Métricas' mode='light' />
       </CardMenu>
 
@@ -51,12 +88,29 @@ export function StudentClassPage({mode, ...props}: StudentClassPageProps) {
           </div>
         </div>
         <div className='column'>
-          <Input type={'text'} />
           <Table
             mode='light'
             clickable={true}
-            header={['Aluno']}
-          />
+            header={['Aluno', 'id']}
+          >
+            {selectedStudents.map((student, index) => (
+              <TableRow key={index}>
+                <td>{student.name}</td>
+                <td>{student.id}</td>
+              </TableRow>
+            ))}
+          </Table>
+          <div className="center">
+            <Button onClick={() => setOpenAdd(true)}>{'Adicionar aluno'}</Button>
+            <SelectList 
+            className={openAdd ? 'modal-open' : 'modal-close'} 
+            close={() => setOpenAdd(false)} items={students} 
+            verifyIncluded={verifyIncluded} 
+            handleListChange={handleCheckboxChange}
+            confirm={confirm}
+            />
+            <CreateStudentClass className={open ? 'modal-open' : 'modal-close'} mode='light' close={() => setOpen(false)} />
+          </div>
         </div>
       </div>
     </div>
