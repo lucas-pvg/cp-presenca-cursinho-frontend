@@ -1,0 +1,50 @@
+.page.subject-detail {
+  gap: 50px;
+}
+
+.page.subject-detail .page-content {
+  width: 100%;
+  flex-direction: row;
+  justify-content: stretch;
+  gap: 50px;
+}
+
+.subject-detail .subject-menu {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: stretch;
+  gap: 30px;
+}
+
+.subject-detail .vl {
+  height: 450px;
+  border-radius: 5px;
+  border: 1px solid var(--outline-base);
+}
+
+.subject-detail .subject-content {
+  align-self: stretch;
+  flex: 1 0 0;
+}
+
+.subject-detail .classes-menu {
+  display: flex;
+  align-items: flex-end;
+  flex: 1 0 0;
+  gap: 15px;
+}
+
+.subject-detail .schedule {
+  width: 70%;
+  padding: 50px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.subject-detail .schedule-row {
+  display: flex;
+  gap: 20px;
+}

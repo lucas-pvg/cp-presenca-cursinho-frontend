@@ -15,6 +15,15 @@ const SubjectService = {
   async retrieveSubject(subjectId: number) {
     const response = await get(`subject/${subjectId}/`)
     return subjectMapper(response)
+  },
+
+  async listSubjectsFromMain(mainSubject: string) {
+    const response = await get(`subject/${mainSubject}/`)
+    const subjectMapped = response.map((subject: SubjectServiceResponse) => 
+      subjectMapper(subject)
+    )
+
+    return subjectMapped
   }
 }
 

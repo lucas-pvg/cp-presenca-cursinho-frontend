@@ -1,7 +1,6 @@
 import { Lesson, LessonCreateData } from "../models/lesson.model";
 import { LessonServiceResponse, LessonServiceRequest } from "../models/lesson.model";
 
-
 export const lessonMapper = (lesson: LessonServiceResponse): Lesson => 
   new Lesson ({
     id: lesson.id,
@@ -16,7 +15,6 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson =>
     course: lesson.course,
     passkey: lesson.passkey
 });
-
 
 export const lessonRequestMapper = (lesson: LessonCreateData): LessonServiceRequest => {
   let startDatetime: Date = new Date(`${lesson.date}T${lesson.startTime}`)

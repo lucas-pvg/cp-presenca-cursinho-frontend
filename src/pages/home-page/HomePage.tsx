@@ -77,7 +77,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
       <CardMenu className='menu'>
         <Card to='' label='Agendar' mode='light' onClick={() => setIsModalOpen(true)} />
         <Card to='/lessons' label='Consultar' mode='light' />
-        <Card to='' label='Disciplinas' mode='light' />
+        <Card to='/subject' label='Disciplinas' mode='light' />
       </CardMenu>
 
       <div className='page-content'>

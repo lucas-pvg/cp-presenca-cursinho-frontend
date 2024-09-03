@@ -19,7 +19,7 @@ export interface SubjectInterface {
 export interface SubjectServiceResponse {
   id: number,
   name: string,
-  main_subject: string,
+  main_subject: string
 }
 
 export class Subject implements SubjectInterface {
