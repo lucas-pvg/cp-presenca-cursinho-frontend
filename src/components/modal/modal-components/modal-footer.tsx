@@ -21,16 +21,17 @@ interface modalFooterProps extends VariantProps<typeof modalFooterVariants> {
   mode?: 'light' | 'dark'
   type?: 'submit' | 'button'
   form?: string
-  close: Function
+  close: () => void;
+  confirm?: () => void;
 }
 
-export function ModalFooter({ mode, type, form, close }: modalFooterProps) {
+export function ModalFooter({ mode, type, form, close, confirm }: modalFooterProps) {
   return (
     <div className={modalFooterVariants({ mode })} >
       {
         type == 'submit'
         ? <Button type='submit' form={form} variant='solid' mode={mode}>Confirmar</Button>
-        : <Button type='button' variant='solid' mode={mode}>Confirmar</Button>
+        : <Button type='button' variant='solid' mode={mode} onClick={confirm}>Confirmar</Button>
       }
       
       <Button type='button' variant='outline' mode={mode} onClick={() => close()}>Cancelar</Button>
