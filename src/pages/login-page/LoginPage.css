@@ -1,0 +1,48 @@
+body {
+    background: var(--blue-grad);
+    margin: 0; 
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#root {
+    width: 100%; /* Ajuste a largura do root */
+    max-width: 1200px; /* Defina um valor máximo conforme necessário */
+    margin: 0 auto; /* Centralize o conteúdo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 5.5rem;
+    color: var(--text-base);
+    padding-bottom: 20px;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: var(--background-base);
+    padding-bottom: 40px;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 40px 10px 40px;
+    width: 100%;
+}

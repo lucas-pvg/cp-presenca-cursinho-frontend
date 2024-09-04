@@ -15,11 +15,16 @@ const ButtonVariants = cva(
       mode: {
         dark: 'dark',
         light: 'light'
+      },
+      fullWidth: {
+        true: 'full-width',
+        false: ''
       }
     },
     defaultVariants: {
       variant: 'solid',
-      mode: 'light'
+      mode: 'light',
+      fullWidth: false
     }
   }
 )
@@ -29,18 +34,19 @@ interface ButtonProps
     to?: To
     variant?: 'solid' | 'outline'
     mode?: 'light' | 'dark'
+    fullWidth?: boolean
 }
 
-export function Button({ to, variant, mode, ...props }: ButtonProps) {
+export function Button({ to, variant, mode, fullWidth, ...props }: ButtonProps) {
   if (to) {
     return (
       <Link to={to}>
-        <button className={ButtonVariants({variant, mode})} {...props} />
+        <button className={ButtonVariants({variant, mode, fullWidth})} {...props} />
       </Link>
     )
   }
   
   else return (    
-    <button className={ButtonVariants({variant, mode})} {...props} />
+    <button className={ButtonVariants({variant, mode, fullWidth})} {...props} />
   )
 }

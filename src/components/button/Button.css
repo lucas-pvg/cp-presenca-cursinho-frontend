@@ -15,6 +15,10 @@
     transform .1s ease-in-out
 }
 
+.base-button.full-width {
+  width: 100%;
+}
+
 .base-button:hover {
   transform: scale(1.1);
 }
@@ -56,10 +60,8 @@
   font-weight: 500;
   font-size: 12px;
 
- 
   background: green;
   color: var(--base-white);
-  
 
   transition: 
     transform .1s ease-in-out
@@ -78,10 +80,8 @@
   font-weight: 500;
   font-size: 12px;
 
- 
   background: red;
   color: var(--base-white);
-  
 
   transition: 
     transform .1s ease-in-out
