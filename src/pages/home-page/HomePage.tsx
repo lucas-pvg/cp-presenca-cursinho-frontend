@@ -7,11 +7,8 @@ import { Card } from '../../components/card-menu/card';
 import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
 import { Switch } from '../../components/switch/switch';
-import { OptionList } from '../../components/option-list/option-list';
-import { NextLesson } from '../../components/next-class/next-lesson';
 
 import { Lesson } from '../../data/models/lesson.model';
-import { StudentClass } from '../../data/models/student-class.model';
 import { CreateLesson } from '../../components/modal/create-lesson';
 import Services from '../../services';
 
@@ -35,28 +32,18 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 
 export function HomePage({ mode, ...props }: HomePageProps) {
   const [lessons, setLessons] = useState(Array<Lesson>);
-  const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const nav = useNavigate();
 
   useEffect(() => {
     !isModalOpen &&
-    Services.listLessonsWithDetails()
-      .then((response) => {
-        setLessons(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    
-    !isModalOpen &&
-    Services.listStudentClasses()
-      .then((response) => {
-        setStudentClasses(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      Services.listLessonsWithDetails()
+        .then((response) => {
+          setLessons(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }, [isModalOpen]);
 
   const handleSwitchChange = (lesson: Lesson, index: number) => {
@@ -97,51 +84,32 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
         <div className="page-content">
           <div className="content">
-            <OptionList labels={['Geral', 'Turma A', 'Turma B', 'Turma C']} />
-            
-            <div className='next-lesson-container'>
-              <h5>Próximas Aulas</h5>
+            <h5>Aulas de Hoje</h5>
 
-              <div className='next-lesson-menu'>
-                {
-                  studentClasses.map(cls => {
-                    const lesson = lessons.filter(lesson => {
-                      return lesson.studentClass === cls.name && lesson.endTime > new Date()
-                    })[0]
-                    if (lesson) return <NextLesson lesson={lesson} key={lesson.id} />
-                  })
-                }
-              </div>
-            </div>
-            
-            <div className='today-lesson-container'>
-              <h5>Aulas de Hoje</h5>
-
-              <Table
-                mode="light"
-                clickable={true}
-                header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
-              >
-                {lessons.map((lesson, index) => (
-                  <TableRow
-                    key={lesson.id}
-                    onClick={() => nav(`/lessons/${lesson.id}`)}
-                  >
-                    <td>{lesson.subject}</td>
-                    <td>{lesson.startTimeFormat()}</td>
-                    <td>{lesson.studentClass}</td>
-                    <td>
-                      <Switch
-                        type="base"
-                        mode={mode}
-                        isActive={lesson.isAttendanceRegistrable}
-                        handleChange={() => handleSwitchChange(lesson, index)}
-                      />
-                    </td>
-                  </TableRow>
-                ))}
-              </Table>
-            </div>
+            <Table
+              mode="light"
+              clickable={true}
+              header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
+            >
+              {lessons.map((lesson, index) => (
+                <TableRow
+                  key={lesson.id}
+                  onClick={() => nav(`/lessons/${lesson.id}`)}
+                >
+                  <td>{lesson.subject}</td>
+                  <td>{lesson.startTimeFormat()}</td>
+                  <td>{lesson.studentClass}</td>
+                  <td>
+                    <Switch
+                      type="base"
+                      mode={mode}
+                      isActive={lesson.isAttendanceRegistrable}
+                      handleChange={() => handleSwitchChange(lesson, index)}
+                    />
+                  </td>
+                </TableRow>
+              ))}
+            </Table>
           </div>
         </div>
       </div>

@@ -33,6 +33,7 @@ interface ButtonProps
   to?: To;
   variant?: 'solid' | 'outline' | 'present' | 'absent';
   mode?: 'light' | 'dark';
+  fullWidth?: boolean;
 }
 
 export function Button({

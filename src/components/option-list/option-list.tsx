@@ -1,4 +1,5 @@
 import { cva, VariantProps } from 'class-variance-authority';
+import { useState } from 'react';
 import { Option } from './option';
 import './option.css';
 
@@ -17,12 +18,14 @@ const optionListVariants = cva('option-list', {
 interface OptionListProps extends VariantProps<typeof optionListVariants> {
   mode?: 'light' | 'dark';
   labels: Array<string>;
-  index?: number
   setIndex?: (index: number) => void;
 }
 
-export function OptionList({ mode, labels, index, setIndex }: OptionListProps) {
+export function OptionList({ mode, labels, setIndex }: OptionListProps) {
+  const [option, setOption] = useState(0);
+
   const setActive = (e: any) => {
+    setOption(e.currentTarget.value);
     setIndex && setIndex(e.currentTarget.value);
   };
 
@@ -33,7 +36,7 @@ export function OptionList({ mode, labels, index, setIndex }: OptionListProps) {
           return (
             <Option
               mode={mode}
-              active={index == i}
+              active={option == i}
               onClick={setActive}
               value={i}
               key={i}

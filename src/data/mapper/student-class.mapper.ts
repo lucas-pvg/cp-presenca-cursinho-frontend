@@ -3,4 +3,12 @@ import { StudentClassResponse } from '../models/student-class.model';
 
 export const studentClassMapper = (
   studentClass: StudentClassResponse
-): StudentClass => new StudentClass(studentClass);
+): StudentClass => {
+  return {
+    id: studentClass.id,
+    name: studentClass.name,
+    classroom: studentClass.classroom,
+    course: studentClass.course,
+    subjects: studentClass.subjects,
+  };
+};

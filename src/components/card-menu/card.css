@@ -12,10 +12,7 @@
   white-space: normal;
   word-wrap: break-word;
 
-  transition:
-    transform 0.2s ease-in-out,
-    color 0.2s ease-in-out,
-    background-color 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .base-card:hover {

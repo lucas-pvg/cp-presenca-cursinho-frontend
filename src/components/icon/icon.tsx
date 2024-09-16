@@ -13,6 +13,7 @@ import ArrowLeftCircle from '../../assets/icons/style_guide/icon-arrow-left-circ
 import ArrowLeft from '../../assets/icons/style_guide/icon-arrow-left.svg?react';
 import ArrowRightCircle from '../../assets/icons/style_guide/icon-arrow-right-circle.svg?react';
 import ArrowRight from '../../assets/icons/style_guide/icon-arrow-right.svg?react';
+import AtSign from '../../assets/icons/style_guide/icon-at-sign.svg?react';
 import Book from '../../assets/icons/style_guide/icon-book.svg?react';
 import Calendar from '../../assets/icons/style_guide/icon-calendar.svg?react';
 import Check from '../../assets/icons/style_guide/icon-check.svg?react';
@@ -186,6 +187,15 @@ export const Icon = (props: IconProps) => {
     case 'arrow-right':
       return (
         <ArrowRight
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
+        />
+      );
+    case 'at-sign':
+      return (
+        <AtSign
           id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
