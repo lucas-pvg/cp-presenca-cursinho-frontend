@@ -3,9 +3,9 @@ import { TextInput } from './text-input';
 import { DateInput } from './date-input';
 import { TimeInput } from './time-input';
 import { EmailInput } from './email-input';
+import { PasswordInput } from './password-input';
 
 import './input.css';
-import { PasswordInput } from './password-input';
 
 interface inputProps extends ComponentProps<'input'> {
   mode?: 'light' | 'dark';

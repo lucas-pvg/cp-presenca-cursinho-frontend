@@ -35,7 +35,7 @@ function App() {
             />
 
             <Route
-              path="attendence"
+              path="attendance"
               element={<h1 className="center">Presença</h1>}
             />
             <Route path="users" element={<UsersPage />} />
