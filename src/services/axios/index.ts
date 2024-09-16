@@ -2,7 +2,7 @@ import Axios, { type AxiosResponse } from 'axios';
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  responseType: 'json'
+  responseType: 'json',
 });
 
 axios.interceptors.request.use(
@@ -24,7 +24,9 @@ axios.interceptors.response.use(
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh');
       if (refreshToken) {
-        const response = await axios.post('token/refresh/', { refresh: refreshToken });
+        const response = await axios.post('token/refresh/', {
+          refresh: refreshToken,
+        });
         localStorage.setItem('access', response.data.access);
         return axios(originalRequest);
       }

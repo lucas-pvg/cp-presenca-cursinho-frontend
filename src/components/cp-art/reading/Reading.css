@@ -27,7 +27,7 @@
   height: 10px;
   top: 10px;
   left: 180px;
-  animation-delay: .8s !important;
+  animation-delay: 0.8s !important;
 }
 
 .reading .d3 {
@@ -63,6 +63,11 @@
 }
 
 @keyframes float {
-  0%, 100%   {translate: 0 0;}
-  50%  {translate: 0 -7px;}
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
 }
