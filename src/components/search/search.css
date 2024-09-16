@@ -9,8 +9,7 @@
   border-radius: 8px;
   border: 1px solid;
 
-  transition: 
-    border-color .2s ease-in-out;
+  transition: border-color 0.2s ease-in-out;
 }
 
 .search.light {
@@ -36,7 +35,7 @@
 .search input {
   all: unset;
   width: 100%;
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
   font-weight: 300;
   font-size: 12px;
 }
@@ -52,8 +51,7 @@
 .search .clear-icon {
   cursor: pointer;
 
-  transition: 
-    transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .search .clear-icon:hover {

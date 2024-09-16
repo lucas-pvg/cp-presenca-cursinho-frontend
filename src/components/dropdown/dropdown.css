@@ -1,15 +1,15 @@
 .base-dropdown {
-    position: absolute;
-    padding: 1rem;
-    width: 200px;
-    border-radius: 8px;
-    margin-top: 1rem;
+  position: absolute;
+  padding: 1rem;
+  width: 200px;
+  border-radius: 8px;
+  margin-top: 1rem;
 }
 
 .base-dropdown::before {
-    content: '';
-    position: absolute;
-    transform: rotate(45deg);
+  content: '';
+  position: absolute;
+  transform: rotate(45deg);
 }
 
 .light {
@@ -17,8 +17,8 @@
   border-color: var(--blue-base);
   color: var(--base-black);
 }
-  
-  .dark {
+
+.dark {
   background: var(--base-black);
   border-color: var(--blue-inverse);
   color: var(--base-white);

@@ -7,12 +7,11 @@
   border-radius: 5px;
   cursor: pointer;
 
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 14px;
 
-  transition: 
-    transform .1s ease-in-out
+  transition: transform 0.1s ease-in-out;
 }
 
 .base-button.full-width {
@@ -56,17 +55,16 @@
   border-radius: 5px;
   cursor: pointer;
 
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 12px;
 
   background: green;
   color: var(--base-white);
 
-  transition: 
-    transform .1s ease-in-out
+  transition: transform 0.1s ease-in-out;
 }
-  
+
 .abscense-button {
   padding: 8px 13px;
   display: flex;
@@ -76,13 +74,12 @@
   border-radius: 5px;
   cursor: pointer;
 
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 12px;
 
   background: red;
   color: var(--base-white);
 
-  transition: 
-    transform .1s ease-in-out
+  transition: transform 0.1s ease-in-out;
 }

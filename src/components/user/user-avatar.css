@@ -1,59 +1,58 @@
-  .user-avatar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 200px;
-  }
-  
-  .avatar-image {
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    border-radius: 50%;
-    background: var(--base-white);
-  }
-  
-  .avatar-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .user-name {
-    font-size: 16px;
-    text-align: center;
-    margin: 1rem;
-  }
+.user-avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 200px;
+}
 
-  .drop-arrow {
-    margin-left: 0.5rem;
-  }
+.avatar-image {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--base-white);
+}
 
-  .dropdown-menu.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    transition: var(--speed) ease;
-  }
+.avatar-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .dropdown-menu.inactive {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-20px);
-    transition: var(--speed) ease;
-  }
+.user-name {
+  font-size: 16px;
+  text-align: center;
+  margin: 1rem;
+}
 
-  .light {
-    background: var(--base-white);
-    border-color: var(--blue-base);
-    color: var(--base-black);
-  }
+.drop-arrow {
+  margin-left: 0.5rem;
+}
 
-  
-  .dark {
-    background: var(--base-black);
-    border-color: var(--blue-inverse);
-    color: var(--base-white);
-  }
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: var(--speed) ease;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: var(--speed) ease;
+}
+
+.light {
+  background: var(--base-white);
+  border-color: var(--blue-base);
+  color: var(--base-black);
+}
+
+.dark {
+  background: var(--base-black);
+  border-color: var(--blue-inverse);
+  color: var(--base-white);
+}
