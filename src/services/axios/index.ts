@@ -2,15 +2,15 @@ import Axios, { type AxiosResponse } from 'axios';
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  responseType: 'json'
+  responseType: 'json',
 });
 
 axios.interceptors.request.use(
   (config: any) => ({
     ...config,
     headers: {
-      ...config.headers
-    }
+      ...config.headers,
+    },
   }),
   (error: any) => Promise.reject(error)
 );

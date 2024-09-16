@@ -1,19 +1,19 @@
-import ZombieImg from "../../../assets/cp-images/zombie.png"
-import Circle from "../../../assets/cp-doodles/circle.png"
-import X from "../../../assets/cp-doodles/x.png"
-import Spiral from "../../../assets/cp-doodles/spiral.png"
-import Baloon from "../../../assets/cp-doodles/baloon.png"
-import Wave from "../../../assets/cp-doodles/wave.png"
-import Hash from "../../../assets/cp-doodles/hash.png"
-import './Zombie.css'
+import ZombieImg from '../../../assets/cp-images/zombie.png';
+import Circle from '../../../assets/cp-doodles/circle.png';
+import X from '../../../assets/cp-doodles/x.png';
+import Spiral from '../../../assets/cp-doodles/spiral.png';
+import Baloon from '../../../assets/cp-doodles/baloon.png';
+import Wave from '../../../assets/cp-doodles/wave.png';
+import Hash from '../../../assets/cp-doodles/hash.png';
+import './Zombie.css';
 
 interface ZombieProps {
-  className?: string
+  className?: string;
 }
 
 export function Zombie({ className }: ZombieProps) {
-  const classes = `${className ? className : 'zombie'}`
-  
+  const classes = `${className ? className : 'zombie'}`;
+
   return (
     <div className={classes}>
       <img className="zombie-img" src={ZombieImg} alt="Image" />
@@ -30,5 +30,5 @@ export function Zombie({ className }: ZombieProps) {
       <img className="float doodle d11" src={Hash} alt="Image" />
       <img className="float doodle d12" src={Hash} alt="Image" />
     </div>
-  )
+  );
 }

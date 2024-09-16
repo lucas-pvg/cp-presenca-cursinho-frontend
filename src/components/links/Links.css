@@ -25,8 +25,7 @@
   font-size: 16px;
   font-weight: 400;
 
-  transition: 
-    transform .2s ease-in-out
+  transition: transform 0.2s ease-in-out;
 }
 
 .link-content {
@@ -42,8 +41,8 @@
   border-radius: 10px;
 
   transition:
-    width .2s ease-in-out,
-    border-color .2s ease-in-out
+    width 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
 }
 
 .base-link.active.light hr {
