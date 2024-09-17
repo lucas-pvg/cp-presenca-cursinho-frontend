@@ -1,12 +1,12 @@
 .presence .page-content {
-    padding: 0 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 50px;
+  padding: 0 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
 }
 
 .presence {
-    position: relative;
+  position: relative;
 }

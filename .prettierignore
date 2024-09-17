@@ -1,1 +1,46 @@
-**/** 
+# Ignore artifacts:
+build
+coverage
+node_modules
+dist
+
+# Ignore all configuration files in the root directory
+# that aren't related to Prettier:
+*.toml
+*.yaml
+*.yml
+*.lock
+*.json
+!.prettierrc.json
+*.tsconfig.json
+
+# Ignore minified files:
+*.min.js
+*.min.css
+
+# Ignore bundled files:
+*.bundle.js
+*.bundle.css
+
+# Ignore generated files by IDEs or tools:
+.vscode
+.idea
+*.log
+.DS_Store
+
+# Ignore test coverage files:
+coverage
+*.snap
+
+# Ignore specific files/folders
+.env
+.env.local
+.env.*.local
+
+# Ignore generated assets:
+public/static
+
+# Ignore TypeScript build output
+*.js
+*.jsx
+*.d.ts

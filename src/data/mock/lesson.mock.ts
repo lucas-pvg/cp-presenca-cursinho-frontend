@@ -1,4 +1,4 @@
-import { Lesson } from "../models/lesson.model";
+import { Lesson } from '../models/lesson.model';
 
 export const lessonsMock = [
   new Lesson({
@@ -12,7 +12,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-10T08:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'abc123',
-    course: 'Curso de Exatas'
+    course: 'Curso de Exatas',
   }),
   new Lesson({
     id: 2,
@@ -25,7 +25,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-11T10:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'def456',
-    course: 'Curso de Ciências'
+    course: 'Curso de Ciências',
   }),
   new Lesson({
     id: 3,
@@ -38,7 +38,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-12T14:15:00'),
     isAttendanceRegistrable: false,
     passkey: 'ghi789',
-    course: 'Curso de Ciências'
+    course: 'Curso de Ciências',
   }),
   new Lesson({
     id: 4,
@@ -51,7 +51,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-13T09:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'jkl012',
-    course: 'Curso de Ciências da Vida'
+    course: 'Curso de Ciências da Vida',
   }),
   new Lesson({
     id: 5,
@@ -64,7 +64,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-14T11:15:00'),
     isAttendanceRegistrable: false,
     passkey: 'mno345',
-    course: 'Curso de Ciências Humanas'
+    course: 'Curso de Ciências Humanas',
   }),
   new Lesson({
     id: 6,
@@ -77,7 +77,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-15T13:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'pqr678',
-    course: 'Curso de Ciências Humanas'
+    course: 'Curso de Ciências Humanas',
   }),
   new Lesson({
     id: 7,
@@ -90,7 +90,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-16T15:15:00'),
     isAttendanceRegistrable: false,
     passkey: 'stu901',
-    course: 'Curso de Letras'
+    course: 'Curso de Letras',
   }),
   new Lesson({
     id: 8,
@@ -103,7 +103,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-17T17:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'vwx234',
-    course: 'Curso de Humanidades'
+    course: 'Curso de Humanidades',
   }),
   new Lesson({
     id: 9,
@@ -116,7 +116,7 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-18T08:15:00'),
     isAttendanceRegistrable: false,
     passkey: 'yzx567',
-    course: 'Curso de Ciências Sociais'
+    course: 'Curso de Ciências Sociais',
   }),
   new Lesson({
     id: 10,
@@ -129,6 +129,6 @@ export const lessonsMock = [
     endAttendance: new Date('2024-08-19T10:15:00'),
     isAttendanceRegistrable: true,
     passkey: 'abc890',
-    course: 'Curso de Artes'
-  })
+    course: 'Curso de Artes',
+  }),
 ];

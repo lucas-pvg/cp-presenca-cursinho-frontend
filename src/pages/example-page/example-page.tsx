@@ -8,7 +8,7 @@
 
 // export function examplePage({ className }: examplePageProps) {
 //     const classes = `${className ? className : ''}`
-    
+
 //     return (
 //         <div className={classes}>
 //             This is a Page!

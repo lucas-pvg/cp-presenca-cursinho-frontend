@@ -1,7 +1,7 @@
 .row-section {
   display: flex;
   flex-direction: column;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .row {
@@ -10,17 +10,17 @@
 }
 
 .item {
-  width: 40%; 
-  box-sizing: border-box; 
-  padding: 20px; 
+  width: 40%;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 .item h5 {
-  font-size: 16px; 
-  margin: 0 0 5px 0; 
+  font-size: 16px;
+  margin: 0 0 5px 0;
 }
 
 .item p {
-  font-size: 14px; 
+  font-size: 14px;
   width: 100%;
 }

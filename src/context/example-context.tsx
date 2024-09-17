@@ -5,7 +5,6 @@
 // export type ThemeContextType = "light" | "dark"
 // export const ThemeContext = createContext<ThemeContextType>("light")
 
-
 // THIS IS AN EXAMPLE OF CONTEXT WITH NO DEFAULT VALUE AND A CUSTOM HOOK FOR DEALING WITH NULL VALUES
 
 // import { createContext, useContext } from "react"

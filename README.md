@@ -2,22 +2,20 @@
 
 Este repositório contém o ambiente de desenvolvimento frontend da plataforma de controle de presença que está sendo desenvolvida em parceria com o Cursinho Popular da Poli USP. O projeto contém 2 instâncias, uma de uso interno do cursinho e outra para os alunos, sendo este repositório usado para hospedagem do front da instância usada pelo cursinho. Este projeto é, também, o Trabalho de Conclusão de Curso (TCC) de seus contribuidores para o curso de Engenharia de Computação da Escola Politécnica da USP no ano de 2024.
 
-
 ## Contribuidores
 
 - Lucas Pavan Garieri
 - Pedro Henrique Rodrigues de Viveiros
 - Victor de Almeida Santana
 
-
 ## Execução do Ambiente de Desenvolvimento Local
 
 A aplicação está sendo desenvolvida usando Vite + React. Para rodá-la localmente, clone este repositório e, na raiz da pasta `cp-presenca-cursinho-frontend`, execute os seguintes comandos:
+
 ```
 $ npm install
 $ npm run dev
 ```
-
 
 ## Versionamento e GitFlow
 
