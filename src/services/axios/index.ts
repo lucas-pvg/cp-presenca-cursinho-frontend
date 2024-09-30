@@ -6,13 +6,31 @@ const axios = Axios.create({
 });
 
 axios.interceptors.request.use(
-  (config: any) => ({
-    ...config,
-    headers: {
-      ...config.headers
+  (config: any) => {
+    const token = localStorage.getItem('access');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
-  }),
+    return config;
+  },
   (error: any) => Promise.reject(error)
+);
+
+axios.interceptors.response.use(
+  (response: any) => response,
+  async (error: any) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refreshToken = localStorage.getItem('refresh');
+      if (refreshToken) {
+        const response = await axios.post('token/refresh/', { refresh: refreshToken });
+        localStorage.setItem('access', response.data.access);
+        return axios(originalRequest);
+      }
+    }
+    return Promise.reject(error);
+  }
 );
 
 const get = async (url: string, config?: any) => {
