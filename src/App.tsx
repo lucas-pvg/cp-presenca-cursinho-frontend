@@ -1,6 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Navbar } from "./components/navbar/Navbar";
-import { Header } from "./components/header/header";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import { HomePage } from './pages/home-page/HomePage'
@@ -11,39 +9,35 @@ import { SubjectDetailPage } from "./pages/subject-detail-page/subject-detail-pa
 import { StudentClassPage } from "./pages/student-class-page/StudentClassPage";
 import { useState } from "react";
 import { LoginPage } from "./pages/login-page/LoginPage";
+import { ForgotPasswordPage } from "./pages/forgot-password-page/ForgotPasswordPage";
+import LoggedInLayout from "./layouts/logged-in/LoggedInLayout";
+import LoggedOutLayout from "./layouts/logged-out/LoggedOutLayout";
 
 function App() {
-	const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    isLoggedIn ? (
-      <div className="app-container">
-        <Navbar mode="light" />
-
-        <div className="page-container">
-          <Header to={location} />
-
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/lessons" element={<LessonsPage />} />
-            <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
-            <Route path="/subject" element={<SubjectPage />} />
-            <Route path="/subject/:subjectCode" element={<SubjectDetailPage />} />
-            
-            <Route path="/attendence" element={<h1 className='center'>Presença</h1>} />
-            <Route path="/teachers" element={<h1 className='center'>Professores</h1>} />
-            <Route path="/metrics" element={<h1 className='center'>Métricas</h1>} />
-            <Route path="/classes" element={<StudentClassPage />} />
-          </Routes>
-        </div>
-      </div>
-    ) : (
       <Routes>
-        <Route path="/forgot-password" element={<h1>Forgot Password</h1>} />
-        <Route path="/" element={<LoginPage onLogin={() => {setIsLoggedIn(true)}}/>} />
+        {isLoggedIn ? (
+          <Route path='/' element={<LoggedInLayout />} >
+            <Route path="" element={<HomePage />} />
+            <Route path="lessons" element={<LessonsPage />} />
+            <Route path="lessons/:lessonID" element={<LessonDetailPage />} />
+            <Route path="subject" element={<SubjectPage />} />
+            <Route path="subject/:subjectCode" element={<SubjectDetailPage />} />
+            
+            <Route path="attendence" element={<h1 className='center'>Presença</h1>} />
+            <Route path="teachers" element={<h1 className='center'>Professores</h1>} />
+            <Route path="metrics" element={<h1 className='center'>Métricas</h1>} />
+            <Route path="classes" element={<StudentClassPage />} />
+          </ Route>
+        ) : (
+          <Route path='/' element={<LoggedOutLayout />} >
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="" element={<LoginPage onLogin={() => {setIsLoggedIn(true)}}/>} />
+          </Route>
+        )}
       </Routes>
-    )
     );
 }
 
