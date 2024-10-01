@@ -16,7 +16,9 @@
     "eslint-plugin-react": "^7.36.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^5.2.1",
+    "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.23.1",
     "vite-plugin-svgr": "^4.2.0"
   },

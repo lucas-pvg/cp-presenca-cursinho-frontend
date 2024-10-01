@@ -15,6 +15,7 @@ import ArrowRightCircle from '../../assets/icons/style_guide/icon-arrow-right-ci
 import ArrowRight from '../../assets/icons/style_guide/icon-arrow-right.svg?react';
 import Book from '../../assets/icons/style_guide/icon-book.svg?react';
 import Calendar from '../../assets/icons/style_guide/icon-calendar.svg?react';
+import Check from '../../assets/icons/style_guide/icon-check.svg?react';
 import ChevronDown from '../../assets/icons/style_guide/icon-chevron-down.svg?react';
 import ChevronsDown from '../../assets/icons/style_guide/icon-chevrons-down.svg?react';
 import ChevronLeft from '../../assets/icons/style_guide/icon-chevron-left.svg?react';
@@ -26,12 +27,14 @@ import ChevronsUp from '../../assets/icons/style_guide/icon-chevrons-up.svg?reac
 import Clipboard from '../../assets/icons/style_guide/icon-clipboard.svg?react';
 import Clock from '../../assets/icons/style_guide/icon-clock.svg?react';
 import File from '../../assets/icons/style_guide/icon-file.svg?react';
+import Hash from '../../assets/icons/style_guide/icon-hash.svg?react';
 import Lock from '../../assets/icons/style_guide/icon-lock.svg?react';
 import Logout from '../../assets/icons/style_guide/icon-log-out.svg?react';
 import Trash from '../../assets/icons/style_guide/icon-trash.svg?react';
 import Search from '../../assets/icons/style_guide/icon-search.svg?react';
 import Settings from '../../assets/icons/style_guide/icon-settings.svg?react';
 import TrendingUp from '../../assets/icons/style_guide/icon-trending-up.svg?react';
+import UploadCloud from '../../assets/icons/style_guide/icon-upload-cloud.svg?react';
 import User from '../../assets/icons/style_guide/icon-user.svg?react';
 import Users from '../../assets/icons/style_guide/icon-users.svg?react';
 import X from '../../assets/icons/style_guide/icon-x.svg?react';
@@ -170,6 +173,13 @@ export const Icon = (props: IconProps) => {
           className={classes}
         />
       );
+    case 'check':
+      return (
+        <Check
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+        />
+      );
     case 'chevron-down':
       return (
         <ChevronDown
@@ -247,6 +257,13 @@ export const Icon = (props: IconProps) => {
           className={classes}
         />
       );
+    case 'hash':
+      return (
+        <Hash
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+        />
+      );
     case 'lock':
       return (
         <Lock
@@ -285,6 +302,13 @@ export const Icon = (props: IconProps) => {
     case 'trending-up':
       return (
         <TrendingUp
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+        />
+      );
+    case 'upload-cloud':
+      return (
+        <UploadCloud
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
         />
