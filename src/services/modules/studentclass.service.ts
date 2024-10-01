@@ -1,5 +1,5 @@
-import { studentClassMapper } from "../../data/mapper/studentclass.mapper";
-import { get } from "../axios"
+import { studentClassMapper } from '../../data/mapper/studentclass.mapper';
+import { get } from '../axios';
 
 export const StudentClassService = {
   async listStudentClasses(params?: unknown) {
@@ -10,5 +10,5 @@ export const StudentClassService = {
   async retrieveStudentClass(studentClassId: number) {
     const response = await get(`student-class/${studentClassId}`);
     return studentClassMapper(response);
-  }
-}
+  },
+};

@@ -1,8 +1,7 @@
-import { ComponentProps } from 'react'
-import { cva, VariantProps } from 'class-variance-authority'
-import { Link, To } from 'react-router-dom'
-import './Button.css'
-
+import { ComponentProps } from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
+import { Link, To } from 'react-router-dom';
+import './Button.css';
 
 const ButtonVariants = cva(
   'base-button',
@@ -45,8 +44,8 @@ export function Button({ to, variant, mode, fullWidth, ...props }: ButtonProps) 
       </Link>
     )
   }
-  
-  else return (    
+
+  else return (
     <button className={ButtonVariants({variant, mode, fullWidth})} {...props} />
   )
 }
