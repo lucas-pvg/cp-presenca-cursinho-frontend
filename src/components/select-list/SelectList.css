@@ -3,7 +3,7 @@
 }
 
 .content-body {
-  height: 300px;
+  height: auto;
   overflow: auto;
 }
 

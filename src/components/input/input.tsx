@@ -2,7 +2,6 @@ import { ComponentProps } from 'react';
 import { TextInput } from './text-input';
 import { DateInput } from './date-input';
 import { TimeInput } from './time-input';
-import { SelectInput } from './select-input';
 import { EmailInput } from './email-input';
 
 import './input.css';
@@ -19,8 +18,6 @@ export function Input({ mode, type, names, values, ...props }: inputProps) {
   switch (type) {
     case 'text':
       return <TextInput mode={mode} {...props} />;
-    case 'select':
-      return <SelectInput mode={mode} {...props} />;
     case 'date':
       return <DateInput mode={mode} {...props} />;
     case 'time':
