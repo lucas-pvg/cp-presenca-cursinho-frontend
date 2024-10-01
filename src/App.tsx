@@ -12,6 +12,7 @@ import { LoginPage } from './pages/login-page/LoginPage';
 import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
 import LoggedInLayout from './layouts/logged-in/LoggedInLayout';
 import LoggedOutLayout from './layouts/logged-out/LoggedOutLayout';
+import { UsersPage } from './pages/users-page/users-page';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,10 +31,7 @@ function App() {
             path="attendence"
             element={<h1 className="center">Presença</h1>}
           />
-          <Route
-            path="teachers"
-            element={<h1 className="center">Professores</h1>}
-          />
+          <Route path="users" element={<UsersPage />} />
           <Route
             path="metrics"
             element={<h1 className="center">Métricas</h1>}
