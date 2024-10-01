@@ -9,6 +9,10 @@
   flex-shrink: 0;
 
   transition: transform 0.2s ease-in-out;
+
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .base-card:hover {
