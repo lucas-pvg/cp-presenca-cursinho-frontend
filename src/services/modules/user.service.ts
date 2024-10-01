@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { userMapper, userBasicInfoMapper } from '../../data/mapper/user.mapper';
 import {
   UserServiceResponse,
@@ -28,8 +29,12 @@ const UserService = {
     return await post('user/', data);
   },
 
-  async registerMultipleUsers(data: unknown) {
-    return await post('register_multiple/', data);
+  async registerMultipleUsers(formData: FormData) {
+    return await post('register_multiple/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
 
   async retrieveBasicInfoById(id: string, params?: unknown) {

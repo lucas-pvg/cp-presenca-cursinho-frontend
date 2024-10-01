@@ -1,0 +1,33 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--outline-Base, #bbb);
+  border-radius: 4px;
+  padding: 20px 0;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.upload-icon {
+  color: var(--blue-base);
+}
+
+.caller-phrase {
+  color: var(--outline-Base, #bbb);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.or {
+  color: var(--outline-Base, #bbb);
+  font-family: Karla;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

@@ -9,6 +9,7 @@ import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
 import Services from '../../services';
 import { ManualRegister } from '../../components/modal/manual-register';
+import { BatchRegister } from '../../components/modal/batch-register/batch-register';
 
 const UsersPageVariants = cva('users page', {
   variants: {
@@ -120,6 +121,12 @@ export function UsersPage({ mode, ...props }: UsersPageProps) {
         className={isManualRegisterModalOpen ? 'modal-open' : 'modal-close'}
         mode={mode}
         onClose={() => setIsManualRegisterModalOpen(false)}
+      />
+
+      <BatchRegister
+        className={isBatchRegisterModalOpen ? 'modal-open' : 'modal-close'}
+        mode={mode}
+        onClose={() => setIsBatchRegisterModalOpen(false)}
       />
     </>
   );
