@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { userMapper, userBasicInfoMapper } from '../../data/mapper/user.mapper';
 import {
   UserServiceResponse,
