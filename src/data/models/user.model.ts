@@ -1,3 +1,10 @@
+export interface CreateUserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
 export interface User {
   id: number;
   firstName: string;

@@ -36,8 +36,8 @@ export function Navbar({ minimized, mode }: NavbarProps) {
 
         <LinkGroup
           mode={mode}
-          labels={['Aulas', 'Presença', 'Professores', 'Turmas', 'Métricas']}
-          paths={['/', '/attendence', '/teachers', '/classes', '/metrics']}
+          labels={['Aulas', 'Presença', 'Usuários', 'Turmas', 'Métricas']}
+          paths={['/', '/attendence', '/users', '/classes', '/metrics']}
           iconTypes={['book', 'calendar', 'user', 'users', 'trending-up']}
           iconSize={16}
         />
