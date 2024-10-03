@@ -2,16 +2,16 @@
   z-index: 1;
 }
 
-.content-body {
-  height: auto;
+.select-list .content-body {
+  height: 300px;
   overflow: auto;
 }
 
-.row-content {
+.select-list .row-content {
   display: flex;
   flex-direction: row;
 }
 
-.row-content input {
+.select-list .row-content input {
   margin-right: 1rem;
 }
