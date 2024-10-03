@@ -32,6 +32,11 @@ export interface SubjectServiceRequest {
   main_subject: string
 }
 
+export interface SubjectServiceRequest {
+  name: string,
+  main_subject: string
+}
+
 export class Subject implements SubjectInterface {
   id: number;
   name: string;

@@ -17,7 +17,6 @@ const modalWarningVariants = cva('modal-warning', {
 interface modalWarningProps extends VariantProps<typeof modalWarningVariants> {
   mode?: 'light' | 'dark'
   description: string
-
 }
 
 export function ModalWarning({ description, mode }: modalWarningProps) {
