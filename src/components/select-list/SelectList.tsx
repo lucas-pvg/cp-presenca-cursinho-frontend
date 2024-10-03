@@ -8,7 +8,7 @@ import './SelectList.css';
 
 
 const selectListVariants = cva(
-  'base-modal input-modal',
+  'base-modal input-modal select-list',
   {
     variants: {
       mode: {

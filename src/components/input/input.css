@@ -1,3 +1,10 @@
+.input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .input {
   width: 100%;
   padding: 10px 15px;
