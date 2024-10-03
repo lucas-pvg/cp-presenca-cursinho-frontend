@@ -41,11 +41,14 @@ import X from '../../assets/icons/style_guide/icon-x.svg?react';
 import XCircle from '../../assets/icons/style_guide/icon-x-circle.svg?react';
 
 import './icon.css';
+import { MouseEventHandler } from 'react';
 
 interface IconProps {
+  id?: string;
   className?: string;
   iconType: string;
   size?: number;
+  onClick?: MouseEventHandler;
 }
 
 export const Icon = (props: IconProps) => {
@@ -57,288 +60,370 @@ export const Icon = (props: IconProps) => {
     case 'activity':
       return (
         <Activity
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'airplay':
       return (
         <Airplay
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'alert-circle':
       return (
         <AlertCircle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'alert-octagon':
       return (
         <AlertOctagon
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'alert-triangle':
       return (
         <AlertTriangle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'align-center':
       return (
         <AlignCenter
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'align-justify':
       return (
         <AlignJustify
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-down-circle':
       return (
         <ArrowDownCircle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-down-left':
       return (
         <ArrowDownLeft
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-down-right':
       return (
         <ArrowDownRight
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-down':
       return (
         <ArrowDown
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-left-circle':
       return (
         <ArrowLeftCircle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-left':
       return (
         <ArrowLeft
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-right-circle':
       return (
         <ArrowRightCircle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'arrow-right':
       return (
         <ArrowRight
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'book':
       return (
         <Book
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'calendar':
       return (
         <Calendar
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'check':
       return (
         <Check
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevron-down':
       return (
         <ChevronDown
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevrons-down':
       return (
         <ChevronsDown
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevron-left':
       return (
         <ChevronLeft
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevrons-left':
       return (
         <ChevronsLeft
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevron-right':
       return (
         <ChevronRight
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevrons-right':
       return (
         <ChevronsRight
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevron-up':
       return (
         <ChevronUp
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'chevrons-up':
       return (
         <ChevronsUp
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'clipboard':
       return (
         <Clipboard
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'clock':
       return (
         <Clock
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'file':
       return (
         <File
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'hash':
       return (
         <Hash
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'lock':
       return (
         <Lock
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'logout':
       return (
         <Logout
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'trash':
       return (
         <Trash
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'search':
       return (
         <Search
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'settings':
       return (
         <Settings
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'trending-up':
       return (
         <TrendingUp
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'upload-cloud':
       return (
         <UploadCloud
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'user':
       return (
         <User
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'users':
       return (
         <Users
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'x':
       return (
         <X
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
     case 'x-circle':
       return (
         <XCircle
+          id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+          onClick={props.onClick}
         />
       );
   }
