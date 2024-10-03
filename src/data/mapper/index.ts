@@ -1,12 +1,13 @@
 import { lessonMapper, lessonRequestMapper } from './lesson.mapper';
-import { subjectMapper } from './subject.mapper';
+import { subjectMapper, subjectRequestMapper } from './subject.mapper';
 import { studentMapper } from './student.mapper';
 import { studentClassMapper } from './student-class.mapper';
 
-export { 
+export {
   lessonMapper,
   lessonRequestMapper,
   subjectMapper,
+  subjectRequestMapper,
   studentMapper,
-  studentClassMapper
+  studentClassMapper,
 };
