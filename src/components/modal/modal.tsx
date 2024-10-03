@@ -62,7 +62,7 @@ export function Modal({ mode, variant, close, className }: modalProps) {
           </div>
 
           <hr className='divider'/>
-          <ModalWarning mode={mode} />
+          <ModalWarning mode={mode} description='Aviso ou informação!' />
           <ModalFooter type='button' mode={mode} close={() => close()} />
         </div>
       </div>

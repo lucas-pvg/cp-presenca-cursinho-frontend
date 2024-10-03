@@ -19,13 +19,14 @@ const modalWarningVariants = cva(
 
 interface modalWarningProps extends VariantProps<typeof modalWarningVariants> {
   mode?: 'light' | 'dark'
+  description: string
 }
 
-export function ModalWarning({ mode }: modalWarningProps) {
+export function ModalWarning({ description, mode }: modalWarningProps) {
   return (
     <div className={modalWarningVariants({ mode })}>
-      <Icon className='modal-icon' iconType='alert-circle'/>
-      <p>Informação ou aviso</p>
+      <Icon size={12} className='modal-icon' iconType='alert-circle'/>
+      <p>{description}</p>
     </div>
   )
 }
