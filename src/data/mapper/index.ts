@@ -1,5 +1,11 @@
-import { lessonMapper, lessonRequestMapper } from './lesson.mapper';
-import { subjectMapper } from './subject.mapper';
-import { studentClassMapper } from './student-class.mapper';
+import { lessonMapper, lessonRequestMapper } from "./lesson.mapper";
+import { subjectMapper, subjectRequestMapper } from "./subject.mapper";
+import { studentClassMapper } from "./student-class.mapper";
 
-export { lessonMapper, lessonRequestMapper, subjectMapper, studentClassMapper };
+export {
+  lessonMapper,
+  lessonRequestMapper,
+  subjectMapper,
+  subjectRequestMapper,
+  studentClassMapper,
+}
