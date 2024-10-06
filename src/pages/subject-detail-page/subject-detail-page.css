@@ -41,10 +41,29 @@
   padding: 50px 30px;
   display: flex;
   flex-direction: column;
+  gap: 50px;
+}
+
+.subject-detail .schedule-forms {
+  display: flex;
+  flex-direction: column;
   gap: 30px;
 }
 
 .subject-detail .schedule-row {
   display: flex;
+  align-items: flex-end;
   gap: 20px;
+}
+
+.subject-detail .delete-icon {
+  color: var(--red-inverse);
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: 
+    transform .1s ease-in-out
+}
+
+.subject-detail .delete-icon:hover {
+  transform: scale(1.2);
 }
