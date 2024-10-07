@@ -30,7 +30,7 @@ export function NextLesson({ mode, lesson, ...props }: nextLessonProps) {
 
   return (
     <div className={nextLessonVariants({ mode })} onClick={() => nav(`/lessons/${lesson.id}`)} {...props}>
-      <h5>{ lesson.subject }</h5>
+      <h6>{ lesson.subject }</h6>
 
       <div className='next-lesson-info'>
         <p>{ lesson.startTimeFormat() }</p>
