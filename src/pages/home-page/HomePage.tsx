@@ -105,7 +105,9 @@ export function HomePage({ mode, ...props }: HomePageProps) {
               <div className='next-lesson-menu'>
                 {
                   studentClasses.map(cls => {
-                    const lesson = lessons.filter(lesson => lesson.studentClass === cls.name)[0]
+                    const lesson = lessons.filter(lesson => {
+                      return lesson.studentClass === cls.name && lesson.endTime > new Date()
+                    })[0]
                     if (lesson) return <NextLesson lesson={lesson} key={lesson.id} />
                   })
                 }
