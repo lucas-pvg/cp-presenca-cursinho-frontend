@@ -1,0 +1,33 @@
+.next-lesson {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+
+  background-color: var(--base-white);
+  padding: 15px 18px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 30px 0 var(--shadow-base);
+
+  transition:
+    transform .2s ease-in-out
+  ;
+}
+
+.next-lesson:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.next-lesson .next-lesson-info {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.next-lesson .next-lesson-class {
+  padding: 0px 5px;
+  border-radius: 5px;
+  background-color: var(--yellow-base);
+  font-size: 14px;
+}
