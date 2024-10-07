@@ -4,6 +4,10 @@ import { ModalHeader } from './modal-components/modal-header';
 import { ModalRow } from './modal-components/modal-row';
 import { ModalFooter } from './modal-components/modal-footer';
 import { Input } from '../input/input';
+import { SelectInput } from '../select-input/select-input';
+
+import { StudentClassRequest } from '../../data/models/student-class.model';
+import Services from '../../services';
 import './modal.css';
 
 const createStudentClassVariants = cva('base-modal input-modal', {
@@ -18,27 +22,20 @@ const createStudentClassVariants = cva('base-modal input-modal', {
   },
 });
 
-interface createClassProps
-  extends VariantProps<typeof createStudentClassVariants> {
-  className?: string;
+interface createClassProps extends VariantProps<typeof createStudentClassVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   close: () => void;
 }
 
-export function CreateStudentClass({
-  mode,
-  variant,
-  close,
-  className,
-}: createClassProps) {
-  const [studentClassData, setStudentClassData] = useState({
+export function CreateStudentClass({ mode, variant, close }: createClassProps) {
+  const [closingAnimation, setClosingAnimation] = useState(false)
+  const [studentClassData, setStudentClassData] = useState<StudentClassRequest>({
     name: '',
     modality: '',
     course: '',
     classroom: '',
-    startTime: '',
-    endTime: '',
+    subjects: [1, 3]
   });
 
   const handleChange = (e: any) => {
@@ -46,28 +43,31 @@ export function CreateStudentClass({
     setStudentClassData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    console.log(studentClassData)
+    Services.createStudentClass(studentClassData)
+      .then((res) => {
+        console.log(res);
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleClose = () => {
-    close();
-    setStudentClassData({
-      name: '',
-      modality: '',
-      course: '',
-      classroom: '',
-      startTime: '',
-      endTime: '',
-    });
+    setClosingAnimation(true)
+    setTimeout(() => close(), 200);
   };
 
   return (
-    <div className={className ? `modal ${className}` : 'modal'}>
+    <div className={closingAnimation ? 'modal modal-close' : 'modal modal-open'}>
       <div className="modal-background" onClick={() => handleClose()} />
 
       <div className={createStudentClassVariants({ mode })}>
         <ModalHeader
           title="Criar Turma"
-          description="Crie uma turma e selecione os alunos que fazem parte dela."
+          description="Crie uma turma para, posteriormente, selecionar os alunos que fazem parte dela."
           variant={variant}
           mode={mode}
         />
@@ -75,48 +75,42 @@ export function CreateStudentClass({
         <div className="modal-content">
           <div className="content-body">
             <form id="class-form" onSubmit={handleSubmit}>
-              <ModalRow labels={['Turma']} mode={mode}>
+              <ModalRow labels={['Nome da Turma', 'Modalidade']} mode={mode}>
                 <Input
                   type="text"
                   name="name"
                   value={studentClassData.name}
-                  placeholder="Turma"
+                  placeholder="Nome da turma"
                   mode={mode}
                   onChange={handleChange}
                 />
-              </ModalRow>
 
-              <ModalRow labels={['Modalidade', 'Curso']} mode={mode}>
-                <Input
-                  type="select"
+                <SelectInput
+                  placeholder="-- Modalidade --"
                   name="modality"
                   value={studentClassData.modality}
-                  placeholder="Selecione a modalidade"
-                  mode={mode}
                   onChange={handleChange}
-                />
-                <Input
-                  type="select"
-                  name="course"
-                  value={studentClassData.course}
-                  placeholder="Selecione o curso"
-                  mode={mode}
-                  onChange={handleChange}
-                />
+                >
+                  <option value='ON'>Online</option>
+                  <option value='IN'>Presencial</option>
+                </SelectInput>
               </ModalRow>
 
-              <ModalRow labels={['Sala', 'Horário']} mode={mode}>
+              <ModalRow labels={['Nome do Curso', 'Sala']} mode={mode}>
+                <Input
+                  type="text"
+                  name="course"
+                  value={studentClassData.course}
+                  placeholder="Nome do curso"
+                  mode={mode}
+                  onChange={handleChange}
+                />
+
                 <Input
                   type="text"
                   name="classroom"
                   value={studentClassData.classroom}
-                  mode={mode}
-                  onChange={handleChange}
-                />
-                <Input
-                  type="time"
-                  names={['startTime', 'endTime']}
-                  value={[studentClassData.startTime, studentClassData.endTime]}
+                  placeholder="Sala"
                   mode={mode}
                   onChange={handleChange}
                 />
@@ -125,11 +119,9 @@ export function CreateStudentClass({
           </div>
 
           <hr className="divider" />
-          {/* <ModalWarning mode={mode} /> */}
           <ModalFooter
-            type="submit"
-            form="class-form"
             mode={mode}
+            confirm={() => handleSubmit()}
             close={() => handleClose()}
           />
         </div>
