@@ -41,21 +41,21 @@
 }
 
 .alert-open {
-  animation: open .2s ease-in-out;
+  animation: alert-open .2s ease-in-out;
   display: flex;
 }
 
 .alert-close {
-  animation: close .2s ease-in-out;
+  animation: alert-close .2s ease-in-out;
   display: none;
 }
 
-@keyframes open {
+@keyframes alert-open {
   from {top: -20%;}
   to {top: 3%;}
 }
 
-@keyframes close {
+@keyframes alert-close {
   /* from {top: 3%; display: flex;}
   to {top: -20%; display: none;} */
   from {opacity: 100%; display: flex;}
