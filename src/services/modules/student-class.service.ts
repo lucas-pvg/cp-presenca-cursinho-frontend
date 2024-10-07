@@ -1,6 +1,6 @@
-import { get } from '../axios';
+import { get, post } from '../axios';
 import { studentClassMapper } from '../../data/mapper';
-import { StudentClassResponse } from '../../data/models/student-class.model';
+import { StudentClassRequest, StudentClassResponse } from '../../data/models/student-class.model';
 
 const StudentClassService = {
   async listStudentClasses(params?: unknown) {
@@ -15,6 +15,10 @@ const StudentClassService = {
   async retrieveStudentClass(studentClassId: number) {
     const response = await get(`subject/${studentClassId}/`);
     return studentClassMapper(response);
+  },
+
+  async createStudentClass(studentClass: StudentClassRequest, params?: unknown) {
+    return await post('student_class/', studentClass, params);
   },
 };
 
