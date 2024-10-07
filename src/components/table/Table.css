@@ -25,6 +25,11 @@
     text-align: start;
     padding: 12px 20px;
   }
+
+  th:nth-of-type(n+2) {
+    width: 20%;
+    white-space: nowrap;
+  }
 }
 
 .table-header.light {
@@ -48,6 +53,11 @@
     font-weight: 400;
     text-align: start;
     padding: 12px 20px;
+  }
+
+  td:nth-of-type(n+2) {
+    width: 20%;
+    white-space: nowrap;
   }
 }
 

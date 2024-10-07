@@ -25,7 +25,7 @@
   align-items: stretch;
   justify-content: flex-start;
   padding-bottom: 50px;
-  gap: 100px;
+  gap: 85px;
   position: relative;
 
   overflow: scroll;
@@ -41,7 +41,7 @@
   padding: 0 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
 }
