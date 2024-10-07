@@ -23,23 +23,25 @@ const TableVariants = cva("base-table", {
 
 interface TableProps
 	extends ComponentProps<"table">, VariantProps<typeof TableVariants> {
-    variant?: 'base' | 'attendance'
+    	variant?: 'base' | 'attendance'
 		mode?: "light" | "dark";
 		clickable?: boolean;
 		header: Array<string>;
+		itemsPerPage?: number
 		onClick?: () => void;
 }
 
-export function Table({ mode, variant, clickable, header, onClick, ...props }: TableProps) {
+export function Table({ mode, variant, clickable, header, itemsPerPage, onClick, ...props }: TableProps) {
 	const [ page, setPage ] = useState(1);
-	const maxPage = Math.ceil(Children.count(props.children) / 10);
+	const items = itemsPerPage ? itemsPerPage : 10
+	const maxPage = Math.ceil(Children.count(props.children) / items);
 
 	return (
 		<table className={TableVariants({ mode, variant })} {...props}>
 			<TableHeader mode={mode} clickable={clickable} headers={header} />
 
 			<tbody>
-				{ Children.toArray(props.children).slice((page - 1) * 10, page * 10) }
+				{ Children.toArray(props.children).slice((page - 1) * items, page * items) }
 			</tbody>
 
 			<TableFooter
