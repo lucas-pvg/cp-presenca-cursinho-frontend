@@ -1,6 +1,28 @@
 .home .content {
+  width: 80%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 25px;
+  align-items: stretch;
+  gap: 35px;
+}
+
+.home .next-lesson-container,
+.home .today-lesson-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* padding: 0 30px; */
+}
+
+.home .next-lesson-menu {
+  /* max-width: 70%; */
+  margin: -50px;
+  padding: 50px;
+  overflow-x: auto;
+  display: flex;
+  gap: 20px;
+}
+
+.home .next-lesson-menu::-webkit-scrollbar {
+  display: none;
 }
