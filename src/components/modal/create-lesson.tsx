@@ -83,8 +83,8 @@ export function CreateLesson({ mode, variant, close, className }: createLessonPr
     close();
     setLessonData({
       name: '',
-      subject: 'default',
-      studentClass: 'default',
+      subject: '',
+      studentClass: '',
       date: '',
       startTime: '',
       endTime: '',
