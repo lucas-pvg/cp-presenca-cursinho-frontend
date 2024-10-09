@@ -38,6 +38,7 @@
 }
 
 .page .page-content {
+  height: 100%;
   padding: 0 60px;
   display: flex;
   flex-direction: column;
