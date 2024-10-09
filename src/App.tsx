@@ -17,6 +17,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
+import './App.css';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -40,10 +42,7 @@ function App() {
               path="/students"
               element={<h1 className="center">Alunos</h1>}
             />
-            <Route
-              path="/users"
-              element={<h1 className="center">Usuários</h1>}
-            />
+            <Route path="/users" element={<UsersPage />} />
             <Route
               path="/metrics"
               element={<h1 className="center">Métricas</h1>}
