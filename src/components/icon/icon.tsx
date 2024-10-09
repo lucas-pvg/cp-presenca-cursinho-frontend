@@ -25,6 +25,7 @@ import ChevronUp from "../../assets/icons/style_guide/icon-chevron-up.svg?react"
 import ChevronsUp from "../../assets/icons/style_guide/icon-chevrons-up.svg?react";
 import Clipboard from "../../assets/icons/style_guide/icon-clipboard.svg?react";
 import Clock from "../../assets/icons/style_guide/icon-clock.svg?react";
+import Coffee from "../../assets/icons/style_guide/icon-coffee.svg?react";
 import File from "../../assets/icons/style_guide/icon-file.svg?react";
 import Lock from "../../assets/icons/style_guide/icon-lock.svg?react";
 import Logout from "../../assets/icons/style_guide/icon-log-out.svg?react";
@@ -37,8 +38,8 @@ import Users from "../../assets/icons/style_guide/icon-users.svg?react";
 import X from "../../assets/icons/style_guide/icon-x.svg?react";
 import XCircle from "../../assets/icons/style_guide/icon-x-circle.svg?react";
 
-import './icon.css'
 import { MouseEventHandler } from "react";
+import './icon.css'
 
 interface IconProps {
   id?: string
@@ -79,6 +80,7 @@ export const Icon = (props: IconProps) => {
     case "chevrons-up" : return <ChevronsUp id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
     case "clipboard" : return <Clipboard id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
     case "clock" : return <Clock id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
+    case "coffee" : return <Coffee id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
     case "file" : return <File id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
     case "lock" : return <Lock id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
     case "logout" : return <Logout id={props.id} style={{ width: props.size || '24px', height: props.size || '24px' }} className={classes} onClick={props.onClick} />;
