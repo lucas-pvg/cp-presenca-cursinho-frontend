@@ -8,7 +8,7 @@ import { LessonsPage } from './pages/lessons-page/lessons-page';
 import { LessonDetailPage } from './pages/lesson-detail-page/lesson-detail-page';
 import { SubjectPage } from './pages/subject-page/subject-page';
 import { SubjectDetailPage } from './pages/subject-detail-page/subject-detail-page';
-import { StudentClassPage } from './pages/student-class-page/StudentClassPage';
+import { StudentClassPage } from './pages/student-class-page/student-class-page';
 
 function App() {
   const location = useLocation();
