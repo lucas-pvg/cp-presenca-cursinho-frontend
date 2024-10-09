@@ -52,4 +52,15 @@ export class StudentClass implements StudentClassInterface {
         return 'Modalidade não listada'
     }
   }
+
+  toDict(): StudentClassInterface {
+    return ({
+      id: this.id,
+      name: this.name,
+      classroom: this.classroom,
+      course: this.course,
+      modality: this.modality,
+      subjects: this.subjects
+    })
+  }
 }
