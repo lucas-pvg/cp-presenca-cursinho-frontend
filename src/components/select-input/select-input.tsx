@@ -31,7 +31,7 @@ export function SelectInput({ mode, placeholder, label, ...props }: selectInputP
 
       <div className={selectInputVariants({ mode })}>
         <select {...props}>
-          { placeholder && <option disabled value='default'>{placeholder}</option> }
+          { placeholder && <option disabled value=''>{placeholder}</option> }
           { props.children }
         </select>
         <Icon className='input-icon' iconType='chevron-down' size={16} />
