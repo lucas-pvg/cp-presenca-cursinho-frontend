@@ -24,6 +24,7 @@ import ChevronsRight from '../../assets/icons/style_guide/icon-chevrons-right.sv
 import ChevronUp from '../../assets/icons/style_guide/icon-chevron-up.svg?react';
 import ChevronsUp from '../../assets/icons/style_guide/icon-chevrons-up.svg?react';
 import Clock from '../../assets/icons/style_guide/icon-clock.svg?react';
+import Coffee from "../../assets/icons/style_guide/icon-coffee.svg?react";
 import File from '../../assets/icons/style_guide/icon-file.svg?react';
 import Logout from '../../assets/icons/style_guide/icon-log-out.svg?react';
 import Trash from '../../assets/icons/style_guide/icon-trash.svg?react';
@@ -206,6 +207,11 @@ export const ClickableIcon = (props: ClickableIconProps) => {
           <Clock className={classes} />
         </Link>
       );
+    case "coffee": return (
+      <Link className="clickable-icon-container" to={props.to}>
+        <Coffee className={classes} />;
+      </Link>
+    );
     case 'file':
       return (
         <Link className="clickable-icon-container" to={props.to}>
