@@ -16,7 +16,6 @@ import ArrowRight from '../../assets/icons/style_guide/icon-arrow-right.svg?reac
 import AtSign from '../../assets/icons/style_guide/icon-at-sign.svg?react';
 import Book from '../../assets/icons/style_guide/icon-book.svg?react';
 import Calendar from '../../assets/icons/style_guide/icon-calendar.svg?react';
-import Check from '../../assets/icons/style_guide/icon-check.svg?react';
 import ChevronDown from '../../assets/icons/style_guide/icon-chevron-down.svg?react';
 import ChevronsDown from '../../assets/icons/style_guide/icon-chevrons-down.svg?react';
 import ChevronLeft from '../../assets/icons/style_guide/icon-chevron-left.svg?react';
@@ -25,8 +24,10 @@ import ChevronRight from '../../assets/icons/style_guide/icon-chevron-right.svg?
 import ChevronsRight from '../../assets/icons/style_guide/icon-chevrons-right.svg?react';
 import ChevronUp from '../../assets/icons/style_guide/icon-chevron-up.svg?react';
 import ChevronsUp from '../../assets/icons/style_guide/icon-chevrons-up.svg?react';
+import Check from '../../assets/icons/style_guide/icon-check.svg?react';
 import Clipboard from '../../assets/icons/style_guide/icon-clipboard.svg?react';
 import Clock from '../../assets/icons/style_guide/icon-clock.svg?react';
+import Coffee from '../../assets/icons/style_guide/icon-coffee.svg?react';
 import File from '../../assets/icons/style_guide/icon-file.svg?react';
 import Hash from '../../assets/icons/style_guide/icon-hash.svg?react';
 import Lock from '../../assets/icons/style_guide/icon-lock.svg?react';
@@ -41,8 +42,8 @@ import Users from '../../assets/icons/style_guide/icon-users.svg?react';
 import X from '../../assets/icons/style_guide/icon-x.svg?react';
 import XCircle from '../../assets/icons/style_guide/icon-x-circle.svg?react';
 
-import './icon.css';
 import { MouseEventHandler } from 'react';
+import './icon.css';
 
 interface IconProps {
   id?: string;
@@ -313,6 +314,15 @@ export const Icon = (props: IconProps) => {
     case 'clock':
       return (
         <Clock
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
+        />
+      );
+    case 'coffee':
+      return (
+        <Coffee
           id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
