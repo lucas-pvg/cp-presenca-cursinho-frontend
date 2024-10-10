@@ -1,0 +1,30 @@
+h1 {
+  font-size: 48px;
+  color: var(--text-base);
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 40px 10px 40px;
+  width: 100%;
+}
+
+.submit-button {
+  padding-top: 1rem;
+}
+
+.forgot-password {
+  font-style: italic;
+  font-size: var(--text-small);
+  color: var(--blue-base);
+}
+
+.forgot-password:hover {
+  color: var(--blue-inverse);
+}
