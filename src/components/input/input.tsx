@@ -2,7 +2,6 @@ import { ComponentProps } from 'react';
 import { TextInput } from './text-input';
 import { DateInput } from './date-input';
 import { TimeInput } from './time-input';
-import { SelectInput } from './select-input';
 import { EmailInput } from './email-input';
 
 import './input.css';
@@ -13,21 +12,28 @@ interface inputProps extends ComponentProps<'input'> {
   type: 'text' | 'date' | 'time' | 'select' | 'email' | 'password';
   names?: Array<string>;
   values?: Array<string>;
+  label?: string;
 }
 
-export function Input({ mode, type, names, values, ...props }: inputProps) {
-  switch (type) {
-    case 'text':
-      return <TextInput mode={mode} {...props} />;
-    case 'select':
-      return <SelectInput mode={mode} {...props} />;
-    case 'date':
-      return <DateInput mode={mode} {...props} />;
-    case 'time':
-      return <TimeInput names={names} values={values} mode={mode} {...props} />;
-    case 'email':
-      return <EmailInput mode={mode} {...props} />;
-    case 'password':
-      return <PasswordInput mode={mode} {...props} />;
-  }
+export function Input({
+  mode,
+  type,
+  names,
+  values,
+  label,
+  ...props
+}: inputProps) {
+  return (
+    <div className="input-container">
+      {label && <h5>{label}</h5>}
+
+      {type == 'text' && <TextInput mode={mode} {...props} />}
+      {type == 'date' && <DateInput mode={mode} {...props} />}
+      {type == 'time' && (
+        <TimeInput names={names} values={values} mode={mode} {...props} />
+      )}
+      {type == 'email' && <EmailInput mode={mode} {...props} />}
+      {type == 'password' && <PasswordInput mode={mode} {...props} />}
+    </div>
+  );
 }
