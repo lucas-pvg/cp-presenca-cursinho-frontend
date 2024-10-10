@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Icon } from '../../icon/icon';
 import Services from '../../../services';
 import { Oval } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 const BatchRegisterVariants = cva('base-modal input-modal', {
   variants: {
@@ -63,6 +64,10 @@ export function BatchRegister({
           lines: response.total_lines,
           success: response.successful_count,
           errors: response.failed_count,
+        });
+
+        response.errors.map((error: any) => {
+          toast.error(`Erro ao cadastrar usuário da linha ${error.line}`);
         });
       })
       .catch((error) => console.log(error))

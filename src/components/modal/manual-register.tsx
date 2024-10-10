@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { CreateUserData } from '../../data/models/user.model';
 import { ModalFooter } from './modal-components/modal-footer';
 import { SelectInput } from '../select-input/select-input';
+import { toast } from 'react-toastify';
 
 // TODO: passar para o backend
 const userRoles = [
@@ -43,8 +44,8 @@ export function ManualRegister({
   className,
 }: ManualRegisterProps) {
   const [userData, setUserData] = useState<CreateUserData>({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     role: '',
   });
@@ -58,18 +59,19 @@ export function ManualRegister({
     e.preventDefault();
     Services.registerUser(userData as CreateUserData)
       .then(() => {
+        toast.success('Usuário cadastrado com sucesso!');
         onClose();
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(`Erro: ${error}`);
       });
   };
 
   const handleClose = () => {
     onClose();
     setUserData({
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       role: '',
     });
@@ -93,8 +95,8 @@ export function ManualRegister({
                 <Input
                   required
                   type="text"
-                  name="firstName"
-                  value={userData.firstName}
+                  name="first_name"
+                  value={userData.first_name}
                   placeholder="Nome"
                   mode={mode}
                   onChange={handleChange}
@@ -102,8 +104,8 @@ export function ManualRegister({
                 <Input
                   required
                   type="text"
-                  name="lastName"
-                  value={userData.lastName}
+                  name="last_name"
+                  value={userData.last_name}
                   placeholder="Sobrenome"
                   mode={mode}
                   onChange={handleChange}
