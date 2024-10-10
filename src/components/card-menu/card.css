@@ -8,7 +8,10 @@
   justify-content: center;
   flex-shrink: 0;
 
-  transition: transform 0.2s ease-in-out;
+  transition: 
+    transform .2s ease-in-out,
+    color .2s ease-in-out,
+    background-color .2s ease-in-out;
 }
 
 .base-card:hover {
@@ -17,25 +20,25 @@
 
 .base-card.secondary.light {
   color: var(--base-black);
-  background: var(--base-white);
+  background-color: var(--base-white);
   box-shadow: 4px 4px 30px 0 var(--shadow-base);
 }
 
 .base-card.secondary.dark {
   color: var(--base-white);
-  background: var(--base-gray);
+  background-color: var(--base-gray);
   box-shadow: 4px 4px 30px 0 var(--shadow-inverse);
 }
 
 .base-card.primary.light {
   color: var(--base-white);
-  background: var(--blue-base);
+  background-color: var(--blue-base);
   box-shadow: 4px 4px 30px 0 var(--shadow-base);
 }
 
 .base-card.primary.dark {
   color: var(--base-white);
-  background: var(--blue-inverse);
+  background-color: var(--blue-inverse);
   box-shadow: 4px 4px 30px 0 var(--shadow-inverse);
 }
 

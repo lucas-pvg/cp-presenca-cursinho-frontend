@@ -39,11 +39,14 @@ import X from '../../assets/icons/style_guide/icon-x.svg?react';
 import XCircle from '../../assets/icons/style_guide/icon-x-circle.svg?react';
 
 import './icon.css';
+import { MouseEventHandler } from 'react';
 
 interface IconProps {
+  id?: string;
   className?: string;
   iconType: string;
   size?: number;
+  onClick?: MouseEventHandler;
 }
 
 export const Icon = (props: IconProps) => {

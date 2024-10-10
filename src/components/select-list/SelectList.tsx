@@ -5,13 +5,15 @@ import { ModalHeader } from '../modal/modal-components/modal-header';
 import { ModalRow } from '../modal/modal-components/modal-row';
 import './SelectList.css';
 
-const selectListVariants = cva('base-modal input-modal', {
-  variants: {
-    mode: {
-      light: 'light',
-      dark: 'dark',
+const selectListVariants = cva(
+  'base-modal input-modal select-list',
+  {
+    variants: {
+      mode: {
+        light: 'light',
+        dark: 'dark'
+      }
     },
-  },
   defaultVariants: {
     mode: 'light',
   },

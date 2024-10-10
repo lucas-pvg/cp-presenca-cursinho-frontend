@@ -11,15 +11,25 @@ export const MainSubject = [
 ];
 
 export interface SubjectInterface {
-  id: number;
-  name: string;
-  mainSubject: string;
+	id: number,
+	name: string,
+	mainSubject: string
+}
+
+export interface SubjectCreateData {
+  name: string,
+  mainSubject: string
 }
 
 export interface SubjectServiceResponse {
   id: number;
   name: string;
   main_subject: string;
+}
+
+export interface SubjectServiceRequest {
+  name: string,
+  main_subject: string
 }
 
 export class Subject implements SubjectInterface {

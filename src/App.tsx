@@ -13,6 +13,7 @@ import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordP
 import { LoginPage } from './pages/login-page/LoginPage';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import { StudentClassPage } from './pages/student-class-page/student-class-page';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +41,7 @@ function App() {
               path="metrics"
               element={<h1 className="center">Métricas</h1>}
             />
+            <Route path="classes" element={<StudentClassPage />} />
           </Route>
         ) : (
           <Route path="/" element={<LoggedOutLayout />}>
