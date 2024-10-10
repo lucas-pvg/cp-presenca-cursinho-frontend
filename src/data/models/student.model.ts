@@ -1,11 +1,17 @@
-import { StudentClass } from './student-class.model';
-
-export interface Student {
-  name: string;
-  course_class: StudentClass;
+export interface StudentInterface {
+  id: number
+  name: string
+  courseClass: number
+  isPresent: boolean
 }
 
-export interface StudentSelect {
-  name: string;
-  id: number;
+export interface StudentResponse {
+  id: number
+  full_name: string
+  student_class: number
 }
+
+// export interface StudentSelect {
+//   name: string;
+//   id: number;
+// }

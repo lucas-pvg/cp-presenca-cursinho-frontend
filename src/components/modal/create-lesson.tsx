@@ -31,12 +31,7 @@ interface createLessonProps extends VariantProps<typeof createLessonVariants> {
   close: () => void;
 }
 
-export function CreateLesson({
-  mode,
-  variant,
-  close,
-  className,
-}: createLessonProps) {
+export function CreateLesson({ mode, variant, close, className }: createLessonProps) {
   const [subjects, setSubjects] = useState(Array<Subject>);
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [lessonData, setLessonData] = useState<LessonCreateData>({
@@ -74,7 +69,6 @@ export function CreateLesson({
   };
 
   const handleSubmit = () => {
-    console.log('entrou no submit');
     Services.createLesson(lessonData)
       .then((res) => {
         console.log(res);
@@ -89,8 +83,8 @@ export function CreateLesson({
     close();
     setLessonData({
       name: '',
-      subject: 'default',
-      studentClass: 'default',
+      subject: '',
+      studentClass: '',
       date: '',
       startTime: '',
       endTime: '',

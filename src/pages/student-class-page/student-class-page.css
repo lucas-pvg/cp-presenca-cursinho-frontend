@@ -1,0 +1,33 @@
+.student-class .content {
+  width: 80%;
+  display: grid;
+  grid-template-rows: 45px 2fr 3fr;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: 
+    "header header"
+    "info table"
+    ". table"
+  ;
+  gap: 40px;
+}
+
+.student-class .classes-header {
+  grid-area: header;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.student-class .classes-info {
+  grid-area: info;
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  gap: 20px;
+}
+
+.student-class .classes-table {
+  grid-area: table;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

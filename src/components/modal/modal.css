@@ -15,6 +15,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .modal-open {
@@ -174,13 +175,8 @@
   color: var(--base-white);
 }
 
-.modal-warning .modal-icon {
-  height: 12px;
-  width: 12px;
-}
-
 .modal-footer {
-  padding: 10px 0;
+  padding: 20px 0 10px;
   display: flex;
   align-items: center;
   gap: 20px;
