@@ -16,27 +16,34 @@ const selectInputVariants = cva('select-input', {
 });
 
 interface selectInputProps
-  extends ComponentProps<'select'>, VariantProps<typeof selectInputVariants> {
-    mode?: 'light' | 'dark'
-    placeholder?: string
-    label?: string
+  extends ComponentProps<'select'>,
+    VariantProps<typeof selectInputVariants> {
+  mode?: 'light' | 'dark';
+  placeholder?: string;
+  label?: string;
 }
 
-export function SelectInput({ mode, placeholder, label, ...props }: selectInputProps) {
+export function SelectInput({
+  mode,
+  placeholder,
+  label,
+  ...props
+}: selectInputProps) {
   return (
-    <div className='input-container'>
-      {
-        label && <h5>{label}</h5>
-      }
+    <div className="input-container">
+      {label && <h5>{label}</h5>}
 
       <div className={selectInputVariants({ mode })}>
         <select {...props}>
-          { placeholder && <option disabled value=''>{placeholder}</option> }
-          { props.children }
+          {placeholder && (
+            <option disabled value="">
+              {placeholder}
+            </option>
+          )}
+          {props.children}
         </select>
-        <Icon className='input-icon' iconType='chevron-down' size={16} />
+        <Icon className="input-icon" iconType="chevron-down" size={16} />
       </div>
     </div>
-    
-  )
+  );
 }

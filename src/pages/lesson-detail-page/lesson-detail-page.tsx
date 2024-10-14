@@ -46,6 +46,9 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   const [ alert, setAlert ] = useState<boolean>(false)
   const [ isAnimationEnded, setIsAnimationEnded ] = useState(true)
 
+  const [alert, setAlert] = useState<boolean>(false);
+  const [isAnimationEnded, setIsAnimationEnded] = useState(true);
+
   useEffect(() => {
     lessonID &&
     Services.retrieveLesson(parseInt(lessonID))
@@ -104,6 +107,21 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       return student_data
     })
   }
+
+  const changeAttendance = (e: any) => {
+    console.log('PRESSED');
+    const { id } = e.target;
+    console.log(id);
+
+    setStudents((prev_students) => {
+      const student_data = [...prev_students];
+      const i = student_data.findIndex((student) => student.id == id);
+      student_data[i].isPresent = !student_data[i].isPresent;
+      console.log(student_data[i].isPresent);
+
+      return student_data;
+    });
+  };
 
   return (
     <>

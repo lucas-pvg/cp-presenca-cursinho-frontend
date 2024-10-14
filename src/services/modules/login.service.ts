@@ -17,6 +17,10 @@ const LoginService = {
   async forgotPassword(data: ForgotPasswordData) {
     return await post('forgot_password/', data);
   },
+
+  async logout(data: RefreshTokenData) {
+    return await post('token/blacklist/', data);
+  },
 };
 
 export default LoginService;
