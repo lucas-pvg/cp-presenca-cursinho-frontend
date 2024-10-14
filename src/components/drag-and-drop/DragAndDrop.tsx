@@ -2,6 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import { Icon } from '../icon/icon';
 import './DragAndDrop.css';
+import { toast } from 'react-toastify';
 
 const DragAndDropVariants = cva('base-modal input-modal', {
   variants: {
@@ -34,6 +35,9 @@ export function DragAndDrop({
     ...dropzoneProps,
     onDrop: (acceptedFiles) => {
       onFileDrop(acceptedFiles);
+    },
+    onDropRejected: () => {
+      toast.error('Somente um arquivo pode ser enviado!');
     },
   });
 
