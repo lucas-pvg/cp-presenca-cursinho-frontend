@@ -20,6 +20,7 @@ interface selectInputProps
     VariantProps<typeof selectInputVariants> {
   mode?: 'light' | 'dark';
   placeholder?: string;
+  label?: string;
 }
 
 export function SelectInput({
@@ -29,16 +30,20 @@ export function SelectInput({
   ...props
 }: selectInputProps) {
   return (
-    <div className={selectInputVariants({ mode })}>
-      <select {...props}>
-        {placeholder && (
-          <option disabled value="default">
-            {placeholder}
-          </option>
-        )}
-        {props.children}
-      </select>
-      <Icon className="input-icon" iconType="chevron-down" size={16} />
+    <div className="input-container">
+      {label && <h5>{label}</h5>}
+
+      <div className={selectInputVariants({ mode })}>
+        <select {...props}>
+          {placeholder && (
+            <option disabled value="">
+              {placeholder}
+            </option>
+          )}
+          {props.children}
+        </select>
+        <Icon className="input-icon" iconType="chevron-down" size={16} />
+      </div>
     </div>
   );
 }

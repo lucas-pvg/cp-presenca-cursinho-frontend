@@ -7,12 +7,15 @@ import { LessonsPage } from './pages/lessons-page/lessons-page';
 import { LessonDetailPage } from './pages/lesson-detail-page/lesson-detail-page';
 import { SubjectPage } from './pages/subject-page/subject-page';
 import { SubjectDetailPage } from './pages/subject-detail-page/subject-detail-page';
-import { StudentClassPage } from './pages/student-class-page/StudentClassPage';
 import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
 import { LoginPage } from './pages/login-page/LoginPage';
 import { useState } from 'react';
 import { UsersPage } from './pages/users-page/users-page';
 import { ToastContainer } from 'react-toastify';
+import { StudentClassPage } from './pages/student-class-page/student-class-page';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';

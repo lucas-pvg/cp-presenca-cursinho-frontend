@@ -31,12 +31,7 @@ interface createLessonProps extends VariantProps<typeof createLessonVariants> {
   close: () => void;
 }
 
-export function CreateLesson({
-  mode,
-  variant,
-  close,
-  className,
-}: createLessonProps) {
+export function CreateLesson({ mode, variant, close, className }: createLessonProps) {
   const [subjects, setSubjects] = useState(Array<Subject>);
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [lessonData, setLessonData] = useState<LessonCreateData>({

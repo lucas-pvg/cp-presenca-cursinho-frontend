@@ -203,6 +203,15 @@ export const Icon = (props: IconProps) => {
           onClick={props.onClick}
         />
       );
+    case 'at-sign':
+      return (
+        <AtSign
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
+        />
+      );
     case 'book':
       return (
         <Book
@@ -314,6 +323,15 @@ export const Icon = (props: IconProps) => {
     case 'clock':
       return (
         <Clock
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
+        />
+      );
+    case 'coffee':
+      return (
+        <Coffee
           id={props.id}
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
