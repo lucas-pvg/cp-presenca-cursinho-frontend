@@ -31,23 +31,23 @@ function App() {
       <Routes>
         {isLoggedIn ? (
           <Route path="/" element={<LoggedInLayout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/lessons" element={<LessonsPage />} />
-            <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
-            <Route path="/subject" element={<SubjectPage />} />
+            <Route index element={<HomePage />} />
+            <Route path="lessons" element={<LessonsPage />} />
+            <Route path="lessons/:lessonID" element={<LessonDetailPage />} />
+            <Route path="subject" element={<SubjectPage />} />
             <Route
-              path="/subject/:subjectCode"
+              path="subject/:subjectCode"
               element={<SubjectDetailPage />}
             />
-            <Route path="/classes" element={<StudentClassPage />} />
+            <Route path="classes" element={<StudentClassPage />} />
 
             <Route
-              path="/students"
+              path="students"
               element={<h1 className="center">Alunos</h1>}
             />
-            <Route path="/users" element={<UsersPage />} />
+            <Route path="users" element={<UsersPage />} />
             <Route
-              path="/metrics"
+              path="metrics"
               element={<h1 className="center">Métricas</h1>}
             />
           </Route>
@@ -55,7 +55,7 @@ function App() {
           <Route path="/" element={<LoggedOutLayout />}>
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route
-              path=""
+              index
               element={
                 <LoginPage
                   onLogin={() => {
