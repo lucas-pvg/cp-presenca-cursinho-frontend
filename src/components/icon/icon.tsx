@@ -13,6 +13,7 @@ import ArrowLeftCircle from '../../assets/icons/style_guide/icon-arrow-left-circ
 import ArrowLeft from '../../assets/icons/style_guide/icon-arrow-left.svg?react';
 import ArrowRightCircle from '../../assets/icons/style_guide/icon-arrow-right-circle.svg?react';
 import ArrowRight from '../../assets/icons/style_guide/icon-arrow-right.svg?react';
+import AtSign from '../../assets/icons/style_guide/icon-at-sign.svg?react';
 import Book from '../../assets/icons/style_guide/icon-book.svg?react';
 import Calendar from '../../assets/icons/style_guide/icon-calendar.svg?react';
 import Check from '../../assets/icons/style_guide/icon-check.svg?react';
@@ -26,6 +27,7 @@ import ChevronUp from '../../assets/icons/style_guide/icon-chevron-up.svg?react'
 import ChevronsUp from '../../assets/icons/style_guide/icon-chevrons-up.svg?react';
 import Clipboard from '../../assets/icons/style_guide/icon-clipboard.svg?react';
 import Clock from '../../assets/icons/style_guide/icon-clock.svg?react';
+import Coffee from '../../assets/icons/style_guide/icon-coffee.svg?react';
 import File from '../../assets/icons/style_guide/icon-file.svg?react';
 import Hash from '../../assets/icons/style_guide/icon-hash.svg?react';
 import Lock from '../../assets/icons/style_guide/icon-lock.svg?react';
@@ -40,8 +42,8 @@ import Users from '../../assets/icons/style_guide/icon-users.svg?react';
 import X from '../../assets/icons/style_guide/icon-x.svg?react';
 import XCircle from '../../assets/icons/style_guide/icon-x-circle.svg?react';
 
-import './icon.css';
 import { MouseEventHandler } from 'react';
+import './icon.css';
 
 interface IconProps {
   id?: string;
@@ -162,6 +164,15 @@ export const Icon = (props: IconProps) => {
           className={classes}
         />
       );
+    case 'at-sign':
+      return (
+        <AtSign
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
+        />
+      );
     case 'book':
       return (
         <Book
@@ -251,6 +262,15 @@ export const Icon = (props: IconProps) => {
         <Clock
           style={{ width: props.size || '24px', height: props.size || '24px' }}
           className={classes}
+        />
+      );
+    case 'coffee':
+      return (
+        <Coffee
+          id={props.id}
+          style={{ width: props.size || '24px', height: props.size || '24px' }}
+          className={classes}
+          onClick={props.onClick}
         />
       );
     case 'file':

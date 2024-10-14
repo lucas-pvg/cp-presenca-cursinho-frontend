@@ -31,7 +31,7 @@ interface ButtonProps
   extends ComponentProps<'button'>,
     VariantProps<typeof ButtonVariants> {
   to?: To;
-  variant?: 'solid' | 'outline';
+  variant?: 'solid' | 'outline' | 'present' | 'absent';
   mode?: 'light' | 'dark';
   fullWidth?: boolean;
 }
