@@ -10,6 +10,7 @@ export interface LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
 }
 
 export interface LessonCreateData {
@@ -33,6 +34,7 @@ export interface LessonServiceResponse {
   student_class: string;
   course: string;
   passkey: string;
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
 }
 
 export interface LessonServiceRequest {
@@ -59,6 +61,7 @@ export class Lesson implements LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
 
   constructor(params: LessonInterface) {
     this.id = params.id;
@@ -72,6 +75,7 @@ export class Lesson implements LessonInterface {
     this.isAttendanceRegistrable = params.isAttendanceRegistrable;
     this.passkey = params.passkey;
     this.course = params.course;
+    this.status = params.status
   }
 
   dateFormat(style: 'medium' | 'short'): string {
