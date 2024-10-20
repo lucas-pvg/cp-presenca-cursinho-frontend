@@ -17,6 +17,7 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson =>
     studentClass: lesson.student_class,
     course: lesson.course,
     passkey: lesson.passkey,
+    status: lesson.status
   });
 
 export const lessonRequestMapper = (

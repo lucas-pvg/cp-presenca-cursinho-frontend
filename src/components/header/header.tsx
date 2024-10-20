@@ -1,29 +1,43 @@
-import { ComponentProps, useState } from 'react';
-import { To, Link } from 'react-router-dom';
-import { Switch } from '../switch/switch';
+import { ComponentProps } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Links } from '../links/Links';
+
+// import { Switch } from '../switch/switch';
 import './header.css';
 
 interface HeaderProps extends ComponentProps<'header'> {
-  to: To;
+  onLogout: () => void
 }
 
-export const Header = ({ to, ...props }: HeaderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+export const Header = ({ onLogout, ...props }: HeaderProps) => {
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate()
+  const handleLoggout = () => {
+    onLogout && onLogout()
+    navigate('/')
+  }
 
   return (
     <header className="base-header" {...props}>
       {/* TODO: adicionar dark mode */}
-      <Switch
+      {/* <Switch
         isActive={isDarkMode}
         handleChange={() => {
           setIsDarkMode(!isDarkMode);
         }}
         type="darkMode"
-      />
+      /> */}
 
-      <Link to={to}>
-        <h1>{'Topo da página'}</h1>
-      </Link>
+      <Links
+        mode='dark'
+        to={'/'}
+        iconType='logout'
+        iconSize={16}
+        state='inactive'
+        onClick={handleLoggout}
+      >
+        <p>Logout</p>
+      </Links>
     </header>
   );
 };

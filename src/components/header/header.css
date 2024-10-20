@@ -1,17 +1,11 @@
 .base-header {
   width: 100%;
-  padding: 20px 50px;
+  padding: 20px 50px 0;
   position: sticky;
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   background: var(--blue-grad);
   color: var(--base-white);
-}
-
-.base-header h1 {
-  color: var(--base-white);
-  text-decoration: underline;
-  font-size: 16px;
 }

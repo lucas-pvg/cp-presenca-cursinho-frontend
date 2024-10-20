@@ -26,8 +26,8 @@ function App() {
         {
           isLoggedIn 
           ? (
-            <Route path="/" element={<LoggedInLayout />}>
-              <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<LoggedInLayout onLogout={() => setIsLoggedIn(false)} />}>
+              <Route index element={<HomePage />} />
               <Route path="/lessons" element={<LessonsPage />} />
               <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
               <Route path="/subject" element={<SubjectPage />} />
@@ -52,7 +52,7 @@ function App() {
             <Route path="/" element={<LoggedOutLayout />}>
               <Route path="forgot-password" element={<ForgotPasswordPage />} />
               <Route
-                path=""
+                index
                 element={
                   <LoginPage
                     onLogin={() => {
