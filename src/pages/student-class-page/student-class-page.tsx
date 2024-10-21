@@ -44,11 +44,15 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   // const [selectedIds, setSelectedIds] = useState([0]);
   // const [selectedStudents, setSelectedStudents] = useState<StudentSelect[]>([]);
 
-  const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
-  const [classIndex, setClassIndex] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>('create')
+  const openModal = (type: 'create' | 'update' | 'delete') => {
+    setModalType(type)
+    setModalState(true)
+  }
 
+  const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
+  const [classIndex, setClassIndex] = useState(0);
   useEffect(() => {
     !modalState &&
     Services.listStudentClasses()
@@ -60,11 +64,6 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
         console.log(error);
       });
   }, [modalState]);
-
-  const openModal = (type: 'create' | 'update' | 'delete') => {
-    setModalType(type)
-    setModalState(true)
-  }
 
   // const handleCheckboxChange = (id: number) => {
   //   setSelectedIds((prevSelectedIds) => {
