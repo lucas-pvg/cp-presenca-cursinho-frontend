@@ -1,7 +1,7 @@
 import { get, post, patch, destroy } from "../axios"
 import { recurrencyMapper, recurrentDatetimeRequestMapper } from "../../data/mapper";
 import { LessonRecurrencyResponse } from "../../data/models/recurrency.model";
-import { LessonRecurrentDatetime } from "../../data/models/recurrency.model";
+import { LessonRecurrentDatetime, LessonRecurrentDatetimeRequest } from "../../data/models/recurrency.model";
 
 const RecurrencyService = {
   async listRecurrency(params?: unknown) {
@@ -20,8 +20,8 @@ const RecurrencyService = {
     return recurrencyMapped
   },
 
-  async createRecurrentDatetime(datetime: LessonRecurrentDatetime) {
-    return await post(`lesson_recurrent_datetime/`, recurrentDatetimeRequestMapper(datetime));
+  async createRecurrentDatetime(datetime: LessonRecurrentDatetimeRequest) {
+    return await post(`lesson_recurrent_datetime/`, datetime);
   },
 
   async updateRecurrentDatetime(datetime: LessonRecurrentDatetime) {
