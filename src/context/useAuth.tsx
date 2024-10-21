@@ -72,7 +72,7 @@ export const UserProvider = ({ children }: Props) => {
     setUser(null);
     setToken({ access: '', refresh: '' });
     toast.success('Logout realizado com sucesso');
-    navigate('/login');
+    navigate('/auth/login');
   };
 
   return (
