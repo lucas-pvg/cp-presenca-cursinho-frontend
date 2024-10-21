@@ -9,31 +9,25 @@ import { SubjectPage } from './pages/subject-page/subject-page';
 import { SubjectDetailPage } from './pages/subject-detail-page/subject-detail-page';
 import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
 import { LoginPage } from './pages/login-page/LoginPage';
-import { useState } from 'react';
 import { UsersPage } from './pages/users-page/users-page';
 import { ToastContainer } from 'react-toastify';
 import { StudentClassPage } from './pages/student-class-page/student-class-page';
+import { UserProvider } from './context/useAuth';
 
 import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
-
-import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
-
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <>
       <ToastContainer />
-      <Routes>
-        {isLoggedIn ? (
-          <Route
-            path="/"
-            element={<LoggedInLayout onLogout={() => setIsLoggedIn(false)} />}
-          >
+      <UserProvider>
+        <Routes>
+          <Route path="/login" element={<LoggedOutLayout />}>
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route index element={<LoginPage />} />
+          </Route>
+          <Route path="/" element={<LoggedInLayout />}>
             <Route index element={<HomePage />} />
             <Route path="lessons" element={<LessonsPage />} />
             <Route path="lessons/:lessonID" element={<LessonDetailPage />} />
@@ -43,7 +37,6 @@ function App() {
               element={<SubjectDetailPage />}
             />
             <Route path="classes" element={<StudentClassPage />} />
-
             <Route
               path="students"
               element={<h1 className="center">Alunos</h1>}
@@ -54,22 +47,8 @@ function App() {
               element={<h1 className="center">Métricas</h1>}
             />
           </Route>
-        ) : (
-          <Route path="/" element={<LoggedOutLayout />}>
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route
-              index
-              element={
-                <LoginPage
-                  onLogin={() => {
-                    setIsLoggedIn(true);
-                  }}
-                />
-              }
-            />
-          </Route>
-        )}
-      </Routes>
+        </Routes>
+      </UserProvider>
     </>
   );
 }

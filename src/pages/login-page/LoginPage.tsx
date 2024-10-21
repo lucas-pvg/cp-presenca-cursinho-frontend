@@ -5,37 +5,24 @@ import { Link } from 'react-router-dom';
 import './LoginPage.css';
 import { useState } from 'react';
 import { LoginData } from '../../data/models/login.model';
-import Services from '../../services';
-import { toast } from 'react-toastify';
+import { useAuth } from '../../context/useAuth';
 
-interface loginPageProps {
-  onLogin: () => void;
-}
+export function LoginPage() {
+  const { loginUser } = useAuth();
 
-export function LoginPage({ onLogin }: loginPageProps) {
   const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: '',
   });
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    Services.login(loginData)
-      .then((response) => {
-        localStorage.setItem('access', response.access);
-        localStorage.setItem('refresh', response.refresh);
-
-        toast.success('Login efetuado com sucesso!');
-
-        onLogin();
-      })
-      .catch(() => toast.error('Erro ao efetuar login'));
+    await loginUser(loginData.email, loginData.password);
   };
 
   return (
     <>
-      <form id="login-form" onSubmit={handleLogin}>
+      <form id="login-form" onSubmit={handleSubmit}>
         <h1>Login</h1>
         <Input
           required
