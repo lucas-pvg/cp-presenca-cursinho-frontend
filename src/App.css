@@ -1,5 +1,5 @@
 .app-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: flex-start;
@@ -38,7 +38,7 @@
 }
 
 .page .page-content {
-  height: 100%;
+  height: fit-content;
   padding: 0 60px;
   display: flex;
   flex-direction: column;

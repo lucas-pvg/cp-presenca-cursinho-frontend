@@ -1,47 +1,45 @@
-import { ComponentProps, useState } from 'react';
-import { To } from 'react-router-dom';
-import { Switch } from '../switch/switch';
+import { ComponentProps } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Links } from '../links/Links';
+
+// import { Switch } from '../switch/switch';
 import './header.css';
 import Services from '../../services';
 import { toast } from 'react-toastify';
 
 interface HeaderProps extends ComponentProps<'header'> {
-  to: To;
+  onLogout: () => void;
 }
 
-export const Header = ({ to, ...props }: HeaderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+export const Header = ({ onLogout, ...props }: HeaderProps) => {
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate();
+  const handleLoggout = () => {
+    onLogout && onLogout();
+    navigate('/');
+  };
 
   return (
     <header className="base-header" {...props}>
       {/* TODO: adicionar dark mode */}
-      <Switch
+      {/* <Switch
         isActive={isDarkMode}
         handleChange={() => {
           setIsDarkMode(!isDarkMode);
         }}
         type="darkMode"
-      />
+      /> */}
 
-      <div
-        onClick={() => {
-          const refreshToken = localStorage.getItem('refresh');
-          if (refreshToken) {
-            Services.logout({ refresh: refreshToken })
-              .then(() => {
-                localStorage.removeItem('access');
-                localStorage.removeItem('refresh');
-                window.location.href = '/';
-              })
-              .catch(() => toast.error('Erro ao realizar logout'));
-          } else {
-            toast.error('Erro ao recuperar token de autenticação');
-          }
-        }}
-        style={{ cursor: 'pointer' }}
+      <Links
+        mode="dark"
+        to={'/'}
+        iconType="logout"
+        iconSize={16}
+        state="inactive"
+        onClick={handleLoggout}
       >
-        <h1>{'Logout'}</h1>
-      </div>
+        <p>Logout</p>
+      </Links>
     </header>
   );
 };

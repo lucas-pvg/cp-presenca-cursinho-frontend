@@ -30,7 +30,10 @@ function App() {
       <ToastContainer />
       <Routes>
         {isLoggedIn ? (
-          <Route path="/" element={<LoggedInLayout />}>
+          <Route
+            path="/"
+            element={<LoggedInLayout onLogout={() => setIsLoggedIn(false)} />}
+          >
             <Route index element={<HomePage />} />
             <Route path="lessons" element={<LessonsPage />} />
             <Route path="lessons/:lessonID" element={<LessonDetailPage />} />

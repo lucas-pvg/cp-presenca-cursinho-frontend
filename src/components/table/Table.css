@@ -65,7 +65,6 @@
   td {
     padding: 5px 20px;
   }
-  
 }
 
 .table-row.light,
@@ -93,6 +92,15 @@
 .table-row.click.dark:hover {
   background-color: var(--background-inverse);
 }
+
+.table-row.enabled {
+  opacity: 100%;
+}
+
+.table-row.disabled {
+  opacity: 30%;
+}
+
 
 .base-table .click .icon {
   width: 50px;
