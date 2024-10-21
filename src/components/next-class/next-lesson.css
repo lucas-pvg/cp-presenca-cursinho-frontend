@@ -9,9 +9,7 @@
   border-radius: 5px;
   box-shadow: 4px 4px 30px 0 var(--shadow-base);
 
-  transition:
-    transform .2s ease-in-out
-  ;
+  transition: transform 0.2s ease-in-out;
 }
 
 .next-lesson:hover {

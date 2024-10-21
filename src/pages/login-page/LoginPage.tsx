@@ -6,6 +6,7 @@ import './LoginPage.css';
 import { useState } from 'react';
 import { LoginData } from '../../data/models/login.model';
 import Services from '../../services';
+import { toast } from 'react-toastify';
 
 interface loginPageProps {
   onLogin: () => void;
@@ -25,9 +26,11 @@ export function LoginPage({ onLogin }: loginPageProps) {
         localStorage.setItem('access', response.access);
         localStorage.setItem('refresh', response.refresh);
 
+        toast.success('Login efetuado com sucesso!');
+
         onLogin();
       })
-      .catch((error) => console.log(error));
+      .catch(() => toast.error('Erro ao efetuar login'));
   };
 
   return (

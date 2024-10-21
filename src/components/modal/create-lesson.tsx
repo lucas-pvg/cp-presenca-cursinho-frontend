@@ -28,7 +28,7 @@ interface createLessonProps extends VariantProps<typeof createLessonVariants> {
   className?: string;
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
-  close: Function;
+  close: () => void;
 }
 
 export function CreateLesson({ mode, variant, close, className }: createLessonProps) {
@@ -61,7 +61,9 @@ export function CreateLesson({ mode, variant, close, className }: createLessonPr
       });
   }, []);
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setLessonData((prevData) => ({ ...prevData, [name]: value }));
   };
