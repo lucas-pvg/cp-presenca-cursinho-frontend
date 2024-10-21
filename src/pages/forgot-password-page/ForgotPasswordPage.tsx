@@ -4,14 +4,18 @@ import { Button } from '../../components/button/Button';
 import { Link } from 'react-router-dom';
 
 import './ForgotPasswordPage.css';
+import Services from '../../services';
+import { toast } from 'react-toastify';
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica para enviar o e-mail de recuperação de senha
-    console.log('E-mail enviado para:', email);
+
+    Services.forgotPassword({ email })
+      .then(() => toast.success('Um e-mail foi enviado para você!'))
+      .catch(() => toast.error('Verifique o e-mail e tente novamente.'));
   };
 
   return (
@@ -35,7 +39,7 @@ export function ForgotPasswordPage() {
           Redefinir senha
         </Button>
       </form>
-      <Link className="back-to-login" to="/">
+      <Link className="back-to-login" to="/auth/login">
         Login
       </Link>
     </>
