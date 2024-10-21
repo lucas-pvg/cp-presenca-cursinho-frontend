@@ -33,7 +33,7 @@ interface CreateLessonProps extends VariantProps<typeof createLessonVariants> {
 }
 
 export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: CreateLessonProps) {
-  const [subjects, setSubjects] = useState(Array<Subject>);0
+  const [subjects, setSubjects] = useState(Array<Subject>);
   useEffect(() => {
     Services.listSubjects()
       .then((data) => {
@@ -86,7 +86,7 @@ export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: Cre
   return (
     <div className={createLessonVariants({ mode })}>
       <ModalHeader
-        title="Agendar de aula"
+        title="Agendar aula"
         description="Agende uma aula manualmente e relacione a uma disciplina."
         variant={variant}
         mode={mode}
