@@ -4,6 +4,7 @@ import { ModalRow } from '../modal-components/modal-row'
 import { ModalFooter } from '../modal-components/modal-footer'
 import { ModalWarning } from '../modal-components/modal-warning'
 
+import { Subject } from '../../../data/models/subject.model'
 import Services from '../../../services'
 import '../modal.css'
 
@@ -22,56 +23,47 @@ const deleteSubjectVariants = cva(
   }
 )
 
-interface deleteSubjectProps extends VariantProps<typeof deleteSubjectVariants> {
-  className?: string
+interface DeleteSubjectProps extends VariantProps<typeof deleteSubjectVariants> {
   mode?: 'light' | 'dark'
   variant?: 'solid' | 'outline'
-  confirm: Function
-  close: Function
-  subjectID: number
-  subjectName: string
-  onAnimationEnd: Function
+  subject: Subject
+  onSuccess?: () => void;
+  onFailure?: (err: any) => void;
+  close: () => void;
 }
 
-export function DeleteSubject({ mode, variant, confirm, close, subjectID, subjectName, className, onAnimationEnd }: deleteSubjectProps) {
+export function DeleteSubject({ mode, variant, subject, onSuccess, onFailure, close }: DeleteSubjectProps) {
   const handleSubmit = () => {
-    Services.deleteSubject(subjectID)
+    Services.deleteSubject(subject.id)
     .then(res => {
+      onSuccess && onSuccess()
       console.log(res)
-      confirm()
-      handleClose()
+      close()
     })
     .catch(err => { 
+      onFailure && onFailure(err)
       console.log(err) 
     })
   }
 
-  const handleClose = () => {
-    close()
-  }
-
   return (
-    <div className={className ? `modal ${className}` : 'modal'} onAnimationEnd={() => onAnimationEnd()}>
-      <div className='modal-background' onClick={() => handleClose()} />
+    <div className={deleteSubjectVariants({ mode })}>
+      <ModalHeader
+        title='Deletar frente'
+        variant={variant}
+        mode={mode}
+      />
 
-      <div className={deleteSubjectVariants({ mode })}>
-        <ModalHeader
-          title='Deletar frente'
-          variant={variant}
-          mode={mode}
-        />
-
-        <div className='modal-content'>
-          <div className='content-body'>
-            <ModalRow labels={[]} mode={mode} >
-              <p>{`Tem certeza que deseja deletar a frente ${subjectName}?`}</p>
-            </ModalRow>
-          </div>
-
-          <hr className='divider'/>
-          <ModalWarning mode={mode} description='Isso deletará todas as aulas marcadas para essa frente!' />
-          <ModalFooter mode={mode} confirm={() => handleSubmit()} close={() => handleClose()} />
+      <div className='modal-content'>
+        <div className='content-body'>
+          <ModalRow labels={[]} mode={mode} >
+            <p>{`Tem certeza que deseja deletar a frente ${subject.name}?`}</p>
+          </ModalRow>
         </div>
+
+        <hr className='divider'/>
+        <ModalWarning mode={mode} description='Isso deletará todas as aulas marcadas para essa frente!' />
+        <ModalFooter mode={mode} confirm={() => handleSubmit()} close={() => close()} />
       </div>
     </div>
   )

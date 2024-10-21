@@ -5,11 +5,11 @@ import { ModalRow } from '../modal-components/modal-row'
 import { ModalFooter } from '../modal-components/modal-footer'
 import { Input } from '../../input/input'
 
-import { SubjectCreateData, MainSubject } from '../../../data/models/subject.model'
+import { Subject, SubjectCreateData } from '../../../data/models/subject.model'
 import Services from '../../../services'
 import '../modal.css'
 
-const createSubjectVariants = cva(
+const editSubjectVariants = cva(
   'base-modal input-modal',
   {
     variants: {
@@ -24,19 +24,19 @@ const createSubjectVariants = cva(
   }
 )
 
-interface createSubjectProps extends VariantProps<typeof createSubjectVariants> {
+interface EditSubjectProps extends VariantProps<typeof editSubjectVariants> {
   mode?: 'light' | 'dark'
   variant?: 'solid' | 'outline'
-  mainSubject: string
+  subject: Subject
   onSuccess?: () => void;
   onFailure?: (err: any) => void;
   close: () => void;
 }
 
-export function CreateSubject({ mode, variant, mainSubject, onSuccess, onFailure, close }: createSubjectProps) {
+export function EditSubject({ mode, variant, subject, onSuccess, onFailure, close  }: EditSubjectProps) {
   const [ subjectData, setSubjectData ] = useState<SubjectCreateData>({
     name: '',
-    mainSubject: mainSubject
+    mainSubject: subject.mainSubject
   })
 
   const handleChange = (e: any) => {
@@ -46,41 +46,37 @@ export function CreateSubject({ mode, variant, mainSubject, onSuccess, onFailure
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    Services.createSubject(subjectData)
+    Services.updateSubject(subject.id, subjectData)
     .then(res => {
       onSuccess && onSuccess()
       console.log(res)
       close()
     })
-    .catch(err => {
+    .catch(err => { 
       onFailure && onFailure(err)
-      console.log(err) 
+      console.log(err)  
     })
   }
 
-  const getMainSubjectName = () => {
-    return MainSubject.filter((main) => main.id === mainSubject)[0].name
-  }
-
   return (
-    <div className={createSubjectVariants({ mode })}>
+    <div className={editSubjectVariants({ mode })}>
       <ModalHeader
-        title='Criar frente'
-        description={`Crie uma frente na disciplina de ${getMainSubjectName()}`}
+        title='Editar frente'
+        description={`Edite o nome da frente ${subject.name}`}
         variant={variant}
         mode={mode}
       />
 
       <div className='modal-content'>
         <div className='content-body'>
-          <form id='subject-form' onSubmit={handleSubmit}>
+          <form id='edit-subject-form' onSubmit={handleSubmit}>
             <ModalRow labels={['Nome da frente']} mode={mode} >
-              <Input type='text' name='name' value={subjectData.name} placeholder='Geometria' mode={mode} onChange={handleChange} required />
+              <Input type='text' name='name' value={subjectData.name} placeholder='Geometria' mode={mode} onChange={handleChange} />
             </ModalRow>
           </form>
         </div>
 
-        <ModalFooter mode={mode} type='submit' form='subject-form' close={() => close()} />
+        <ModalFooter mode={mode} type='submit' form='edit-subject-form' close={() => close()} />
       </div>
     </div>
   )
