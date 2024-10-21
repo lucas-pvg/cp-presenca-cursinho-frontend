@@ -1,19 +1,17 @@
-.subject .page-content {
-  padding: 0 60px;
-  display: flex;
-  flex-direction: column;
+.subject.page .page-content {
+  height: 100%;
+  width: 100%;
   align-items: center;
-  justify-content: flex-start;
-  gap: 50px;
+  justify-content: center;
 }
 
-.subject {
-  position: relative;
+.subject.page {
+  padding: 0;
+  gap: 0;
 }
 
 .subject .subject-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 50px;
-  row-gap: 40px;
+  gap: 40px 50px;
 }
