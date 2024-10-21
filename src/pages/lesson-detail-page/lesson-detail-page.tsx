@@ -10,9 +10,9 @@ import { Table } from '../../components/table/Table'
 import { TableRow } from '../../components/table/TableRow'
 import { Switch } from '../../components/switch/switch'
 import { Button } from '../../components/button/Button'
-import { Alert } from '../../components/alert/alert'
 
 import { Lesson } from '../../data/models/lesson.model'
+import { LessonModal } from '../../components/modal/lesson-modal'
 import { StudentInterface } from '../../data/models/student.model'
 import Services from '../../services'
 import './lesson-detail-page.css'
@@ -37,17 +37,17 @@ interface LessonDetailPageProps extends VariantProps<typeof LessonDetailPageVari
 }
 
 export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
-  const [ search, setSearch ] = useState<string>('')
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [ modalType, setModalType ] = useState<'create' | 'update' | 'delete'>('update')
+  const openModal = (type: 'create' | 'update' | 'delete') => {
+    setModalType(type)
+    setIsModalOpen(true)
+  }
+
   const [ lesson, setLesson ] = useState<Lesson>()
-  const [ students, setStudents ] = useState(Array<StudentInterface>)
-  const [ attendance, setAttendance ] = useState<boolean>(false)
   const { lessonID } = useParams()
-
-  const [ alert, setAlert ] = useState<boolean>(false)
-  const [ isAnimationEnded, setIsAnimationEnded ] = useState(true)
-
   useEffect(() => {
-    lessonID &&
+    !isModalOpen && lessonID &&
     Services.retrieveLesson(parseInt(lessonID))
       .then(data => {
         setLesson(data)
@@ -56,8 +56,10 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       .catch(error => {
         console.log(error)
       })
+  }, [lessonID, isModalOpen]);
 
-    lessonID &&
+  const [ students, setStudents ] = useState(Array<StudentInterface>)
+  useEffect(() => {
     Services.listStudent()
       .then(data => {
         setStudents(data)
@@ -65,12 +67,9 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       .catch(error => {
         console.log(error)
       })
-  }, [lessonID]);
+  }, []);
 
-  const filterLesson = (e: any) => {
-    setSearch(e.target.value)
-  }
-
+  const [ attendance, setAttendance ] = useState<boolean>(false)
   const handleSwitchChange = () => {
     lesson &&
     Services.updateAttendanceRegistrability(lesson.id)
@@ -82,8 +81,6 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
           })
           
           setAttendance(!lesson.isAttendanceRegistrable)
-          setIsAnimationEnded(false)
-          setAlert(true)
           return updatedLesson
         })
       })
@@ -91,9 +88,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   }
 
   const changeAttendance = (e: any) => {
-    console.log('PRESSED')
     const { id } = e.target
-    console.log(id)
 
     setStudents((prev_students) => {
       let student_data = [...prev_students]
@@ -107,15 +102,14 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
 
   return (
     <>
-    <div className={LessonDetailPageVariants({ mode })} {...props} onClick={() => setIsAnimationEnded(true)}>
-      <Hero 
-        title={`${lesson?.name}`}
-        description={`${lesson?.subject} • ${lesson?.studentClass}`}
-      />
+    <div className={LessonDetailPageVariants({ mode })} {...props}>
+      <Hero title={`${lesson?.name}`} minimized>
+       <p>{`${lesson?.subject}`} <span style={{margin: '0 10px'}}>•</span> {`${lesson?.studentClass}`}</p>
+      </Hero>
 
       <CardMenu className='menu'>
-        <Card to='' label='Editar' mode='light' />
-        <Card to='' label='Excluir' mode='light' />
+        <Card to='' label='Editar' mode='light' onClick={() => openModal('update')} />
+        <Card to='' label='Excluir' mode='light' onClick={() => openModal('delete')} />
       </CardMenu>
 
       <div className='page-content'>
@@ -132,7 +126,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
         
         <div className='lesson-table'>
           <div className='header'>
-            <Search value={search} onChange={filterLesson} />
+            <Search />
 
             <div className='switch-content'>
               <p>Presença aberta?</p>
@@ -172,25 +166,13 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
     </div>
 
     {
-      alert && 
-      attendance
-      ?
-      <Alert 
-        animation={isAnimationEnded ? 'close' : 'open'}
-        close={() => setIsAnimationEnded(true)}
-        onAnimationEnd={() => {if (isAnimationEnded) () => setAlert(false)}}
-      >
-        A presença está aberta! Os alunos já podem marcar sua presença pelo app.
-      </Alert>
-
-      :
-      <Alert 
-        animation={isAnimationEnded ? 'close' : 'open'}
-        close={() => setIsAnimationEnded(true)}
-        onAnimationEnd={() => {if (isAnimationEnded) () => setAlert(false)}}
-      >
-        A marcação de presença foi encerrada! Abra novamente caso queira controlar a presença dos alunos.
-      </Alert>
+      isModalOpen && 
+      <LessonModal
+        mode="light"
+        type={modalType}
+        lesson={lesson}
+        close={() => setIsModalOpen(false)}
+      />
     }
     </>
   )

@@ -35,7 +35,7 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 
 export function HomePage({ mode, ...props }: HomePageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>('create')
+  const filters = { day: new Date().getDay() }
   const nav = useNavigate();
 
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
@@ -56,7 +56,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
     !isModalOpen && (
       classIndex == 0
 
-      ? Services.listLessonsWithDetails()
+      ? Services.listLessonsWithDetails(filters)
         .then((response) => {
           setLessons(sortLessons(response));
         })
@@ -64,7 +64,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
           console.log(error);
         })
       
-      : Services.listLessonsWithDetails({ student_class: studentClasses[classIndex-1].name})
+      : Services.listLessonsWithDetails({ ...filters, student_class: studentClasses[classIndex-1].name})
       .then((response) => {
         setLessons(sortLessons(response));
       })
@@ -105,11 +105,6 @@ export function HomePage({ mode, ...props }: HomePageProps) {
     return [...notEnded, ...ended]
   }
 
-  const openModal = (type: 'create' | 'update' | 'delete') => {
-    setModalType(type)
-    setIsModalOpen(true)
-  }
-
   return (
     <>
     {
@@ -126,7 +121,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
               to=""
               label="Agendar"
               mode="light"
-              onClick={() => openModal('create')}
+              onClick={() => setIsModalOpen(true)}
             />
             <Card to="/lessons" label="Consultar" mode="light" />
             <Card to="/subject" label="Disciplinas" mode="light" />
@@ -192,7 +187,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
       isModalOpen &&
       <LessonModal
         mode="light"
-        type={modalType}
+        type='create'
         close={() => setIsModalOpen(false)}
       />
     }
