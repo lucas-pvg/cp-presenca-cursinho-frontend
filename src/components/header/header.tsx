@@ -4,18 +4,20 @@ import { Links } from '../links/Links';
 
 // import { Switch } from '../switch/switch';
 import './header.css';
+import Services from '../../services';
+import { toast } from 'react-toastify';
 
 interface HeaderProps extends ComponentProps<'header'> {
-  onLogout: () => void
+  onLogout: () => void;
 }
 
 export const Header = ({ onLogout, ...props }: HeaderProps) => {
   // const [isDarkMode, setIsDarkMode] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLoggout = () => {
-    onLogout && onLogout()
-    navigate('/')
-  }
+    onLogout && onLogout();
+    navigate('/');
+  };
 
   return (
     <header className="base-header" {...props}>
@@ -29,11 +31,11 @@ export const Header = ({ onLogout, ...props }: HeaderProps) => {
       /> */}
 
       <Links
-        mode='dark'
+        mode="dark"
         to={'/'}
-        iconType='logout'
+        iconType="logout"
         iconSize={16}
-        state='inactive'
+        state="inactive"
         onClick={handleLoggout}
       >
         <p>Logout</p>

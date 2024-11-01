@@ -10,10 +10,16 @@ import { SubjectDetailPage } from './pages/subject-detail-page/subject-detail-pa
 import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
 import { LoginPage } from './pages/login-page/LoginPage';
 import { useState } from 'react';
+import { UsersPage } from './pages/users-page/users-page';
 import { ToastContainer } from 'react-toastify';
 import { StudentClassPage } from './pages/student-class-page/student-class-page';
 
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+
 import './App.css';
 
 function App() {
@@ -23,47 +29,46 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-        {
-          isLoggedIn 
-          ? (
-            <Route path="/" element={<LoggedInLayout onLogout={() => setIsLoggedIn(false)} />}>
-              <Route index element={<HomePage />} />
-              <Route path="/lessons" element={<LessonsPage />} />
-              <Route path="/lessons/:lessonID" element={<LessonDetailPage />} />
-              <Route path="/subject" element={<SubjectPage />} />
-              <Route path="/subject/:subjectCode" element={<SubjectDetailPage />} />
-              <Route path="/classes" element={<StudentClassPage />} />
+        {isLoggedIn ? (
+          <Route
+            path="/"
+            element={<LoggedInLayout onLogout={() => setIsLoggedIn(false)} />}
+          >
+            <Route index element={<HomePage />} />
+            <Route path="lessons" element={<LessonsPage />} />
+            <Route path="lessons/:lessonID" element={<LessonDetailPage />} />
+            <Route path="subject" element={<SubjectPage />} />
+            <Route
+              path="subject/:subjectCode"
+              element={<SubjectDetailPage />}
+            />
+            <Route path="classes" element={<StudentClassPage />} />
 
-              <Route
-                path="/students"
-                element={<h1 className="center">Alunos</h1>}
-              />
-              <Route
-                path="/teachers"
-                element={<h1 className="center">Professores</h1>}
-              />
-              <Route
-                path="/metrics"
-                element={<h1 className="center">Métricas</h1>}
-              />
-            </Route>
-          ) 
-          : (
-            <Route path="/" element={<LoggedOutLayout />}>
-              <Route path="forgot-password" element={<ForgotPasswordPage />} />
-              <Route
-                index
-                element={
-                  <LoginPage
-                    onLogin={() => {
-                      setIsLoggedIn(true);
-                    }}
-                  />
-                }
-              />
-            </Route>
-          )
-        }
+            <Route
+              path="students"
+              element={<h1 className="center">Alunos</h1>}
+            />
+            <Route path="users" element={<UsersPage />} />
+            <Route
+              path="metrics"
+              element={<h1 className="center">Métricas</h1>}
+            />
+          </Route>
+        ) : (
+          <Route path="/" element={<LoggedOutLayout />}>
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route
+              index
+              element={
+                <LoginPage
+                  onLogin={() => {
+                    setIsLoggedIn(true);
+                  }}
+                />
+              }
+            />
+          </Route>
+        )}
       </Routes>
     </>
   );
