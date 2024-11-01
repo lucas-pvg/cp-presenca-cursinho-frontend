@@ -21,14 +21,23 @@
   font-size: 12px;
   
   th {
+    width: fit-content;
+    max-width: 40%;
     font-weight: 600;
     text-align: start;
-    padding: 12px 20px;
+    padding: 12px 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  th:nth-of-type(n+2) {
+  /* th:nth-of-type(n+2) {
     width: 20%;
     white-space: nowrap;
+  } */
+
+  th:first-of-type {
+    width: 100%;
   }
 }
 
@@ -50,20 +59,29 @@
     background-color .2s ease-in-out;
 
   td {
+    width: fit-content;
+    max-width: 40%;
     font-weight: 400;
     text-align: start;
-    padding: 12px 20px;
+    padding: 12px 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  td:nth-of-type(n+2) {
-    width: 20%;
+  /* td:nth-of-type(n+2) {
+    width: 10%;
     white-space: nowrap;
+  } */
+
+  td:first-of-type {
+    width: 100%;
   }
 }
 
 .attendance-table .table-row {
   td {
-    padding: 5px 20px;
+    padding: 5px 30px;
   }
 }
 

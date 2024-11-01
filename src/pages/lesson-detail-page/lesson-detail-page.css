@@ -8,6 +8,7 @@
 }
 
 .page.lesson-detail .menu {
+  top: 70px;
   left: auto;
   right: 60px;
 }

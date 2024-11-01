@@ -7,9 +7,16 @@ import { Card } from '../../components/card-menu/card';
 import { Search } from '../../components/search/search';
 import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
+import { Input } from '../../components/input/input';
+import { SelectInput } from '../../components/select-input/select-input';
+import { Button } from '../../components/button/Button';
+import { Icon } from '../../components/icon/icon';
 
 import { Lesson } from '../../data/models/lesson.model';
-import { CreateLesson } from '../../components/modal/create-lesson';
+import { LessonFilters } from '../../data/models/lesson.model';
+import { LessonModal } from '../../components/modal/lesson-modal';
+import { Subject } from '../../data/models/subject.model';
+import { StudentClass } from '../../data/models/student-class.model';
 import Services from '../../services';
 
 import './lessons-page.css';
@@ -31,41 +38,92 @@ interface LessonsPageProps extends VariantProps<typeof LessonsPageVariants> {
 }
 
 export function LessonsPage({ mode, ...props }: LessonsPageProps) {
-  const [lessons, setLessons] = useState(Array<Lesson>);
-  const [filtered, setFiltered] = useState(Array<Lesson>);
-  const [search, setSearch] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const nav = useNavigate();
 
+  const [lessons, setLessons] = useState(Array<Lesson>);
   useEffect(() => {
     !isModalOpen &&
-      Services.listLessonsWithDetails()
-        .then((data) => {
-          setLessons(data);
-          setFiltered(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    Services.listLessonsWithDetails()
+      .then((data) => {
+        setLessons(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [isModalOpen]);
 
-  const filterLesson = (e: any) => {
-    setSearch(e.target.value);
-    if (e.target.value == '') {
-      setFiltered(lessons);
-    } else {
-      setFiltered(
-        lessons.filter((lesson) => lesson.name.includes(e.target.value))
-      );
-    }
+  const [subjects, setSubjects] = useState(Array<Subject>);
+  useEffect(() => {
+    Services.listSubjects()
+      .then((data) => {
+        setSubjects(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
+  useEffect(() => {
+    Services.listStudentClasses()
+      .then((data) => {
+        setStudentClasses(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [lessonFilters, setLessonFilters] = useState<LessonFilters>({
+    name: '',
+    subject: '',
+    student_class: '',
+    start_datetime__gte: '',
+  });
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setLessonFilters((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    const filters = Object.fromEntries(Object.entries(lessonFilters).filter(([_, v]) => v !== ''));
+    Services.listLessonsWithDetails(filters)
+      .then((data) => {
+        setLessons(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const resetFilters = () => {
+    setLessonFilters({
+      name: '',
+      subject: '',
+      student_class: '',
+      start_datetime__gte: '',
+    })
+
+    Services.listLessonsWithDetails()
+      .then((data) => {
+        setLessons(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
+
     <>
       <div className={LessonsPageVariants({ mode })} {...props}>
         <Hero
           title="Consultar aulas"
-          description="Veja as suas aulas que foram agendadas dentro do período de 1 mês."
+          description="Veja todas as suas aulas que foram agendadas dentro de um período de 6 meses."
         />
 
         <CardMenu className="menu">
@@ -79,14 +137,71 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
         </CardMenu>
 
         <div className="page-content">
-          {filtered && (
-            <div className="lesson-table">
-              <Search value={search} onChange={filterLesson} />
-              <Table
-                clickable={true}
-                header={['Aula', 'Data', 'Hora', 'Turma']}
+          <div className='filter-container'>
+            <form className='filters' id='filter-lesson-form' method='GET' onSubmit={handleSubmit}>
+              <Search
+                className='search'
+                name="name"
+                placeholder="Nome da Aula"
+                value={lessonFilters.name}
+                onChange={handleChange}
+              />
+
+              <SelectInput
+                placeholder="-- Turma --"
+                name="student_class"
+                value={lessonFilters.student_class}
+                onChange={handleChange}
               >
-                {filtered.map((lesson) => {
+                {studentClasses.map((studentClass) => (
+                  <option key={studentClass.id} value={studentClass.name}>
+                    {studentClass.name}
+                  </option>
+                ))}
+              </SelectInput>
+
+
+              <SelectInput
+                placeholder="-- Disciplina --"
+                name="subject"
+                value={lessonFilters.subject}
+                onChange={handleChange}
+              >
+                {subjects.map((subject) => (
+                  <option key={subject.id} value={subject.name}>
+                    {subject.name}
+                  </option>
+                ))}
+              </SelectInput>
+
+              <Input
+                type="date"
+                name="start_datetime__gte"
+                value={lessonFilters.start_datetime__gte}
+                mode={mode}
+                onChange={handleChange}
+              />
+            </form>
+
+            <div className='buttons'>
+              <Button type='submit' form='filter-lesson-form'>
+                <Icon iconType='search' size={16} />
+              </Button>
+
+              <Button onClick={resetFilters}>
+                <Icon iconType='x' size={16} />
+              </Button>
+            </div>
+          </div>
+          
+
+          <div className="lesson-table">
+            <Table
+              clickable={true}
+              header={['Aula', 'Data', 'Hora', 'Turma', 'Matéria']}
+            >
+              {
+                lessons.map((lesson) => {
                   return (
                     <TableRow
                       key={lesson.id}
@@ -96,20 +211,24 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
                       <td>{lesson.dateFormat('medium')}</td>
                       <td>{lesson.startTimeFormat()}</td>
                       <td>{lesson.studentClass}</td>
+                      <td>{lesson.subject}</td>
                     </TableRow>
                   );
-                })}
-              </Table>
-            </div>
-          )}
+                })
+              }
+            </Table>
+          </div>
         </div>
       </div>
 
-      <CreateLesson
-        className={isModalOpen ? 'modal-open' : 'modal-close'}
-        mode="light"
-        close={() => setIsModalOpen(false)}
-      />
+      {
+        isModalOpen &&
+        <LessonModal
+          mode="light"
+          type='create'
+          close={() => setIsModalOpen(false)}
+        />
+      }
     </>
   );
 }

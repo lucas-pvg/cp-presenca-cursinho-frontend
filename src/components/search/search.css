@@ -1,6 +1,6 @@
 .search {
   flex-grow: 1;
-  max-width: 400px;
+  /* max-width: 400px; */
   padding: 8px 12px;
   display: flex;
   align-items: center;
@@ -37,7 +37,7 @@
   width: 100%;
   font-family: 'Karla', sans-serif;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .search input::placeholder {
