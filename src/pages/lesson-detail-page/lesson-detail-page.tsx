@@ -26,14 +26,15 @@ const LessonDetailPageVariants = cva(
         dark: 'dark'
       }
     },
-    defaultVariants: {
-      mode: 'light'
-    }
-  }
-)
+  },
+  defaultVariants: {
+    mode: 'light',
+  },
+});
 
-interface LessonDetailPageProps extends VariantProps<typeof LessonDetailPageVariants> {
-  mode?: 'light' | 'dark'
+interface LessonDetailPageProps
+  extends VariantProps<typeof LessonDetailPageVariants> {
+  mode?: 'light' | 'dark';
 }
 
 export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
@@ -83,22 +84,21 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
           setAttendance(!lesson.isAttendanceRegistrable)
           return updatedLesson
         })
-      })
-      .catch((error) => console.log(error))
-  }
+        .catch((error) => console.log(error));
+  };
 
   const changeAttendance = (e: any) => {
     const { id } = e.target
 
     setStudents((prev_students) => {
-      let student_data = [...prev_students]
-      let i = student_data.findIndex((student) => student.id == id)
-      student_data[i].isPresent = !(student_data[i].isPresent)
-      console.log(student_data[i].isPresent)
+      const student_data = [...prev_students];
+      const i = student_data.findIndex((student) => student.id == id);
+      student_data[i].isPresent = !student_data[i].isPresent;
+      console.log(student_data[i].isPresent);
 
-      return student_data
-    })
-  }
+      return student_data;
+    });
+  };
 
   return (
     <>
@@ -139,28 +139,61 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
               />
             </div>
           </div>
-          
 
-          <Table variant={attendance ? 'attendance' : 'base'} mode='light' clickable={true} header={['Nome do aluno', 'Presença']}>
-            {
-              students.map((student) => { return (
-                <TableRow key={student.id}>
-                  <td>{student.name}</td>
-                  {
-                    attendance
-                    ? <td>
-                      {
-                        student.isPresent
-                        ? <Button id={`${student.id}`} variant='present' onClick={changeAttendance}>Presente</Button>
-                        : <Button id={`${student.id}`} variant='absent' onClick={changeAttendance}>Ausente</Button>
-                      }
+          <div className="lesson-table">
+            <div className="header">
+              <Search value={search} onChange={filterLesson} />
+
+              <div className="switch-content">
+                <p>Presença aberta?</p>
+
+                <Switch
+                  type="base"
+                  mode={mode}
+                  isActive={lesson?.isAttendanceRegistrable}
+                  handleChange={() => handleSwitchChange()}
+                />
+              </div>
+            </div>
+
+            <Table
+              variant={attendance ? 'attendance' : 'base'}
+              mode="light"
+              clickable={true}
+              header={['Nome do aluno', 'Presença']}
+            >
+              {students.map((student) => {
+                return (
+                  <TableRow key={student.id}>
+                    <td>{student.name}</td>
+                    {attendance ? (
+                      <td>
+                        {student.isPresent ? (
+                          <Button
+                            id={`${student.id}`}
+                            variant="present"
+                            onClick={changeAttendance}
+                          >
+                            Presente
+                          </Button>
+                        ) : (
+                          <Button
+                            id={`${student.id}`}
+                            variant="absent"
+                            onClick={changeAttendance}
+                          >
+                            Ausente
+                          </Button>
+                        )}
                       </td>
-                    : <td>{student.isPresent ? 'Presente' : 'Ausente'}</td>
-                  }
-                </TableRow>
-              )})
-            }
-          </Table>
+                    ) : (
+                      <td>{student.isPresent ? 'Presente' : 'Ausente'}</td>
+                    )}
+                  </TableRow>
+                );
+              })}
+            </Table>
+          </div>
         </div>
       </div>
     </div>
@@ -175,5 +208,5 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
       />
     }
     </>
-  )
+  );
 }
