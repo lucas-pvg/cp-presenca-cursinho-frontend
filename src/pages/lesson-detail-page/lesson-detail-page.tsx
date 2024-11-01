@@ -26,10 +26,9 @@ const LessonDetailPageVariants = cva(
         dark: 'dark'
       }
     },
-  },
   defaultVariants: {
     mode: 'light',
-  },
+  }
 });
 
 interface LessonDetailPageProps
@@ -84,7 +83,8 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
           setAttendance(!lesson.isAttendanceRegistrable)
           return updatedLesson
         })
-        .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
   };
 
   const changeAttendance = (e: any) => {
@@ -142,7 +142,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
 
           <div className="lesson-table">
             <div className="header">
-              <Search value={search} onChange={filterLesson} />
+              <Search />
 
               <div className="switch-content">
                 <p>Presença aberta?</p>
