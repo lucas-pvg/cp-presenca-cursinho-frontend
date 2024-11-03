@@ -1,6 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { Button } from '../../button/Button';
 import '../modal.css';
+import { Oval } from 'react-loader-spinner';
 
 const modalFooterVariants = cva('modal-footer', {
   variants: {
@@ -20,6 +21,7 @@ interface modalFooterProps extends VariantProps<typeof modalFooterVariants> {
   form?: string;
   close: () => void;
   confirm?: () => void;
+  isLoading?: boolean;
 }
 
 export function ModalFooter({
@@ -28,12 +30,24 @@ export function ModalFooter({
   form,
   close,
   confirm,
+  isLoading = false,
 }: modalFooterProps) {
   return (
     <div className={modalFooterVariants({ mode })}>
       {type == 'submit' ? (
         <Button type="submit" form={form} variant="solid" mode={mode}>
-          Confirmar
+          {isLoading ? (
+            <Oval
+              color="var(--blue-inverse)"
+              secondaryColor="#FFFFFF"
+              height={20}
+              width={20}
+              strokeWidth={6}
+              strokeWidthSecondary={6}
+            />
+          ) : (
+            'Confirmar'
+          )}
         </Button>
       ) : (
         <Button type="button" variant="solid" mode={mode} onClick={confirm}>

@@ -43,6 +43,7 @@ export function ManualRegister({
   onClose,
   className,
 }: ManualRegisterProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState<CreateUserData>({
     first_name: '',
     last_name: '',
@@ -57,8 +58,10 @@ export function ManualRegister({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     Services.registerUser(userData as CreateUserData)
       .then(() => {
+        setIsLoading(false);
         toast.success('Usuário cadastrado com sucesso!');
         onClose();
       })
@@ -150,6 +153,7 @@ export function ManualRegister({
             form="class-form"
             mode={mode}
             close={() => handleClose()}
+            isLoading={isLoading}
           />
         </div>
       </div>

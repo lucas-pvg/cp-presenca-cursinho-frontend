@@ -6,9 +6,11 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Services from '../../services';
+import { Oval } from 'react-loader-spinner';
 
 export function ResetPasswordPage() {
   const { token } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const [resetPasswordData, setResetPasswordData] = useState({
@@ -18,6 +20,7 @@ export function ResetPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (
       resetPasswordData.password !== resetPasswordData.password_confirmation
@@ -36,9 +39,10 @@ export function ResetPasswordPage() {
         toast.success(
           'Senha redefinida com sucesso! \nVocê será redirecionado para a página de login.'
         );
+        setIsLoading(false);
         setTimeout(() => {
           navigate('/auth/login');
-        }, 3000);
+        }, 2000);
       })
       .catch(() => {});
   };
@@ -79,7 +83,18 @@ export function ResetPasswordPage() {
           fullWidth
           style={{ marginTop: '1rem' }}
         >
-          Redefinir senha
+          {isLoading ? (
+            <Oval
+              color="var(--blue-inverse)"
+              secondaryColor="#FFFFFF"
+              height={20}
+              width={20}
+              strokeWidth={6}
+              strokeWidthSecondary={6}
+            />
+          ) : (
+            'Redefinir senha'
+          )}
         </Button>
       </form>
     </>
