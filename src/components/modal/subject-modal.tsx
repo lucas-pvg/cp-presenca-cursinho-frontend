@@ -10,57 +10,69 @@ import './modal.css';
 interface SubjectProps {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
-  type: 'create' | 'update' | 'delete'
-  mainSubject: string
-  subject?: Subject
-  close: () => void
+  type: 'create' | 'update' | 'delete';
+  mainSubject: string;
+  subject?: Subject;
+  close: () => void;
 }
 
-export function SubjectModal({ mode, variant, type, mainSubject, subject, close }: SubjectProps) {
-  const [closingAnimation, setClosingAnimation] = useState(false)
-  const toastify = useToastify()
+export function SubjectModal({
+  mode,
+  variant,
+  type,
+  mainSubject,
+  subject,
+  close,
+}: SubjectProps) {
+  const [closingAnimation, setClosingAnimation] = useState(false);
+  const toastify = useToastify();
 
   const handleClose = () => {
-    setClosingAnimation(true)   
-    setTimeout(() => close(), 200)
+    setClosingAnimation(true);
+    setTimeout(() => close(), 200);
   };
 
   return (
-    <div className={closingAnimation ? 'modal modal-close' : 'modal modal-open'}>
+    <div
+      className={closingAnimation ? 'modal modal-close' : 'modal modal-open'}
+    >
       <div className="modal-background" onClick={() => handleClose()} />
-      {
-        type === 'create' &&
+      {type === 'create' && (
         <CreateSubject
           mode={mode}
           variant={variant}
           mainSubject={mainSubject}
           onSuccess={() => toastify('success', 'Frente criada com sucesso!')}
-          onFailure={(err) => toastify('failure', 'Não foi possível criar a frente\n' + err)}
+          onFailure={(err) =>
+            toastify('failure', 'Não foi possível criar a frente\n' + err)
+          }
           close={handleClose}
         />
-      }
-      {
-        type === 'update' &&
+      )}
+      {type === 'update' && (
         <EditSubject
           mode={mode}
           variant={variant}
           subject={subject!}
           onSuccess={() => toastify('success', 'Frente editada com sucesso!')}
-          onFailure={(err) => toastify('failure', 'Não foi possível editar a frente\n' + err)}
+          onFailure={(err) =>
+            toastify('failure', 'Não foi possível editar a frente\n' + err)
+          }
           close={handleClose}
         />
-      }
-      {
-        type === 'delete' &&
+      )}
+      {type === 'delete' && (
         <DeleteSubject
           mode={mode}
           variant={variant}
           subject={subject!}
           onSuccess={() => toastify('success', 'Frente deletada com sucesso!')}
-          onFailure={(err) => toastify('failure', 'Não foi possível deletar a frente\n' + err)}
+          onFailure={(err) =>
+            toastify('failure', 'Não foi possível deletar a frente\n' + err)
+          }
           close={handleClose}
         />
-      }
+      )}
     </div>
   );
 }

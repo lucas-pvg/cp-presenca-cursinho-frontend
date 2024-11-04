@@ -10,7 +10,7 @@ export interface LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 }
 
 export interface LessonCreateData {
@@ -20,9 +20,9 @@ export interface LessonCreateData {
   date: string;
   startTime: string;
   endTime: string;
-  attendanceStart?: string
-  attendanceEnd?: string
-  passkey?: string
+  attendanceStart?: string;
+  attendanceEnd?: string;
+  passkey?: string;
 }
 
 export interface LessonFilters {
@@ -46,7 +46,7 @@ export interface LessonServiceResponse {
   student_class: string;
   course: string;
   passkey: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 }
 
 export interface LessonServiceRequest {
@@ -73,7 +73,7 @@ export class Lesson implements LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 
   constructor(params: LessonInterface) {
     this.id = params.id;
@@ -87,7 +87,7 @@ export class Lesson implements LessonInterface {
     this.isAttendanceRegistrable = params.isAttendanceRegistrable;
     this.passkey = params.passkey;
     this.course = params.course;
-    this.status = params.status
+    this.status = params.status;
   }
 
   dateFormat(style: 'medium' | 'short'): string {
@@ -143,15 +143,17 @@ export class Lesson implements LessonInterface {
   }
 
   getDateJSON(): string {
-    const year = this.startTime.toLocaleString("default", { year: "numeric" })
-    const month = this.startTime.toLocaleString("default", { month: "2-digit" })
-    const day = this.startTime.toLocaleString("default", { day: "2-digit" })
+    const year = this.startTime.toLocaleString('default', { year: 'numeric' });
+    const month = this.startTime.toLocaleString('default', {
+      month: '2-digit',
+    });
+    const day = this.startTime.toLocaleString('default', { day: '2-digit' });
 
-    return year + '-' + month + '-' + day
+    return year + '-' + month + '-' + day;
   }
 
   toDict(): LessonCreateData {
-    return ({
+    return {
       name: this.name,
       subject: this.subject,
       studentClass: this.studentClass,
@@ -160,7 +162,7 @@ export class Lesson implements LessonInterface {
       endTime: this.endTime.toTimeString().split(' ')[0],
       attendanceStart: this.startAttendance.toTimeString().split(' ')[0],
       attendanceEnd: this.endAttendance.toTimeString().split(' ')[0],
-      passkey: this.passkey
-    })
+      passkey: this.passkey,
+    };
   }
 }

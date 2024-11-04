@@ -1,10 +1,14 @@
 import { lessonMapper, lessonRequestMapper } from './lesson.mapper';
-import { subjectMapper, subjectRequestMapper } from "./subject.mapper";
-import { recurrencyMapper, recurrentDatetimeMapper, recurrentDatetimeRequestMapper } from './recurrency.mapper';
+import { subjectMapper, subjectRequestMapper } from './subject.mapper';
+import {
+  recurrencyMapper,
+  recurrentDatetimeMapper,
+  recurrentDatetimeRequestMapper,
+} from './recurrency.mapper';
 import { studentMapper } from './student.mapper';
 import { studentClassMapper } from './student-class.mapper';
 
-export { 
+export {
   lessonMapper,
   lessonRequestMapper,
   subjectMapper,
@@ -13,5 +17,5 @@ export {
   recurrentDatetimeMapper,
   recurrentDatetimeRequestMapper,
   studentMapper,
-  studentClassMapper
+  studentClassMapper,
 };

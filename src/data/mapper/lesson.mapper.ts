@@ -17,7 +17,7 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson =>
     studentClass: lesson.student_class,
     course: lesson.course,
     passkey: lesson.passkey,
-    status: lesson.status
+    status: lesson.status,
   });
 
 export const lessonRequestMapper = (
@@ -26,13 +26,13 @@ export const lessonRequestMapper = (
   const startDatetime: Date = new Date(`${lesson.date}T${lesson.startTime}`);
   const endDatetime: Date = new Date(`${lesson.date}T${lesson.endTime}`);
 
-  const startAttendance: Date = lesson.attendanceStart 
+  const startAttendance: Date = lesson.attendanceStart
     ? new Date(`${lesson.date}T${lesson.attendanceStart}`)
-    : startDatetime
+    : startDatetime;
 
   const endAttendance: Date = lesson.attendanceEnd
-  ? new Date(`${lesson.date}T${lesson.attendanceEnd}`)
-  : endDatetime
+    ? new Date(`${lesson.date}T${lesson.attendanceEnd}`)
+    : endDatetime;
 
   return {
     name: lesson.name,

@@ -1,23 +1,29 @@
-import { get, post, patch, destroy } from "../axios"
-import { recurrencyMapper, recurrentDatetimeRequestMapper } from "../../data/mapper";
-import { LessonRecurrencyResponse } from "../../data/models/recurrency.model";
-import { LessonRecurrentDatetime, LessonRecurrentDatetimeRequest } from "../../data/models/recurrency.model";
+import { get, post, patch, destroy } from '../axios';
+import {
+  recurrencyMapper,
+  recurrentDatetimeRequestMapper,
+} from '../../data/mapper';
+import { LessonRecurrencyResponse } from '../../data/models/recurrency.model';
+import {
+  LessonRecurrentDatetime,
+  LessonRecurrentDatetimeRequest,
+} from '../../data/models/recurrency.model';
 
 const RecurrencyService = {
   async listRecurrency(params?: unknown) {
     const response = await get('lesson_recurrency/', { params });
-    const recurrencyMapped = response.map((recurrency: LessonRecurrencyResponse) => 
-      recurrencyMapper(recurrency)
+    const recurrencyMapped = response.map(
+      (recurrency: LessonRecurrencyResponse) => recurrencyMapper(recurrency)
     );
 
     return recurrencyMapped;
   },
 
   async listRecurrencyFromParams(subject: number, studentClass: number) {
-    const response = await get(`lesson_recurrency/${subject}/${studentClass}/`)
-    const recurrencyMapped = recurrencyMapper(response)
+    const response = await get(`lesson_recurrency/${subject}/${studentClass}/`);
+    const recurrencyMapped = recurrencyMapper(response);
 
-    return recurrencyMapped
+    return recurrencyMapped;
   },
 
   async createRecurrentDatetime(datetime: LessonRecurrentDatetimeRequest) {
@@ -25,12 +31,15 @@ const RecurrencyService = {
   },
 
   async updateRecurrentDatetime(datetime: LessonRecurrentDatetime) {
-    return await patch(`lesson_recurrent_datetime/${datetime.id}/`, recurrentDatetimeRequestMapper(datetime))
+    return await patch(
+      `lesson_recurrent_datetime/${datetime.id}/`,
+      recurrentDatetimeRequestMapper(datetime)
+    );
   },
 
   async deleteRecurrentDatetime(datetimeId: number) {
-    return await destroy(`lesson_recurrent_datetime/${datetimeId}/`)
-  }
-}
+    return await destroy(`lesson_recurrent_datetime/${datetimeId}/`);
+  },
+};
 
-export default RecurrencyService
+export default RecurrencyService;

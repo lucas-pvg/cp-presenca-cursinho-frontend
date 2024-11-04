@@ -6,7 +6,10 @@ import { ModalFooter } from '../modal-components/modal-footer';
 import { Input } from '../../input/input';
 import { SelectInput } from '../../select-input/select-input';
 
-import { StudentClass, StudentClassInterface } from '../../../data/models/student-class.model';
+import {
+  StudentClass,
+  StudentClassInterface,
+} from '../../../data/models/student-class.model';
 import Services from '../../../services';
 import '../modal.css';
 
@@ -22,31 +25,38 @@ const editStudentClassVariants = cva('base-modal input-modal', {
   },
 });
 
-interface createClassProps extends VariantProps<typeof editStudentClassVariants> {
-  mode?: 'light' | 'dark'
-  variant?: 'solid' | 'outline'
-  studentClass: StudentClass
+interface createClassProps
+  extends VariantProps<typeof editStudentClassVariants> {
+  mode?: 'light' | 'dark';
+  variant?: 'solid' | 'outline';
+  studentClass: StudentClass;
   close: () => void;
 }
 
-export function EditStudentClass({ mode, studentClass, variant, close }: createClassProps) {
-  const [studentClassData, setStudentClassData] = useState<StudentClassInterface>(studentClass.toDict());
+export function EditStudentClass({
+  mode,
+  studentClass,
+  variant,
+  close,
+}: createClassProps) {
+  const [studentClassData, setStudentClassData] =
+    useState<StudentClassInterface>(studentClass.toDict());
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setStudentClassData((prev) => ({...prev!, [name]: value}))
+    setStudentClassData((prev) => ({ ...prev!, [name]: value }));
   };
 
   const handleSubmit = () => {
     studentClassData?.id &&
-    Services.updateStudentClass(studentClassData.id, studentClassData)
-      .then((res) => {
-        console.log(res);
-        close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      Services.updateStudentClass(studentClassData.id, studentClassData)
+        .then((res) => {
+          console.log(res);
+          close();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   return (
@@ -77,8 +87,8 @@ export function EditStudentClass({ mode, studentClass, variant, close }: createC
                 value={studentClassData?.modality ?? 'default'}
                 onChange={handleChange}
               >
-                <option value='ON'>Online</option>
-                <option value='IN'>Presencial</option>
+                <option value="ON">Online</option>
+                <option value="IN">Presencial</option>
               </SelectInput>
             </ModalRow>
 

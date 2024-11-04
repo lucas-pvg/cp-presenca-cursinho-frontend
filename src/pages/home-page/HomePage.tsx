@@ -35,7 +35,7 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 
 export function HomePage({ mode, ...props }: HomePageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const filters = { day: new Date().getDay() }
+  const filters = { day: new Date().getDay() };
   const nav = useNavigate();
 
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
@@ -44,7 +44,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
     Services.listStudentClasses()
       .then((data) => {
         setStudentClasses(data);
-        setClassIndex(0)
+        setClassIndex(0);
       })
       .catch((error) => {
         console.log(error);
@@ -53,25 +53,25 @@ export function HomePage({ mode, ...props }: HomePageProps) {
 
   const [lessons, setLessons] = useState(Array<Lesson>);
   useEffect(() => {
-    !isModalOpen && (
-      classIndex == 0
-
-      ? Services.listLessonsWithDetails(filters)
-        .then((response) => {
-          setLessons(sortLessons(response));
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-      
-      : Services.listLessonsWithDetails({ ...filters, student_class: studentClasses[classIndex-1].name})
-      .then((response) => {
-        setLessons(sortLessons(response));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    )
+    !isModalOpen &&
+      (classIndex == 0
+        ? Services.listLessonsWithDetails(filters)
+            .then((response) => {
+              setLessons(sortLessons(response));
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+        : Services.listLessonsWithDetails({
+            ...filters,
+            student_class: studentClasses[classIndex - 1].name,
+          })
+            .then((response) => {
+              setLessons(sortLessons(response));
+            })
+            .catch((error) => {
+              console.log(error);
+            }));
   }, [isModalOpen, classIndex]);
 
   const handleSwitchChange = (lesson: Lesson, index: number) => {
@@ -92,24 +92,22 @@ export function HomePage({ mode, ...props }: HomePageProps) {
   };
 
   const getNextLesson = (cls: StudentClass) => {
-    const lesson = lessons.filter(lesson => {
-      return lesson.studentClass === cls.name && lesson.endTime > new Date()
-    })[0]
+    const lesson = lessons.filter((lesson) => {
+      return lesson.studentClass === cls.name && lesson.endTime > new Date();
+    })[0];
 
-    if (lesson) return <NextLesson lesson={lesson} key={lesson.id} />
-  }
+    if (lesson) return <NextLesson lesson={lesson} key={lesson.id} />;
+  };
 
   const sortLessons = (lessons: Array<Lesson>): Array<Lesson> => {
-    const ended = lessons.filter((lesson) => lesson.status === 'ENDED')
-    const notEnded = lessons.filter((lesson) => lesson.status !== 'ENDED')
-    return [...notEnded, ...ended]
-  }
+    const ended = lessons.filter((lesson) => lesson.status === 'ENDED');
+    const notEnded = lessons.filter((lesson) => lesson.status !== 'ENDED');
+    return [...notEnded, ...ended];
+  };
 
   return (
     <>
-    {
-      studentClasses &&
-      (
+      {studentClasses && (
         <div className={HomePageVariants({ mode })} {...props}>
           <Hero
             title="Bem-vindo, Lucas!"
@@ -134,19 +132,18 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                 index={classIndex}
                 setIndex={setClassIndex}
               />
-              
-              <div className='next-lesson-container'>
+
+              <div className="next-lesson-container">
                 <h5>Próximas Aulas</h5>
 
-                <div className='next-lesson-menu'>
-                  { classIndex == 0
-                    ? (studentClasses.map(cls => getNextLesson(cls)))
-                    : getNextLesson(studentClasses[classIndex-1])
-                  }
+                <div className="next-lesson-menu">
+                  {classIndex == 0
+                    ? studentClasses.map((cls) => getNextLesson(cls))
+                    : getNextLesson(studentClasses[classIndex - 1])}
                 </div>
               </div>
-              
-              <div className='today-lesson-container'>
+
+              <div className="today-lesson-container">
                 <h5>Aulas de Hoje</h5>
 
                 <Table
@@ -154,43 +151,39 @@ export function HomePage({ mode, ...props }: HomePageProps) {
                   clickable={true}
                   header={['Aula', 'Horário', 'Turma', 'Presença aberta?']}
                 >
-                  { 
-                    lessons.map((lesson, index) => (
-                      <TableRow
-                        key={lesson.id}
-                        onClick={() => nav(`/lessons/${lesson.id}`)}
-                        disabled={lesson.status === 'ENDED'}
-                      >
-                        <td>{lesson.name}</td>
-                        <td>{lesson.startTimeFormat()}</td>
-                        <td>{lesson.studentClass}</td>
-                        <td>
-                          <Switch
-                            type="base"
-                            mode={mode}
-                            isActive={lesson.isAttendanceRegistrable}
-                            handleChange={() => handleSwitchChange(lesson, index)}
-                          />
-                        </td>
-                      </TableRow>
-                    ))
-                  }
+                  {lessons.map((lesson, index) => (
+                    <TableRow
+                      key={lesson.id}
+                      onClick={() => nav(`/lessons/${lesson.id}`)}
+                      disabled={lesson.status === 'ENDED'}
+                    >
+                      <td>{lesson.name}</td>
+                      <td>{lesson.startTimeFormat()}</td>
+                      <td>{lesson.studentClass}</td>
+                      <td>
+                        <Switch
+                          type="base"
+                          mode={mode}
+                          isActive={lesson.isAttendanceRegistrable}
+                          handleChange={() => handleSwitchChange(lesson, index)}
+                        />
+                      </td>
+                    </TableRow>
+                  ))}
                 </Table>
               </div>
             </div>
           </div>
         </div>
-      )
-    }
-    
-    {
-      isModalOpen &&
-      <LessonModal
-        mode="light"
-        type='create'
-        close={() => setIsModalOpen(false)}
-      />
-    }
+      )}
+
+      {isModalOpen && (
+        <LessonModal
+          mode="light"
+          type="create"
+          close={() => setIsModalOpen(false)}
+        />
+      )}
     </>
   );
 }

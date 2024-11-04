@@ -26,9 +26,8 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 10px 10px;
   grid-template-areas:
-    "search search search"
-    "class subject date"
-  ;
+    'search search search'
+    'class subject date';
 }
 
 .lessons .search {
