@@ -5,7 +5,7 @@ import {
   recurrentDatetimeMapper,
   recurrentDatetimeRequestMapper,
 } from './recurrency.mapper';
-import { studentMapper } from './student.mapper';
+import { studentMapper, studentWithAttendanceMapper } from './student.mapper';
 import { studentClassMapper } from './student-class.mapper';
 
 export {
@@ -17,5 +17,6 @@ export {
   recurrentDatetimeMapper,
   recurrentDatetimeRequestMapper,
   studentMapper,
+  studentWithAttendanceMapper,
   studentClassMapper,
 };

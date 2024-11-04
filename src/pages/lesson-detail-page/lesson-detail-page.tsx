@@ -13,9 +13,11 @@ import { Button } from '../../components/button/Button';
 
 import { Lesson } from '../../data/models/lesson.model';
 import { LessonModal } from '../../components/modal/lesson-modal';
-import { StudentInterface } from '../../data/models/student.model';
+import { StudentWithAttendanceInterface } from '../../data/models/student.model';
 import Services from '../../services';
 import './lesson-detail-page.css';
+import { AttendanceStatus } from '../../data/models/attendance.model';
+import { useToastify } from '../../services/toastify';
 
 const LessonDetailPageVariants = cva('lesson-detail page', {
   variants: {
@@ -43,6 +45,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
     setModalType(type);
     setIsModalOpen(true);
   };
+  const toastify = useToastify();
 
   const [lesson, setLesson] = useState<Lesson>();
   const { lessonID } = useParams();
@@ -59,16 +62,20 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
         });
   }, [lessonID, isModalOpen]);
 
-  const [students, setStudents] = useState(Array<StudentInterface>);
+  const [students, setStudents] = useState(
+    Array<StudentWithAttendanceInterface>
+  );
   useEffect(() => {
-    Services.listStudent()
+    if (!lessonID) return;
+
+    Services.listStudentWithAttendanceByLesson(parseInt(lessonID))
       .then((data) => {
         setStudents(data);
       })
       .catch((error) => {
-        console.log(error);
+        toastify('failure', 'Não foi possível listar os alunos\n' + error);
       });
-  }, []);
+  }, [lessonID]);
 
   const [attendance, setAttendance] = useState<boolean>(false);
   const handleSwitchChange = () => {
@@ -85,20 +92,43 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
             return updatedLesson;
           });
         })
-        .catch((error) => console.log(error));
+        .catch(() =>
+          toastify(
+            'failure',
+            'Não foi possível atualizar a presença dessa aula\n'
+          )
+        );
+  };
+
+  const flipStudentAttendance = (studentId: number) => {
+    return students.find((student) => student.id == studentId)?.attendance ===
+      AttendanceStatus.PRESENT
+      ? AttendanceStatus.ABSENT
+      : AttendanceStatus.PRESENT;
   };
 
   const changeAttendance = (e: any) => {
     const { id } = e.target;
 
-    setStudents((prev_students) => {
-      const student_data = [...prev_students];
-      const i = student_data.findIndex((student) => student.id == id);
-      student_data[i].isPresent = !student_data[i].isPresent;
-      console.log(student_data[i].isPresent);
+    if (!lessonID) return;
 
-      return student_data;
-    });
+    const createAttendanceData = {
+      lesson: parseInt(lessonID),
+      student: id,
+      status: flipStudentAttendance(id),
+    };
+
+    Services.createAttendance(createAttendanceData)
+      .then(() => {
+        const student_data = [...students];
+        const i = student_data.findIndex((student) => student.id == id);
+
+        student_data[i].attendance = flipStudentAttendance(id);
+        setStudents(student_data);
+      })
+      .catch(() =>
+        toastify('failure', 'Não foi possível atualizar a presença do aluno')
+      );
   };
 
   return (
@@ -189,10 +219,10 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
                 {students.map((student) => {
                   return (
                     <TableRow key={student.id}>
-                      <td>{student.name}</td>
+                      <td>{student.fullName}</td>
                       {attendance ? (
                         <td>
-                          {student.isPresent ? (
+                          {student.attendance == AttendanceStatus.PRESENT ? (
                             <Button
                               id={`${student.id}`}
                               variant="present"
@@ -211,7 +241,11 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
                           )}
                         </td>
                       ) : (
-                        <td>{student.isPresent ? 'Presente' : 'Ausente'}</td>
+                        <td>
+                          {student.attendance == AttendanceStatus.PRESENT
+                            ? 'Presente'
+                            : 'Ausente'}
+                        </td>
                       )}
                     </TableRow>
                   );
