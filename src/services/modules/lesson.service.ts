@@ -1,4 +1,4 @@
-import { get, patch, post } from '../axios';
+import { get, patch, post, destroy } from '../axios';
 import { lessonMapper, lessonRequestMapper } from '../../data/mapper';
 import {
   Lesson,
@@ -8,7 +8,6 @@ import {
 
 const LessonService = {
   async createLesson(lesson: LessonCreateData, params?: unknown) {
-    console.log('entrou no serviço');
     return await post('lesson/', lessonRequestMapper(lesson), params);
   },
 
@@ -19,6 +18,14 @@ const LessonService = {
     );
 
     return lessonsMapped;
+  },
+
+  async updateLesson(lessonId: number, lesson: LessonCreateData, params?: unknown) {
+    return await patch(`lesson/${lessonId}/`, lessonRequestMapper(lesson), params);
+  },
+
+  async deleteLesson(lessonId: number) {
+    return await destroy(`lesson/${lessonId}/`);
   },
 
   async updateAttendanceRegistrability(lessonId: number, params?: unknown) {

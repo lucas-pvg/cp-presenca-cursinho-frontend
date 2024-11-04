@@ -1,6 +1,6 @@
 .select-input {
   width: 100%;
-  padding: 10px 15px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -37,6 +37,6 @@
   padding: 0 5px;
   font-family: 'Karla', sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
 }

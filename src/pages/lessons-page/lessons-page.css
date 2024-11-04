@@ -1,7 +1,45 @@
+.page.lessons .page-content {
+  gap: 30px;
+}
+
 .lessons .lesson-table {
+  width: 80%;
+}
+
+.lessons .filter-container {
+  width: 70%;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
+  align-items: flex-end;
   gap: 20px;
+}
+
+.lessons .buttons {
+  height: 45%;
+  display: flex;
+  gap: 10px;
+}
+
+.lessons .filters {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px 10px;
+  grid-template-areas:
+    "search search search"
+    "class subject date"
+  ;
+}
+
+.lessons .search {
+  grid-area: search;
+}
+.lessons .class {
+  grid-area: class;
+}
+.lessons .subject {
+  grid-area: subject;
+}
+.lessons .date {
+  grid-area: start;
 }

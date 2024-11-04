@@ -5,17 +5,22 @@ import './hero.css';
 interface HeroProps extends ComponentProps<'div'> {
   title: string;
   description?: string;
+  minimized?: boolean
 }
 
-export const Hero = ({ title, description, ...props }: HeroProps) => {
+export const Hero = ({ title, description, minimized=false,  ...props }: HeroProps) => {
   return (
     <div className={'base-hero'} {...props}>
       <div className="hero-text">
         <h3 className="hero-title">{title ?? 'Hero title'}</h3>
-        {description && <p className="hero-description">{description}</p>}
+        { 
+          description
+          ? <p className="hero-description">{description}</p>
+          : props.children
+        }
       </div>
 
-      <Zombie />
+      { !minimized && <Zombie /> }
     </div>
   );
 };
