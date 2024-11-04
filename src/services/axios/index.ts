@@ -1,4 +1,5 @@
 import Axios, { type AxiosResponse } from 'axios';
+import Services from '..';
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -24,22 +25,25 @@ axios.interceptors.response.use(
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh');
       if (refreshToken) {
-        try {
-          const response = await axios.post('token/refresh/', {
-            refresh: refreshToken,
+        Services.refreshToken({
+          refresh: refreshToken,
+        })
+          .then((response) => {
+            localStorage.setItem('access', response.data.access);
+            originalRequest.headers['Authorization'] =
+              `Bearer ${response.data.access}`;
+            return axios(originalRequest);
+          })
+          .catch((refreshError) => {
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
+            window.location.href = '/auth/login';
+            return Promise.reject(refreshError);
           });
-          localStorage.setItem('access', response.data.access);
-          return axios(originalRequest);
-        } catch (refreshError) {
-          localStorage.removeItem('access');
-          localStorage.removeItem('refresh');
-          window.location.href = '/';
-          return Promise.reject(refreshError);
-        }
       } else {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
-        window.location.href = '/';
+        window.location.href = '/auth/login';
       }
     }
     return Promise.reject(error);
