@@ -4,7 +4,6 @@ import { Navbar } from '../../components/navbar/Navbar';
 import { Header } from '../../components/header/header';
 import './LoggedInLayout.css';
 import { useAuth } from '../../context/useAuth';
-import { toast } from 'react-toastify';
 
 const LoggedInLayout = () => {
   const { isLoggedIn, logout } = useAuth();
@@ -12,7 +11,6 @@ const LoggedInLayout = () => {
 
   useEffect(() => {
     if (!isLoggedIn()) {
-      toast.error('Verifique os dados e tente novamente!');
       navigate('/login', { replace: true });
     }
   }, [isLoggedIn, navigate]);

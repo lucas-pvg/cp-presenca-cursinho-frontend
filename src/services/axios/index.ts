@@ -21,9 +21,16 @@ axios.interceptors.response.use(
   (response: any) => response,
   async (error: any) => {
     const originalRequest = error.config;
+
+    // impede redirects para requisições da area deslogada
+    if (originalRequest.url.includes('token')) {
+      return Promise.reject(error);
+    }
+
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh');
+
       if (refreshToken) {
         Services.refreshToken({
           refresh: refreshToken,
@@ -37,15 +44,16 @@ axios.interceptors.response.use(
           .catch((refreshError) => {
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
-            window.location.href = '/auth/login';
+            window.location.href = '/login';
             return Promise.reject(refreshError);
           });
       } else {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
-        window.location.href = '/auth/login';
+        window.location.href = '/login';
       }
     }
+
     return Promise.reject(error);
   }
 );
