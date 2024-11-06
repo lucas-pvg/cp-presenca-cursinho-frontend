@@ -5,6 +5,8 @@ export interface StudentClassInterface {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export interface StudentClassResponse {
@@ -14,6 +16,8 @@ export interface StudentClassResponse {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export interface StudentClassRequest {
@@ -23,6 +27,8 @@ export interface StudentClassRequest {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export class StudentClass implements StudentClassInterface {
@@ -32,6 +38,8 @@ export class StudentClass implements StudentClassInterface {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 
   constructor(params: StudentClassInterface) {
     this.id = params.id;
@@ -40,6 +48,8 @@ export class StudentClass implements StudentClassInterface {
     this.course = params.course;
     this.modality = params.modality;
     this.subjects = params.subjects;
+    this.start_datetime = params.start_datetime;
+    this.end_datetime = params.end_datetime;
   }
 
   modalityFormat(): string {
@@ -61,6 +71,8 @@ export class StudentClass implements StudentClassInterface {
       course: this.course,
       modality: this.modality,
       subjects: this.subjects,
+      start_datetime: this.start_datetime,
+      end_datetime: this.end_datetime,
     };
   }
 }

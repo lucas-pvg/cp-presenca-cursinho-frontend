@@ -1,6 +1,9 @@
 import { get } from '../axios';
-import { StudentResponse } from '../../data/models/student.model';
-import { studentMapper } from '../../data/mapper';
+import {
+  StudentResponse,
+  StudentWithAttendanceResponse,
+} from '../../data/models/student.model';
+import { studentMapper, studentWithAttendanceMapper } from '../../data/mapper';
 
 const StudentService = {
   async listStudent(params?: unknown) {
@@ -10,6 +13,19 @@ const StudentService = {
     );
 
     return studentMapped;
+  },
+
+  async listStudentWithAttendanceByLesson(lessonId: number, params?: unknown) {
+    const response = await get(`student/lesson_attendance/${lessonId}`, {
+      params,
+    });
+
+    const studentsMapped = response.map(
+      (student: StudentWithAttendanceResponse) =>
+        studentWithAttendanceMapper(student)
+    );
+
+    return studentsMapped;
   },
 };
 
