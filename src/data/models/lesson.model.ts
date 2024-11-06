@@ -10,16 +10,28 @@ export interface LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 }
 
 export interface LessonCreateData {
   name: string;
-  subject: string;
-  studentClass: string;
+  subject?: string;
+  studentClass?: string;
   date: string;
   startTime: string;
   endTime: string;
+  attendanceStart?: string;
+  attendanceEnd?: string;
+  passkey?: string;
+}
+
+export interface LessonFilters {
+  name?: string;
+  subject?: string;
+  student_class?: string;
+  day?: number;
+  start_datetime__gte?: string;
+  start_datetime__lte?: string;
 }
 
 export interface LessonServiceResponse {
@@ -34,19 +46,19 @@ export interface LessonServiceResponse {
   student_class: string;
   course: string;
   passkey: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 }
 
 export interface LessonServiceRequest {
   name: string;
-  subject: string;
-  student_class: string;
+  subject?: string;
+  student_class?: string;
   start_datetime: Date;
   end_datetime: Date;
-  attendance_start_datetime: Date;
-  attendance_end_datetime: Date;
-  is_attendance_registrable: boolean;
-  passkey: string;
+  attendance_start_datetime?: Date;
+  attendance_end_datetime?: Date;
+  is_attendance_registrable?: boolean;
+  passkey?: string;
 }
 
 export class Lesson implements LessonInterface {
@@ -61,7 +73,7 @@ export class Lesson implements LessonInterface {
   isAttendanceRegistrable: boolean;
   passkey: string;
   course: string;
-  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN'
+  status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 
   constructor(params: LessonInterface) {
     this.id = params.id;
@@ -75,7 +87,7 @@ export class Lesson implements LessonInterface {
     this.isAttendanceRegistrable = params.isAttendanceRegistrable;
     this.passkey = params.passkey;
     this.course = params.course;
-    this.status = params.status
+    this.status = params.status;
   }
 
   dateFormat(style: 'medium' | 'short'): string {
@@ -128,5 +140,29 @@ export class Lesson implements LessonInterface {
           .toLocaleTimeString('pt-br', { timeStyle: 'short', hour12: true })
           .replace('AM', '')
           .replace('PM', '');
+  }
+
+  getDateJSON(): string {
+    const year = this.startTime.toLocaleString('default', { year: 'numeric' });
+    const month = this.startTime.toLocaleString('default', {
+      month: '2-digit',
+    });
+    const day = this.startTime.toLocaleString('default', { day: '2-digit' });
+
+    return year + '-' + month + '-' + day;
+  }
+
+  toDict(): LessonCreateData {
+    return {
+      name: this.name,
+      subject: this.subject,
+      studentClass: this.studentClass,
+      date: this.getDateJSON(),
+      startTime: this.startTime.toTimeString().split(' ')[0],
+      endTime: this.endTime.toTimeString().split(' ')[0],
+      attendanceStart: this.startAttendance.toTimeString().split(' ')[0],
+      attendanceEnd: this.endAttendance.toTimeString().split(' ')[0],
+      passkey: this.passkey,
+    };
   }
 }

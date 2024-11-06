@@ -17,7 +17,7 @@ const optionListVariants = cva('option-list', {
 interface OptionListProps extends VariantProps<typeof optionListVariants> {
   mode?: 'light' | 'dark';
   labels: Array<string>;
-  index?: number
+  index?: number;
   setIndex?: (index: number) => void;
 }
 

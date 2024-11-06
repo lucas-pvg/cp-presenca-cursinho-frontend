@@ -14,21 +14,30 @@
 }
 
 .table-header {
-  border-bottom: 1px solid ;
+  border-bottom: 1px solid;
   background: var(--blue-grad);
   color: var(--base-white);
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  
+
   th {
+    width: fit-content;
+    max-width: 40%;
     font-weight: 600;
     text-align: start;
-    padding: 12px 20px;
+    padding: 12px 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  th:nth-of-type(n+2) {
+  /* th:nth-of-type(n+2) {
     width: 20%;
     white-space: nowrap;
+  } */
+
+  th:first-of-type {
+    width: 100%;
   }
 }
 
@@ -42,28 +51,36 @@
 
 .table-row,
 .table-footer {
-  font-family: "Karla", sans-serif;
+  font-family: 'Karla', sans-serif;
   font-size: 12px;
   border-bottom: 1px solid;
 
-  transition:
-    background-color .2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
   td {
+    width: fit-content;
+    max-width: 40%;
     font-weight: 400;
     text-align: start;
-    padding: 12px 20px;
+    padding: 12px 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  td:nth-of-type(n+2) {
-    width: 20%;
+  /* td:nth-of-type(n+2) {
+    width: 10%;
     white-space: nowrap;
+  } */
+
+  td:first-of-type {
+    width: 100%;
   }
 }
 
 .attendance-table .table-row {
   td {
-    padding: 5px 20px;
+    padding: 5px 30px;
   }
 }
 
@@ -101,7 +118,6 @@
   opacity: 30%;
 }
 
-
 .base-table .click .icon {
   width: 50px;
   display: table-cell;
@@ -126,8 +142,7 @@
 .table-footer .icon {
   cursor: pointer;
 
-  transition: 
-    transform .1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
 }
 
 .table-footer .icon:hover {

@@ -1,14 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { cva, VariantProps } from 'class-variance-authority';
 import { ModalHeader } from '../modal-components/modal-header';
 import { ModalRow } from '../modal-components/modal-row';
 import { ModalFooter } from '../modal-components/modal-footer';
 import { ModalWarning } from '../modal-components/modal-warning';
 
-import { Subject } from '../../../data/models/subject.model';
+import { Lesson } from '../../../data/models/lesson.model';
 import Services from '../../../services';
 import '../modal.css';
 
-const deleteSubjectVariants = cva('base-modal input-modal', {
+const deleteLessonVariants = cva('base-modal', {
   variants: {
     mode: {
       light: 'light',
@@ -20,29 +21,30 @@ const deleteSubjectVariants = cva('base-modal input-modal', {
   },
 });
 
-interface DeleteSubjectProps
-  extends VariantProps<typeof deleteSubjectVariants> {
+interface DeleteLessonProps extends VariantProps<typeof deleteLessonVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
-  subject: Subject;
+  lesson: Lesson;
   onSuccess?: () => void;
   onFailure?: (err: any) => void;
   close: () => void;
 }
 
-export function DeleteSubject({
+export function DeleteLesson({
   mode,
   variant,
-  subject,
+  lesson,
   onSuccess,
   onFailure,
   close,
-}: DeleteSubjectProps) {
+}: DeleteLessonProps) {
+  const navigate = useNavigate();
   const handleSubmit = () => {
-    Services.deleteSubject(subject.id)
+    Services.deleteLesson(lesson.id)
       .then((res) => {
         onSuccess && onSuccess();
         console.log(res);
+        navigate('/lessons');
         close();
       })
       .catch((err) => {
@@ -52,20 +54,20 @@ export function DeleteSubject({
   };
 
   return (
-    <div className={deleteSubjectVariants({ mode })}>
-      <ModalHeader title="Deletar frente" variant={variant} mode={mode} />
+    <div className={deleteLessonVariants({ mode })}>
+      <ModalHeader title="Deletar aula" variant={variant} mode={mode} />
 
       <div className="modal-content">
         <div className="content-body">
           <ModalRow labels={[]} mode={mode}>
-            <p>{`Tem certeza que deseja deletar a frente ${subject.name}?`}</p>
+            <p>{`Tem certeza que deseja deletar a aula ${lesson.name}?`}</p>
           </ModalRow>
         </div>
 
         <hr className="divider" />
         <ModalWarning
           mode={mode}
-          description="Isso deletará todas as aulas marcadas para essa frente!"
+          description="Isso deletará apenas essa aula em específico."
         />
         <ModalFooter
           mode={mode}

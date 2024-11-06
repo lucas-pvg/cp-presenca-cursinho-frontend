@@ -7,6 +7,12 @@ export interface Attendance {
   status: AttendanceStatus;
 }
 
+export interface AttendanceRequest {
+  student: number;
+  lesson: number;
+  status: AttendanceStatus;
+}
+
 export enum AttendanceStatus {
   PRESENT = 'P',
   ABSENT = 'A',

@@ -17,7 +17,7 @@ export const lessonMapper = (lesson: LessonServiceResponse): Lesson =>
     studentClass: lesson.student_class,
     course: lesson.course,
     passkey: lesson.passkey,
-    status: lesson.status
+    status: lesson.status,
   });
 
 export const lessonRequestMapper = (
@@ -26,15 +26,22 @@ export const lessonRequestMapper = (
   const startDatetime: Date = new Date(`${lesson.date}T${lesson.startTime}`);
   const endDatetime: Date = new Date(`${lesson.date}T${lesson.endTime}`);
 
+  const startAttendance: Date = lesson.attendanceStart
+    ? new Date(`${lesson.date}T${lesson.attendanceStart}`)
+    : startDatetime;
+
+  const endAttendance: Date = lesson.attendanceEnd
+    ? new Date(`${lesson.date}T${lesson.attendanceEnd}`)
+    : endDatetime;
+
   return {
     name: lesson.name,
     subject: lesson.subject,
     student_class: lesson.studentClass,
     start_datetime: startDatetime,
     end_datetime: endDatetime,
-    attendance_start_datetime: startDatetime,
-    attendance_end_datetime: endDatetime,
-    is_attendance_registrable: false,
-    passkey: 'CURSINHO',
+    attendance_start_datetime: startAttendance,
+    attendance_end_datetime: endAttendance,
+    passkey: lesson.passkey ?? 'CURSINHO',
   };
 };

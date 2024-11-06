@@ -24,13 +24,13 @@ function App() {
       <ToastContainer />
       <UserProvider>
         <Routes>
-          <Route path="/auth/" element={<LoggedOutLayout />}>
+          <Route path="/login" element={<LoggedOutLayout />}>
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route
               path="password-reset/:token"
               element={<ResetPasswordPage />}
             />
-            <Route path="login" element={<LoginPage />} />
+            <Route index element={<LoginPage />} />
           </Route>
           <Route path="/" element={<LoggedInLayout />}>
             <Route index element={<HomePage />} />

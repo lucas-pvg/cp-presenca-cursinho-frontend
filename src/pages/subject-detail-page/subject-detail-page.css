@@ -60,8 +60,7 @@
   color: var(--red-inverse);
   margin-bottom: 5px;
   cursor: pointer;
-  transition: 
-    transform .1s ease-in-out
+  transition: transform 0.1s ease-in-out;
 }
 
 .subject-detail .delete-icon:hover {

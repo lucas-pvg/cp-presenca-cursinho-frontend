@@ -5,14 +5,11 @@ import { ModalRow } from '../modal-components/modal-row';
 import { ModalFooter } from '../modal-components/modal-footer';
 import { Input } from '../../input/input';
 
-import {
-  SubjectCreateData,
-  MainSubject,
-} from '../../../data/models/subject.model';
+import { Subject, SubjectCreateData } from '../../../data/models/subject.model';
 import Services from '../../../services';
 import '../modal.css';
 
-const createSubjectVariants = cva('base-modal input-modal', {
+const editSubjectVariants = cva('base-modal input-modal', {
   variants: {
     mode: {
       light: 'light',
@@ -24,27 +21,26 @@ const createSubjectVariants = cva('base-modal input-modal', {
   },
 });
 
-interface createSubjectProps
-  extends VariantProps<typeof createSubjectVariants> {
+interface EditSubjectProps extends VariantProps<typeof editSubjectVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
-  mainSubject: string;
+  subject: Subject;
   onSuccess?: () => void;
   onFailure?: (err: any) => void;
   close: () => void;
 }
 
-export function CreateSubject({
+export function EditSubject({
   mode,
   variant,
-  mainSubject,
+  subject,
   onSuccess,
   onFailure,
   close,
-}: createSubjectProps) {
+}: EditSubjectProps) {
   const [subjectData, setSubjectData] = useState<SubjectCreateData>({
     name: '',
-    mainSubject: mainSubject,
+    mainSubject: subject.mainSubject,
   });
 
   const handleChange = (e: any) => {
@@ -54,7 +50,7 @@ export function CreateSubject({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    Services.createSubject(subjectData)
+    Services.updateSubject(subject.id, subjectData)
       .then((res) => {
         onSuccess && onSuccess();
         console.log(res);
@@ -66,22 +62,18 @@ export function CreateSubject({
       });
   };
 
-  const getMainSubjectName = () => {
-    return MainSubject.filter((main) => main.id === mainSubject)[0].name;
-  };
-
   return (
-    <div className={createSubjectVariants({ mode })}>
+    <div className={editSubjectVariants({ mode })}>
       <ModalHeader
-        title="Criar frente"
-        description={`Crie uma frente na disciplina de ${getMainSubjectName()}`}
+        title="Editar frente"
+        description={`Edite o nome da frente ${subject.name}`}
         variant={variant}
         mode={mode}
       />
 
       <div className="modal-content">
         <div className="content-body">
-          <form id="subject-form" onSubmit={handleSubmit}>
+          <form id="edit-subject-form" onSubmit={handleSubmit}>
             <ModalRow labels={['Nome da frente']} mode={mode}>
               <Input
                 type="text"
@@ -90,7 +82,6 @@ export function CreateSubject({
                 placeholder="Geometria"
                 mode={mode}
                 onChange={handleChange}
-                required
               />
             </ModalRow>
           </form>
@@ -99,7 +90,7 @@ export function CreateSubject({
         <ModalFooter
           mode={mode}
           type="submit"
-          form="subject-form"
+          form="edit-subject-form"
           close={() => close()}
         />
       </div>

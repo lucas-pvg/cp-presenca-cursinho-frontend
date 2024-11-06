@@ -3,11 +3,10 @@
   display: grid;
   grid-template-rows: 45px 2fr 3fr;
   grid-template-columns: 1fr 2fr;
-  grid-template-areas: 
-    "header header"
-    "info table"
-    ". table"
-  ;
+  grid-template-areas:
+    'header header'
+    'info table'
+    '. table';
   gap: 40px;
 }
 

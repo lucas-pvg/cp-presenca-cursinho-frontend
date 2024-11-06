@@ -5,8 +5,10 @@ import StudentService from './modules/student.service';
 import StudentClassService from './modules/student-class.service';
 import LoginService from './modules/login.service';
 import UserService from './modules/user.service';
+import AttendanceService from './modules/attendance.service';
 
 const Services = {
+  ...AttendanceService,
   ...LessonService,
   ...SubjectService,
   ...RecurrencyService,

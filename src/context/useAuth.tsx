@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: Props) => {
     if (accessToken && refreshToken) {
       Services.retrieveSelfUser()
         .then((response) => {
-          setUser(response.data);
+          setUser(response);
         })
         .catch(() => {
           setUser(null);
@@ -42,10 +42,9 @@ export const UserProvider = ({ children }: Props) => {
     setIsReady(true);
   }, []);
 
-  const loginUser = async (email: string, password: string): Promise<void> => {
-    try {
-      const response = await Services.login({ email, password });
-      if (response) {
+  const loginUser = async (email: string, password: string) => {
+    Services.login({ email, password })
+      .then((response) => {
         localStorage.setItem('access', response.access);
         localStorage.setItem('refresh', response.refresh);
         setToken({
@@ -54,10 +53,10 @@ export const UserProvider = ({ children }: Props) => {
         });
         toast.success('Login realizado com sucesso');
         navigate('/');
-      }
-    } catch (error) {
-      toast.error('Ocorreu um erro ao realizar o login');
-    }
+      })
+      .catch(() => {
+        toast.error('Verifique as credenciais e tente novamente!');
+      });
   };
 
   const isLoggedIn = () => {
@@ -72,7 +71,7 @@ export const UserProvider = ({ children }: Props) => {
     setUser(null);
     setToken({ access: '', refresh: '' });
     toast.success('Logout realizado com sucesso');
-    navigate('/auth/login');
+    navigate('/login');
   };
 
   return (
