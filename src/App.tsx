@@ -16,6 +16,7 @@ import { UserProvider } from './context/useAuth';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { ResetPasswordPage } from './pages/reset-password-page/ResetPasswordPage';
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoggedOutLayout />}>
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route
+              path="password-reset/:token"
+              element={<ResetPasswordPage />}
+            />
             <Route index element={<LoginPage />} />
           </Route>
           <Route path="/" element={<LoggedInLayout />}>

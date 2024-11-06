@@ -10,7 +10,7 @@ const TableRowVariants = cva('table-row', {
     },
     disabled: {
       true: 'disabled',
-      false: 'enabled'
+      false: 'enabled',
     },
     mode: {
       light: 'light',
@@ -20,7 +20,7 @@ const TableRowVariants = cva('table-row', {
   defaultVariants: {
     mode: 'light',
     clickable: true,
-    disabled: false
+    disabled: false,
   },
 });
 
@@ -31,7 +31,12 @@ interface TableRowProps
   clickable?: boolean;
 }
 
-export function TableRow({ mode, clickable, disabled, ...props }: TableRowProps) {
+export function TableRow({
+  mode,
+  clickable,
+  disabled,
+  ...props
+}: TableRowProps) {
   return (
     <tr className={TableRowVariants({ mode, clickable, disabled })} {...props}>
       {props.children}

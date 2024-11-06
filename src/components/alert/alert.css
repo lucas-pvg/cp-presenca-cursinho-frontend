@@ -11,7 +11,7 @@
   transform: translate(-25%, 0);
 
   border-radius: 12px;
-  background: #CBFCBC;
+  background: #cbfcbc;
   box-shadow: 4px 4px 30px 0 var(--shadow-base);
 }
 
@@ -32,8 +32,7 @@
 
 .base-alert .close-alert-icon {
   cursor: pointer;
-  transition: 
-    transform .1s ease-in-out
+  transition: transform 0.1s ease-in-out;
 }
 
 .base-alert .close-alert-icon:hover {
@@ -41,23 +40,33 @@
 }
 
 .alert-open {
-  animation: alert-open .2s ease-in-out;
+  animation: alert-open 0.2s ease-in-out;
   display: flex;
 }
 
 .alert-close {
-  animation: alert-close .2s ease-in-out;
+  animation: alert-close 0.2s ease-in-out;
   display: none;
 }
 
 @keyframes alert-open {
-  from {top: -20%;}
-  to {top: 3%;}
+  from {
+    top: -20%;
+  }
+  to {
+    top: 3%;
+  }
 }
 
 @keyframes alert-close {
   /* from {top: 3%; display: flex;}
   to {top: -20%; display: none;} */
-  from {opacity: 100%; display: flex;}
-  to {opacity: 0%; display: none;}
+  from {
+    opacity: 100%;
+    display: flex;
+  }
+  to {
+    opacity: 0%;
+    display: none;
+  }
 }

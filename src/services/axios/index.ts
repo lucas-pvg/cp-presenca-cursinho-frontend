@@ -1,4 +1,5 @@
 import Axios, { type AxiosResponse } from 'axios';
+import Services from '..';
 
 const deployedApiUrl = '/choreo-apis/monitoramento-de-presenca/backend/v1';
 
@@ -22,17 +23,39 @@ axios.interceptors.response.use(
   (response: any) => response,
   async (error: any) => {
     const originalRequest = error.config;
+
+    // impede redirects para requisições da area deslogada
+    if (originalRequest.url.includes('token')) {
+      return Promise.reject(error);
+    }
+
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh');
+
       if (refreshToken) {
-        const response = await axios.post('token/refresh/', {
+        Services.refreshToken({
           refresh: refreshToken,
-        });
-        localStorage.setItem('access', response.data.access);
-        return axios(originalRequest);
+        })
+          .then((response) => {
+            localStorage.setItem('access', response.data.access);
+            originalRequest.headers['Authorization'] =
+              `Bearer ${response.data.access}`;
+            return axios(originalRequest);
+          })
+          .catch((refreshError) => {
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
+            window.location.href = '/login';
+            return Promise.reject(refreshError);
+          });
+      } else {
+        localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
+        window.location.href = '/login';
       }
     }
+
     return Promise.reject(error);
   }
 );

@@ -24,31 +24,40 @@ const editLessonVariants = cva('base-modal input-modal', {
 interface EditLessonProps extends VariantProps<typeof editLessonVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
-  lesson: Lesson
+  lesson: Lesson;
   onSuccess?: () => void;
   onFailure?: (err: any) => void;
   close: () => void;
 }
 
-export function EditLesson({ mode, variant, lesson, onSuccess, onFailure, close }: EditLessonProps) {
-  const [lessonData, setLessonData] = useState<LessonCreateData>(lesson.toDict());
+export function EditLesson({
+  mode,
+  variant,
+  lesson,
+  onSuccess,
+  onFailure,
+  close,
+}: EditLessonProps) {
+  const [lessonData, setLessonData] = useState<LessonCreateData>(
+    lesson.toDict()
+  );
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setLessonData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(lessonData)
+    console.log(lessonData);
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     Services.updateLesson(lesson.id, lessonData)
       .then((res) => {
-        onSuccess && onSuccess()
+        onSuccess && onSuccess();
         console.log(res);
         close();
       })
       .catch((err) => {
-        onFailure && onFailure(err)
+        onFailure && onFailure(err);
         console.log(err);
       });
   };
@@ -64,7 +73,7 @@ export function EditLesson({ mode, variant, lesson, onSuccess, onFailure, close 
 
       <div className="modal-content">
         <div className="content-body">
-          <form action='' id="lesson-form" onSubmit={handleSubmit}>
+          <form action="" id="lesson-form" onSubmit={handleSubmit}>
             <ModalRow labels={['Nome do evento']} mode={mode}>
               <Input
                 type="text"
@@ -100,14 +109,17 @@ export function EditLesson({ mode, variant, lesson, onSuccess, onFailure, close 
               <Input
                 type="time"
                 names={['attendanceStart', 'attendanceEnd']}
-                values={[lessonData.attendanceStart!, lessonData.attendanceEnd!]}
+                values={[
+                  lessonData.attendanceStart!,
+                  lessonData.attendanceEnd!,
+                ]}
                 mode={mode}
                 onChange={handleChange}
                 required
               />
               <Input
                 type="text"
-                name='passkey'
+                name="passkey"
                 value={lessonData.passkey}
                 mode={mode}
                 onChange={handleChange}
@@ -121,8 +133,8 @@ export function EditLesson({ mode, variant, lesson, onSuccess, onFailure, close 
         <ModalFooter
           mode={mode}
           close={() => close()}
-          form='lesson-form'
-          type='submit'
+          form="lesson-form"
+          type="submit"
         />
       </div>
     </div>

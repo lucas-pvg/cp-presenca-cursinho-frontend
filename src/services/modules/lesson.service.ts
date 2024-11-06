@@ -20,8 +20,16 @@ const LessonService = {
     return lessonsMapped;
   },
 
-  async updateLesson(lessonId: number, lesson: LessonCreateData, params?: unknown) {
-    return await patch(`lesson/${lessonId}/`, lessonRequestMapper(lesson), params);
+  async updateLesson(
+    lessonId: number,
+    lesson: LessonCreateData,
+    params?: unknown
+  ) {
+    return await patch(
+      `lesson/${lessonId}/`,
+      lessonRequestMapper(lesson),
+      params
+    );
   },
 
   async deleteLesson(lessonId: number) {

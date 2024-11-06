@@ -32,7 +32,13 @@ interface CreateLessonProps extends VariantProps<typeof createLessonVariants> {
   close: () => void;
 }
 
-export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: CreateLessonProps) {
+export function CreateLesson({
+  mode,
+  variant,
+  onSuccess,
+  onFailure,
+  close,
+}: CreateLessonProps) {
   const [subjects, setSubjects] = useState(Array<Subject>);
   useEffect(() => {
     Services.listSubjects()
@@ -70,15 +76,15 @@ export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: Cre
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     Services.createLesson(lessonData)
       .then((res) => {
-        onSuccess && onSuccess()
+        onSuccess && onSuccess();
         console.log(res);
         close();
       })
       .catch((err) => {
-        onFailure && onFailure(err)
+        onFailure && onFailure(err);
         console.log(err);
       });
   };
@@ -94,7 +100,7 @@ export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: Cre
 
       <div className="modal-content">
         <div className="content-body">
-          <form action='' id="lesson-form" onSubmit={handleSubmit}>
+          <form action="" id="lesson-form" onSubmit={handleSubmit}>
             <ModalRow labels={['Nome do evento']} mode={mode}>
               <Input
                 type="text"
@@ -162,8 +168,8 @@ export function CreateLesson({ mode, variant, onSuccess, onFailure, close }: Cre
         <ModalFooter
           mode={mode}
           close={() => close()}
-          form='lesson-form'
-          type='submit'
+          form="lesson-form"
+          type="submit"
         />
       </div>
     </div>

@@ -1,6 +1,9 @@
-import { get, post, patch, destroy } from "../axios"
-import { subjectMapper, subjectRequestMapper } from "../../data/mapper";
-import { SubjectCreateData, SubjectServiceResponse } from "../../data/models/subject.model";
+import { get, post, patch, destroy } from '../axios';
+import { subjectMapper, subjectRequestMapper } from '../../data/mapper';
+import {
+  SubjectCreateData,
+  SubjectServiceResponse,
+} from '../../data/models/subject.model';
 
 const SubjectService = {
   async createSubject(subject: SubjectCreateData, params?: unknown) {
@@ -27,16 +30,24 @@ const SubjectService = {
       subjectMapper(subject)
     );
 
-    return subjectMapped
+    return subjectMapped;
   },
 
-  async updateSubject(subjectId: number, subject: SubjectCreateData, params?: unknown) {
-    return await patch(`subject/${subjectId}/`, subjectRequestMapper(subject), params);
+  async updateSubject(
+    subjectId: number,
+    subject: SubjectCreateData,
+    params?: unknown
+  ) {
+    return await patch(
+      `subject/${subjectId}/`,
+      subjectRequestMapper(subject),
+      params
+    );
   },
 
   async deleteSubject(subjectId: number) {
-    return await destroy(`subject/${subjectId}/`)
-  }
-}
+    return await destroy(`subject/${subjectId}/`);
+  },
+};
 
 export default SubjectService;

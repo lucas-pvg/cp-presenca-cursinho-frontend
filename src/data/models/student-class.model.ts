@@ -5,6 +5,8 @@ export interface StudentClassInterface {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export interface StudentClassResponse {
@@ -14,6 +16,8 @@ export interface StudentClassResponse {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export interface StudentClassRequest {
@@ -23,6 +27,8 @@ export interface StudentClassRequest {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 }
 
 export class StudentClass implements StudentClassInterface {
@@ -32,14 +38,18 @@ export class StudentClass implements StudentClassInterface {
   course?: string;
   modality: string;
   subjects: number[];
+  start_datetime?: Date;
+  end_datetime?: Date;
 
   constructor(params: StudentClassInterface) {
-    this.id = params.id
-    this.name = params.name
-    this.classroom = params.classroom
-    this.course = params.course
-    this.modality = params.modality
-    this.subjects = params.subjects
+    this.id = params.id;
+    this.name = params.name;
+    this.classroom = params.classroom;
+    this.course = params.course;
+    this.modality = params.modality;
+    this.subjects = params.subjects;
+    this.start_datetime = params.start_datetime;
+    this.end_datetime = params.end_datetime;
   }
 
   modalityFormat(): string {
@@ -49,18 +59,20 @@ export class StudentClass implements StudentClassInterface {
       case 'IN':
         return 'Presencial';
       default:
-        return 'Modalidade não listada'
+        return 'Modalidade não listada';
     }
   }
 
   toDict(): StudentClassInterface {
-    return ({
+    return {
       id: this.id,
       name: this.name,
       classroom: this.classroom,
       course: this.course,
       modality: this.modality,
-      subjects: this.subjects
-    })
+      subjects: this.subjects,
+      start_datetime: this.start_datetime,
+      end_datetime: this.end_datetime,
+    };
   }
 }
