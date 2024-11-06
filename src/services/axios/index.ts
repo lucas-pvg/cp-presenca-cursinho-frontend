@@ -24,22 +24,11 @@ axios.interceptors.response.use(
       originalRequest._retry = true;
       const refreshToken = localStorage.getItem('refresh');
       if (refreshToken) {
-        try {
-          const response = await axios.post('token/refresh/', {
-            refresh: refreshToken,
-          });
-          localStorage.setItem('access', response.data.access);
-          return axios(originalRequest);
-        } catch (refreshError) {
-          localStorage.removeItem('access');
-          localStorage.removeItem('refresh');
-          window.location.href = '/';
-          return Promise.reject(refreshError);
-        }
-      } else {
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
-        window.location.href = '/';
+        const response = await axios.post('token/refresh/', {
+          refresh: refreshToken,
+        });
+        localStorage.setItem('access', response.data.access);
+        return axios(originalRequest);
       }
     }
     return Promise.reject(error);

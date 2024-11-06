@@ -1,4 +1,4 @@
-import { To } from 'react-router-dom';
+import { To, useNavigate } from 'react-router-dom';
 import { Icon } from '../../icon/icon';
 
 import './dropdown-item.css';
@@ -10,13 +10,17 @@ interface DropDownItemProps {
 }
 
 export const DropDownItem = (props: DropDownItemProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="item-container">
       <Icon
         className="dropdown-icon"
         iconType={props.icon}
-        to={props.to ? props.to : ''}
         size={14}
+        onClick={() => {
+          navigate(props.to as string);
+        }}
       />
       <p className="body">{props.body}</p>
     </div>
