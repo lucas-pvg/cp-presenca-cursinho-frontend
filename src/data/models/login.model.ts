@@ -10,3 +10,8 @@ export interface ForgotPasswordData {
 export interface RefreshTokenData {
   refresh: string;
 }
+
+export interface ResetPasswordData {
+  password: string;
+  token: string;
+}

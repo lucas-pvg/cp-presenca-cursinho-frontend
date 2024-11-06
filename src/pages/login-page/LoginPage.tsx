@@ -53,7 +53,7 @@ export function LoginPage() {
           Login
         </Button>
       </form>
-      <Link className="forgot-password" to={'/forgot-password'}>
+      <Link className="forgot-password" to={'/auth/forgot-password'}>
         Esqueci minha senha
       </Link>
     </>
