@@ -44,13 +44,13 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   const [lessons, setLessons] = useState(Array<Lesson>);
   useEffect(() => {
     !isModalOpen &&
-    Services.listLessonsWithDetails()
-      .then((data) => {
-        setLessons(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      Services.listLessonsWithDetails()
+        .then((data) => {
+          setLessons(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }, [isModalOpen]);
 
   const [subjects, setSubjects] = useState(Array<Subject>);
@@ -88,9 +88,11 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
   };
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const filters = Object.fromEntries(Object.entries(lessonFilters).filter(([_, v]) => v !== ''));
+    const filters = Object.fromEntries(
+      Object.entries(lessonFilters).filter(([_, v]) => v !== '')
+    );
     Services.listLessonsWithDetails(filters)
       .then((data) => {
         setLessons(data);
@@ -98,7 +100,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const resetFilters = () => {
     setLessonFilters({
@@ -106,7 +108,7 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       subject: '',
       student_class: '',
       start_datetime__gte: '',
-    })
+    });
 
     Services.listLessonsWithDetails()
       .then((data) => {
@@ -115,10 +117,9 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   return (
-
     <>
       <div className={LessonsPageVariants({ mode })} {...props}>
         <Hero
@@ -137,10 +138,15 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
         </CardMenu>
 
         <div className="page-content">
-          <div className='filter-container'>
-            <form className='filters' id='filter-lesson-form' method='GET' onSubmit={handleSubmit}>
+          <div className="filter-container">
+            <form
+              className="filters"
+              id="filter-lesson-form"
+              method="GET"
+              onSubmit={handleSubmit}
+            >
               <Search
-                className='search'
+                className="search"
                 name="name"
                 placeholder="Nome da Aula"
                 value={lessonFilters.name}
@@ -159,7 +165,6 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
                   </option>
                 ))}
               </SelectInput>
-
 
               <SelectInput
                 placeholder="-- Disciplina --"
@@ -183,52 +188,48 @@ export function LessonsPage({ mode, ...props }: LessonsPageProps) {
               />
             </form>
 
-            <div className='buttons'>
-              <Button type='submit' form='filter-lesson-form'>
-                <Icon iconType='search' size={16} />
+            <div className="buttons">
+              <Button type="submit" form="filter-lesson-form">
+                <Icon iconType="search" size={16} />
               </Button>
 
               <Button onClick={resetFilters}>
-                <Icon iconType='x' size={16} />
+                <Icon iconType="x" size={16} />
               </Button>
             </div>
           </div>
-          
 
           <div className="lesson-table">
             <Table
               clickable={true}
               header={['Aula', 'Data', 'Hora', 'Turma', 'Matéria']}
             >
-              {
-                lessons.map((lesson) => {
-                  return (
-                    <TableRow
-                      key={lesson.id}
-                      onClick={() => nav(`/lessons/${lesson.id}`)}
-                    >
-                      <td>{lesson.name}</td>
-                      <td>{lesson.dateFormat('medium')}</td>
-                      <td>{lesson.startTimeFormat()}</td>
-                      <td>{lesson.studentClass}</td>
-                      <td>{lesson.subject}</td>
-                    </TableRow>
-                  );
-                })
-              }
+              {lessons.map((lesson) => {
+                return (
+                  <TableRow
+                    key={lesson.id}
+                    onClick={() => nav(`/lessons/${lesson.id}`)}
+                  >
+                    <td>{lesson.name}</td>
+                    <td>{lesson.dateFormat('medium')}</td>
+                    <td>{lesson.startTimeFormat()}</td>
+                    <td>{lesson.studentClass}</td>
+                    <td>{lesson.subject}</td>
+                  </TableRow>
+                );
+              })}
             </Table>
           </div>
         </div>
       </div>
 
-      {
-        isModalOpen &&
+      {isModalOpen && (
         <LessonModal
           mode="light"
-          type='create'
+          type="create"
           close={() => setIsModalOpen(false)}
         />
-      }
+      )}
     </>
   );
 }

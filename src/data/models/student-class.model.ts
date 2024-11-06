@@ -34,12 +34,12 @@ export class StudentClass implements StudentClassInterface {
   subjects: number[];
 
   constructor(params: StudentClassInterface) {
-    this.id = params.id
-    this.name = params.name
-    this.classroom = params.classroom
-    this.course = params.course
-    this.modality = params.modality
-    this.subjects = params.subjects
+    this.id = params.id;
+    this.name = params.name;
+    this.classroom = params.classroom;
+    this.course = params.course;
+    this.modality = params.modality;
+    this.subjects = params.subjects;
   }
 
   modalityFormat(): string {
@@ -49,18 +49,18 @@ export class StudentClass implements StudentClassInterface {
       case 'IN':
         return 'Presencial';
       default:
-        return 'Modalidade não listada'
+        return 'Modalidade não listada';
     }
   }
 
   toDict(): StudentClassInterface {
-    return ({
+    return {
       id: this.id,
       name: this.name,
       classroom: this.classroom,
       course: this.course,
       modality: this.modality,
-      subjects: this.subjects
-    })
+      subjects: this.subjects,
+    };
   }
 }

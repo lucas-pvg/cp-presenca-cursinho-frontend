@@ -20,7 +20,6 @@ import Services from '../../services';
 
 import './student-class-page.css';
 
-
 const StudentClassPageVariants = cva('student-class page', {
   variants: {
     mode: {
@@ -45,24 +44,26 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   // const [selectedStudents, setSelectedStudents] = useState<StudentSelect[]>([]);
 
   const [modalState, setModalState] = useState(false);
-  const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>('create')
+  const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>(
+    'create'
+  );
   const openModal = (type: 'create' | 'update' | 'delete') => {
-    setModalType(type)
-    setModalState(true)
-  }
+    setModalType(type);
+    setModalState(true);
+  };
 
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [classIndex, setClassIndex] = useState(0);
   useEffect(() => {
     !modalState &&
-    Services.listStudentClasses()
-      .then((data) => {
-        setStudentClasses(data);
-        setClassIndex((prev) => prev >= data.length ? 0 : prev)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      Services.listStudentClasses()
+        .then((data) => {
+          setStudentClasses(data);
+          setClassIndex((prev) => (prev >= data.length ? 0 : prev));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }, [modalState]);
 
   // const handleCheckboxChange = (id: number) => {
@@ -95,67 +96,78 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
 
   return (
     <>
-    <div className={StudentClassPageVariants({ mode })} {...props}>
-      <Hero
-        title="Turmas"
-        description="Crie e edite suas turmas e gerencie seus alunos que pertencem a cada uma delas." />
-
-      <CardMenu className="menu">
-        <Card
-          to=""
-          label="Adicionar"
-          mode="light"
-          onClick={() => openModal('create')}
+      <div className={StudentClassPageVariants({ mode })} {...props}>
+        <Hero
+          title="Turmas"
+          description="Crie e edite suas turmas e gerencie seus alunos que pertencem a cada uma delas."
         />
-        <Card to="" label="Métricas" mode="light" />
-      </CardMenu>
 
-      <div className="page-content">
-        {
-          studentClasses.length > 0 &&
-          <div className='content'>
-            <div className='classes-header'>
-              <OptionList
-                labels={studentClasses.map((st) => st.name)}
-                index={classIndex}
-                setIndex={setClassIndex}
-              />
+        <CardMenu className="menu">
+          <Card
+            to=""
+            label="Adicionar"
+            mode="light"
+            onClick={() => openModal('create')}
+          />
+          <Card to="" label="Métricas" mode="light" />
+        </CardMenu>
 
-              <Button variant='outline' onClick={() => openModal('update')}>Editar</Button>
-              <Button onClick={() => openModal('delete')}>Excluir</Button>
+        <div className="page-content">
+          {studentClasses.length > 0 && (
+            <div className="content">
+              <div className="classes-header">
+                <OptionList
+                  labels={studentClasses.map((st) => st.name)}
+                  index={classIndex}
+                  setIndex={setClassIndex}
+                />
+
+                <Button variant="outline" onClick={() => openModal('update')}>
+                  Editar
+                </Button>
+                <Button onClick={() => openModal('delete')}>Excluir</Button>
+              </div>
+
+              <div className="classes-info">
+                <TextCard iconType="book" label="Curso">
+                  {studentClasses?.[classIndex].course ?? 'Não definido'}
+                </TextCard>
+                <TextCard iconType="clipboard" label="Sala">
+                  {studentClasses?.[classIndex].classroom ?? 'Não definido'}
+                </TextCard>
+                <TextCard iconType="calendar" label="Modalidade">
+                  {studentClasses?.[classIndex].modalityFormat() ??
+                    'Não definido'}
+                </TextCard>
+                <TextCard iconType="users" label="Alunos">
+                  {8}
+                </TextCard>
+              </div>
+
+              <div className="classes-table">
+                <Input type="text" />
+
+                <Table
+                  mode="light"
+                  itemsPerPage={8}
+                  clickable={true}
+                  header={['Nome do aluno']}
+                >
+                  {students.map((student) => {
+                    return (
+                      <TableRow key={student.id}>
+                        <td>{student.name}</td>
+                      </TableRow>
+                    );
+                  })}
+                </Table>
+
+                <Button>Adicionar Aluno</Button>
+              </div>
             </div>
+          )}
 
-            <div className='classes-info'>
-              <TextCard iconType='book' label='Curso'>{studentClasses?.[classIndex].course ?? 'Não definido'}</TextCard>
-              <TextCard iconType='clipboard' label='Sala'>{studentClasses?.[classIndex].classroom ?? 'Não definido'}</TextCard>
-              <TextCard iconType='calendar' label='Modalidade'>{studentClasses?.[classIndex].modalityFormat() ?? 'Não definido'}</TextCard>
-              <TextCard iconType='users' label='Alunos'>{8}</TextCard>
-            </div>
-
-            <div className='classes-table'>
-              <Input type='text' />
-
-              <Table mode='light' itemsPerPage={8} clickable={true} header={['Nome do aluno']}>
-                {
-                  students.map((student) => { return (
-                    <TableRow key={student.id}>
-                      <td>{student.name}</td>
-                    </TableRow>
-                  )})
-                }
-              </Table>
-
-              <Button>Adicionar Aluno</Button>
-            </div>
-          </div>
-        }
-          
-        
-        
-        
-
-
-        {/* {studentClasses.length > 0 && (
+          {/* {studentClasses.length > 0 && (
         )}
         <div className="column">
           <Table mode="light" clickable={true} header={['Aluno', 'id']}>
@@ -186,18 +198,17 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
             />
           </div>
         </div> */}
+        </div>
       </div>
-    </div>
 
-    {
-      modalState && 
-      <StudentClassModal
-        mode="light"
-        type={modalType}
-        studentClass={studentClasses[classIndex]}
-        close={() => setModalState(false)}
-      />
-    }
+      {modalState && (
+        <StudentClassModal
+          mode="light"
+          type={modalType}
+          studentClass={studentClasses[classIndex]}
+          close={() => setModalState(false)}
+        />
+      )}
     </>
   );
 }

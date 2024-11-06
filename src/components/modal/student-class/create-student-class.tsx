@@ -23,26 +23,29 @@ const createStudentClassVariants = cva('base-modal input-modal', {
   },
 });
 
-interface createClassProps extends VariantProps<typeof createStudentClassVariants> {
+interface createClassProps
+  extends VariantProps<typeof createStudentClassVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   close: () => void;
 }
 
 export function CreateStudentClass({ mode, variant, close }: createClassProps) {
-  const [studentClassData, setStudentClassData] = useState<StudentClassRequest>({
-    name: '',
-    modality: '',
-    course: '',
-    classroom: '',
-    subjects: []
-  });
+  const [studentClassData, setStudentClassData] = useState<StudentClassRequest>(
+    {
+      name: '',
+      modality: '',
+      course: '',
+      classroom: '',
+      subjects: [],
+    }
+  );
 
   useEffect(() => {
     Services.listSubjects()
       .then((data) => {
-        let subjects = data.map((subject: Subject) => subject.id)
-        setStudentClassData((prev) => ({...prev, subjects: subjects}))
+        let subjects = data.map((subject: Subject) => subject.id);
+        setStudentClassData((prev) => ({ ...prev, subjects: subjects }));
       })
       .catch((error) => {
         console.log(error);
@@ -93,8 +96,8 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
                 value={studentClassData.modality ?? 'default'}
                 onChange={handleChange}
               >
-                <option value='ON'>Online</option>
-                <option value='IN'>Presencial</option>
+                <option value="ON">Online</option>
+                <option value="IN">Presencial</option>
               </SelectInput>
             </ModalRow>
 
