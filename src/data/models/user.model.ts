@@ -2,7 +2,8 @@ export interface CreateUserData {
   first_name: string;
   last_name: string;
   email: string;
-  role: string;
+  role: number;
+  student_class?: number;
 }
 
 export interface User {
@@ -21,7 +22,7 @@ export interface UserBasicInfoServiceResponse {
   first_name: string;
   last_name: string;
   email: string;
-  role: number;
+  role: UserRole;
 }
 
 export interface UserServiceResponse {
@@ -33,4 +34,24 @@ export interface UserServiceResponse {
   date_joined: Date;
   is_active: boolean;
   is_staff: boolean;
+}
+
+export enum UserRole {
+  ADMIN = 0,
+  TEACHER = 1,
+  STUDENT = 2,
+  OTHERS = 3,
+}
+
+export function mapRoleToString(role: number): string {
+  switch (role) {
+    case UserRole.ADMIN:
+      return 'Administrador';
+    case UserRole.TEACHER:
+      return 'Professor';
+    case UserRole.STUDENT:
+      return 'Aluno';
+    default:
+      return 'Outros';
+  }
 }

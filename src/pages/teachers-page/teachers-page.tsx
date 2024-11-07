@@ -2,16 +2,20 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Hero } from '../../components/hero/hero';
 import { CardMenu } from '../../components/card-menu/card-menu';
 import { Card } from '../../components/card-menu/card';
-import { useEffect, useState } from 'react';
-import { User } from '../../data/models/user.model';
+import { useCallback, useEffect, useState } from 'react';
+import { mapRoleToString, User, UserRole } from '../../data/models/user.model';
 import { Search } from '../../components/search/search';
 import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
 import Services from '../../services';
 import { ManualRegister } from '../../components/modal/manual-register';
 import { BatchRegister } from '../../components/modal/batch-register/batch-register';
+import { debounce } from '../../utils';
+import { useToastify } from '../../services/toastify';
 
-const UsersPageVariants = cva('users page', {
+import './teachers-page.css';
+
+const TeachersPageVariants = cva('teachers page', {
   variants: {
     mode: {
       light: 'light',
@@ -23,52 +27,61 @@ const UsersPageVariants = cva('users page', {
   },
 });
 
-interface UsersPageProps extends VariantProps<typeof UsersPageVariants> {
+interface TeachersPageProps extends VariantProps<typeof TeachersPageVariants> {
   mode?: 'light' | 'dark';
 }
 
-export function UsersPage({ mode, ...props }: UsersPageProps) {
+export function TeachersPage({ mode, ...props }: TeachersPageProps) {
   const [isManualRegisterModalOpen, setIsManualRegisterModalOpen] =
     useState(false);
   const [isBatchRegisterModalOpen, setIsBatchRegisterModalOpen] =
     useState(false);
 
+  const toast = useToastify();
+
   const [search, setSearch] = useState<string>('');
-  const [filteredUsers, setFilteredUsers] = useState(Array<User>);
-  const [users, setUsers] = useState(Array<User>);
+  const [users, setUsers] = useState<Array<User>>([]);
 
   useEffect(() => {
     !isManualRegisterModalOpen &&
       !isBatchRegisterModalOpen &&
-      Services.listUsers()
+      Services.listUsers({
+        role__in: `${UserRole.ADMIN},${UserRole.TEACHER},${UserRole.OTHERS}`,
+      })
         .then((response) => {
           setUsers(response);
-          setFilteredUsers(response);
         })
-        .catch((error) => console.log(error));
+        .catch(() => toast('failure', 'Erro ao carregar usuários'));
   }, [isManualRegisterModalOpen, isBatchRegisterModalOpen]);
 
-  const filterUsers = (e: any) => {
-    setSearch(e.target.value);
-    if (e.target.value == '') {
-      setFilteredUsers(users);
-    } else {
-      setFilteredUsers(
-        users.filter(
-          (user) =>
-            user.firstName.includes(e.target.value) ||
-            user.lastName.includes(e.target.value)
-        )
-      );
-    }
+  const fetchFilteredUsers = (search: string) => {
+    Services.listUsers({
+      search,
+      role__in: `${UserRole.ADMIN},${UserRole.TEACHER},${UserRole.OTHERS}`,
+    })
+      .then((response) => {
+        setUsers(response);
+      })
+      .catch(() => toast('failure', 'Erro ao carregar usuários'));
+  };
+
+  const debouncedFetchFilteredUsers = useCallback(
+    debounce(fetchFilteredUsers, 300),
+    []
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    debouncedFetchFilteredUsers(value);
   };
 
   return (
     <>
-      <div className={UsersPageVariants({ mode })} {...props}>
+      <div className={TeachersPageVariants({ mode })} {...props}>
         <Hero
-          title="Usuários"
-          description="Gerencie os professores e alunos do sistema."
+          title="Professores"
+          description="Gerencie os professores e administradores do sistema."
         />
 
         <CardMenu className="menu">
@@ -87,26 +100,28 @@ export function UsersPage({ mode, ...props }: UsersPageProps) {
         </CardMenu>
 
         <div className="page-content">
-          {filteredUsers && (
+          {users && (
             <>
-              {/* TODO: arrumar componente para ficar na tela inteira */}
               <Search
                 className="search-bar"
                 value={search}
-                onChange={filterUsers}
+                onChange={handleSearchChange}
               />
               <div className="user-table">
                 <Table
-                  clickable={true}
+                  clickable={false}
                   header={['Nome', 'Sobrenome', 'E-mail', 'Cargo']}
                 >
-                  {filteredUsers.map((user) => {
+                  {users.map((user) => {
                     return (
-                      <TableRow key={user.id}>
+                      <TableRow
+                        key={user.id}
+                        style={{ cursor: 'context-menu' }}
+                      >
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
-                        <td>{user.role}</td>
+                        <td>{mapRoleToString(user.role)}</td>
                       </TableRow>
                     );
                   })}

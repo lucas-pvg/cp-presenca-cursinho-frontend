@@ -110,7 +110,7 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
   }, [subjects, subjectIndex, studentClasses, classIndex]);
 
   const createDatetime = async () => {
-    let newDatetime: LessonRecurrentDatetimeRequest = {
+    const newDatetime: LessonRecurrentDatetimeRequest = {
       lesson_recurrency: recurrency!.id,
       start_datetime: new Date(),
       end_datetime: new Date(),
@@ -174,8 +174,8 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
       let time: Date;
 
       if (prevData) {
-        let today: Date = new Date();
-        let date_str = today.toLocaleDateString('en-US', {
+        const today: Date = new Date();
+        const date_str = today.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
