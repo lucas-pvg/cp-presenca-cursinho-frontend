@@ -102,12 +102,15 @@ export function StudentsPage({ mode, ...props }: StudentsPageProps) {
               />
               <div className="user-table">
                 <Table
-                  clickable={true}
+                  clickable={false}
                   header={['Nome', 'Sobrenome', 'E-mail']}
                 >
                   {students.map((user) => {
                     return (
-                      <TableRow key={user.id}>
+                      <TableRow
+                        key={user.id}
+                        style={{ cursor: 'context-menu' }}
+                      >
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>

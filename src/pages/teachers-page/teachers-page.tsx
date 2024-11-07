@@ -45,7 +45,9 @@ export function TeachersPage({ mode, ...props }: TeachersPageProps) {
   useEffect(() => {
     !isManualRegisterModalOpen &&
       !isBatchRegisterModalOpen &&
-      Services.listUsers({ role: [UserRole.ADMIN, UserRole.TEACHER] })
+      Services.listUsers({
+        role__in: `${UserRole.ADMIN},${UserRole.TEACHER},${UserRole.OTHERS}`,
+      })
         .then((response) => {
           setUsers(response);
         })
@@ -53,7 +55,10 @@ export function TeachersPage({ mode, ...props }: TeachersPageProps) {
   }, [isManualRegisterModalOpen, isBatchRegisterModalOpen]);
 
   const fetchFilteredUsers = (search: string) => {
-    Services.listUsers({ search, role: [UserRole.ADMIN, UserRole.TEACHER] })
+    Services.listUsers({
+      search,
+      role__in: `${UserRole.ADMIN},${UserRole.TEACHER},${UserRole.OTHERS}`,
+    })
       .then((response) => {
         setUsers(response);
       })
@@ -105,12 +110,15 @@ export function TeachersPage({ mode, ...props }: TeachersPageProps) {
               />
               <div className="user-table">
                 <Table
-                  clickable={true}
+                  clickable={false}
                   header={['Nome', 'Sobrenome', 'E-mail', 'Cargo']}
                 >
                   {users.map((user) => {
                     return (
-                      <TableRow key={user.id}>
+                      <TableRow
+                        key={user.id}
+                        style={{ cursor: 'context-menu' }}
+                      >
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
