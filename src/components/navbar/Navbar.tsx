@@ -41,7 +41,7 @@ export function Navbar({ minimized, mode }: NavbarProps) {
             'Disciplinas',
             'Alunos',
             'Turmas',
-            'Usuários',
+            'Professores',
             'Métricas',
           ]}
           paths={[
@@ -49,7 +49,7 @@ export function Navbar({ minimized, mode }: NavbarProps) {
             '/subject',
             '/students',
             '/classes',
-            '/users',
+            '/teachers',
             '/metrics',
           ]}
           iconTypes={[

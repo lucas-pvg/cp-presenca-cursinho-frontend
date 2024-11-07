@@ -2,16 +2,20 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Hero } from '../../components/hero/hero';
 import { CardMenu } from '../../components/card-menu/card-menu';
 import { Card } from '../../components/card-menu/card';
-import { useEffect, useState } from 'react';
-import { User } from '../../data/models/user.model';
+import { useCallback, useEffect, useState } from 'react';
+import { User, UserRole } from '../../data/models/user.model';
 import { Search } from '../../components/search/search';
 import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
 import Services from '../../services';
 import { ManualRegister } from '../../components/modal/manual-register';
 import { BatchRegister } from '../../components/modal/batch-register/batch-register';
+import { debounce } from '../../utils';
+import { useToastify } from '../../services/toastify';
 
-const UsersPageVariants = cva('users page', {
+import './students-page.css';
+
+const StudentsPageVariants = cva('students page', {
   variants: {
     mode: {
       light: 'light',
@@ -23,53 +27,54 @@ const UsersPageVariants = cva('users page', {
   },
 });
 
-interface UsersPageProps extends VariantProps<typeof UsersPageVariants> {
+interface StudentsPageProps extends VariantProps<typeof StudentsPageVariants> {
   mode?: 'light' | 'dark';
 }
 
-export function UsersPage({ mode, ...props }: UsersPageProps) {
+export function StudentsPage({ mode, ...props }: StudentsPageProps) {
   const [isManualRegisterModalOpen, setIsManualRegisterModalOpen] =
     useState(false);
   const [isBatchRegisterModalOpen, setIsBatchRegisterModalOpen] =
     useState(false);
 
+  const toast = useToastify();
+
   const [search, setSearch] = useState<string>('');
-  const [filteredUsers, setFilteredUsers] = useState(Array<User>);
-  const [users, setUsers] = useState(Array<User>);
+  const [students, setStudents] = useState<Array<User>>([]);
 
   useEffect(() => {
     !isManualRegisterModalOpen &&
       !isBatchRegisterModalOpen &&
-      Services.listUsers()
+      Services.listUsers({ role: UserRole.STUDENT })
         .then((response) => {
-          setUsers(response);
-          setFilteredUsers(response);
+          setStudents(response);
         })
-        .catch((error) => console.log(error));
+        .catch(() => toast('failure', 'Erro ao carregar alunos'));
   }, [isManualRegisterModalOpen, isBatchRegisterModalOpen]);
 
-  const filterUsers = (e: any) => {
-    setSearch(e.target.value);
-    if (e.target.value == '') {
-      setFilteredUsers(users);
-    } else {
-      setFilteredUsers(
-        users.filter(
-          (user) =>
-            user.firstName.includes(e.target.value) ||
-            user.lastName.includes(e.target.value)
-        )
-      );
-    }
+  const fetchFilteredUsers = (search: string) => {
+    Services.listUsers({ search, role: UserRole.STUDENT })
+      .then((response) => {
+        setStudents(response);
+      })
+      .catch(() => toast('failure', 'Erro ao carregar alunos'));
+  };
+
+  const debouncedFetchFilteredUsers = useCallback(
+    debounce(fetchFilteredUsers, 300),
+    []
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    debouncedFetchFilteredUsers(value);
   };
 
   return (
     <>
-      <div className={UsersPageVariants({ mode })} {...props}>
-        <Hero
-          title="Usuários"
-          description="Gerencie os professores e alunos do sistema."
-        />
+      <div className={StudentsPageVariants({ mode })} {...props}>
+        <Hero title="Alunos" description="Gerencie os alunos do sistema." />
 
         <CardMenu className="menu">
           <Card
@@ -87,26 +92,25 @@ export function UsersPage({ mode, ...props }: UsersPageProps) {
         </CardMenu>
 
         <div className="page-content">
-          {filteredUsers && (
+          {students && (
             <>
               {/* TODO: arrumar componente para ficar na tela inteira */}
               <Search
                 className="search-bar"
                 value={search}
-                onChange={filterUsers}
+                onChange={handleSearchChange}
               />
               <div className="user-table">
                 <Table
                   clickable={true}
-                  header={['Nome', 'Sobrenome', 'E-mail', 'Cargo']}
+                  header={['Nome', 'Sobrenome', 'E-mail']}
                 >
-                  {filteredUsers.map((user) => {
+                  {students.map((user) => {
                     return (
                       <TableRow key={user.id}>
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
                         <td>{user.email}</td>
-                        <td>{user.role}</td>
                       </TableRow>
                     );
                   })}
