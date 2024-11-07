@@ -35,3 +35,8 @@ export interface StudentSelect {
   name: string;
   id: number;
 }
+
+export interface StudentFilters {
+  name: string
+  student_class: string
+}
