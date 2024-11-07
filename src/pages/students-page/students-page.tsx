@@ -125,6 +125,7 @@ export function StudentsPage({ mode, ...props }: StudentsPageProps) {
         className={isManualRegisterModalOpen ? 'modal-open' : 'modal-close'}
         mode={mode}
         onClose={() => setIsManualRegisterModalOpen(false)}
+        isStudent
       />
 
       <BatchRegister

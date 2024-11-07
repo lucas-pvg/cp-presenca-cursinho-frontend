@@ -2,7 +2,8 @@ export interface CreateUserData {
   first_name: string;
   last_name: string;
   email: string;
-  role: string;
+  role: number;
+  student_class?: number;
 }
 
 export interface User {

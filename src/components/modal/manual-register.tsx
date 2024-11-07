@@ -4,18 +4,17 @@ import './modal.css';
 import { ModalHeader } from './modal-components/modal-header';
 import { ModalRow } from './modal-components/modal-row';
 import { Input } from '../input/input';
-import { useState } from 'react';
-import { CreateUserData } from '../../data/models/user.model';
+import { useEffect, useState } from 'react';
+import {
+  CreateUserData,
+  mapRoleToString,
+  UserRole,
+} from '../../data/models/user.model';
 import { ModalFooter } from './modal-components/modal-footer';
 import { SelectInput } from '../select-input/select-input';
 import { toast } from 'react-toastify';
-
-// TODO: passar para o backend
-const userRoles = [
-  { id: 0, name: 'Administrador' },
-  { id: 1, name: 'Professor' },
-  { id: 2, name: 'Aluno' },
-];
+import { getEnumValues } from '../../utils';
+import { StudentClass } from '../../data/models/student-class.model';
 
 const ManualRegisterVariants = cva('base-modal input-modal', {
   variants: {
@@ -35,6 +34,7 @@ interface ManualRegisterProps
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   onClose: () => void;
+  isStudent?: boolean;
 }
 
 export function ManualRegister({
@@ -42,12 +42,14 @@ export function ManualRegister({
   variant,
   onClose,
   className,
+  isStudent,
 }: ManualRegisterProps) {
   const [userData, setUserData] = useState<CreateUserData>({
     first_name: '',
     last_name: '',
     email: '',
-    role: '',
+    role: isStudent ? UserRole.STUDENT : UserRole.OTHERS,
+    student_class: undefined,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +59,8 @@ export function ManualRegister({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    Services.registerUser(userData as CreateUserData)
+    console.log(userData);
+    Services.registerUser(userData)
       .then(() => {
         toast.success('Usuário cadastrado com sucesso!');
         onClose();
@@ -73,9 +76,25 @@ export function ManualRegister({
       first_name: '',
       last_name: '',
       email: '',
-      role: '',
+      role: isStudent ? UserRole.STUDENT : UserRole.OTHERS,
+      student_class: undefined,
     });
   };
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
+  const [studentClasses, setStudentClasses] = useState<StudentClass[]>([]);
+  useEffect(() => {
+    if (isStudent) {
+      Services.listStudentClasses()
+        .then((response) => {
+          setStudentClasses(response);
+        })
+        .catch(() => toast.error('Erro ao carregar turmas'));
+    }
+  }, [isStudent]);
 
   return (
     <div className={className ? `modal ${className}` : 'modal'}>
@@ -112,35 +131,67 @@ export function ManualRegister({
                 />
               </ModalRow>
 
-              <ModalRow labels={['Email', 'Cargo']} mode={mode}>
-                <Input
-                  required
-                  type="email"
-                  name="email"
-                  value={userData.email}
-                  placeholder="Email"
-                  mode={mode}
-                  onChange={handleChange}
-                />
-                <SelectInput
-                  placeholder="Cargo"
-                  name="role"
-                  value={userData.role}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    setUserData((prevData) => ({
-                      ...prevData,
-                      role: e.target.value,
-                    }));
-                  }}
-                >
-                  {userRoles.map((role) => (
-                    <option key={role.id} value={role.name}>
-                      {role.name}
-                    </option>
-                  ))}
-                </SelectInput>
-              </ModalRow>
+              {isStudent ? (
+                <ModalRow labels={['Email', 'Turma']} mode={mode}>
+                  <Input
+                    required
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    placeholder="Email"
+                    mode={mode}
+                    onChange={handleChange}
+                  />
+                  <SelectInput
+                    placeholder="Turma"
+                    name="studentClass"
+                    value={userData.student_class}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setUserData((prevData) => ({
+                        ...prevData,
+                        student_class: parseInt(e.target.value),
+                      }));
+                    }}
+                  >
+                    {studentClasses.map((studentClass) => (
+                      <option key={studentClass.id} value={studentClass.id}>
+                        {studentClass.name}
+                      </option>
+                    ))}
+                  </SelectInput>
+                </ModalRow>
+              ) : (
+                <ModalRow labels={['Email', 'Cargo']} mode={mode}>
+                  <Input
+                    required
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    placeholder="Email"
+                    mode={mode}
+                    onChange={handleChange}
+                  />
+                  <SelectInput
+                    placeholder="Cargo"
+                    name="role"
+                    value={userData.role}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setUserData((prevData) => ({
+                        ...prevData,
+                        role: parseInt(e.target.value),
+                      }));
+                    }}
+                  >
+                    {getEnumValues(UserRole).map((role: UserRole) => (
+                      <option key={role} value={role}>
+                        {mapRoleToString(role)}
+                      </option>
+                    ))}
+                  </SelectInput>
+                </ModalRow>
+              )}
             </form>
           </div>
 
