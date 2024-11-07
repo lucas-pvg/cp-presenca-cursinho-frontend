@@ -16,7 +16,7 @@ const StudentService = {
   },
 
   async listStudentWithAttendanceByLesson(lessonId: number, params?: unknown) {
-    const response = await get(`student/lesson_attendance/${lessonId}`, {
+    const response = await get(`student/lesson_attendance/${lessonId}/`, {
       params,
     });
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useToastify } from '../../services/toastify';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -19,6 +19,7 @@ import {
   LessonRecurrentDatetimeRequest,
 } from '../../data/models/recurrency.model';
 import Services from '../../services';
+import { debounce } from '../../utils';
 import './subject-detail-page.css';
 
 const SubjectDetailPageVariants = cva('subject-detail page', {
@@ -138,16 +139,19 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
     }
   };
 
-  const handleSubmit = async (datetime: LessonRecurrentDatetime) => {
-    try {
-      await Services.updateRecurrentDatetime(datetime);
-      toastify('success', 'Recorrência editada com sucesso!');
-      getDatetimes();
-    } catch (e) {
-      toastify('failure', 'Não foi possível editar recorrência' + e);
-      console.log(e);
-    }
-  };
+  const handleSubmit = useCallback(
+    debounce(async (datetime: LessonRecurrentDatetime) => {
+      try {
+        await Services.updateRecurrentDatetime(datetime);
+        toastify('success', 'Recorrência editada com sucesso!');
+        getDatetimes();
+      } catch (e) {
+        toastify('failure', 'Não foi possível editar recorrência' + e);
+        console.log(e);
+      }
+    }, 500),
+    []
+  );
 
   const handleChange = (e: any) => {
     const { name, value, id } = e.target;

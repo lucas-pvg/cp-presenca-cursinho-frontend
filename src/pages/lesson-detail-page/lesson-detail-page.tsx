@@ -65,6 +65,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   const [students, setStudents] = useState<
     Array<StudentWithAttendanceInterface>
   >([]);
+
   useEffect(() => {
     if (!lessonID) return;
 
