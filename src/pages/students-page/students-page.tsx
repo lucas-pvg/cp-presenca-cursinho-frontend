@@ -94,7 +94,6 @@ export function StudentsPage({ mode, ...props }: StudentsPageProps) {
         <div className="page-content">
           {students && (
             <>
-              {/* TODO: arrumar componente para ficar na tela inteira */}
               <Search
                 className="search-bar"
                 value={search}

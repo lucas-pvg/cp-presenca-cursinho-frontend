@@ -102,7 +102,6 @@ export function TeachersPage({ mode, ...props }: TeachersPageProps) {
         <div className="page-content">
           {users && (
             <>
-              {/* TODO: arrumar componente para ficar na tela inteira */}
               <Search
                 className="search-bar"
                 value={search}
