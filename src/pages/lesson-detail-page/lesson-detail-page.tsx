@@ -194,64 +194,47 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
               </div>
             </div>
 
-            <div className="lesson-table">
-              <div className="header">
-                <Search />
-
-                <div className="switch-content">
-                  <p>Presença aberta?</p>
-
-                  <Switch
-                    type="base"
-                    mode={mode}
-                    isActive={lesson?.isAttendanceRegistrable}
-                    handleChange={() => handleSwitchChange()}
-                  />
-                </div>
-              </div>
-
-              <Table
-                variant={attendance ? 'attendance' : 'base'}
-                mode="light"
-                clickable={true}
-                header={['Nome do aluno', 'Presença']}
-              >
-                {students.map((student) => {
-                  return (
-                    <TableRow key={student.id}>
-                      <td>{student.fullName}</td>
-                      {attendance ? (
-                        <td>
-                          {student.attendance == AttendanceStatus.PRESENT ? (
-                            <Button
-                              id={`${student.id}`}
-                              variant="present"
-                              onClick={changeAttendance}
-                            >
-                              Presente
-                            </Button>
-                          ) : (
-                            <Button
-                              id={`${student.id}`}
-                              variant="absent"
-                              onClick={changeAttendance}
-                            >
-                              Ausente
-                            </Button>
-                          )}
-                        </td>
-                      ) : (
-                        <td>
-                          {student.attendance == AttendanceStatus.PRESENT
-                            ? 'Presente'
-                            : 'Ausente'}
-                        </td>
-                      )}
-                    </TableRow>
-                  );
-                })}
-              </Table>
-            </div>
+            <Table
+              variant={attendance ? 'attendance' : 'base'}
+              mode="light"
+              clickable={true}
+              header={['Nome do aluno', 'Presença']}
+            >
+              {students.map((student) => {
+                return (
+                  <TableRow key={student.id}>
+                    <td>{student.fullName}</td>
+                    {attendance ? (
+                      <td>
+                        {student.attendance == AttendanceStatus.PRESENT ? (
+                          <Button
+                            id={`${student.id}`}
+                            variant="present"
+                            onClick={changeAttendance}
+                          >
+                            Presente
+                          </Button>
+                        ) : (
+                          <Button
+                            id={`${student.id}`}
+                            variant="absent"
+                            onClick={changeAttendance}
+                          >
+                            Ausente
+                          </Button>
+                        )}
+                      </td>
+                    ) : (
+                      <td>
+                        {student.attendance == AttendanceStatus.PRESENT
+                          ? 'Presente'
+                          : 'Ausente'}
+                      </td>
+                    )}
+                  </TableRow>
+                );
+              })}
+            </Table>
           </div>
         </div>
       </div>
