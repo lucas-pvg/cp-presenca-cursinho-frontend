@@ -39,7 +39,7 @@ export function ForgotPasswordPage() {
           Redefinir senha
         </Button>
       </form>
-      <Link className="back-to-login" to="/auth/login">
+      <Link className="back-to-login" to="/login">
         Login
       </Link>
     </>

@@ -37,7 +37,7 @@ export function ResetPasswordPage() {
           'Senha redefinida com sucesso! \nVocê será redirecionado para a página de login.'
         );
         setTimeout(() => {
-          navigate('/auth/login');
+          navigate('/login');
         }, 3000);
       })
       .catch(() => {});

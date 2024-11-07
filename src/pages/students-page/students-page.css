@@ -1,11 +1,16 @@
-.users .user-table {
+.students .user-table {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
   gap: 20px;
+  width: 100%;
+
+  .base-table {
+    width: 100%;
+  }
 }
 
-.search-bar {
-  margin-bottom: 1rem;
+.students .search {
+  width: 100%;
 }

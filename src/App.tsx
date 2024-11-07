@@ -9,7 +9,8 @@ import { SubjectPage } from './pages/subject-page/subject-page';
 import { SubjectDetailPage } from './pages/subject-detail-page/subject-detail-page';
 import { ForgotPasswordPage } from './pages/forgot-password-page/ForgotPasswordPage';
 import { LoginPage } from './pages/login-page/LoginPage';
-import { UsersPage } from './pages/users-page/users-page';
+import { TeachersPage } from './pages/teachers-page/teachers-page';
+import { StudentsPage } from './pages/students-page/students-page';
 import { ToastContainer } from 'react-toastify';
 import { StudentClassPage } from './pages/student-class-page/student-class-page';
 import { UserProvider } from './context/useAuth';
@@ -42,11 +43,8 @@ function App() {
               element={<SubjectDetailPage />}
             />
             <Route path="classes" element={<StudentClassPage />} />
-            <Route
-              path="students"
-              element={<h1 className="center">Alunos</h1>}
-            />
-            <Route path="users" element={<UsersPage />} />
+            <Route path="students" element={<StudentsPage />} />
+            <Route path="teachers" element={<TeachersPage />} />
             <Route
               path="metrics"
               element={<h1 className="center">Métricas</h1>}
