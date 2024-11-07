@@ -3,7 +3,7 @@ import {
   UserServiceResponse,
   UserBasicInfoServiceResponse,
 } from '../../data/models/user.model';
-import { get, post } from '../axios';
+import { get, patch, post } from '../axios';
 
 const UserService = {
   async listUsers(params?: unknown) {
@@ -39,6 +39,10 @@ const UserService = {
   async retrieveBasicInfoById(id: string, params?: unknown) {
     const response = await get(`user/${id}/`, { params });
     return userBasicInfoMapper(response);
+  },
+
+  async updateUser(userId: number, data: unknown) {
+    return await patch(`user/${userId}/`, data);
   },
 };
 

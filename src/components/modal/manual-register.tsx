@@ -35,6 +35,8 @@ interface ManualRegisterProps
   variant?: 'solid' | 'outline';
   onClose: () => void;
   isStudent?: boolean;
+  type?: 'create' | 'update';
+  userId?: number;
 }
 
 export function ManualRegister({
@@ -43,6 +45,8 @@ export function ManualRegister({
   onClose,
   className,
   isStudent,
+  type = 'create',
+  userId,
 }: ManualRegisterProps) {
   const [userData, setUserData] = useState<CreateUserData>({
     first_name: '',
@@ -59,15 +63,27 @@ export function ManualRegister({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userData);
-    Services.registerUser(userData)
-      .then(() => {
-        toast.success('Usuário cadastrado com sucesso!');
-        onClose();
-      })
-      .catch((error) => {
-        toast.error(`Erro: ${error}`);
-      });
+    if (type === 'create') {
+      Services.registerUser(userData)
+        .then(() => {
+          toast.success('Usuário cadastrado com sucesso!');
+          onClose();
+        })
+        .catch((error) => {
+          toast.error(`Erro: ${error}`);
+        });
+    } else {
+      if (userId) {
+        Services.updateUser(userId, userData)
+          .then(() => {
+            toast.success('Usuário atualizado com sucesso!');
+            onClose();
+          })
+          .catch((error) => {
+            toast.error(`Erro: ${error}`);
+          });
+      }
+    }
   };
 
   const handleClose = () => {
@@ -184,11 +200,13 @@ export function ManualRegister({
                       }));
                     }}
                   >
-                    {getEnumValues(UserRole).map((role: UserRole) => (
-                      <option key={role} value={role}>
-                        {mapRoleToString(role)}
-                      </option>
-                    ))}
+                    {getEnumValues(UserRole)
+                      .filter((role: UserRole) => role !== UserRole.STUDENT)
+                      .map((role: UserRole) => (
+                        <option key={role} value={role}>
+                          {mapRoleToString(role)}
+                        </option>
+                      ))}
                   </SelectInput>
                 </ModalRow>
               )}
