@@ -62,9 +62,9 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
         });
   }, [lessonID, isModalOpen]);
 
-  const [students, setStudents] = useState(
+  const [students, setStudents] = useState<
     Array<StudentWithAttendanceInterface>
-  );
+  >([]);
   useEffect(() => {
     if (!lessonID) return;
 
