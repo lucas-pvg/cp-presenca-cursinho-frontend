@@ -110,7 +110,7 @@ export function HomePage({ mode, ...props }: HomePageProps) {
       {studentClasses && (
         <div className={HomePageVariants({ mode })} {...props}>
           <Hero
-            title="Bem-vindo, Lucas!"
+            title="Bem-vindo, CP!"
             description="Acompanhe suas turmas e aulas e gerencie a presença de seus alunos."
           />
 
