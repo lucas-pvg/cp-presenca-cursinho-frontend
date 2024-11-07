@@ -1,5 +1,6 @@
 .search {
   flex-grow: 1;
+  max-height: 40px;
   /* max-width: 400px; */
   padding: 8px 12px;
   display: flex;
