@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// import { useToastify } from '../../services/toastify';
 import { cva, VariantProps } from 'class-variance-authority';
 import { Hero } from '../../components/hero/hero';
 import { CardMenu } from '../../components/card-menu/card-menu';
@@ -7,14 +8,17 @@ import { Table } from '../../components/table/Table';
 import { TableRow } from '../../components/table/TableRow';
 import { OptionList } from '../../components/option-list/option-list';
 import { Button } from '../../components/button/Button';
+import { Icon } from '../../components/icon/icon';
 // import { SelectList } from '../../components/select-list/SelectList';
 import { StudentClassModal } from '../../components/modal/student-class-modal';
 import { TextCard } from '../../components/text-card/text-card';
-import { Input } from '../../components/input/input';
+import { Search } from '../../components/search/search';
 
-import { students } from '../../data/mock/students-select';
 // import { StudentSelect } from '../../data/models/student.model';
 import { StudentClass } from '../../data/models/student-class.model';
+import { StudentInterface, StudentFilters } from '../../data/models/student.model';
+// import { User } from '../../data/models/user.model';
+// import { userBasicInfoResponseMapper } from '../../data/mapper';
 // import { formattedTime } from '../../data/mapper/studentclass.mapper';
 import Services from '../../services';
 
@@ -38,60 +42,127 @@ interface StudentClassPageProps
 }
 
 export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
-  // const [open, setOpen] = useState(false);
-  // const [openAdd, setOpenAdd] = useState(false);
-  // const [selectedIds, setSelectedIds] = useState([0]);
-  // const [selectedStudents, setSelectedStudents] = useState<StudentSelect[]>([]);
+  // const toastify = useToastify()
 
-  const [modalState, setModalState] = useState(false);
+  const [isStudentListOpen, setIsStudentListOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>(
     'create'
   );
   const openModal = (type: 'create' | 'update' | 'delete') => {
     setModalType(type);
-    setModalState(true);
+    setIsModalOpen(true);
   };
 
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [classIndex, setClassIndex] = useState(0);
   useEffect(() => {
-    !modalState &&
-      Services.listStudentClasses()
-        .then((data) => {
-          setStudentClasses(data);
-          setClassIndex((prev) => (prev >= data.length ? 0 : prev));
+    Services.listStudentClasses()
+      .then((data) => {
+        setStudentClasses(data);
+        setClassIndex((prev) => (prev >= data.length ? 0 : prev));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [!isModalOpen]);
+
+  const [studentsFiltered, setStudentsFiltered] = useState(Array<StudentInterface>);
+  const [studentFilters, setStudentFilters] = useState<StudentFilters>({
+    name: '',
+    student_class: '',
+  });
+
+  const [students, setStudents] = useState(Array<StudentInterface>);
+  useEffect(() => {
+    studentClasses.length > 0 &&
+    Services.listStudent({ student_class: studentClasses[classIndex].name })
+      .then((data) => {
+        setStudents(data);
+        setStudentsFiltered(data)
+        setStudentFilters({
+          student_class: studentClasses[classIndex].name,
+          name: ''
         })
-        .catch((error) => {
-          console.log(error);
-        });
-  }, [modalState]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [!isModalOpen, !isStudentListOpen, studentClasses, classIndex]);
 
-  // const handleCheckboxChange = (id: number) => {
-  //   setSelectedIds((prevSelectedIds) => {
-  //     if (prevSelectedIds.includes(id)) {
-  //       return prevSelectedIds.filter((selectedId) => selectedId !== id);
-  //     } else {
-  //       return [...prevSelectedIds, id];
-  //     }
-  //   });
-  // };
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setStudentFilters((prevData) => ({ ...prevData, [name]: value }));
+  }
 
-  // const verifyIncluded = (id: number) => {
-  //   return selectedIds.includes(id);
-  // };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const filters = Object.fromEntries(
+      Object.entries(studentFilters).filter(([_, v]) => v !== '')
+    );
 
-  // const confirm = () => {
-  //   setSelectedStudents([]);
-  //   selectedIds.sort((a, b) => a - b);
-  //   selectedIds.forEach((id) => {
-  //     const student = students.find((student) => student.id === id) ?? null;
-  //     setSelectedStudents((prevSelectedStudents) => {
-  //       return student
-  //         ? [...prevSelectedStudents, student]
-  //         : [...prevSelectedStudents];
+    Services.listStudent(filters)
+      .then((data) => {
+        setStudentsFiltered(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // const [users, setUsers] = useState(Array<User>);
+  // useEffect(() => {
+  //   Services.listUsers()
+  //     .then((data) => {
+  //       const studentUsers = data.filter((user) => user.role == 2)
+  //       setUsers(studentUsers);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
   //     });
-  //   });
-  //   setOpenAdd(false);
+  // }, [!isStudentListOpen]);
+
+  // const handleCheckboxChange = async (email: string) => {
+  //   if (verifyIncluded(email)) {
+  //     const student = students.find((student) => student.email == email)
+
+  //     try {
+  //       student && await Services.deleteStudent(student.id)
+  //       toastify('success', 'Aluno removido com sucesso!')
+  //     } 
+  //     catch (error) {
+  //       toastify('failure', 'Não foi possível remover aluno\n' + error)
+  //       console.log(error)
+  //     }
+  //   }
+    
+  //   else {
+  //     const user = users.find((user) => user.email == email)
+
+  //     try {
+  //       user && await Services.createStudent({
+  //         student_class: studentClasses[classIndex],
+  //         user: userBasicInfoResponseMapper(user)
+  //       })
+  //       toastify('success', 'Aluno adicionado com sucesso!')
+  //     } 
+  //     catch (error) {
+  //       toastify('failure', 'Não foi possível adiconar aluno\n' + error)
+  //       console.log(error)
+  //     }
+  //   }
+
+  //   Services.listStudent({ student_class: studentClasses[classIndex].name })
+  //     .then((data) => {
+  //       setStudents(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  // const verifyIncluded = (email: string) => {
+  //   return students.some((student) => student.email == email)
   // };
 
   return (
@@ -140,12 +211,28 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
                     'Não definido'}
                 </TextCard>
                 <TextCard iconType="users" label="Alunos">
-                  {8}
+                  {students.length}
                 </TextCard>
               </div>
 
               <div className="classes-table">
-                <Input type="text" />
+                <form
+                  className="student-filters"
+                  id="filter-student-form"
+                  method="GET"
+                  onSubmit={handleSubmit}  
+                >
+                  <Search
+                    name="name"
+                    placeholder="Nome do Aluno"
+                    value={studentFilters.name}
+                    onChange={handleChange}
+                  />
+
+                  <Button type="submit" form="filter-student-form">
+                    <Icon iconType="search" size={12} />
+                  </Button>
+                </form>
 
                 <Table
                   mode="light"
@@ -153,62 +240,45 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
                   clickable={true}
                   header={['Nome do aluno']}
                 >
-                  {students.map((student) => {
+                  {studentsFiltered.map((student) => {
                     return (
                       <TableRow key={student.id}>
-                        <td>{student.name}</td>
+                        <td>{student.fullName}</td>
                       </TableRow>
                     );
                   })}
                 </Table>
 
-                <Button>Adicionar Aluno</Button>
+                {/* <Button onClick={() => setIsStudentListOpen(true)}>
+                  Adicionar Aluno
+                </Button> */}
               </div>
             </div>
           )}
-
-          {/* {studentClasses.length > 0 && (
-        )}
-        <div className="column">
-          <Table mode="light" clickable={true} header={['Aluno', 'id']}>
-            {selectedStudents.map((student, index) => (
-              <TableRow key={index}>
-                <td>{student.name}</td>
-                <td>{student.id}</td>
-              </TableRow>
-            ))}
-          </Table>
-          
-          <div className="center">
-            <Button onClick={() => setOpenAdd(true)}>
-              {'Adicionar aluno'}
-            </Button>
-            <SelectList
-              className={openAdd ? 'modal-open' : 'modal-close'}
-              close={() => setOpenAdd(false)}
-              items={students}
-              verifyIncluded={verifyIncluded}
-              handleListChange={handleCheckboxChange}
-              confirm={confirm}
-            />
-            <CreateStudentClass
-              className={open ? 'modal-open' : 'modal-close'}
-              mode="light"
-              close={() => setOpen(false)}
-            />
-          </div>
-        </div> */}
         </div>
       </div>
 
-      {modalState && (
+      {
+        isModalOpen && (
         <StudentClassModal
           mode="light"
           type={modalType}
           studentClass={studentClasses[classIndex]}
-          close={() => setModalState(false)}
+          close={() => setIsModalOpen(false)}
         />
       )}
+
+      {/* {
+        isStudentListOpen && (
+        <SelectList
+          users={users}
+          verifyIncluded={verifyIncluded}
+          handleListChange={handleCheckboxChange}
+          confirm={() => setIsStudentListOpen(false)}
+          close={() => setIsStudentListOpen(false)}
+        />
+        )
+      } */}
     </>
   );
 }
