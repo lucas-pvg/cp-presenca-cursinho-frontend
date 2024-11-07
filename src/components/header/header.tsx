@@ -4,8 +4,6 @@ import { Links } from '../links/Links';
 
 // import { Switch } from '../switch/switch';
 import './header.css';
-import Services from '../../services';
-import { toast } from 'react-toastify';
 
 interface HeaderProps extends ComponentProps<'header'> {
   onLogout: () => void;

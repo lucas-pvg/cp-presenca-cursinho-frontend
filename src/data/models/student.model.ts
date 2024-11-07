@@ -31,7 +31,7 @@ export interface StudentWithAttendanceInterface extends StudentInterface {
   attendance: string;
 }
 
-// export interface StudentSelect {
-//   name: string;
-//   id: number;
-// }
+export interface StudentSelect {
+  name: string;
+  id: number;
+}

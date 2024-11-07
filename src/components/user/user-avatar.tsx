@@ -38,9 +38,9 @@ export const UserAvatar = ({ mode, ...props }: UserAvatarProps) => {
         </div>
         <div className="drop-arrow" onClick={() => setActive(!active)}>
           {active ? (
-            <Icon iconType={'chevron-down'} to={''} />
+            <Icon iconType={'chevron-down'} />
           ) : (
-            <Icon iconType={'chevron-right'} to={''} />
+            <Icon iconType={'chevron-right'} />
           )}
         </div>
       </div>

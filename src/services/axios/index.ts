@@ -1,8 +1,10 @@
 import Axios, { type AxiosResponse } from 'axios';
 import Services from '..';
 
+const deployedApiUrl = '/choreo-apis/monitoramento-de-presenca/backend/v1';
+
 const axios = Axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL ?? deployedApiUrl,
   responseType: 'json',
 });
 

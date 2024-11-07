@@ -81,7 +81,7 @@ export const LessonDetailModal = ({
                 labels={['Disciplina', 'Horário de aula', 'Curso']}
                 mode={mode}
               >
-                <p>{lessonData.subject.name}</p>
+                <p>{lessonData.subject}</p>
                 <p>{lessonData.startTimeFormat()}</p>
                 <p>{lessonData.course}</p>
               </ModalRow>
@@ -94,7 +94,7 @@ export const LessonDetailModal = ({
                 ]}
                 mode={mode}
               >
-                <p>{lessonData.studentClass.name}</p>
+                <p>{lessonData.studentClass}</p>
                 <div>
                   <p>{lessonData.startAttendanceFormat()}</p>
                   <p>{lessonData.endAttendanceFormat()}</p>

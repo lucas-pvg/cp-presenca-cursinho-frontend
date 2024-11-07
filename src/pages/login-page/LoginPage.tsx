@@ -6,6 +6,7 @@ import './LoginPage.css';
 import { useState } from 'react';
 import { LoginData } from '../../data/models/login.model';
 import { useAuth } from '../../context/useAuth';
+import { Oval } from 'react-loader-spinner';
 
 export function LoginPage() {
   const { loginUser } = useAuth();
@@ -15,9 +16,13 @@ export function LoginPage() {
     password: '',
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     await loginUser(loginData.email, loginData.password);
+    setIsLoading(false);
   };
 
   return (
@@ -50,7 +55,15 @@ export function LoginPage() {
           fullWidth
           style={{ marginTop: '1rem' }}
         >
-          Login
+          {isLoading ? (
+            <Oval
+              height={20}
+              color="var(--blue-inverse)"
+              secondaryColor="#FFFFFF"
+            />
+          ) : (
+            'Login'
+          )}
         </Button>
       </form>
       <Link className="forgot-password" to={'/auth/forgot-password'}>
