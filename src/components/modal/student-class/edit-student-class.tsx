@@ -30,6 +30,8 @@ interface createClassProps
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   studentClass: StudentClass;
+  onSuccess?: () => void;
+  onFailure?: (err: any) => void;
   close: () => void;
 }
 
@@ -37,6 +39,8 @@ export function EditStudentClass({
   mode,
   studentClass,
   variant,
+  onSuccess,
+  onFailure,
   close,
 }: createClassProps) {
   const [studentClassData, setStudentClassData] =
@@ -47,16 +51,18 @@ export function EditStudentClass({
     setStudentClassData((prev) => ({ ...prev!, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    studentClassData?.id &&
-      Services.updateStudentClass(studentClassData.id, studentClassData)
-        .then((res) => {
-          console.log(res);
-          close();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    Services.updateStudentClass(studentClassData.id, studentClassData)
+      .then((res) => {
+        onSuccess && onSuccess();
+        console.log(res);
+        close();
+      })
+      .catch((err) => {
+        onFailure && onFailure(err);
+        console.log(err);
+      });
   };
 
   return (
@@ -70,7 +76,7 @@ export function EditStudentClass({
 
       <div className="modal-content">
         <div className="content-body">
-          <form id="class-form" onSubmit={handleSubmit}>
+          <form id="edit-class-form" onSubmit={handleSubmit}>
             <ModalRow labels={['Nome da Turma', 'Modalidade']} mode={mode}>
               <Input
                 type="text"
@@ -79,6 +85,7 @@ export function EditStudentClass({
                 placeholder="Nome da turma"
                 mode={mode}
                 onChange={handleChange}
+                required
               />
 
               <SelectInput
@@ -86,6 +93,7 @@ export function EditStudentClass({
                 name="modality"
                 value={studentClassData?.modality ?? 'default'}
                 onChange={handleChange}
+                required
               >
                 <option value="ON">Online</option>
                 <option value="IN">Presencial</option>
@@ -100,6 +108,7 @@ export function EditStudentClass({
                 placeholder="Nome do curso"
                 mode={mode}
                 onChange={handleChange}
+                required
               />
 
               <Input
@@ -117,7 +126,8 @@ export function EditStudentClass({
         <hr className="divider" />
         <ModalFooter
           mode={mode}
-          confirm={() => handleSubmit()}
+          type='submit'
+          form='edit-class-form'
           close={() => close()}
         />
       </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useToastify } from '../../services/toastify';
 import { cva, VariantProps } from 'class-variance-authority';
 import { CreateStudentClass } from './student-class/create-student-class';
 import { EditStudentClass } from './student-class/edit-student-class';
@@ -24,7 +25,7 @@ interface createClassProps
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   type: 'create' | 'update' | 'delete';
-  studentClass: StudentClass;
+  studentClass?: StudentClass;
   close: () => void;
 }
 
@@ -36,6 +37,7 @@ export function StudentClassModal({
   close,
 }: createClassProps) {
   const [closingAnimation, setClosingAnimation] = useState(false);
+  const toastify = useToastify()
 
   const handleClose = () => {
     setClosingAnimation(true);
@@ -47,25 +49,49 @@ export function StudentClassModal({
       className={closingAnimation ? 'modal modal-close' : 'modal modal-open'}
     >
       <div className="modal-background" onClick={() => handleClose()} />
-      {(type === 'create' && (
-        <CreateStudentClass mode={mode} variant={variant} close={handleClose} />
-      )) ||
+      {
+        (type === 'create' && (
+          <CreateStudentClass
+            mode={mode}
+            variant={variant}
+            onSuccess={() => toastify('success', 'Turma criada com sucesso!')}
+            onFailure={(err) =>
+              toastify('failure', 'Não foi possível criar a turma\n' + err)
+            }
+            close={handleClose}
+          />
+        ))
+      }
+      
+      {
         (type === 'update' && studentClass && (
           <EditStudentClass
             mode={mode}
             variant={variant}
             studentClass={studentClass}
+            onSuccess={() => toastify('success', 'Turma editada com sucesso!')}
+            onFailure={(err) =>
+              toastify('failure', 'Não foi possível editar a turma\n' + err)
+            }
             close={handleClose}
           />
-        )) ||
+        ))
+      }
+      
+      {
         (type === 'delete' && studentClass && (
           <DeleteStudentClass
             mode={mode}
             variant={variant}
             studentClass={studentClass}
+            onSuccess={() => toastify('success', 'Turma deletada com sucesso!')}
+            onFailure={(err) =>
+              toastify('failure', 'Não foi possível deletar a turma\n' + err)
+            }
             close={handleClose}
           />
-        ))}
+        ))
+      }
     </div>
   );
 }

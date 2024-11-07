@@ -25,6 +25,8 @@ interface deleteStudentClassProps
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
   studentClass: StudentClass;
+  onSuccess?: () => void;
+  onFailure?: (err: any) => void;
   close: () => void;
 }
 
@@ -32,15 +34,19 @@ export function DeleteStudentClass({
   mode,
   variant,
   studentClass,
+  onSuccess,
+  onFailure,
   close,
 }: deleteStudentClassProps) {
   const handleSubmit = () => {
     Services.deleteStudentClass(studentClass.id)
       .then((res) => {
+        onSuccess && onSuccess();
         console.log(res);
         close();
       })
       .catch((err) => {
+        onFailure && onFailure(err);
         console.log(err);
       });
   };

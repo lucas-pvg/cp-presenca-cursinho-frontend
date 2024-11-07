@@ -27,10 +27,12 @@ interface createClassProps
   extends VariantProps<typeof createStudentClassVariants> {
   mode?: 'light' | 'dark';
   variant?: 'solid' | 'outline';
+  onSuccess?: () => void;
+  onFailure?: (err: any) => void;
   close: () => void;
 }
 
-export function CreateStudentClass({ mode, variant, close }: createClassProps) {
+export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure, }: createClassProps) {
   const [studentClassData, setStudentClassData] = useState<StudentClassRequest>(
     {
       name: '',
@@ -57,13 +59,16 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
     setStudentClassData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
     Services.createStudentClass(studentClassData)
       .then((res) => {
+        onSuccess && onSuccess();
         console.log(res);
         close();
       })
       .catch((err) => {
+        onFailure && onFailure(err);
         console.log(err);
       });
   };
@@ -88,6 +93,7 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
                 placeholder="Nome da turma"
                 mode={mode}
                 onChange={handleChange}
+                required
               />
 
               <SelectInput
@@ -95,6 +101,7 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
                 name="modality"
                 value={studentClassData.modality ?? 'default'}
                 onChange={handleChange}
+                required
               >
                 <option value="ON">Online</option>
                 <option value="IN">Presencial</option>
@@ -109,6 +116,7 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
                 placeholder="Nome do curso"
                 mode={mode}
                 onChange={handleChange}
+                required
               />
 
               <Input
@@ -126,7 +134,8 @@ export function CreateStudentClass({ mode, variant, close }: createClassProps) {
         <hr className="divider" />
         <ModalFooter
           mode={mode}
-          confirm={() => handleSubmit()}
+          type='submit'
+          form='class-form'
           close={() => close()}
         />
       </div>
