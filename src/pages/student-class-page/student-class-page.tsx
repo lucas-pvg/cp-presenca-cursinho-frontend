@@ -16,7 +16,10 @@ import { Search } from '../../components/search/search';
 
 // import { StudentSelect } from '../../data/models/student.model';
 import { StudentClass } from '../../data/models/student-class.model';
-import { StudentInterface, StudentFilters } from '../../data/models/student.model';
+import {
+  StudentInterface,
+  StudentFilters,
+} from '../../data/models/student.model';
 // import { User } from '../../data/models/user.model';
 // import { userBasicInfoResponseMapper } from '../../data/mapper';
 // import { formattedTime } from '../../data/mapper/studentclass.mapper';
@@ -44,7 +47,7 @@ interface StudentClassPageProps
 export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   // const toastify = useToastify()
 
-  const [isStudentListOpen, setIsStudentListOpen] = useState(false);
+  const [isStudentListOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'create' | 'update' | 'delete'>(
     'create'
@@ -67,7 +70,9 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
       });
   }, [!isModalOpen]);
 
-  const [studentsFiltered, setStudentsFiltered] = useState(Array<StudentInterface>);
+  const [studentsFiltered, setStudentsFiltered] = useState(
+    Array<StudentInterface>
+  );
   const [studentFilters, setStudentFilters] = useState<StudentFilters>({
     name: '',
     student_class: '',
@@ -76,24 +81,24 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   const [students, setStudents] = useState(Array<StudentInterface>);
   useEffect(() => {
     studentClasses.length > 0 &&
-    Services.listStudent({ student_class: studentClasses[classIndex].name })
-      .then((data) => {
-        setStudents(data);
-        setStudentsFiltered(data)
-        setStudentFilters({
-          student_class: studentClasses[classIndex].name,
-          name: ''
+      Services.listStudent({ student_class: studentClasses[classIndex].name })
+        .then((data) => {
+          setStudents(data);
+          setStudentsFiltered(data);
+          setStudentFilters({
+            student_class: studentClasses[classIndex].name,
+            name: '',
+          });
         })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .catch((error) => {
+          console.log(error);
+        });
   }, [!isModalOpen, !isStudentListOpen, studentClasses, classIndex]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setStudentFilters((prevData) => ({ ...prevData, [name]: value }));
-  }
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -129,13 +134,13 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   //     try {
   //       student && await Services.deleteStudent(student.id)
   //       toastify('success', 'Aluno removido com sucesso!')
-  //     } 
+  //     }
   //     catch (error) {
   //       toastify('failure', 'Não foi possível remover aluno\n' + error)
   //       console.log(error)
   //     }
   //   }
-    
+
   //   else {
   //     const user = users.find((user) => user.email == email)
 
@@ -145,7 +150,7 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
   //         user: userBasicInfoResponseMapper(user)
   //       })
   //       toastify('success', 'Aluno adicionado com sucesso!')
-  //     } 
+  //     }
   //     catch (error) {
   //       toastify('failure', 'Não foi possível adiconar aluno\n' + error)
   //       console.log(error)
@@ -220,7 +225,7 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
                   className="student-filters"
                   id="filter-student-form"
                   method="GET"
-                  onSubmit={handleSubmit}  
+                  onSubmit={handleSubmit}
                 >
                   <Search
                     name="name"
@@ -258,8 +263,7 @@ export function StudentClassPage({ mode, ...props }: StudentClassPageProps) {
         </div>
       </div>
 
-      {
-        isModalOpen && (
+      {isModalOpen && (
         <StudentClassModal
           mode="light"
           type={modalType}
