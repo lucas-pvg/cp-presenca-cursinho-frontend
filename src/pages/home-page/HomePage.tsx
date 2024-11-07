@@ -35,7 +35,7 @@ interface HomePageProps extends VariantProps<typeof HomePageVariants> {
 
 export function HomePage({ mode, ...props }: HomePageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const filters = { day: new Date().getDay() };
+  const filters = { day: new Date().getDate() };
   const nav = useNavigate();
 
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
