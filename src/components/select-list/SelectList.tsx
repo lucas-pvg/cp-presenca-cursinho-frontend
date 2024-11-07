@@ -1,88 +1,88 @@
-import { cva, VariantProps } from 'class-variance-authority';
-import { StudentSelect } from '../../data/models/student.model';
-import { ModalFooter } from '../modal/modal-components/modal-footer';
-import { ModalHeader } from '../modal/modal-components/modal-header';
-import { ModalRow } from '../modal/modal-components/modal-row';
-import './SelectList.css';
+// import { useState } from 'react';
+// import { cva, VariantProps } from 'class-variance-authority';
+// import { User } from '../../data/models/user.model';
+// import { ModalFooter } from '../modal/modal-components/modal-footer';
+// import { ModalHeader } from '../modal/modal-components/modal-header';
+// import { ModalRow } from '../modal/modal-components/modal-row';
+// import './SelectList.css';
 
-const selectListVariants = cva('base-modal input-modal select-list', {
-  variants: {
-    mode: {
-      light: 'light',
-      dark: 'dark',
-    },
-  },
-  defaultVariants: {
-    mode: 'light',
-  },
-});
+// const selectListVariants = cva('base-modal input-modal select-list', {
+//   variants: {
+//     mode: {
+//       light: 'light',
+//       dark: 'dark',
+//     },
+//   },
+//   defaultVariants: {
+//     mode: 'light',
+//   },
+// });
 
-interface ListProps extends VariantProps<typeof selectListVariants> {
-  items: StudentSelect[];
-  verifyIncluded: (id: number) => boolean;
-  handleListChange: (id: number) => void;
-  className?: string;
-  mode?: 'light' | 'dark';
-  variant?: 'solid' | 'outline';
-  close: () => void;
-  confirm: () => void;
-}
+// interface ListProps extends VariantProps<typeof selectListVariants> {
+//   mode?: 'light' | 'dark';
+//   variant?: 'solid' | 'outline';
+//   users: User[];
+//   verifyIncluded: (email: string) => boolean;
+//   handleListChange: (email: string) => void;
+//   confirm: () => void;
+//   close: () => void;
+// }
 
-export function SelectList({
-  items,
-  mode,
-  variant,
-  close,
-  verifyIncluded,
-  handleListChange,
-  className,
-  confirm,
-}: ListProps) {
-  const handleClose = () => {
-    close();
-  };
+// export function SelectList({
+//   mode,
+//   variant,
+//   users,
+//   verifyIncluded,
+//   handleListChange,
+//   confirm,
+//   close,
+// }: ListProps) {
+//   const [closingAnimation, setClosingAnimation] = useState(false);
 
-  return (
-    <div className={className ? `modal ${className}` : 'modal'}>
-      <div className="modal-background" onClick={() => handleClose()} />
+//   const handleClose = () => {
+//     setClosingAnimation(true);
+//     setTimeout(() => close(), 200);
+//   };
 
-      <div className={selectListVariants({ mode })}>
-        <ModalHeader
-          title="Alunos"
-          description="Adicione os alunos que farão parte da presente turma."
-          variant={variant}
-          mode={mode}
-        />
+//   return (
+//     <div className={closingAnimation ? 'modal modal-close' : 'modal modal-open'}>
+//       <div className="modal-background" onClick={() => handleClose()} />
 
-        <div className="modal-content">
-          <div className="content-body">
-            {items.map((item) => (
-              <div key={item.id}>
-                <ModalRow labels={['Nome']} mode={mode}>
-                  <div className="row-content">
-                    <input
-                      type="checkbox"
-                      id={`item-${item.id}`}
-                      checked={verifyIncluded(item.id)}
-                      onChange={() => handleListChange(item.id)}
-                    />
-                    <label htmlFor={`item-${item.id}`}>{item.name}</label>
-                  </div>
-                </ModalRow>
-              </div>
-            ))}
-          </div>
+//       <div className={selectListVariants({ mode })}>
+//         <ModalHeader
+//           title="Gerenciar Alunos"
+//           description="Adicione os alunos que farão parte desta turma."
+//           variant={variant}
+//           mode={mode}
+//         />
 
-          <hr className="divider" />
-          {/* <ModalWarning mode={mode} /> */}
-          <ModalFooter
-            form="class-form"
-            mode={mode}
-            close={() => handleClose()}
-            confirm={confirm}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
+//         <div className="modal-content">
+//           <div className="content-body">
+//             {users.map((user) => (
+//               <div key={user.id}>
+//                 <ModalRow labels={['Nome']} mode={mode}>
+//                   <div className="row-content">
+//                     <input
+//                       type="checkbox"
+//                       id={`item-${user.id}`}
+//                       checked={verifyIncluded(user.email)}
+//                       onChange={() => handleListChange(user.email)}
+//                     />
+//                     <label htmlFor={`item-${user.id}`}>{user.firstName}</label>
+//                   </div>
+//                 </ModalRow>
+//               </div>
+//             ))}
+//           </div>
+
+//           <hr className="divider" />
+//           <ModalFooter
+//             mode={mode}
+//             close={() => handleClose()}
+//             confirm={confirm}
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
