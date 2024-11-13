@@ -3,7 +3,7 @@ export interface CreateUserData {
   last_name: string;
   email: string;
   role: number;
-  student_class?: number;
+  student_class?: number | string;
 }
 
 export interface User {
