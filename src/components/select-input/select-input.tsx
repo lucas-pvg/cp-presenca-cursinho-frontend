@@ -36,7 +36,7 @@ export function SelectInput({
       <div className={selectInputVariants({ mode })}>
         <select {...props}>
           {placeholder && (
-            <option disabled value="">
+            <option disabled value={undefined}>
               {placeholder}
             </option>
           )}
