@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { store } from './app/store'
+import { Provider } from 'react-redux'
 import LoggedInLayout from './layouts/logged-in/LoggedInLayout';
 import LoggedOutLayout from './layouts/logged-out/LoggedOutLayout';
 
@@ -23,6 +25,7 @@ function App() {
   return (
     <>
       <ToastContainer />
+      <Provider store={store}>
       <UserProvider>
         <Routes>
           <Route path="/login" element={<LoggedOutLayout />}>
@@ -52,6 +55,7 @@ function App() {
           </Route>
         </Routes>
       </UserProvider>
+      </Provider>
     </>
   );
 }
