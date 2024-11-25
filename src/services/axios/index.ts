@@ -60,24 +60,23 @@ axios.interceptors.response.use(
   }
 );
 
-const get = async (url: string, config?: any) => {
-  const response: AxiosResponse = await axios.get(url, config || {});
+const get = async (url: string, params?: any) => {
+  const response: AxiosResponse = await axios.get(url, { params });
   return response.data;
 };
 
-const patch = async (url: string, data: any, config?: any) => {
-  const response: AxiosResponse = await axios.patch(url, data, config || {});
+const patch = async (url: string, data: any, params?: any) => {
+  const response: AxiosResponse = await axios.patch(url, data, { params });
   return response.data;
 };
 
-const post = async (url: string, data: any, config?: any) => {
-  const response: AxiosResponse = await axios.post(url, data, config || {});
-
+const post = async (url: string, data: any, params?: any) => {
+  const response: AxiosResponse = await axios.post(url, data, { params });
   return response.data;
 };
 
-const destroy = async (url: string, config?: any) => {
-  const response: AxiosResponse = await axios.delete(url, config || {});
+const destroy = async (url: string, params?: any) => {
+  const response: AxiosResponse = await axios.delete(url, { params });
   return response.data;
 };
 

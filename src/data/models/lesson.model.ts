@@ -13,25 +13,13 @@ export interface LessonInterface {
   status: 'NOT STARTED' | 'STARTED' | 'ENDED' | 'UNKNOWN';
 }
 
-export interface LessonCreateData {
-  name: string;
-  subject?: string;
-  studentClass?: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  attendanceStart?: string;
-  attendanceEnd?: string;
-  passkey?: string;
-}
-
 export interface LessonFilters {
-  name?: string;
-  subject?: string;
-  student_class?: string;
-  day?: number;
-  start_datetime__gte?: string;
-  start_datetime__lte?: string;
+  name: string;
+  subject: string;
+  student_class: string;
+  day: number;
+  start_datetime__gte: string;
+  start_datetime__lte: string;
 }
 
 export interface LessonServiceResponse {
@@ -58,6 +46,18 @@ export interface LessonServiceRequest {
   attendance_start_datetime?: Date;
   attendance_end_datetime?: Date;
   is_attendance_registrable?: boolean;
+  passkey?: string;
+}
+
+export interface LessonCreateData {
+  name: string;
+  subject?: string;
+  studentClass?: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  attendanceStart?: string;
+  attendanceEnd?: string;
   passkey?: string;
 }
 
