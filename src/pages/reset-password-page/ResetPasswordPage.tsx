@@ -3,13 +3,12 @@ import { Button } from '../../components/button/Button';
 
 import './ResetPasswordPage.css';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Services from '../../services';
 
 export function ResetPasswordPage() {
   const { token } = useParams();
-  const navigate = useNavigate();
 
   const [resetPasswordData, setResetPasswordData] = useState({
     password: '',
@@ -33,12 +32,7 @@ export function ResetPasswordPage() {
 
     Services.resetPassword({ password: resetPasswordData.password, token })
       .then(() => {
-        toast.success(
-          'Senha redefinida com sucesso! \nVocê será redirecionado para a página de login.'
-        );
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
+        toast.success('Senha redefinida com sucesso!');
       })
       .catch(() => {});
   };

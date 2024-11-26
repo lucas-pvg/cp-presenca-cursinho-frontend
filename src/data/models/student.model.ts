@@ -37,6 +37,6 @@ export interface StudentSelect {
 }
 
 export interface StudentFilters {
-  name: string
-  student_class: string
+  name: string;
+  student_class: string;
 }
