@@ -149,7 +149,6 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
       try {
         await Services.updateRecurrentDatetime(datetime);
         toastify('success', 'Recorrência editada com sucesso!');
-        getDatetimes();
       } catch (e) {
         toastify('failure', 'Não foi possível editar recorrência' + e);
         console.log(e);
