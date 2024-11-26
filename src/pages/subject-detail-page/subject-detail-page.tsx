@@ -64,6 +64,8 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
         })
         .catch((error) => {
           console.log(error);
+          setSubjects([]);
+          setSubjectIndex(0);
         });
   }, [!isModalOpen]);
 
@@ -75,15 +77,18 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [classIndex, setClassIndex] = useState(0);
   useEffect(() => {
-    Services.listStudentClasses()
+    subjects.length > 0 && 
+    Services.listStudentClasses({ subject: subjects[subjectIndex].id })
       .then((data) => {
         setStudentClasses(data);
         setClassIndex((prev) => (prev >= data.length ? 0 : prev));
       })
       .catch((error) => {
         console.log(error);
+        setStudentClasses([]);
+        setClassIndex(0);
       });
-  }, [!isModalOpen]);
+  }, [!isModalOpen, subjects, subjectIndex]);
 
   const [recurrency, setRecurrency] = useState<LessonRecurrencyInterface>();
   const [lessonDatetimes, setLessonDatetimes] =
@@ -108,7 +113,7 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
     if (subjects.length > 0 && studentClasses.length > 0) {
       getDatetimes();
     }
-  }, [subjects, subjectIndex, studentClasses, classIndex]);
+  }, [!isModalOpen, subjects, subjectIndex, studentClasses, classIndex]);
 
   const createDatetime = async () => {
     const newDatetime: LessonRecurrentDatetimeRequest = {
