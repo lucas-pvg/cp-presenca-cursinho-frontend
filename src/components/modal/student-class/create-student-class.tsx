@@ -5,6 +5,7 @@ import { ModalRow } from '../modal-components/modal-row';
 import { ModalFooter } from '../modal-components/modal-footer';
 import { Input } from '../../input/input';
 import { SelectInput } from '../../select-input/select-input';
+import { CheckboxInput } from '../../checkbox-input/checkbox-input';
 
 import { Subject } from '../../../data/models/subject.model';
 import { StudentClassRequest } from '../../../data/models/student-class.model';
@@ -43,11 +44,11 @@ export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure,
     }
   );
 
+  const [subjects, setSubjects] = useState<Subject[]>([])
   useEffect(() => {
     Services.listSubjects()
       .then((data) => {
-        let subjects = data.map((subject: Subject) => subject.id);
-        setStudentClassData((prev) => ({ ...prev, subjects: subjects }));
+        setSubjects(data)
       })
       .catch((error) => {
         console.log(error);
@@ -55,12 +56,21 @@ export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure,
   }, []);
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setStudentClassData((prevData) => ({ ...prevData, [name]: value }));
+    const { name, value, type, checked } = e.target
+
+    setStudentClassData((prevData) => ({
+      ...prevData,
+      [name as keyof StudentClassRequest]: type === "checkbox"
+        ? checked
+          ? [...(prevData[name as 'subjects']), parseInt(value)]
+          : (prevData[name as 'subjects']).filter(id => id != parseInt(value))
+        : value,
+    }));
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+
     Services.createStudentClass(studentClassData)
       .then((res) => {
         onSuccess && onSuccess();
@@ -85,7 +95,7 @@ export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure,
       <div className="modal-content">
         <div className="content-body">
           <form id="class-form" onSubmit={handleSubmit}>
-            <ModalRow labels={['Nome da Turma', 'Modalidade']} mode={mode}>
+            <ModalRow labels={['Nome da Turma']} mode={mode}>
               <Input
                 type="text"
                 name="name"
@@ -95,7 +105,9 @@ export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure,
                 onChange={handleChange}
                 required
               />
+            </ModalRow>
 
+            <ModalRow labels={['Modalidade', 'Frentes']} mode={mode}>
               <SelectInput
                 placeholder="-- Modalidade --"
                 name="modality"
@@ -106,6 +118,16 @@ export function CreateStudentClass({ mode, variant, close, onSuccess, onFailure,
                 <option value="ON">Online</option>
                 <option value="IN">Presencial</option>
               </SelectInput>
+
+              <CheckboxInput
+                placeholder='Escolha as frentes'
+                name='subjects'
+                objects={subjects}
+                label='name'
+                id='id'
+                selected={studentClassData.subjects}
+                onChange={handleChange}
+              />
             </ModalRow>
 
             <ModalRow labels={['Nome do Curso', 'Sala']} mode={mode}>

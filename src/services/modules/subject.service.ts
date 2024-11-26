@@ -1,6 +1,7 @@
 import { get, post, patch, destroy } from '../axios';
 import { subjectMapper, subjectRequestMapper } from '../../data/mapper';
 import {
+  Subject,
   SubjectCreateData,
   SubjectServiceResponse,
 } from '../../data/models/subject.model';
@@ -10,7 +11,7 @@ const SubjectService = {
     return await post('subject/', subjectRequestMapper(subject), params);
   },
 
-  async listSubjects(params?: unknown) {
+  async listSubjects(params?: unknown): Promise<Subject[]> {
     const response = await get('subject/', { params });
     const subjectMapped = response.map((subject: SubjectServiceResponse) =>
       subjectMapper(subject)
