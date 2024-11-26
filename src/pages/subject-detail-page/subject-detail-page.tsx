@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useToastify } from '../../services/toastify';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -19,6 +19,7 @@ import {
   LessonRecurrentDatetimeRequest,
 } from '../../data/models/recurrency.model';
 import Services from '../../services';
+import { debounce } from '../../utils';
 import './subject-detail-page.css';
 
 const SubjectDetailPageVariants = cva('subject-detail page', {
@@ -63,6 +64,8 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
         })
         .catch((error) => {
           console.log(error);
+          setSubjects([]);
+          setSubjectIndex(0);
         });
   }, [!isModalOpen]);
 
@@ -74,15 +77,18 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
   const [studentClasses, setStudentClasses] = useState(Array<StudentClass>);
   const [classIndex, setClassIndex] = useState(0);
   useEffect(() => {
-    Services.listStudentClasses()
+    subjects.length > 0 && 
+    Services.listStudentClasses({ subject: subjects[subjectIndex].id })
       .then((data) => {
         setStudentClasses(data);
         setClassIndex((prev) => (prev >= data.length ? 0 : prev));
       })
       .catch((error) => {
         console.log(error);
+        setStudentClasses([]);
+        setClassIndex(0);
       });
-  }, [!isModalOpen]);
+  }, [!isModalOpen, subjects, subjectIndex]);
 
   const [recurrency, setRecurrency] = useState<LessonRecurrencyInterface>();
   const [lessonDatetimes, setLessonDatetimes] =
@@ -107,7 +113,7 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
     if (subjects.length > 0 && studentClasses.length > 0) {
       getDatetimes();
     }
-  }, [subjects, subjectIndex, studentClasses, classIndex]);
+  }, [!isModalOpen, subjects, subjectIndex, studentClasses, classIndex]);
 
   const createDatetime = async () => {
     const newDatetime: LessonRecurrentDatetimeRequest = {
@@ -138,16 +144,18 @@ export function SubjectDetailPage({ mode, ...props }: SubjectDetailPageProps) {
     }
   };
 
-  const handleSubmit = async (datetime: LessonRecurrentDatetime) => {
-    try {
-      await Services.updateRecurrentDatetime(datetime);
-      toastify('success', 'Recorrência editada com sucesso!');
-      getDatetimes();
-    } catch (e) {
-      toastify('failure', 'Não foi possível editar recorrência' + e);
-      console.log(e);
-    }
-  };
+  const handleSubmit = useCallback(
+    debounce(async (datetime: LessonRecurrentDatetime) => {
+      try {
+        await Services.updateRecurrentDatetime(datetime);
+        toastify('success', 'Recorrência editada com sucesso!');
+      } catch (e) {
+        toastify('failure', 'Não foi possível editar recorrência' + e);
+        console.log(e);
+      }
+    }, 500),
+    []
+  );
 
   const handleChange = (e: any) => {
     const { name, value, id } = e.target;

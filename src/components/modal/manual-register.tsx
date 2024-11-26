@@ -49,7 +49,7 @@ export function ManualRegister({
     last_name: '',
     email: '',
     role: isStudent ? UserRole.STUDENT : UserRole.OTHERS,
-    student_class: undefined,
+    student_class: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +77,7 @@ export function ManualRegister({
       last_name: '',
       email: '',
       role: isStudent ? UserRole.STUDENT : UserRole.OTHERS,
-      student_class: undefined,
+      student_class: '',
     });
   };
 
