@@ -16,11 +16,11 @@ const LoginService = {
   },
 
   async forgotPassword(data: ForgotPasswordData) {
-    return await post('password_reset/', data);
+    return await post('password_reset', data);
   },
 
   async resetPassword(data: ResetPasswordData) {
-    return await post('password_reset/confirm/', data);
+    return await post('password_reset/confirm', data);
   },
 
   async logout(data: RefreshTokenData) {
