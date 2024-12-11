@@ -13,6 +13,7 @@ import { TeachersPage } from './pages/teachers-page/teachers-page';
 import { StudentsPage } from './pages/students-page/students-page';
 import { ToastContainer } from 'react-toastify';
 import { StudentClassPage } from './pages/student-class-page/student-class-page';
+import { MetricsPage } from './pages/metrics-page/metrics-page';
 import { UserProvider } from './context/useAuth';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,10 +46,7 @@ function App() {
             <Route path="classes" element={<StudentClassPage />} />
             <Route path="students" element={<StudentsPage />} />
             <Route path="teachers" element={<TeachersPage />} />
-            <Route
-              path="metrics"
-              element={<h1 className="center">Métricas</h1>}
-            />
+            <Route path="metrics" element={<MetricsPage />} />
           </Route>
         </Routes>
       </UserProvider>
