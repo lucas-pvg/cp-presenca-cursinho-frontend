@@ -1,5 +1,5 @@
 .base-table {
-  min-width: 40vw;
+  flex: 1 0 0;
   border-collapse: collapse;
   border-radius: 8px;
   overflow: hidden;

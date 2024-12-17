@@ -109,6 +109,7 @@ export function StudentsPage({ mode, ...props }: StudentsPageProps) {
                       <TableRow
                         key={user.id}
                         style={{ cursor: 'context-menu' }}
+                        clickable={false}
                       >
                         <td>{user.firstName}</td>
                         <td>{user.lastName}</td>
