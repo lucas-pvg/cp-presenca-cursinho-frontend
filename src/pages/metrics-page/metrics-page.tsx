@@ -61,7 +61,6 @@ export function MetricsPage({ mode, ...props }: MetricsPageProps) {
     Services.getSubjectsAvgAttendancePercentage(filters)
       .then((data) => {
         setSubjectsAvgAttendancePercentage(data);
-
       })
       .catch((error) => {
         console.log(error);
