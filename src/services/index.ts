@@ -6,6 +6,7 @@ import StudentClassService from './modules/student-class.service';
 import LoginService from './modules/login.service';
 import UserService from './modules/user.service';
 import AttendanceService from './modules/attendance.service';
+import MetricsService from './modules/metrics.service';
 
 const Services = {
   ...AttendanceService,
@@ -16,6 +17,7 @@ const Services = {
   ...StudentClassService,
   ...LoginService,
   ...UserService,
+  ...MetricsService,
 };
 
 export default Services;

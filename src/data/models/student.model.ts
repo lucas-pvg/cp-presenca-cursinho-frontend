@@ -39,4 +39,5 @@ export interface StudentSelect {
 export interface StudentFilters {
   name: string
   student_class: string
+  lesson_id: string
 }

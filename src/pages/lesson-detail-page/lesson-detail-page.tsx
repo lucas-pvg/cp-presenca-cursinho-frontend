@@ -13,7 +13,7 @@ import { Button } from '../../components/button/Button';
 
 import { Lesson } from '../../data/models/lesson.model';
 import { LessonModal } from '../../components/modal/lesson-modal';
-import { StudentWithAttendanceInterface } from '../../data/models/student.model';
+import { StudentWithAttendanceInterface, StudentFilters } from '../../data/models/student.model';
 import Services from '../../services';
 import './lesson-detail-page.css';
 import { AttendanceStatus } from '../../data/models/attendance.model';
@@ -60,8 +60,16 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
         .catch((error) => {
           console.log(error);
         });
-  }, [lessonID, isModalOpen]);
+  }, [lessonID, !isModalOpen]);
 
+  const [studentsFiltered, setStudentsFiltered] = useState(
+    Array<StudentWithAttendanceInterface>
+  );
+  const [studentFilters, setStudentFilters] = useState<StudentFilters>({
+    name: '',
+    student_class: '',
+    lesson_id: `${lessonID ?? ''}`
+  });
   const [students, setStudents] = useState<
     Array<StudentWithAttendanceInterface>
   >([]);
@@ -69,14 +77,22 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
   useEffect(() => {
     if (!lessonID) return;
 
-    Services.listStudentWithAttendanceByLesson(parseInt(lessonID))
+    Services.listStudentWithAttendanceByLesson(parseInt(lessonID), {lesson_id: `${lessonID}`})
       .then((data) => {
         setStudents(data);
+        setStudentsFiltered(data);
+        setStudentFilters(prev => ({...prev, lesson_id: `${lessonID}`}));
       })
       .catch((error) => {
         toastify('failure', 'Não foi possível listar os alunos\n' + error);
       });
-  }, [lessonID]);
+  }, [lessonID, !isModalOpen]);
+
+  const handleSearch = (e: any) => {
+    const { name, value } = e.target;
+    setStudentsFiltered(students.filter(student => student.fullName.includes(value)))
+    setStudentFilters(prev => ({...prev, [name]: value}))
+  };
 
   const [attendance, setAttendance] = useState<boolean>(false);
   const handleSwitchChange = () => {
@@ -181,7 +197,13 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
 
           <div className="lesson-table">
             <div className="header">
-              <Search />
+              <Search
+                className="search"
+                name="name"
+                placeholder="Nome do Aluno"
+                value={studentFilters.name}
+                onChange={handleSearch}
+              />
 
               <div className="switch-content">
                 <p>Presença aberta?</p>
@@ -201,7 +223,7 @@ export function LessonDetailPage({ mode, ...props }: LessonDetailPageProps) {
               clickable={true}
               header={['Nome do aluno', 'Presença']}
             >
-              {students.map((student) => {
+              {studentsFiltered.map((student) => {
                 return (
                   <TableRow key={student.id}>
                     <td>{student.fullName}</td>

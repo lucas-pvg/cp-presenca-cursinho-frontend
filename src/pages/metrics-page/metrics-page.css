@@ -1,0 +1,87 @@
+.page.metrics {
+  gap: 60px;
+}
+
+.metrics .filter-container {
+  width: 70%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.metrics .buttons {
+  height: 45%;
+  display: flex;
+  gap: 10px;
+}
+
+.metrics .filters {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px 10px;
+  grid-template-areas:
+    'search search  search'
+    'class  subject date';
+}
+
+.metrics .search {
+  grid-area: search;
+}
+.metrics .class {
+  grid-area: class;
+}
+.metrics .subject {
+  grid-area: subject;
+}
+.metrics .date {
+  grid-area: start;
+}
+
+.dashboard {
+  width: 100%;
+  padding: 0 60PX;
+  display: grid;
+  grid-template-columns: auto repeat(2, 300);
+  grid-template-rows: 1fr auto auto;
+  gap: 20px 20px;
+  grid-template-areas:
+    'filter-container  filter-container  filter-container'
+    'students          classes           subjects'
+    'students          history           history';
+}
+
+.metrics .filter-container {
+  grid-area: filter-container;
+}
+.metrics .students {
+  grid-area: students;
+  width: 100%;
+  display: flex;
+  justify-content: stretch;
+  align-items: flex-start;
+}
+.metrics .classes {
+  grid-area: classes;
+}
+.metrics .subjects {
+  grid-area: subjects;
+}
+.metrics .history {
+  grid-area: history;
+}
+
+.chart {
+  padding: 20px 0 12px;
+  border-radius: 8px;
+  background-color: var(--base-white);
+  box-shadow: 4px 4px 30px 0px var(--shadow-base);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
